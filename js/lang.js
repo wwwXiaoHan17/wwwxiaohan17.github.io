@@ -58,7 +58,11 @@ function setActiveNav(){
 document.addEventListener('click',e=>{
   const a=e.target.closest('a[href^="#"]');if(!a)return;
   const t=document.querySelector(a.getAttribute('href'));if(!t)return;
-  e.preventDefault();t.scrollIntoView({behavior:'smooth'});history.pushState(null,'',a.getAttribute('href'));
+  e.preventDefault();
+  const header=document.querySelector('.topbar')?.offsetHeight||52;
+  const top=t.getBoundingClientRect().top+window.pageYOffset-header-12;
+  window.scrollTo({top,behavior:'smooth'});
+  history.pushState(null,'',a.getAttribute('href'));
 });
 
 /* ===== Global Search ===== */
@@ -67,6 +71,16 @@ let searchDropdown=null;
 let searchInput=null;
 
 async function loadSearchIndex(){
+  const embedded=document.getElementById('search-data');
+  if(embedded?.textContent?.trim()){
+    try{
+      const data=JSON.parse(embedded.textContent);
+      if(Array.isArray(data)&&data.length){
+        globalIdx=data;
+        return;
+      }
+    }catch(e){console.warn('Embedded search index parse failed:',e);}
+  }
   try{
     const depth=location.pathname.split('/').length-1;
     const prefix=depth>0?Array(depth).fill('..').join('/')+'/':'';
@@ -88,7 +102,7 @@ function doSearch(query){
   if(!query.trim()){searchDropdown.classList.remove('active');return;}
   const q=query.toLowerCase().trim();
   const hits=globalIdx.filter(item=>{
-    const text=(item.name+' '+(item.module||'')+' '+(item.desc||'')).toLowerCase();
+    const text=(item.name+' '+(item.module||'')+' '+(item.moduleEn||'')+' '+(item.signature||'')+' '+(item.desc||'')).toLowerCase();
     return text.includes(q);
   }).slice(0,15);
 
@@ -101,6 +115,7 @@ function doSearch(query){
       return `<div class="search-result-item" data-href="${prefix}${h.url}">
         <div class="result-name">${escapeHtml(h.name)}</div>
         <div class="result-module">${escapeHtml(h.module||'')}</div>
+        ${h.signature?`<div class="result-signature">${escapeHtml(h.signature)}</div>`:''}
         <div class="result-desc">${escapeHtml(h.desc||'')}</div>
       </div>`;
     }).join('');

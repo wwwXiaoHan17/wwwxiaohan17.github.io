@@ -312,7 +312,7 @@ def page_skeleton(
     body: str,
     active: str = "",
     depth: int = 0,
-    search_data: list = None,
+    search_data: list | None = None,
 ) -> str:
     root = "../" * depth
     css_path = "../" * depth
@@ -512,6 +512,21 @@ def parse_module(path: Path) -> list[ApiItem]:
 # Generate HTML content
 # ---------------------------------------------------------------------------
 
+SECTION_TITLES = {
+    "Parameters",
+    "Returns",
+    "Raises",
+    "See Also",
+    "Examples",
+    "Example",
+    "Notes",
+    "Warnings",
+    "Yields",
+    "Members",
+    "Attributes",
+}
+
+
 def extract_param_descriptions(doc: str) -> dict[str, str]:
     """从 docstring 的 Parameters 部分提取参数描述。
 
@@ -543,10 +558,9 @@ def extract_param_descriptions(doc: str) -> dict[str, str]:
             continue
         if in_params:
             # Check if we've hit another section
-            if stripped and not stripped.startswith(" ") and stripped.endswith("s") and i > 0 and lines[i - 1].strip().startswith("-"):
-                # Another section header like "Returns", "Raises", etc.
+            if stripped in SECTION_TITLES and stripped != "Parameters":
                 if current_param and current_desc:
-                    result[current_param] = " ".join(current_desc).strip()
+                    result[current_param] = "\n".join(current_desc).strip()
                 break
 
             # Check if this line starts a new parameter definition
@@ -555,7 +569,7 @@ def extract_param_descriptions(doc: str) -> dict[str, str]:
             if param_match and (not line.startswith(" ") or line.startswith("    ")):
                 # Save previous param if exists
                 if current_param and current_desc:
-                    result[current_param] = " ".join(current_desc).strip()
+                    result[current_param] = "\n".join(current_desc).strip()
                 current_param = param_match.group(1)
                 current_desc = []
                 continue
@@ -568,7 +582,7 @@ def extract_param_descriptions(doc: str) -> dict[str, str]:
 
     # Save last param
     if current_param and current_desc:
-        result[current_param] = " ".join(current_desc).strip()
+        result[current_param] = "\n".join(current_desc).strip()
 
     return result
 
@@ -582,61 +596,230 @@ def escape_html(s: str) -> str:
     )
 
 
-def render_docstring(doc: str) -> str:
-    """Convert docstring to HTML."""
-    if not doc:
-        return ""
-    lines = doc.strip().split("\n")
-    paragraphs = []
-    current = []
-    in_code = False
+def strip_doc_markup(text: str) -> str:
+    """Return a short plain-text version of a docstring for search snippets."""
+    text = textwrap.dedent(text or "").strip()
+    text = re.sub(r"```.*?```", " ", text, flags=re.S)
+    text = re.sub(r"(?m)^(Parameters|Returns|Raises|See Also|Examples?)\n-+\n.*$", "", text, flags=re.S)
+    text = re.sub(r":(?:func|class|meth|mod|attr|data|exc):`([^`]+)`", r"\1", text)
+    text = re.sub(r"``([^`]+)``", r"\1", text)
+    text = re.sub(r"`([^`]+)`", r"\1", text)
+    text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)
+    text = re.sub(r"\*([^*]+)\*", r"\1", text)
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
 
-    for line in lines:
-        stripped = line.strip()
-        if stripped.startswith("```"):
-            if current and not in_code:
-                paragraphs.append(("p", "\n".join(current)))
-                current = []
-            in_code = not in_code
-            if not in_code and current:
-                paragraphs.append(("code", "\n".join(current)))
-                current = []
-        elif in_code:
-            current.append(line)
-        elif stripped.startswith(">>> ") or stripped.startswith("... "):
-            if current and paragraphs and paragraphs[-1][0] != "code":
-                paragraphs.append(("p", "\n".join(current)))
-                current = []
-            current.append(line)
-        elif stripped == "":
-            if current:
-                if all(l.strip().startswith((">>> ", "... ")) for l in current):
-                    paragraphs.append(("code", "\n".join(current)))
-                else:
-                    paragraphs.append(("p", "\n".join(current)))
-                current = []
-        else:
-            current.append(line)
 
-    if current:
-        if all(l.strip().startswith((">>> ", "... ")) for l in current):
-            paragraphs.append(("code", "\n".join(current)))
-        else:
-            paragraphs.append(("p", "\n".join(current)))
+def render_inline_markup(text: str) -> str:
+    """Render the small Markdown/RST inline subset used by pyera docstrings."""
+    placeholders: list[str] = []
 
-    html_parts = []
-    for kind, text in paragraphs:
-        if kind == "p":
-            html_parts.append(f"<p>{escape_html(text)}</p>")
-        elif kind == "code":
+    def stash(html: str) -> str:
+        placeholders.append(html)
+        return f"\x00{len(placeholders) - 1}\x00"
+
+    text = re.sub(
+        r":(?:func|class|meth|mod|attr|data|exc):`([^`]+)`",
+        lambda m: stash(f"<code>{escape_html(m.group(1))}</code>"),
+        text,
+    )
+    text = re.sub(r"``([^`]+)``", lambda m: stash(f"<code>{escape_html(m.group(1))}</code>"), text)
+    text = re.sub(r"`([^`]+)`", lambda m: stash(f"<code>{escape_html(m.group(1))}</code>"), text)
+    text = re.sub(
+        r"\[([^\]]+)\]\(([^)]+)\)",
+        lambda m: stash(f'<a href="{escape_html(m.group(2))}">{escape_html(m.group(1))}</a>'),
+        text,
+    )
+
+    text = escape_html(text)
+    text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
+    text = re.sub(r"(?<!\*)\*([^*\n]+)\*(?!\*)", r"<em>\1</em>", text)
+
+    for i, html in enumerate(placeholders):
+        text = text.replace(f"\x00{i}\x00", html)
+    return text
+
+
+def is_section_heading(lines: list[str], index: int) -> bool:
+    if index + 1 >= len(lines):
+        return False
+    heading = lines[index].strip()
+    underline = lines[index + 1].strip()
+    return heading in SECTION_TITLES and bool(underline) and set(underline) <= {"-"}
+
+
+def split_doc_description(doc: str) -> str:
+    """Remove NumPy-style API sections from the prose summary."""
+    lines = textwrap.dedent(doc or "").strip().splitlines()
+    kept: list[str] = []
+    i = 0
+    while i < len(lines):
+        if is_section_heading(lines, i):
+            break
+        kept.append(lines[i])
+        i += 1
+    return "\n".join(kept).strip()
+
+
+def render_markdown_blocks(text: str) -> str:
+    """Render a conservative Markdown/RST subset without external dependencies."""
+    lines = textwrap.dedent(text or "").strip().splitlines()
+    html_parts: list[str] = []
+    paragraph: list[str] = []
+    list_items: list[tuple[str, str]] = []
+    in_fence = False
+    fence_lang = ""
+    code_lines: list[str] = []
+    literal_next = False
+
+    def flush_paragraph() -> None:
+        nonlocal paragraph
+        if paragraph:
+            html_parts.append(f"<p>{render_inline_markup(' '.join(line.strip() for line in paragraph))}</p>")
+            paragraph = []
+
+    def flush_list() -> None:
+        nonlocal list_items
+        if not list_items:
+            return
+        tag = "ol" if list_items[0][0] == "ol" else "ul"
+        body = "".join(f"<li>{render_inline_markup(item)}</li>" for _, item in list_items)
+        html_parts.append(f"<{tag}>{body}</{tag}>")
+        list_items = []
+
+    def flush_code() -> None:
+        nonlocal code_lines, fence_lang, literal_next
+        if code_lines:
+            lang_class = f" language-{escape_html(fence_lang)}" if fence_lang else ""
             html_parts.append(
-                f'<pre><code class="language-python">{escape_html(text)}</code><button class="copy-btn">📋</button></pre>'
+                f'<pre><code class="{lang_class.strip()}">{escape_html("\n".join(code_lines).rstrip())}</code>'
+                f'<button class="copy-btn">复制</button></pre>'
             )
+            code_lines = []
+        fence_lang = ""
+        literal_next = False
 
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+
+        if in_fence:
+            if stripped.startswith("```"):
+                in_fence = False
+                flush_code()
+            else:
+                code_lines.append(line)
+            i += 1
+            continue
+
+        if stripped.startswith("```"):
+            flush_paragraph()
+            flush_list()
+            in_fence = True
+            fence_lang = stripped[3:].strip()
+            i += 1
+            continue
+
+        if literal_next:
+            if line.startswith(("    ", "\t")):
+                code_lines.append(line[4:] if line.startswith("    ") else line[1:])
+                i += 1
+                continue
+            if code_lines:
+                flush_code()
+
+        if is_section_heading(lines, i):
+            flush_paragraph()
+            flush_list()
+            html_parts.append(f"<h5>{escape_html(stripped)}</h5>")
+            i += 2
+            continue
+
+        if stripped == "":
+            flush_paragraph()
+            flush_list()
+            i += 1
+            continue
+
+        if stripped.endswith("::"):
+            paragraph.append(stripped[:-1].rstrip())
+            literal_next = True
+            i += 1
+            continue
+
+        if stripped.startswith((">>> ", "... ")):
+            flush_paragraph()
+            flush_list()
+            code_lines.append(stripped)
+            i += 1
+            while i < len(lines) and lines[i].strip().startswith((">>> ", "... ")):
+                code_lines.append(lines[i].strip())
+                i += 1
+            flush_code()
+            continue
+
+        bullet = re.match(r"^[-*]\s+(.+)$", stripped)
+        ordered = re.match(r"^\d+[.)]\s+(.+)$", stripped)
+        if bullet or ordered:
+            flush_paragraph()
+            list_items.append(("ul", bullet.group(1)) if bullet else ("ol", ordered.group(1)))
+            i += 1
+            continue
+
+        heading = re.match(r"^(#{1,4})\s+(.+)$", stripped)
+        if heading:
+            flush_paragraph()
+            flush_list()
+            level = min(len(heading.group(1)) + 1, 5)
+            html_parts.append(f"<h{level}>{render_inline_markup(heading.group(2))}</h{level}>")
+            i += 1
+            continue
+
+        flush_list()
+        paragraph.append(line)
+        i += 1
+
+    flush_paragraph()
+    flush_list()
+    if code_lines:
+        flush_code()
     return "\n".join(html_parts)
 
 
-def generate_api_page(module_name: str, items: list[ApiItem], out_path: Path) -> None:
+def render_docstring(doc: str, summary_only: bool = True) -> str:
+    """Convert the summary part of a docstring to HTML."""
+    return render_markdown_blocks(split_doc_description(doc) if summary_only else doc)
+
+
+def build_global_search_index(parsed_modules: dict[str, list[ApiItem]]) -> list[dict[str, str]]:
+    index: list[dict[str, str]] = []
+    page_by_module = dict(NAV_ORDER)
+    for mod, _ in NAV_ORDER:
+        meta = MODULE_META.get(mod, {})
+        zh_title = meta.get("zh", {}).get("title", mod)
+        page = page_by_module[mod]
+        for item in parsed_modules.get(mod, []):
+            if item.kind not in {"function", "class"}:
+                continue
+            index.append({
+                "name": item.name,
+                "kind": item.kind,
+                "module": zh_title,
+                "moduleEn": meta.get("en", {}).get("title", mod),
+                "signature": item.signature,
+                "desc": strip_doc_markup(item.doc_zh)[:180],
+                "url": f"api/{page}#{item.kind}-{item.name}",
+            })
+    return index
+
+
+def generate_api_page(
+    module_name: str,
+    items: list[ApiItem],
+    out_path: Path,
+    search_index: list[dict[str, str]],
+) -> None:
     meta = MODULE_META.get(module_name, {})
     zh_title = meta.get("zh", {}).get("title", module_name)
     en_title = meta.get("en", {}).get("title", module_name)
@@ -648,8 +831,6 @@ def generate_api_page(module_name: str, items: list[ApiItem], out_path: Path) ->
     bc_ja = f'<a href="../index.html">Pyera</a> / API / {ja_title}'
 
     body_parts = []
-    search_data = []
-
     for lang, title in [("zh", zh_title), ("en", en_title), ("ja", ja_title)]:
         body_parts.append(f'<div class="lang-content" data-lang="{lang}" id="content-{lang}">')
         body_parts.append(f'<h1>{title}</h1>')
@@ -669,7 +850,7 @@ def generate_api_page(module_name: str, items: list[ApiItem], out_path: Path) ->
 
             # Description
             if item.doc_zh:
-                body_parts.append(f'<div class="api-desc">{render_docstring(item.doc_zh)}</div>')
+                body_parts.append(f'<div class="api-desc">{render_docstring(item.doc_zh, summary_only=item.kind == "function")}</div>')
 
             # Parameters
             if item.params:
@@ -678,16 +859,23 @@ def generate_api_page(module_name: str, items: list[ApiItem], out_path: Path) ->
                 body_parts.append('<div class="param-list">')
                 for p in item.params:
                     required = not p.default and not p.name.startswith("*")
-                    req_badge = '<span class="param-required">必需</span>' if required else ''
-                    default_html = f'<span class="param-default-val">= {escape_html(p.default)}</span>' if p.default else ''
-                    desc_html = f'<p class="param-desc-text">{escape_html(p.desc)}</p>' if p.desc else ''
+                    req_badge = '<span class="param-required">必填</span>' if required else '<span class="param-optional">可选</span>'
+                    type_hint = escape_html(p.type_hint) if p.type_hint else "Any"
+                    default_text = escape_html(p.default) if p.default else "无默认值" if required else "None"
+                    desc_html = (
+                        f'<div class="param-desc-text">{render_markdown_blocks(p.desc)}</div>'
+                        if p.desc
+                        else '<div class="param-desc-text muted">暂无详细说明，请参考函数签名和上方说明。</div>'
+                    )
                     body_parts.append(
                         f'<div class="param-item">'
-                        f'<div class="param-row">'
-                        f'<span class="param-name">{p.name}</span>'
-                        f'{req_badge}'
-                        f'<span class="param-type-tag">{escape_html(p.type_hint) or "any"}</span>'
-                        f'{default_html}'
+                        f'<div class="param-topline">'
+                        f'<span class="param-name">{escape_html(p.name)}</span>'
+                        f'<span class="param-required-wrap">{req_badge}</span>'
+                        f'</div>'
+                        f'<div class="param-facts">'
+                        f'<div><span>类型</span><code>{type_hint}</code></div>'
+                        f'<div><span>默认值</span><code>{default_text}</code></div>'
                         f'</div>'
                         f'{desc_html}'
                         f'</div>'
@@ -696,12 +884,6 @@ def generate_api_page(module_name: str, items: list[ApiItem], out_path: Path) ->
 
             body_parts.append('</div>')  # api-body
             body_parts.append('</div>')  # api-card
-
-            search_data.append({
-                "name": item.name,
-                "desc": item.doc_zh[:80] if item.doc_zh else "",
-                "url": f"./{out_path.name}#{anchor}",
-            })
 
         body_parts.append('</div>')  # lang-content
 
@@ -712,7 +894,7 @@ def generate_api_page(module_name: str, items: list[ApiItem], out_path: Path) ->
         body,
         active=module_name,
         depth=1,
-        search_data=search_data,
+        search_data=search_index,
     )
     out_path.write_text(html, encoding="utf-8")
 
@@ -721,7 +903,7 @@ def generate_api_page(module_name: str, items: list[ApiItem], out_path: Path) ->
 # Generate index page
 # ---------------------------------------------------------------------------
 
-def generate_index() -> None:
+def generate_index(search_index: list[dict[str, str]]) -> None:
     features = [
         ("API", "Pythonic API", "Pythonic API", "Pythonic API",
          "用 Python 语法替代繁琐的 ERB，享受现代 IDE 的自动补全和类型检查。",
@@ -798,6 +980,7 @@ def system_title():
         body,
         active="index",
         depth=0,
+        search_data=search_index,
     )
     (BASE / "index.html").write_text(html, encoding="utf-8")
 
@@ -806,7 +989,7 @@ def system_title():
 # Generate getting-started
 # ---------------------------------------------------------------------------
 
-def generate_getting_started() -> None:
+def generate_getting_started(search_index: list[dict[str, str]]) -> None:
     def lang_block(lang):
         t = I18N[lang]
         if lang == "zh":
@@ -1033,6 +1216,7 @@ def event_shop():
         body,
         active="getting-started",
         depth=0,
+        search_data=search_index,
     )
     (BASE / "getting-started.html").write_text(html, encoding="utf-8")
 
@@ -1044,32 +1228,23 @@ def event_shop():
 def main():
     print("Generating pyera documentation...")
 
-    # Collect all API items for global search index
-    global_search_index = []
-
-    # Generate API pages
+    parsed_modules: dict[str, list[ApiItem]] = {}
     api_dir = BASE / "api"
     for mod, page in NAV_ORDER:
         path = SRC / f"{mod}.py"
         if not path.exists():
             print(f"  SKIP (not found): {path}")
             continue
-        print(f"  {mod} -> {page}")
-        items = parse_module(path)
-        generate_api_page(mod, items, api_dir / page)
+        parsed_modules[mod] = parse_module(path)
 
-        # Collect for global search
-        meta = MODULE_META.get(mod, {})
-        zh_title = meta.get("zh", {}).get("title", mod)
-        for item in items:
-            if item.kind == "function":
-                global_search_index.append({
-                    "name": item.name,
-                    "module": zh_title,
-                    "moduleEn": meta.get("en", {}).get("title", mod),
-                    "desc": item.doc_zh[:120] if item.doc_zh else "",
-                    "url": f"api/{page}#function-{item.name}",
-                })
+    global_search_index = build_global_search_index(parsed_modules)
+
+    # Generate API pages
+    for mod, page in NAV_ORDER:
+        if mod not in parsed_modules:
+            continue
+        print(f"  {mod} -> {page}")
+        generate_api_page(mod, parsed_modules[mod], api_dir / page, global_search_index)
 
     # Generate global search index
     print("  api/search-index.json")
@@ -1080,11 +1255,11 @@ def main():
 
     # Generate index
     print("  index.html")
-    generate_index()
+    generate_index(global_search_index)
 
     # Generate getting-started
     print("  getting-started.html")
-    generate_getting_started()
+    generate_getting_started(global_search_index)
 
     # Generate example pages (basic)
     print("  examples/basic-game.html")
@@ -1094,6 +1269,7 @@ def main():
             '<a href="../index.html">Pyera</a> / Examples / Basic Game',
             '<div class="lang-content active" data-lang="zh"><h1>基础游戏示例</h1><p>请查看 <code>py/main.py</code> 获取完整示例代码。</p></div>',
             depth=1,
+            search_data=global_search_index,
         ),
         encoding="utf-8",
     )
@@ -1105,6 +1281,7 @@ def main():
             '<a href="../index.html">Pyera</a> / Examples / Async',
             '<div class="lang-content active" data-lang="zh"><h1>异步集成示例</h1><p>参考 getting-started 中的异步示例。</p></div>',
             depth=1,
+            search_data=global_search_index,
         ),
         encoding="utf-8",
     )

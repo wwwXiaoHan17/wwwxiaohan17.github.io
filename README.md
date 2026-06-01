@@ -10,6 +10,11 @@ designed to be hosted on **GitHub Pages**.
 - **Responsive**: Mobile-friendly sidebar and layout
 - **API Search**: Ctrl+K to search across all documented APIs
 - **Copy code**: One-click copy for all code blocks
+- **Markdown/RST rendering**: Common docstring syntax such as fenced code blocks,
+  inline code, bold/emphasis, lists, links, `:func:` references, and NumPy-style
+  sections is rendered into readable HTML.
+- **Beginner-friendly API parameters**: Parameter cards show whether a value is
+  required, its Python type, default value, and a plain-language description.
 - **Offline-ready**: All static files, no external CDN dependencies
 
 ## File Structure
@@ -82,6 +87,39 @@ python generate.py
 ```
 
 This script parses all `pyera/*.py` modules via AST and regenerates the HTML pages.
+
+## Writing Docstrings
+
+Use NumPy-style sections so the generator can extract parameter help:
+
+```python
+def print_line(text: str) -> None:
+    """打印一行文本。
+
+    支持常见 Markdown/RST 片段，例如 ``inline code``、**强调**、
+    :func:`print` 引用、项目列表和代码块。
+
+    Parameters
+    ----------
+    text : str
+        要显示在 Emuera 输出窗口中的文本。
+
+    Returns
+    -------
+    None
+    """
+```
+
+The API page shows only the summary prose above `Parameters` in the description
+area. Parameter details are rendered separately as beginner-friendly cards.
+
+## Search Behavior
+
+Every generated page embeds the global API search index in
+`<script id="search-data" type="application/json">`. This keeps `Ctrl+K` working
+when the docs are opened from disk or previewed in environments where `fetch()`
+cannot load local JSON files. The standalone `api/search-index.json` is still
+generated for tools and hosted previews.
 
 ## Language Switching
 
