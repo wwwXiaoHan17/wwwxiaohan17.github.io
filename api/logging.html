@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 日志系统</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 日志系统</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>日志系统</h1>
+<div class="api-card" id="function-log_enable">
+<div class="api-header">
+<div><span class="api-name">log_enable</span>
+</div>
+<div class="api-sig">log_enable(enabled: bool = True) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>启用或禁用 Pyera 调试日志。</p>
+<p>Parameters
+----------
+enabled : bool, optional
+    ``True`` 启用日志记录（默认），``False`` 禁用。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">enabled</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">``True`` 启用日志记录（默认），``False`` 禁用。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_set_callback">
+<div class="api-header">
+<div><span class="api-name">log_set_callback</span>
+</div>
+<div class="api-sig">log_set_callback(callback: Optional[Callable[[, None]]) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置自定义日志回调函数。</p>
+<p>当日志启用时，每条日志消息会通过该回调传递。
+传入 ``None`` 则恢复默认输出方式。</p>
+<p>Parameters
+----------
+callback : callable or None
+    接收单个字符串参数的无返回值回调函数。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">callback</span><span class="param-required">必需</span><span class="param-type-tag">Optional[Callable[[, None]]</span></div><p class="param-desc-text">接收单个字符串参数的无返回值回调函数。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log">
+<div class="api-header">
+<div><span class="api-name">log</span>
+</div>
+<div class="api-sig">log(*args) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出一条调试日志消息（级别 LOG）。</p>
+<p>Parameters
+----------
+*args : Any
+    可变参数，与 ``print()`` 类似自动转换为字符串并连接。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_error">
+<div class="api-header">
+<div><span class="api-name">log_error</span>
+</div>
+<div class="api-sig">log_error(*args) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出一条错误日志消息（级别 ERROR）。</p>
+<p>Parameters
+----------
+*args : Any
+    可变参数，要记录的错误信息。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_warn">
+<div class="api-header">
+<div><span class="api-name">log_warn</span>
+</div>
+<div class="api-sig">log_warn(*args) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出一条警告日志消息（级别 WARN）。</p>
+<p>Parameters
+----------
+*args : Any
+    可变参数，要记录的警告信息。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_logs">
+<div class="api-header">
+<div><span class="api-name">get_logs</span>
+</div>
+<div class="api-sig">get_logs() -&gt; list[str]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取所有已缓冲的日志消息。</p>
+<p>Returns
+-------
+list[str]
+    日志消息字符串列表的副本。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-clear_logs">
+<div class="api-header">
+<div><span class="api-name">clear_logs</span>
+</div>
+<div class="api-sig">clear_logs() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>清空日志缓冲区。</p>
+<p>与 :func:`get_logs` 配合使用，可在长时间运行后释放内存并重置日志状态。
+此操作不会影响日志的启用/禁用状态。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+get_logs : 获取当前缓冲区中的所有日志消息。
+log : 输出一条普通日志。
+log_error : 输出一条错误日志。</p></div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Logging</h1>
+<div class="api-card" id="function-log_enable">
+<div class="api-header">
+<div><span class="api-name">log_enable</span>
+</div>
+<div class="api-sig">log_enable(enabled: bool = True) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>启用或禁用 Pyera 调试日志。</p>
+<p>Parameters
+----------
+enabled : bool, optional
+    ``True`` 启用日志记录（默认），``False`` 禁用。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">enabled</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">``True`` 启用日志记录（默认），``False`` 禁用。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_set_callback">
+<div class="api-header">
+<div><span class="api-name">log_set_callback</span>
+</div>
+<div class="api-sig">log_set_callback(callback: Optional[Callable[[, None]]) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置自定义日志回调函数。</p>
+<p>当日志启用时，每条日志消息会通过该回调传递。
+传入 ``None`` 则恢复默认输出方式。</p>
+<p>Parameters
+----------
+callback : callable or None
+    接收单个字符串参数的无返回值回调函数。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">callback</span><span class="param-required">必需</span><span class="param-type-tag">Optional[Callable[[, None]]</span></div><p class="param-desc-text">接收单个字符串参数的无返回值回调函数。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log">
+<div class="api-header">
+<div><span class="api-name">log</span>
+</div>
+<div class="api-sig">log(*args) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出一条调试日志消息（级别 LOG）。</p>
+<p>Parameters
+----------
+*args : Any
+    可变参数，与 ``print()`` 类似自动转换为字符串并连接。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_error">
+<div class="api-header">
+<div><span class="api-name">log_error</span>
+</div>
+<div class="api-sig">log_error(*args) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出一条错误日志消息（级别 ERROR）。</p>
+<p>Parameters
+----------
+*args : Any
+    可变参数，要记录的错误信息。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_warn">
+<div class="api-header">
+<div><span class="api-name">log_warn</span>
+</div>
+<div class="api-sig">log_warn(*args) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出一条警告日志消息（级别 WARN）。</p>
+<p>Parameters
+----------
+*args : Any
+    可变参数，要记录的警告信息。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_logs">
+<div class="api-header">
+<div><span class="api-name">get_logs</span>
+</div>
+<div class="api-sig">get_logs() -&gt; list[str]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取所有已缓冲的日志消息。</p>
+<p>Returns
+-------
+list[str]
+    日志消息字符串列表的副本。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-clear_logs">
+<div class="api-header">
+<div><span class="api-name">clear_logs</span>
+</div>
+<div class="api-sig">clear_logs() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>清空日志缓冲区。</p>
+<p>与 :func:`get_logs` 配合使用，可在长时间运行后释放内存并重置日志状态。
+此操作不会影响日志的启用/禁用状态。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+get_logs : 获取当前缓冲区中的所有日志消息。
+log : 输出一条普通日志。
+log_error : 输出一条错误日志。</p></div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>ログシステム</h1>
+<div class="api-card" id="function-log_enable">
+<div class="api-header">
+<div><span class="api-name">log_enable</span>
+</div>
+<div class="api-sig">log_enable(enabled: bool = True) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>启用或禁用 Pyera 调试日志。</p>
+<p>Parameters
+----------
+enabled : bool, optional
+    ``True`` 启用日志记录（默认），``False`` 禁用。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">enabled</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">``True`` 启用日志记录（默认），``False`` 禁用。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_set_callback">
+<div class="api-header">
+<div><span class="api-name">log_set_callback</span>
+</div>
+<div class="api-sig">log_set_callback(callback: Optional[Callable[[, None]]) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置自定义日志回调函数。</p>
+<p>当日志启用时，每条日志消息会通过该回调传递。
+传入 ``None`` 则恢复默认输出方式。</p>
+<p>Parameters
+----------
+callback : callable or None
+    接收单个字符串参数的无返回值回调函数。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">callback</span><span class="param-required">必需</span><span class="param-type-tag">Optional[Callable[[, None]]</span></div><p class="param-desc-text">接收单个字符串参数的无返回值回调函数。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log">
+<div class="api-header">
+<div><span class="api-name">log</span>
+</div>
+<div class="api-sig">log(*args) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出一条调试日志消息（级别 LOG）。</p>
+<p>Parameters
+----------
+*args : Any
+    可变参数，与 ``print()`` 类似自动转换为字符串并连接。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_error">
+<div class="api-header">
+<div><span class="api-name">log_error</span>
+</div>
+<div class="api-sig">log_error(*args) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出一条错误日志消息（级别 ERROR）。</p>
+<p>Parameters
+----------
+*args : Any
+    可变参数，要记录的错误信息。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_warn">
+<div class="api-header">
+<div><span class="api-name">log_warn</span>
+</div>
+<div class="api-sig">log_warn(*args) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出一条警告日志消息（级别 WARN）。</p>
+<p>Parameters
+----------
+*args : Any
+    可变参数，要记录的警告信息。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_logs">
+<div class="api-header">
+<div><span class="api-name">get_logs</span>
+</div>
+<div class="api-sig">get_logs() -&gt; list[str]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取所有已缓冲的日志消息。</p>
+<p>Returns
+-------
+list[str]
+    日志消息字符串列表的副本。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-clear_logs">
+<div class="api-header">
+<div><span class="api-name">clear_logs</span>
+</div>
+<div class="api-sig">clear_logs() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>清空日志缓冲区。</p>
+<p>与 :func:`get_logs` 配合使用，可在长时间运行后释放内存并重置日志状态。
+此操作不会影响日志的启用/禁用状态。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+get_logs : 获取当前缓冲区中的所有日志消息。
+log : 输出一条普通日志。
+log_error : 输出一条错误日志。</p></div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "log_enable", "desc": "启用或禁用 Pyera 调试日志。\n\nParameters\n----------\nenabled : bool, optional\n    ``True`` 启", "url": "./logging.html#function-log_enable"}, {"name": "log_set_callback", "desc": "设置自定义日志回调函数。\n\n当日志启用时，每条日志消息会通过该回调传递。\n传入 ``None`` 则恢复默认输出方式。\n\nParameters\n--------", "url": "./logging.html#function-log_set_callback"}, {"name": "log", "desc": "输出一条调试日志消息（级别 LOG）。\n\nParameters\n----------\n*args : Any\n    可变参数，与 ``print()`` 类似", "url": "./logging.html#function-log"}, {"name": "log_error", "desc": "输出一条错误日志消息（级别 ERROR）。\n\nParameters\n----------\n*args : Any\n    可变参数，要记录的错误信息。\n\nRet", "url": "./logging.html#function-log_error"}, {"name": "log_warn", "desc": "输出一条警告日志消息（级别 WARN）。\n\nParameters\n----------\n*args : Any\n    可变参数，要记录的警告信息。\n\nRetu", "url": "./logging.html#function-log_warn"}, {"name": "get_logs", "desc": "获取所有已缓冲的日志消息。\n\nReturns\n-------\nlist[str]\n    日志消息字符串列表的副本。", "url": "./logging.html#function-get_logs"}, {"name": "clear_logs", "desc": "清空日志缓冲区。\n\n与 :func:`get_logs` 配合使用，可在长时间运行后释放内存并重置日志状态。\n此操作不会影响日志的启用/禁用状态。\n\nRetur", "url": "./logging.html#function-clear_logs"}, {"name": "log_enable", "desc": "启用或禁用 Pyera 调试日志。\n\nParameters\n----------\nenabled : bool, optional\n    ``True`` 启", "url": "./logging.html#function-log_enable"}, {"name": "log_set_callback", "desc": "设置自定义日志回调函数。\n\n当日志启用时，每条日志消息会通过该回调传递。\n传入 ``None`` 则恢复默认输出方式。\n\nParameters\n--------", "url": "./logging.html#function-log_set_callback"}, {"name": "log", "desc": "输出一条调试日志消息（级别 LOG）。\n\nParameters\n----------\n*args : Any\n    可变参数，与 ``print()`` 类似", "url": "./logging.html#function-log"}, {"name": "log_error", "desc": "输出一条错误日志消息（级别 ERROR）。\n\nParameters\n----------\n*args : Any\n    可变参数，要记录的错误信息。\n\nRet", "url": "./logging.html#function-log_error"}, {"name": "log_warn", "desc": "输出一条警告日志消息（级别 WARN）。\n\nParameters\n----------\n*args : Any\n    可变参数，要记录的警告信息。\n\nRetu", "url": "./logging.html#function-log_warn"}, {"name": "get_logs", "desc": "获取所有已缓冲的日志消息。\n\nReturns\n-------\nlist[str]\n    日志消息字符串列表的副本。", "url": "./logging.html#function-get_logs"}, {"name": "clear_logs", "desc": "清空日志缓冲区。\n\n与 :func:`get_logs` 配合使用，可在长时间运行后释放内存并重置日志状态。\n此操作不会影响日志的启用/禁用状态。\n\nRetur", "url": "./logging.html#function-clear_logs"}, {"name": "log_enable", "desc": "启用或禁用 Pyera 调试日志。\n\nParameters\n----------\nenabled : bool, optional\n    ``True`` 启", "url": "./logging.html#function-log_enable"}, {"name": "log_set_callback", "desc": "设置自定义日志回调函数。\n\n当日志启用时，每条日志消息会通过该回调传递。\n传入 ``None`` 则恢复默认输出方式。\n\nParameters\n--------", "url": "./logging.html#function-log_set_callback"}, {"name": "log", "desc": "输出一条调试日志消息（级别 LOG）。\n\nParameters\n----------\n*args : Any\n    可变参数，与 ``print()`` 类似", "url": "./logging.html#function-log"}, {"name": "log_error", "desc": "输出一条错误日志消息（级别 ERROR）。\n\nParameters\n----------\n*args : Any\n    可变参数，要记录的错误信息。\n\nRet", "url": "./logging.html#function-log_error"}, {"name": "log_warn", "desc": "输出一条警告日志消息（级别 WARN）。\n\nParameters\n----------\n*args : Any\n    可变参数，要记录的警告信息。\n\nRetu", "url": "./logging.html#function-log_warn"}, {"name": "get_logs", "desc": "获取所有已缓冲的日志消息。\n\nReturns\n-------\nlist[str]\n    日志消息字符串列表的副本。", "url": "./logging.html#function-get_logs"}, {"name": "clear_logs", "desc": "清空日志缓冲区。\n\n与 :func:`get_logs` 配合使用，可在长时间运行后释放内存并重置日志状态。\n此操作不会影响日志的启用/禁用状态。\n\nRetur", "url": "./logging.html#function-clear_logs"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 变量代理</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 变量代理</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>变量代理</h1>
+<div class="api-card" id="class-VarProxy">
+<div class="api-header">
+<div><span class="api-name">VarProxy</span>
+</div>
+<div class="api-sig">VarProxy</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Proxy for a single Emuera variable token.</p>
+<p>Supports::</p>
+<p>    proxy[0] = 1          # scalar or 1-D assignment
+    x = proxy[0, 1]       # multi-D read
+    proxy[0, 1] = &quot;text&quot;  # multi-D string assignment</p></div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, name: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化变量代理。</p>
+<p>Parameters
+----------
+name : str
+    变量在引擎中的注册名称（例如 ``&quot;FLAG&quot;``、``&quot;MONEY&quot;``）。
+    内部会自动转为小写以匹配引擎的大小写不敏感行为。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量在引擎中的注册名称（例如 ``&quot;FLAG&quot;``、``&quot;MONEY&quot;``）。 内部会自动转为小写以匹配引擎的大小写不敏感行为。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-name">
+<div class="api-header">
+<div><span class="api-name">name</span>
+</div>
+<div class="api-sig">name(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>变量名称（只读）。</p>
+<p>Returns
+-------
+str
+    初始化时传入的变量名称。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Variable Proxies</h1>
+<div class="api-card" id="class-VarProxy">
+<div class="api-header">
+<div><span class="api-name">VarProxy</span>
+</div>
+<div class="api-sig">VarProxy</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Proxy for a single Emuera variable token.</p>
+<p>Supports::</p>
+<p>    proxy[0] = 1          # scalar or 1-D assignment
+    x = proxy[0, 1]       # multi-D read
+    proxy[0, 1] = &quot;text&quot;  # multi-D string assignment</p></div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, name: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化变量代理。</p>
+<p>Parameters
+----------
+name : str
+    变量在引擎中的注册名称（例如 ``&quot;FLAG&quot;``、``&quot;MONEY&quot;``）。
+    内部会自动转为小写以匹配引擎的大小写不敏感行为。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量在引擎中的注册名称（例如 ``&quot;FLAG&quot;``、``&quot;MONEY&quot;``）。 内部会自动转为小写以匹配引擎的大小写不敏感行为。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-name">
+<div class="api-header">
+<div><span class="api-name">name</span>
+</div>
+<div class="api-sig">name(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>变量名称（只读）。</p>
+<p>Returns
+-------
+str
+    初始化时传入的变量名称。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>変数プロキシ</h1>
+<div class="api-card" id="class-VarProxy">
+<div class="api-header">
+<div><span class="api-name">VarProxy</span>
+</div>
+<div class="api-sig">VarProxy</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Proxy for a single Emuera variable token.</p>
+<p>Supports::</p>
+<p>    proxy[0] = 1          # scalar or 1-D assignment
+    x = proxy[0, 1]       # multi-D read
+    proxy[0, 1] = &quot;text&quot;  # multi-D string assignment</p></div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, name: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化变量代理。</p>
+<p>Parameters
+----------
+name : str
+    变量在引擎中的注册名称（例如 ``&quot;FLAG&quot;``、``&quot;MONEY&quot;``）。
+    内部会自动转为小写以匹配引擎的大小写不敏感行为。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量在引擎中的注册名称（例如 ``&quot;FLAG&quot;``、``&quot;MONEY&quot;``）。 内部会自动转为小写以匹配引擎的大小写不敏感行为。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-name">
+<div class="api-header">
+<div><span class="api-name">name</span>
+</div>
+<div class="api-sig">name(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>变量名称（只读）。</p>
+<p>Returns
+-------
+str
+    初始化时传入的变量名称。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "VarProxy", "desc": "Proxy for a single Emuera variable token.\n\nSupports::\n\n    proxy[0] = 1         ", "url": "./vars.html#class-VarProxy"}, {"name": "__init__", "desc": "初始化变量代理。\n\nParameters\n----------\nname : str\n    变量在引擎中的注册名称（例如 ``\"FLAG\"``、``\"MONE", "url": "./vars.html#function-__init__"}, {"name": "name", "desc": "变量名称（只读）。\n\nReturns\n-------\nstr\n    初始化时传入的变量名称。", "url": "./vars.html#function-name"}, {"name": "VarProxy", "desc": "Proxy for a single Emuera variable token.\n\nSupports::\n\n    proxy[0] = 1         ", "url": "./vars.html#class-VarProxy"}, {"name": "__init__", "desc": "初始化变量代理。\n\nParameters\n----------\nname : str\n    变量在引擎中的注册名称（例如 ``\"FLAG\"``、``\"MONE", "url": "./vars.html#function-__init__"}, {"name": "name", "desc": "变量名称（只读）。\n\nReturns\n-------\nstr\n    初始化时传入的变量名称。", "url": "./vars.html#function-name"}, {"name": "VarProxy", "desc": "Proxy for a single Emuera variable token.\n\nSupports::\n\n    proxy[0] = 1         ", "url": "./vars.html#class-VarProxy"}, {"name": "__init__", "desc": "初始化变量代理。\n\nParameters\n----------\nname : str\n    变量在引擎中的注册名称（例如 ``\"FLAG\"``、``\"MONE", "url": "./vars.html#function-__init__"}, {"name": "name", "desc": "变量名称（只读）。\n\nReturns\n-------\nstr\n    初始化时传入的变量名称。", "url": "./vars.html#function-name"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

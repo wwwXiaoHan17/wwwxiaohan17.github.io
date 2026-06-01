@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 角色类</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 角色类</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>角色类</h1>
+<div class="api-card" id="class-CharaVarProxy">
+<div class="api-header">
+<div><span class="api-name">CharaVarProxy</span>
+</div>
+<div class="api-sig">CharaVarProxy</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色变量代理，支持 ``chara.variable[index]`` 形式的访问。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-Chara">
+<div class="api-header">
+<div><span class="api-name">Chara</span>
+</div>
+<div class="api-sig">Chara</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>单个角色数据的代理对象。</p>
+<p>通过属性访问器（如 ``chara.abl``、``chara.cflag``）获取 :class:`CharaVarProxy`，
+再通过下标索引（如 ``chara.abl[2]``）读写具体的角色变量值。</p>
+<p>Parameters
+----------
+chara_id : int
+    角色在当前角色列表中的索引（``0`` 通常为主人角色）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-chara">
+<div class="api-header">
+<div><span class="api-name">chara</span>
+</div>
+<div class="api-sig">chara(chara_id: int) -&gt; Chara</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按列表索引获取角色代理对象。</p>
+<p>Parameters
+----------
+chara_id : int
+    角色在列表中的索引（``0`` 通常为主人角色）。</p>
+<p>Returns
+-------
+Chara
+    对应索引的角色代理对象。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_id</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在列表中的索引（``0`` 通常为主人角色）。 对应索引的角色代理对象。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-chara_from_no">
+<div class="api-header">
+<div><span class="api-name">chara_from_no</span>
+</div>
+<div class="api-sig">chara_from_no(no: int) -&gt; Optional[Chara]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按 CSV 注册编号查找角色。</p>
+<p>遍历角色列表，返回第一个 ``NO`` 等于指定编号的角色。</p>
+<p>Parameters
+----------
+no : int
+    角色的 CSV 注册编号（CSVNO）。</p>
+<p>Returns
+-------
+Chara or None
+    匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色的 CSV 注册编号（CSVNO）。 匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-chara_by_name">
+<div class="api-header">
+<div><span class="api-name">chara_by_name</span>
+</div>
+<div class="api-sig">chara_by_name(name: str) -&gt; Optional[Chara]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按名称（部分匹配）查找角色。</p>
+<p>遍历角色列表，返回第一个名称包含给定字符串（不区分大小写）的角色。</p>
+<p>Parameters
+----------
+name : str
+    要搜索的名称子串。</p>
+<p>Returns
+-------
+Chara or None
+    匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要搜索的名称子串。 匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, chara: Chara, var_name: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化角色变量代理。</p>
+<p>Parameters
+----------
+chara : Chara
+    所属的角色代理对象。
+var_name : str
+    变量名称（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">chara</span><span class="param-required">必需</span><span class="param-type-tag">Chara</span></div><p class="param-desc-text">所属的角色代理对象。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量名称（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, chara_id: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化角色代理对象。</p>
+<p>Parameters
+----------
+chara_id : int
+    角色在当前角色列表中的索引（``0`` 通常为主人角色）。
+    注意：这是列表索引，不是 CSV 注册编号（NO）。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">chara_id</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在当前角色列表中的索引（``0`` 通常为主人角色）。 注意：这是列表索引，不是 CSV 注册编号（NO）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-id">
+<div class="api-header">
+<div><span class="api-name">id</span>
+</div>
+<div class="api-sig">id(self) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>当前角色在列表中的索引（注意：不是 CSV NO）。</p>
+<p>Returns
+-------
+int
+    角色列表索引。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-no">
+<div class="api-header">
+<div><span class="api-name">no</span>
+</div>
+<div class="api-sig">no(self) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色的 CSV 注册编号（NO）。</p>
+<p>Returns
+-------
+int
+    CSVNO 值；读取失败返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-name">
+<div class="api-header">
+<div><span class="api-name">name</span>
+</div>
+<div class="api-sig">name(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色名称（CSTR:0 或 NAME）。</p>
+<p>Returns
+-------
+str
+    角色名称字符串；读取失败返回空字符串。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-callname">
+<div class="api-header">
+<div><span class="api-name">callname</span>
+</div>
+<div class="api-sig">callname(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色称呼（CSTR:1）。</p>
+<p>Returns
+-------
+str
+    角色称呼字符串；读取失败返回空字符串。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-nickname">
+<div class="api-header">
+<div><span class="api-name">nickname</span>
+</div>
+<div class="api-sig">nickname(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色昵称（CSTR:2）。</p>
+<p>Returns
+-------
+str
+    角色昵称字符串；读取失败返回空字符串。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_master">
+<div class="api-header">
+<div><span class="api-name">is_master</span>
+</div>
+<div class="api-sig">is_master(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断当前角色是否为当前主人（MASTER）。</p>
+<p>Returns
+-------
+bool
+    若 ``MASTER`` 变量等于此角色索引则返回 ``True``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_target">
+<div class="api-header">
+<div><span class="api-name">is_target</span>
+</div>
+<div class="api-sig">is_target(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断当前角色是否为当前目标（TARGET）。</p>
+<p>Returns
+-------
+bool
+    若 ``TARGET`` 变量等于此角色索引则返回 ``True``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_assi">
+<div class="api-header">
+<div><span class="api-name">is_assi</span>
+</div>
+<div class="api-sig">is_assi(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断当前角色是否为当前助手（ASSI）。</p>
+<p>Returns
+-------
+bool
+    若 ``ASSI`` 变量等于此角色索引则返回 ``True``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-delete">
+<div class="api-header">
+<div><span class="api-name">delete</span>
+</div>
+<div class="api-sig">delete(self) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>从角色列表中删除此角色。</p>
+<p>调用后该角色的列表索引会被后续角色填补，
+因此不应继续保留对此 :class:`Chara` 实例的引用。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+copy_to : 将角色数据复制到另一索引。
+swap_with : 与另一角色交换数据。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-copy_to">
+<div class="api-header">
+<div><span class="api-name">copy_to</span>
+</div>
+<div class="api-sig">copy_to(self, target_idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将此角色的全部数据复制到目标索引位置。</p>
+<p>Parameters
+----------
+target_idx : int
+    目标角色在列表中的索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">目标角色在列表中的索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-swap_with">
+<div class="api-header">
+<div><span class="api-name">swap_with</span>
+</div>
+<div class="api-sig">swap_with(self, other_idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将此角色与指定索引位置的角色交换数据。</p>
+<p>Parameters
+----------
+other_idx : int
+    要交换的另一个角色的列表索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">other_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要交换的另一个角色的列表索引。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Chara Class</h1>
+<div class="api-card" id="class-CharaVarProxy">
+<div class="api-header">
+<div><span class="api-name">CharaVarProxy</span>
+</div>
+<div class="api-sig">CharaVarProxy</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色变量代理，支持 ``chara.variable[index]`` 形式的访问。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-Chara">
+<div class="api-header">
+<div><span class="api-name">Chara</span>
+</div>
+<div class="api-sig">Chara</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>单个角色数据的代理对象。</p>
+<p>通过属性访问器（如 ``chara.abl``、``chara.cflag``）获取 :class:`CharaVarProxy`，
+再通过下标索引（如 ``chara.abl[2]``）读写具体的角色变量值。</p>
+<p>Parameters
+----------
+chara_id : int
+    角色在当前角色列表中的索引（``0`` 通常为主人角色）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-chara">
+<div class="api-header">
+<div><span class="api-name">chara</span>
+</div>
+<div class="api-sig">chara(chara_id: int) -&gt; Chara</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按列表索引获取角色代理对象。</p>
+<p>Parameters
+----------
+chara_id : int
+    角色在列表中的索引（``0`` 通常为主人角色）。</p>
+<p>Returns
+-------
+Chara
+    对应索引的角色代理对象。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_id</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在列表中的索引（``0`` 通常为主人角色）。 对应索引的角色代理对象。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-chara_from_no">
+<div class="api-header">
+<div><span class="api-name">chara_from_no</span>
+</div>
+<div class="api-sig">chara_from_no(no: int) -&gt; Optional[Chara]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按 CSV 注册编号查找角色。</p>
+<p>遍历角色列表，返回第一个 ``NO`` 等于指定编号的角色。</p>
+<p>Parameters
+----------
+no : int
+    角色的 CSV 注册编号（CSVNO）。</p>
+<p>Returns
+-------
+Chara or None
+    匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色的 CSV 注册编号（CSVNO）。 匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-chara_by_name">
+<div class="api-header">
+<div><span class="api-name">chara_by_name</span>
+</div>
+<div class="api-sig">chara_by_name(name: str) -&gt; Optional[Chara]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按名称（部分匹配）查找角色。</p>
+<p>遍历角色列表，返回第一个名称包含给定字符串（不区分大小写）的角色。</p>
+<p>Parameters
+----------
+name : str
+    要搜索的名称子串。</p>
+<p>Returns
+-------
+Chara or None
+    匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要搜索的名称子串。 匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, chara: Chara, var_name: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化角色变量代理。</p>
+<p>Parameters
+----------
+chara : Chara
+    所属的角色代理对象。
+var_name : str
+    变量名称（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">chara</span><span class="param-required">必需</span><span class="param-type-tag">Chara</span></div><p class="param-desc-text">所属的角色代理对象。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量名称（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, chara_id: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化角色代理对象。</p>
+<p>Parameters
+----------
+chara_id : int
+    角色在当前角色列表中的索引（``0`` 通常为主人角色）。
+    注意：这是列表索引，不是 CSV 注册编号（NO）。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">chara_id</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在当前角色列表中的索引（``0`` 通常为主人角色）。 注意：这是列表索引，不是 CSV 注册编号（NO）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-id">
+<div class="api-header">
+<div><span class="api-name">id</span>
+</div>
+<div class="api-sig">id(self) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>当前角色在列表中的索引（注意：不是 CSV NO）。</p>
+<p>Returns
+-------
+int
+    角色列表索引。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-no">
+<div class="api-header">
+<div><span class="api-name">no</span>
+</div>
+<div class="api-sig">no(self) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色的 CSV 注册编号（NO）。</p>
+<p>Returns
+-------
+int
+    CSVNO 值；读取失败返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-name">
+<div class="api-header">
+<div><span class="api-name">name</span>
+</div>
+<div class="api-sig">name(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色名称（CSTR:0 或 NAME）。</p>
+<p>Returns
+-------
+str
+    角色名称字符串；读取失败返回空字符串。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-callname">
+<div class="api-header">
+<div><span class="api-name">callname</span>
+</div>
+<div class="api-sig">callname(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色称呼（CSTR:1）。</p>
+<p>Returns
+-------
+str
+    角色称呼字符串；读取失败返回空字符串。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-nickname">
+<div class="api-header">
+<div><span class="api-name">nickname</span>
+</div>
+<div class="api-sig">nickname(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色昵称（CSTR:2）。</p>
+<p>Returns
+-------
+str
+    角色昵称字符串；读取失败返回空字符串。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_master">
+<div class="api-header">
+<div><span class="api-name">is_master</span>
+</div>
+<div class="api-sig">is_master(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断当前角色是否为当前主人（MASTER）。</p>
+<p>Returns
+-------
+bool
+    若 ``MASTER`` 变量等于此角色索引则返回 ``True``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_target">
+<div class="api-header">
+<div><span class="api-name">is_target</span>
+</div>
+<div class="api-sig">is_target(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断当前角色是否为当前目标（TARGET）。</p>
+<p>Returns
+-------
+bool
+    若 ``TARGET`` 变量等于此角色索引则返回 ``True``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_assi">
+<div class="api-header">
+<div><span class="api-name">is_assi</span>
+</div>
+<div class="api-sig">is_assi(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断当前角色是否为当前助手（ASSI）。</p>
+<p>Returns
+-------
+bool
+    若 ``ASSI`` 变量等于此角色索引则返回 ``True``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-delete">
+<div class="api-header">
+<div><span class="api-name">delete</span>
+</div>
+<div class="api-sig">delete(self) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>从角色列表中删除此角色。</p>
+<p>调用后该角色的列表索引会被后续角色填补，
+因此不应继续保留对此 :class:`Chara` 实例的引用。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+copy_to : 将角色数据复制到另一索引。
+swap_with : 与另一角色交换数据。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-copy_to">
+<div class="api-header">
+<div><span class="api-name">copy_to</span>
+</div>
+<div class="api-sig">copy_to(self, target_idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将此角色的全部数据复制到目标索引位置。</p>
+<p>Parameters
+----------
+target_idx : int
+    目标角色在列表中的索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">目标角色在列表中的索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-swap_with">
+<div class="api-header">
+<div><span class="api-name">swap_with</span>
+</div>
+<div class="api-sig">swap_with(self, other_idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将此角色与指定索引位置的角色交换数据。</p>
+<p>Parameters
+----------
+other_idx : int
+    要交换的另一个角色的列表索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">other_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要交换的另一个角色的列表索引。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>キャラクタークラス</h1>
+<div class="api-card" id="class-CharaVarProxy">
+<div class="api-header">
+<div><span class="api-name">CharaVarProxy</span>
+</div>
+<div class="api-sig">CharaVarProxy</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色变量代理，支持 ``chara.variable[index]`` 形式的访问。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-Chara">
+<div class="api-header">
+<div><span class="api-name">Chara</span>
+</div>
+<div class="api-sig">Chara</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>单个角色数据的代理对象。</p>
+<p>通过属性访问器（如 ``chara.abl``、``chara.cflag``）获取 :class:`CharaVarProxy`，
+再通过下标索引（如 ``chara.abl[2]``）读写具体的角色变量值。</p>
+<p>Parameters
+----------
+chara_id : int
+    角色在当前角色列表中的索引（``0`` 通常为主人角色）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-chara">
+<div class="api-header">
+<div><span class="api-name">chara</span>
+</div>
+<div class="api-sig">chara(chara_id: int) -&gt; Chara</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按列表索引获取角色代理对象。</p>
+<p>Parameters
+----------
+chara_id : int
+    角色在列表中的索引（``0`` 通常为主人角色）。</p>
+<p>Returns
+-------
+Chara
+    对应索引的角色代理对象。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_id</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在列表中的索引（``0`` 通常为主人角色）。 对应索引的角色代理对象。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-chara_from_no">
+<div class="api-header">
+<div><span class="api-name">chara_from_no</span>
+</div>
+<div class="api-sig">chara_from_no(no: int) -&gt; Optional[Chara]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按 CSV 注册编号查找角色。</p>
+<p>遍历角色列表，返回第一个 ``NO`` 等于指定编号的角色。</p>
+<p>Parameters
+----------
+no : int
+    角色的 CSV 注册编号（CSVNO）。</p>
+<p>Returns
+-------
+Chara or None
+    匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色的 CSV 注册编号（CSVNO）。 匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-chara_by_name">
+<div class="api-header">
+<div><span class="api-name">chara_by_name</span>
+</div>
+<div class="api-sig">chara_by_name(name: str) -&gt; Optional[Chara]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按名称（部分匹配）查找角色。</p>
+<p>遍历角色列表，返回第一个名称包含给定字符串（不区分大小写）的角色。</p>
+<p>Parameters
+----------
+name : str
+    要搜索的名称子串。</p>
+<p>Returns
+-------
+Chara or None
+    匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要搜索的名称子串。 匹配的角色代理对象；未找到时返回 ``None``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, chara: Chara, var_name: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化角色变量代理。</p>
+<p>Parameters
+----------
+chara : Chara
+    所属的角色代理对象。
+var_name : str
+    变量名称（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">chara</span><span class="param-required">必需</span><span class="param-type-tag">Chara</span></div><p class="param-desc-text">所属的角色代理对象。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量名称（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, chara_id: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化角色代理对象。</p>
+<p>Parameters
+----------
+chara_id : int
+    角色在当前角色列表中的索引（``0`` 通常为主人角色）。
+    注意：这是列表索引，不是 CSV 注册编号（NO）。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">chara_id</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在当前角色列表中的索引（``0`` 通常为主人角色）。 注意：这是列表索引，不是 CSV 注册编号（NO）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-id">
+<div class="api-header">
+<div><span class="api-name">id</span>
+</div>
+<div class="api-sig">id(self) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>当前角色在列表中的索引（注意：不是 CSV NO）。</p>
+<p>Returns
+-------
+int
+    角色列表索引。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-no">
+<div class="api-header">
+<div><span class="api-name">no</span>
+</div>
+<div class="api-sig">no(self) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色的 CSV 注册编号（NO）。</p>
+<p>Returns
+-------
+int
+    CSVNO 值；读取失败返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-name">
+<div class="api-header">
+<div><span class="api-name">name</span>
+</div>
+<div class="api-sig">name(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色名称（CSTR:0 或 NAME）。</p>
+<p>Returns
+-------
+str
+    角色名称字符串；读取失败返回空字符串。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-callname">
+<div class="api-header">
+<div><span class="api-name">callname</span>
+</div>
+<div class="api-sig">callname(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色称呼（CSTR:1）。</p>
+<p>Returns
+-------
+str
+    角色称呼字符串；读取失败返回空字符串。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-nickname">
+<div class="api-header">
+<div><span class="api-name">nickname</span>
+</div>
+<div class="api-sig">nickname(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>角色昵称（CSTR:2）。</p>
+<p>Returns
+-------
+str
+    角色昵称字符串；读取失败返回空字符串。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_master">
+<div class="api-header">
+<div><span class="api-name">is_master</span>
+</div>
+<div class="api-sig">is_master(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断当前角色是否为当前主人（MASTER）。</p>
+<p>Returns
+-------
+bool
+    若 ``MASTER`` 变量等于此角色索引则返回 ``True``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_target">
+<div class="api-header">
+<div><span class="api-name">is_target</span>
+</div>
+<div class="api-sig">is_target(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断当前角色是否为当前目标（TARGET）。</p>
+<p>Returns
+-------
+bool
+    若 ``TARGET`` 变量等于此角色索引则返回 ``True``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_assi">
+<div class="api-header">
+<div><span class="api-name">is_assi</span>
+</div>
+<div class="api-sig">is_assi(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断当前角色是否为当前助手（ASSI）。</p>
+<p>Returns
+-------
+bool
+    若 ``ASSI`` 变量等于此角色索引则返回 ``True``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-delete">
+<div class="api-header">
+<div><span class="api-name">delete</span>
+</div>
+<div class="api-sig">delete(self) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>从角色列表中删除此角色。</p>
+<p>调用后该角色的列表索引会被后续角色填补，
+因此不应继续保留对此 :class:`Chara` 实例的引用。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+copy_to : 将角色数据复制到另一索引。
+swap_with : 与另一角色交换数据。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-copy_to">
+<div class="api-header">
+<div><span class="api-name">copy_to</span>
+</div>
+<div class="api-sig">copy_to(self, target_idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将此角色的全部数据复制到目标索引位置。</p>
+<p>Parameters
+----------
+target_idx : int
+    目标角色在列表中的索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">目标角色在列表中的索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-swap_with">
+<div class="api-header">
+<div><span class="api-name">swap_with</span>
+</div>
+<div class="api-sig">swap_with(self, other_idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将此角色与指定索引位置的角色交换数据。</p>
+<p>Parameters
+----------
+other_idx : int
+    要交换的另一个角色的列表索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">other_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要交换的另一个角色的列表索引。</p></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "CharaVarProxy", "desc": "角色变量代理，支持 ``chara.variable[index]`` 形式的访问。", "url": "./chara-class.html#class-CharaVarProxy"}, {"name": "Chara", "desc": "单个角色数据的代理对象。\n\n通过属性访问器（如 ``chara.abl``、``chara.cflag``）获取 :class:`CharaVarProxy`，", "url": "./chara-class.html#class-Chara"}, {"name": "chara", "desc": "按列表索引获取角色代理对象。\n\nParameters\n----------\nchara_id : int\n    角色在列表中的索引（``0`` 通常为主人角色", "url": "./chara-class.html#function-chara"}, {"name": "chara_from_no", "desc": "按 CSV 注册编号查找角色。\n\n遍历角色列表，返回第一个 ``NO`` 等于指定编号的角色。\n\nParameters\n----------\nno : int\n", "url": "./chara-class.html#function-chara_from_no"}, {"name": "chara_by_name", "desc": "按名称（部分匹配）查找角色。\n\n遍历角色列表，返回第一个名称包含给定字符串（不区分大小写）的角色。\n\nParameters\n----------\nname : ", "url": "./chara-class.html#function-chara_by_name"}, {"name": "__init__", "desc": "初始化角色变量代理。\n\nParameters\n----------\nchara : Chara\n    所属的角色代理对象。\nvar_name : str\n  ", "url": "./chara-class.html#function-__init__"}, {"name": "__init__", "desc": "初始化角色代理对象。\n\nParameters\n----------\nchara_id : int\n    角色在当前角色列表中的索引（``0`` 通常为主人角色", "url": "./chara-class.html#function-__init__"}, {"name": "id", "desc": "当前角色在列表中的索引（注意：不是 CSV NO）。\n\nReturns\n-------\nint\n    角色列表索引。", "url": "./chara-class.html#function-id"}, {"name": "no", "desc": "角色的 CSV 注册编号（NO）。\n\nReturns\n-------\nint\n    CSVNO 值；读取失败返回 ``0``。", "url": "./chara-class.html#function-no"}, {"name": "name", "desc": "角色名称（CSTR:0 或 NAME）。\n\nReturns\n-------\nstr\n    角色名称字符串；读取失败返回空字符串。", "url": "./chara-class.html#function-name"}, {"name": "callname", "desc": "角色称呼（CSTR:1）。\n\nReturns\n-------\nstr\n    角色称呼字符串；读取失败返回空字符串。", "url": "./chara-class.html#function-callname"}, {"name": "nickname", "desc": "角色昵称（CSTR:2）。\n\nReturns\n-------\nstr\n    角色昵称字符串；读取失败返回空字符串。", "url": "./chara-class.html#function-nickname"}, {"name": "is_master", "desc": "判断当前角色是否为当前主人（MASTER）。\n\nReturns\n-------\nbool\n    若 ``MASTER`` 变量等于此角色索引则返回 ``Tru", "url": "./chara-class.html#function-is_master"}, {"name": "is_target", "desc": "判断当前角色是否为当前目标（TARGET）。\n\nReturns\n-------\nbool\n    若 ``TARGET`` 变量等于此角色索引则返回 ``Tru", "url": "./chara-class.html#function-is_target"}, {"name": "is_assi", "desc": "判断当前角色是否为当前助手（ASSI）。\n\nReturns\n-------\nbool\n    若 ``ASSI`` 变量等于此角色索引则返回 ``True``。", "url": "./chara-class.html#function-is_assi"}, {"name": "delete", "desc": "从角色列表中删除此角色。\n\n调用后该角色的列表索引会被后续角色填补，\n因此不应继续保留对此 :class:`Chara` 实例的引用。\n\nReturns\n---", "url": "./chara-class.html#function-delete"}, {"name": "copy_to", "desc": "将此角色的全部数据复制到目标索引位置。\n\nParameters\n----------\ntarget_idx : int\n    目标角色在列表中的索引。\n\nRe", "url": "./chara-class.html#function-copy_to"}, {"name": "swap_with", "desc": "将此角色与指定索引位置的角色交换数据。\n\nParameters\n----------\nother_idx : int\n    要交换的另一个角色的列表索引。\n\n", "url": "./chara-class.html#function-swap_with"}, {"name": "CharaVarProxy", "desc": "角色变量代理，支持 ``chara.variable[index]`` 形式的访问。", "url": "./chara-class.html#class-CharaVarProxy"}, {"name": "Chara", "desc": "单个角色数据的代理对象。\n\n通过属性访问器（如 ``chara.abl``、``chara.cflag``）获取 :class:`CharaVarProxy`，", "url": "./chara-class.html#class-Chara"}, {"name": "chara", "desc": "按列表索引获取角色代理对象。\n\nParameters\n----------\nchara_id : int\n    角色在列表中的索引（``0`` 通常为主人角色", "url": "./chara-class.html#function-chara"}, {"name": "chara_from_no", "desc": "按 CSV 注册编号查找角色。\n\n遍历角色列表，返回第一个 ``NO`` 等于指定编号的角色。\n\nParameters\n----------\nno : int\n", "url": "./chara-class.html#function-chara_from_no"}, {"name": "chara_by_name", "desc": "按名称（部分匹配）查找角色。\n\n遍历角色列表，返回第一个名称包含给定字符串（不区分大小写）的角色。\n\nParameters\n----------\nname : ", "url": "./chara-class.html#function-chara_by_name"}, {"name": "__init__", "desc": "初始化角色变量代理。\n\nParameters\n----------\nchara : Chara\n    所属的角色代理对象。\nvar_name : str\n  ", "url": "./chara-class.html#function-__init__"}, {"name": "__init__", "desc": "初始化角色代理对象。\n\nParameters\n----------\nchara_id : int\n    角色在当前角色列表中的索引（``0`` 通常为主人角色", "url": "./chara-class.html#function-__init__"}, {"name": "id", "desc": "当前角色在列表中的索引（注意：不是 CSV NO）。\n\nReturns\n-------\nint\n    角色列表索引。", "url": "./chara-class.html#function-id"}, {"name": "no", "desc": "角色的 CSV 注册编号（NO）。\n\nReturns\n-------\nint\n    CSVNO 值；读取失败返回 ``0``。", "url": "./chara-class.html#function-no"}, {"name": "name", "desc": "角色名称（CSTR:0 或 NAME）。\n\nReturns\n-------\nstr\n    角色名称字符串；读取失败返回空字符串。", "url": "./chara-class.html#function-name"}, {"name": "callname", "desc": "角色称呼（CSTR:1）。\n\nReturns\n-------\nstr\n    角色称呼字符串；读取失败返回空字符串。", "url": "./chara-class.html#function-callname"}, {"name": "nickname", "desc": "角色昵称（CSTR:2）。\n\nReturns\n-------\nstr\n    角色昵称字符串；读取失败返回空字符串。", "url": "./chara-class.html#function-nickname"}, {"name": "is_master", "desc": "判断当前角色是否为当前主人（MASTER）。\n\nReturns\n-------\nbool\n    若 ``MASTER`` 变量等于此角色索引则返回 ``Tru", "url": "./chara-class.html#function-is_master"}, {"name": "is_target", "desc": "判断当前角色是否为当前目标（TARGET）。\n\nReturns\n-------\nbool\n    若 ``TARGET`` 变量等于此角色索引则返回 ``Tru", "url": "./chara-class.html#function-is_target"}, {"name": "is_assi", "desc": "判断当前角色是否为当前助手（ASSI）。\n\nReturns\n-------\nbool\n    若 ``ASSI`` 变量等于此角色索引则返回 ``True``。", "url": "./chara-class.html#function-is_assi"}, {"name": "delete", "desc": "从角色列表中删除此角色。\n\n调用后该角色的列表索引会被后续角色填补，\n因此不应继续保留对此 :class:`Chara` 实例的引用。\n\nReturns\n---", "url": "./chara-class.html#function-delete"}, {"name": "copy_to", "desc": "将此角色的全部数据复制到目标索引位置。\n\nParameters\n----------\ntarget_idx : int\n    目标角色在列表中的索引。\n\nRe", "url": "./chara-class.html#function-copy_to"}, {"name": "swap_with", "desc": "将此角色与指定索引位置的角色交换数据。\n\nParameters\n----------\nother_idx : int\n    要交换的另一个角色的列表索引。\n\n", "url": "./chara-class.html#function-swap_with"}, {"name": "CharaVarProxy", "desc": "角色变量代理，支持 ``chara.variable[index]`` 形式的访问。", "url": "./chara-class.html#class-CharaVarProxy"}, {"name": "Chara", "desc": "单个角色数据的代理对象。\n\n通过属性访问器（如 ``chara.abl``、``chara.cflag``）获取 :class:`CharaVarProxy`，", "url": "./chara-class.html#class-Chara"}, {"name": "chara", "desc": "按列表索引获取角色代理对象。\n\nParameters\n----------\nchara_id : int\n    角色在列表中的索引（``0`` 通常为主人角色", "url": "./chara-class.html#function-chara"}, {"name": "chara_from_no", "desc": "按 CSV 注册编号查找角色。\n\n遍历角色列表，返回第一个 ``NO`` 等于指定编号的角色。\n\nParameters\n----------\nno : int\n", "url": "./chara-class.html#function-chara_from_no"}, {"name": "chara_by_name", "desc": "按名称（部分匹配）查找角色。\n\n遍历角色列表，返回第一个名称包含给定字符串（不区分大小写）的角色。\n\nParameters\n----------\nname : ", "url": "./chara-class.html#function-chara_by_name"}, {"name": "__init__", "desc": "初始化角色变量代理。\n\nParameters\n----------\nchara : Chara\n    所属的角色代理对象。\nvar_name : str\n  ", "url": "./chara-class.html#function-__init__"}, {"name": "__init__", "desc": "初始化角色代理对象。\n\nParameters\n----------\nchara_id : int\n    角色在当前角色列表中的索引（``0`` 通常为主人角色", "url": "./chara-class.html#function-__init__"}, {"name": "id", "desc": "当前角色在列表中的索引（注意：不是 CSV NO）。\n\nReturns\n-------\nint\n    角色列表索引。", "url": "./chara-class.html#function-id"}, {"name": "no", "desc": "角色的 CSV 注册编号（NO）。\n\nReturns\n-------\nint\n    CSVNO 值；读取失败返回 ``0``。", "url": "./chara-class.html#function-no"}, {"name": "name", "desc": "角色名称（CSTR:0 或 NAME）。\n\nReturns\n-------\nstr\n    角色名称字符串；读取失败返回空字符串。", "url": "./chara-class.html#function-name"}, {"name": "callname", "desc": "角色称呼（CSTR:1）。\n\nReturns\n-------\nstr\n    角色称呼字符串；读取失败返回空字符串。", "url": "./chara-class.html#function-callname"}, {"name": "nickname", "desc": "角色昵称（CSTR:2）。\n\nReturns\n-------\nstr\n    角色昵称字符串；读取失败返回空字符串。", "url": "./chara-class.html#function-nickname"}, {"name": "is_master", "desc": "判断当前角色是否为当前主人（MASTER）。\n\nReturns\n-------\nbool\n    若 ``MASTER`` 变量等于此角色索引则返回 ``Tru", "url": "./chara-class.html#function-is_master"}, {"name": "is_target", "desc": "判断当前角色是否为当前目标（TARGET）。\n\nReturns\n-------\nbool\n    若 ``TARGET`` 变量等于此角色索引则返回 ``Tru", "url": "./chara-class.html#function-is_target"}, {"name": "is_assi", "desc": "判断当前角色是否为当前助手（ASSI）。\n\nReturns\n-------\nbool\n    若 ``ASSI`` 变量等于此角色索引则返回 ``True``。", "url": "./chara-class.html#function-is_assi"}, {"name": "delete", "desc": "从角色列表中删除此角色。\n\n调用后该角色的列表索引会被后续角色填补，\n因此不应继续保留对此 :class:`Chara` 实例的引用。\n\nReturns\n---", "url": "./chara-class.html#function-delete"}, {"name": "copy_to", "desc": "将此角色的全部数据复制到目标索引位置。\n\nParameters\n----------\ntarget_idx : int\n    目标角色在列表中的索引。\n\nRe", "url": "./chara-class.html#function-copy_to"}, {"name": "swap_with", "desc": "将此角色与指定索引位置的角色交换数据。\n\nParameters\n----------\nother_idx : int\n    要交换的另一个角色的列表索引。\n\n", "url": "./chara-class.html#function-swap_with"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

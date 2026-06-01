@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 角色操作</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 角色操作</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>角色操作</h1>
+<div class="api-card" id="function-add_chara">
+<div class="api-header">
+<div><span class="api-name">add_chara</span>
+ <span class="api-erb">ADDCHARA</span>
+</div>
+<div class="api-sig">add_chara(csv_no: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>添加角色（ADDCHARA 指令的 Python 封装）。</p>
+<p>根据 CSV 模板编号从 CSV 文件中加载并创建一个新角色，
+追加到当前角色列表的末尾。</p>
+<p>Parameters
+----------
+csv_no : int
+    角色在 CSV 中的注册编号（CSVNO）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的注册编号（CSVNO）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-del_chara">
+<div class="api-header">
+<div><span class="api-name">del_chara</span>
+ <span class="api-erb">DELCHARA</span>
+</div>
+<div class="api-sig">del_chara(index: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>删除指定角色（DELCHARA 指令的 Python 封装）。</p>
+<p>从角色列表中删除指定索引位置的角色，后续角色会自动前移填补空缺。</p>
+<p>Parameters
+----------
+index : int
+    角色在列表中的索引（``0`` 为第一个角色）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在列表中的索引（``0`` 为第一个角色）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-del_all_chara">
+<div class="api-header">
+<div><span class="api-name">del_all_chara</span>
+ <span class="api-erb">DELALLCHARA</span>
+</div>
+<div class="api-sig">del_all_chara() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>删除所有角色（DELALLCHARA 指令的 Python 封装）。</p>
+<p>清空当前角色列表，保留主人角色（索引 ``0`` 的角色通常不会被删除）。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-find_chara">
+<div class="api-header">
+<div><span class="api-name">find_chara</span>
+ <span class="api-erb">FINDCHARA</span>
+</div>
+<div class="api-sig">find_chara(csv_no: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按 CSV 编号查找角色（FINDCHARA 指令的 Python 封装）。</p>
+<p>在角色列表中搜索具有指定 CSV 编号的角色。</p>
+<p>Parameters
+----------
+csv_no : int
+    要查找的角色 CSV 编号。</p>
+<p>Returns
+-------
+int
+    角色在列表中的索引；如果未找到则返回 ``-1``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要查找的角色 CSV 编号。 角色在列表中的索引；如果未找到则返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-chara_count">
+<div class="api-header">
+<div><span class="api-name">chara_count</span>
+</div>
+<div class="api-sig">chara_count() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前角色总数。</p>
+<p>Returns
+-------
+int
+    角色列表中的角色数量（包含主人角色）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-copy_chara">
+<div class="api-header">
+<div><span class="api-name">copy_chara</span>
+ <span class="api-erb">COPYCHARA</span>
+</div>
+<div class="api-sig">copy_chara(from_idx: int, to_idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>复制角色数据（COPYCHARA 指令的 Python 封装）。</p>
+<p>将源角色的所有数据（属性、能力、经验等）复制到目标角色。</p>
+<p>Parameters
+----------
+from_idx : int
+    源角色在列表中的索引。
+to_idx : int
+    目标角色在列表中的索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">from_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">源角色在列表中的索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">to_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">目标角色在列表中的索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-swap_chara">
+<div class="api-header">
+<div><span class="api-name">swap_chara</span>
+ <span class="api-erb">SWAPCHARA</span>
+</div>
+<div class="api-sig">swap_chara(x: int, y: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>交换两个角色的位置（SWAPCHARA 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+x : int
+    第一个角色的列表索引。
+y : int
+    第二个角色的列表索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">x</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第一个角色的列表索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">y</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第二个角色的列表索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-pickup_chara">
+<div class="api-header">
+<div><span class="api-name">pickup_chara</span>
+ <span class="api-erb">PICKUPCHARA</span>
+</div>
+<div class="api-sig">pickup_chara(*no_list) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按顺序提取指定角色（PICKUPCHARA 指令的 Python 封装）。</p>
+<p>将指定索引的角色按给定顺序重新排列到列表前端，
+未被指定的角色保持相对顺序排在后面。</p>
+<p>Parameters
+----------
+*no_list : int
+    可变参数，要提取并前置的角色索引序列。</p>
+<p>Returns
+-------
+None</p>
+<p>Example
+-------</p>
+<pre><code class="language-python">&gt;&gt;&gt; pickup_chara(0, 2, 5)</code><button class="copy-btn">📋</button></pre></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*no_list</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-find_chara_by_var">
+<div class="api-header">
+<div><span class="api-name">find_chara_by_var</span>
+ <span class="api-erb">FINDCHARA</span>
+</div>
+<div class="api-sig">find_chara_by_var(var_name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按角色变量值查找角色（FINDCHARA 指令的 Python 封装）。</p>
+<p>在角色变量数组中搜索第一个匹配指定值的元素。</p>
+<p>Parameters
+----------
+var_name : str
+    角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``）。
+target : int
+    要匹配的目标值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示搜索到数组末尾）。</p>
+<p>Returns
+-------
+int
+    第一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的目标值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示搜索到数组末尾）。 第一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-find_last_chara_by_var">
+<div class="api-header">
+<div><span class="api-name">find_last_chara_by_var</span>
+ <span class="api-erb">FINDLASTCHARA</span>
+</div>
+<div class="api-sig">find_last_chara_by_var(var_name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按角色变量值反向查找角色（FINDLASTCHARA 指令的 Python 封装）。</p>
+<p>在角色变量数组中搜索最后一个匹配指定值的元素。</p>
+<p>Parameters
+----------
+var_name : str
+    角色变量名。
+target : int
+    要匹配的目标值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示搜索到数组末尾）。</p>
+<p>Returns
+-------
+int
+    最后一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的目标值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示搜索到数组末尾）。 最后一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_chara">
+<div class="api-header">
+<div><span class="api-name">get_chara</span>
+ <span class="api-erb">GETCHARA</span>
+</div>
+<div class="api-sig">get_chara(csv_no: int, include_sp: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 编号的角色索引（GETCHARA 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+csv_no : int
+    角色的 CSV 编号。
+include_sp : bool, optional
+    是否包含 SP 角色（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    角色在列表中的索引；未找到返回 ``-1``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色的 CSV 编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">include_sp</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否包含 SP 角色（默认为 ``False``）。 角色在列表中的索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_sp_chara">
+<div class="api-header">
+<div><span class="api-name">get_sp_chara</span>
+ <span class="api-erb">GETSPCHARA</span>
+</div>
+<div class="api-sig">get_sp_chara(csv_no: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 编号的 SP 角色索引（GETSPCHARA 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+csv_no : int
+    SP 角色的 CSV 编号。</p>
+<p>Returns
+-------
+int
+    SP 角色在列表中的索引；未找到返回 ``-1``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">SP 角色的 CSV 编号。 SP 角色在列表中的索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-var_size">
+<div class="api-header">
+<div><span class="api-name">var_size</span>
+ <span class="api-erb">VARSIZE</span>
+</div>
+<div class="api-sig">var_size(name: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定变量数组的长度（VARSIZE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    变量名称（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。</p>
+<p>Returns
+-------
+int
+    变量数组的长度；变量不存在返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量名称（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。 变量数组的长度；变量不存在返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-add_sp_chara">
+<div class="api-header">
+<div><span class="api-name">add_sp_chara</span>
+ <span class="api-erb">ADDSPCHARA</span>
+</div>
+<div class="api-sig">add_sp_chara(csv_no: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>添加 SP 角色（ADDSPCHARA 指令的 Python 封装）。</p>
+<p>添加一个特殊角色，并自动将其 ``CFLAG:0`` 设置为 ``1``。</p>
+<p>Parameters
+----------
+csv_no : int
+    SP 角色的 CSV 编号。</p>
+<p>Returns
+-------
+None</p>
+<p>Raises
+------
+InvalidOperationException
+    如果引擎的 SP 角色兼容模式未开启（Config.CompatiSPChara 为 False）。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">SP 角色的 CSV 编号。 如果引擎的 SP 角色兼容模式未开启（Config.CompatiSPChara 为 False）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-add_void_chara">
+<div class="api-header">
+<div><span class="api-name">add_void_chara</span>
+ <span class="api-erb">ADDVOIDCHARA</span>
+</div>
+<div class="api-sig">add_void_chara() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>添加空白角色（ADDVOIDCHARA 指令的 Python 封装）。</p>
+<p>创建一个没有任何预设数据的空白角色，所有属性均为默认值。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-add_copy_chara">
+<div class="api-header">
+<div><span class="api-name">add_copy_chara</span>
+ <span class="api-erb">ADDCOPYCHARA</span>
+</div>
+<div class="api-sig">add_copy_chara(idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>复制并添加新角色（ADDCOPYCHARA 指令的 Python 封装）。</p>
+<p>复制指定索引角色的全部数据，并将副本作为新角色追加到列表末尾。</p>
+<p>Parameters
+----------
+idx : int
+    要复制的源角色列表索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要复制的源角色列表索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sort_chara">
+<div class="api-header">
+<div><span class="api-name">sort_chara</span>
+ <span class="api-erb">SORTCHARA</span>
+</div>
+<div class="api-sig">sort_chara(var_name: str, elem: int = 0, order: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>对角色列表进行排序（SORTCHARA 指令的 Python 封装）。</p>
+<p>根据指定的角色变量值对角色列表重新排序。</p>
+<p>Parameters
+----------
+var_name : str
+    用于排序的角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``、``&quot;exp&quot;``）。
+elem : int, optional
+    若变量为二维数组，指定要比较的数组下标（默认为 ``0``）。
+order : int, optional
+    排序方向：
+    - ``0`` — 升序（默认）
+    - ``1`` — 降序</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">用于排序的角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``、``&quot;exp&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">elem</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">若变量为二维数组，指定要比较的数组下标（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">order</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">排序方向： - ``0`` — 升序（默认） - ``1`` — 降序</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Character Operations</h1>
+<div class="api-card" id="function-add_chara">
+<div class="api-header">
+<div><span class="api-name">add_chara</span>
+ <span class="api-erb">ADDCHARA</span>
+</div>
+<div class="api-sig">add_chara(csv_no: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>添加角色（ADDCHARA 指令的 Python 封装）。</p>
+<p>根据 CSV 模板编号从 CSV 文件中加载并创建一个新角色，
+追加到当前角色列表的末尾。</p>
+<p>Parameters
+----------
+csv_no : int
+    角色在 CSV 中的注册编号（CSVNO）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的注册编号（CSVNO）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-del_chara">
+<div class="api-header">
+<div><span class="api-name">del_chara</span>
+ <span class="api-erb">DELCHARA</span>
+</div>
+<div class="api-sig">del_chara(index: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>删除指定角色（DELCHARA 指令的 Python 封装）。</p>
+<p>从角色列表中删除指定索引位置的角色，后续角色会自动前移填补空缺。</p>
+<p>Parameters
+----------
+index : int
+    角色在列表中的索引（``0`` 为第一个角色）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在列表中的索引（``0`` 为第一个角色）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-del_all_chara">
+<div class="api-header">
+<div><span class="api-name">del_all_chara</span>
+ <span class="api-erb">DELALLCHARA</span>
+</div>
+<div class="api-sig">del_all_chara() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>删除所有角色（DELALLCHARA 指令的 Python 封装）。</p>
+<p>清空当前角色列表，保留主人角色（索引 ``0`` 的角色通常不会被删除）。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-find_chara">
+<div class="api-header">
+<div><span class="api-name">find_chara</span>
+ <span class="api-erb">FINDCHARA</span>
+</div>
+<div class="api-sig">find_chara(csv_no: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按 CSV 编号查找角色（FINDCHARA 指令的 Python 封装）。</p>
+<p>在角色列表中搜索具有指定 CSV 编号的角色。</p>
+<p>Parameters
+----------
+csv_no : int
+    要查找的角色 CSV 编号。</p>
+<p>Returns
+-------
+int
+    角色在列表中的索引；如果未找到则返回 ``-1``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要查找的角色 CSV 编号。 角色在列表中的索引；如果未找到则返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-chara_count">
+<div class="api-header">
+<div><span class="api-name">chara_count</span>
+</div>
+<div class="api-sig">chara_count() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前角色总数。</p>
+<p>Returns
+-------
+int
+    角色列表中的角色数量（包含主人角色）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-copy_chara">
+<div class="api-header">
+<div><span class="api-name">copy_chara</span>
+ <span class="api-erb">COPYCHARA</span>
+</div>
+<div class="api-sig">copy_chara(from_idx: int, to_idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>复制角色数据（COPYCHARA 指令的 Python 封装）。</p>
+<p>将源角色的所有数据（属性、能力、经验等）复制到目标角色。</p>
+<p>Parameters
+----------
+from_idx : int
+    源角色在列表中的索引。
+to_idx : int
+    目标角色在列表中的索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">from_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">源角色在列表中的索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">to_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">目标角色在列表中的索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-swap_chara">
+<div class="api-header">
+<div><span class="api-name">swap_chara</span>
+ <span class="api-erb">SWAPCHARA</span>
+</div>
+<div class="api-sig">swap_chara(x: int, y: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>交换两个角色的位置（SWAPCHARA 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+x : int
+    第一个角色的列表索引。
+y : int
+    第二个角色的列表索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">x</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第一个角色的列表索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">y</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第二个角色的列表索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-pickup_chara">
+<div class="api-header">
+<div><span class="api-name">pickup_chara</span>
+ <span class="api-erb">PICKUPCHARA</span>
+</div>
+<div class="api-sig">pickup_chara(*no_list) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按顺序提取指定角色（PICKUPCHARA 指令的 Python 封装）。</p>
+<p>将指定索引的角色按给定顺序重新排列到列表前端，
+未被指定的角色保持相对顺序排在后面。</p>
+<p>Parameters
+----------
+*no_list : int
+    可变参数，要提取并前置的角色索引序列。</p>
+<p>Returns
+-------
+None</p>
+<p>Example
+-------</p>
+<pre><code class="language-python">&gt;&gt;&gt; pickup_chara(0, 2, 5)</code><button class="copy-btn">📋</button></pre></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*no_list</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-find_chara_by_var">
+<div class="api-header">
+<div><span class="api-name">find_chara_by_var</span>
+ <span class="api-erb">FINDCHARA</span>
+</div>
+<div class="api-sig">find_chara_by_var(var_name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按角色变量值查找角色（FINDCHARA 指令的 Python 封装）。</p>
+<p>在角色变量数组中搜索第一个匹配指定值的元素。</p>
+<p>Parameters
+----------
+var_name : str
+    角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``）。
+target : int
+    要匹配的目标值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示搜索到数组末尾）。</p>
+<p>Returns
+-------
+int
+    第一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的目标值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示搜索到数组末尾）。 第一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-find_last_chara_by_var">
+<div class="api-header">
+<div><span class="api-name">find_last_chara_by_var</span>
+ <span class="api-erb">FINDLASTCHARA</span>
+</div>
+<div class="api-sig">find_last_chara_by_var(var_name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按角色变量值反向查找角色（FINDLASTCHARA 指令的 Python 封装）。</p>
+<p>在角色变量数组中搜索最后一个匹配指定值的元素。</p>
+<p>Parameters
+----------
+var_name : str
+    角色变量名。
+target : int
+    要匹配的目标值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示搜索到数组末尾）。</p>
+<p>Returns
+-------
+int
+    最后一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的目标值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示搜索到数组末尾）。 最后一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_chara">
+<div class="api-header">
+<div><span class="api-name">get_chara</span>
+ <span class="api-erb">GETCHARA</span>
+</div>
+<div class="api-sig">get_chara(csv_no: int, include_sp: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 编号的角色索引（GETCHARA 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+csv_no : int
+    角色的 CSV 编号。
+include_sp : bool, optional
+    是否包含 SP 角色（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    角色在列表中的索引；未找到返回 ``-1``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色的 CSV 编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">include_sp</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否包含 SP 角色（默认为 ``False``）。 角色在列表中的索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_sp_chara">
+<div class="api-header">
+<div><span class="api-name">get_sp_chara</span>
+ <span class="api-erb">GETSPCHARA</span>
+</div>
+<div class="api-sig">get_sp_chara(csv_no: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 编号的 SP 角色索引（GETSPCHARA 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+csv_no : int
+    SP 角色的 CSV 编号。</p>
+<p>Returns
+-------
+int
+    SP 角色在列表中的索引；未找到返回 ``-1``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">SP 角色的 CSV 编号。 SP 角色在列表中的索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-var_size">
+<div class="api-header">
+<div><span class="api-name">var_size</span>
+ <span class="api-erb">VARSIZE</span>
+</div>
+<div class="api-sig">var_size(name: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定变量数组的长度（VARSIZE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    变量名称（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。</p>
+<p>Returns
+-------
+int
+    变量数组的长度；变量不存在返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量名称（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。 变量数组的长度；变量不存在返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-add_sp_chara">
+<div class="api-header">
+<div><span class="api-name">add_sp_chara</span>
+ <span class="api-erb">ADDSPCHARA</span>
+</div>
+<div class="api-sig">add_sp_chara(csv_no: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>添加 SP 角色（ADDSPCHARA 指令的 Python 封装）。</p>
+<p>添加一个特殊角色，并自动将其 ``CFLAG:0`` 设置为 ``1``。</p>
+<p>Parameters
+----------
+csv_no : int
+    SP 角色的 CSV 编号。</p>
+<p>Returns
+-------
+None</p>
+<p>Raises
+------
+InvalidOperationException
+    如果引擎的 SP 角色兼容模式未开启（Config.CompatiSPChara 为 False）。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">SP 角色的 CSV 编号。 如果引擎的 SP 角色兼容模式未开启（Config.CompatiSPChara 为 False）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-add_void_chara">
+<div class="api-header">
+<div><span class="api-name">add_void_chara</span>
+ <span class="api-erb">ADDVOIDCHARA</span>
+</div>
+<div class="api-sig">add_void_chara() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>添加空白角色（ADDVOIDCHARA 指令的 Python 封装）。</p>
+<p>创建一个没有任何预设数据的空白角色，所有属性均为默认值。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-add_copy_chara">
+<div class="api-header">
+<div><span class="api-name">add_copy_chara</span>
+ <span class="api-erb">ADDCOPYCHARA</span>
+</div>
+<div class="api-sig">add_copy_chara(idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>复制并添加新角色（ADDCOPYCHARA 指令的 Python 封装）。</p>
+<p>复制指定索引角色的全部数据，并将副本作为新角色追加到列表末尾。</p>
+<p>Parameters
+----------
+idx : int
+    要复制的源角色列表索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要复制的源角色列表索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sort_chara">
+<div class="api-header">
+<div><span class="api-name">sort_chara</span>
+ <span class="api-erb">SORTCHARA</span>
+</div>
+<div class="api-sig">sort_chara(var_name: str, elem: int = 0, order: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>对角色列表进行排序（SORTCHARA 指令的 Python 封装）。</p>
+<p>根据指定的角色变量值对角色列表重新排序。</p>
+<p>Parameters
+----------
+var_name : str
+    用于排序的角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``、``&quot;exp&quot;``）。
+elem : int, optional
+    若变量为二维数组，指定要比较的数组下标（默认为 ``0``）。
+order : int, optional
+    排序方向：
+    - ``0`` — 升序（默认）
+    - ``1`` — 降序</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">用于排序的角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``、``&quot;exp&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">elem</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">若变量为二维数组，指定要比较的数组下标（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">order</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">排序方向： - ``0`` — 升序（默认） - ``1`` — 降序</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>キャラクター操作</h1>
+<div class="api-card" id="function-add_chara">
+<div class="api-header">
+<div><span class="api-name">add_chara</span>
+ <span class="api-erb">ADDCHARA</span>
+</div>
+<div class="api-sig">add_chara(csv_no: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>添加角色（ADDCHARA 指令的 Python 封装）。</p>
+<p>根据 CSV 模板编号从 CSV 文件中加载并创建一个新角色，
+追加到当前角色列表的末尾。</p>
+<p>Parameters
+----------
+csv_no : int
+    角色在 CSV 中的注册编号（CSVNO）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的注册编号（CSVNO）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-del_chara">
+<div class="api-header">
+<div><span class="api-name">del_chara</span>
+ <span class="api-erb">DELCHARA</span>
+</div>
+<div class="api-sig">del_chara(index: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>删除指定角色（DELCHARA 指令的 Python 封装）。</p>
+<p>从角色列表中删除指定索引位置的角色，后续角色会自动前移填补空缺。</p>
+<p>Parameters
+----------
+index : int
+    角色在列表中的索引（``0`` 为第一个角色）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在列表中的索引（``0`` 为第一个角色）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-del_all_chara">
+<div class="api-header">
+<div><span class="api-name">del_all_chara</span>
+ <span class="api-erb">DELALLCHARA</span>
+</div>
+<div class="api-sig">del_all_chara() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>删除所有角色（DELALLCHARA 指令的 Python 封装）。</p>
+<p>清空当前角色列表，保留主人角色（索引 ``0`` 的角色通常不会被删除）。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-find_chara">
+<div class="api-header">
+<div><span class="api-name">find_chara</span>
+ <span class="api-erb">FINDCHARA</span>
+</div>
+<div class="api-sig">find_chara(csv_no: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按 CSV 编号查找角色（FINDCHARA 指令的 Python 封装）。</p>
+<p>在角色列表中搜索具有指定 CSV 编号的角色。</p>
+<p>Parameters
+----------
+csv_no : int
+    要查找的角色 CSV 编号。</p>
+<p>Returns
+-------
+int
+    角色在列表中的索引；如果未找到则返回 ``-1``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要查找的角色 CSV 编号。 角色在列表中的索引；如果未找到则返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-chara_count">
+<div class="api-header">
+<div><span class="api-name">chara_count</span>
+</div>
+<div class="api-sig">chara_count() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前角色总数。</p>
+<p>Returns
+-------
+int
+    角色列表中的角色数量（包含主人角色）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-copy_chara">
+<div class="api-header">
+<div><span class="api-name">copy_chara</span>
+ <span class="api-erb">COPYCHARA</span>
+</div>
+<div class="api-sig">copy_chara(from_idx: int, to_idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>复制角色数据（COPYCHARA 指令的 Python 封装）。</p>
+<p>将源角色的所有数据（属性、能力、经验等）复制到目标角色。</p>
+<p>Parameters
+----------
+from_idx : int
+    源角色在列表中的索引。
+to_idx : int
+    目标角色在列表中的索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">from_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">源角色在列表中的索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">to_idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">目标角色在列表中的索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-swap_chara">
+<div class="api-header">
+<div><span class="api-name">swap_chara</span>
+ <span class="api-erb">SWAPCHARA</span>
+</div>
+<div class="api-sig">swap_chara(x: int, y: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>交换两个角色的位置（SWAPCHARA 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+x : int
+    第一个角色的列表索引。
+y : int
+    第二个角色的列表索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">x</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第一个角色的列表索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">y</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第二个角色的列表索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-pickup_chara">
+<div class="api-header">
+<div><span class="api-name">pickup_chara</span>
+ <span class="api-erb">PICKUPCHARA</span>
+</div>
+<div class="api-sig">pickup_chara(*no_list) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按顺序提取指定角色（PICKUPCHARA 指令的 Python 封装）。</p>
+<p>将指定索引的角色按给定顺序重新排列到列表前端，
+未被指定的角色保持相对顺序排在后面。</p>
+<p>Parameters
+----------
+*no_list : int
+    可变参数，要提取并前置的角色索引序列。</p>
+<p>Returns
+-------
+None</p>
+<p>Example
+-------</p>
+<pre><code class="language-python">&gt;&gt;&gt; pickup_chara(0, 2, 5)</code><button class="copy-btn">📋</button></pre></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*no_list</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-find_chara_by_var">
+<div class="api-header">
+<div><span class="api-name">find_chara_by_var</span>
+ <span class="api-erb">FINDCHARA</span>
+</div>
+<div class="api-sig">find_chara_by_var(var_name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按角色变量值查找角色（FINDCHARA 指令的 Python 封装）。</p>
+<p>在角色变量数组中搜索第一个匹配指定值的元素。</p>
+<p>Parameters
+----------
+var_name : str
+    角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``）。
+target : int
+    要匹配的目标值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示搜索到数组末尾）。</p>
+<p>Returns
+-------
+int
+    第一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的目标值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示搜索到数组末尾）。 第一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-find_last_chara_by_var">
+<div class="api-header">
+<div><span class="api-name">find_last_chara_by_var</span>
+ <span class="api-erb">FINDLASTCHARA</span>
+</div>
+<div class="api-sig">find_last_chara_by_var(var_name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按角色变量值反向查找角色（FINDLASTCHARA 指令的 Python 封装）。</p>
+<p>在角色变量数组中搜索最后一个匹配指定值的元素。</p>
+<p>Parameters
+----------
+var_name : str
+    角色变量名。
+target : int
+    要匹配的目标值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示搜索到数组末尾）。</p>
+<p>Returns
+-------
+int
+    最后一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的目标值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示搜索到数组末尾）。 最后一个匹配角色的列表索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_chara">
+<div class="api-header">
+<div><span class="api-name">get_chara</span>
+ <span class="api-erb">GETCHARA</span>
+</div>
+<div class="api-sig">get_chara(csv_no: int, include_sp: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 编号的角色索引（GETCHARA 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+csv_no : int
+    角色的 CSV 编号。
+include_sp : bool, optional
+    是否包含 SP 角色（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    角色在列表中的索引；未找到返回 ``-1``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色的 CSV 编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">include_sp</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否包含 SP 角色（默认为 ``False``）。 角色在列表中的索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_sp_chara">
+<div class="api-header">
+<div><span class="api-name">get_sp_chara</span>
+ <span class="api-erb">GETSPCHARA</span>
+</div>
+<div class="api-sig">get_sp_chara(csv_no: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 编号的 SP 角色索引（GETSPCHARA 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+csv_no : int
+    SP 角色的 CSV 编号。</p>
+<p>Returns
+-------
+int
+    SP 角色在列表中的索引；未找到返回 ``-1``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">SP 角色的 CSV 编号。 SP 角色在列表中的索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-var_size">
+<div class="api-header">
+<div><span class="api-name">var_size</span>
+ <span class="api-erb">VARSIZE</span>
+</div>
+<div class="api-sig">var_size(name: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定变量数组的长度（VARSIZE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    变量名称（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。</p>
+<p>Returns
+-------
+int
+    变量数组的长度；变量不存在返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量名称（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。 变量数组的长度；变量不存在返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-add_sp_chara">
+<div class="api-header">
+<div><span class="api-name">add_sp_chara</span>
+ <span class="api-erb">ADDSPCHARA</span>
+</div>
+<div class="api-sig">add_sp_chara(csv_no: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>添加 SP 角色（ADDSPCHARA 指令的 Python 封装）。</p>
+<p>添加一个特殊角色，并自动将其 ``CFLAG:0`` 设置为 ``1``。</p>
+<p>Parameters
+----------
+csv_no : int
+    SP 角色的 CSV 编号。</p>
+<p>Returns
+-------
+None</p>
+<p>Raises
+------
+InvalidOperationException
+    如果引擎的 SP 角色兼容模式未开启（Config.CompatiSPChara 为 False）。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">csv_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">SP 角色的 CSV 编号。 如果引擎的 SP 角色兼容模式未开启（Config.CompatiSPChara 为 False）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-add_void_chara">
+<div class="api-header">
+<div><span class="api-name">add_void_chara</span>
+ <span class="api-erb">ADDVOIDCHARA</span>
+</div>
+<div class="api-sig">add_void_chara() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>添加空白角色（ADDVOIDCHARA 指令的 Python 封装）。</p>
+<p>创建一个没有任何预设数据的空白角色，所有属性均为默认值。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-add_copy_chara">
+<div class="api-header">
+<div><span class="api-name">add_copy_chara</span>
+ <span class="api-erb">ADDCOPYCHARA</span>
+</div>
+<div class="api-sig">add_copy_chara(idx: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>复制并添加新角色（ADDCOPYCHARA 指令的 Python 封装）。</p>
+<p>复制指定索引角色的全部数据，并将副本作为新角色追加到列表末尾。</p>
+<p>Parameters
+----------
+idx : int
+    要复制的源角色列表索引。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">idx</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要复制的源角色列表索引。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sort_chara">
+<div class="api-header">
+<div><span class="api-name">sort_chara</span>
+ <span class="api-erb">SORTCHARA</span>
+</div>
+<div class="api-sig">sort_chara(var_name: str, elem: int = 0, order: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>对角色列表进行排序（SORTCHARA 指令的 Python 封装）。</p>
+<p>根据指定的角色变量值对角色列表重新排序。</p>
+<p>Parameters
+----------
+var_name : str
+    用于排序的角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``、``&quot;exp&quot;``）。
+elem : int, optional
+    若变量为二维数组，指定要比较的数组下标（默认为 ``0``）。
+order : int, optional
+    排序方向：
+    - ``0`` — 升序（默认）
+    - ``1`` — 降序</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">var_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">用于排序的角色变量名（例如 ``&quot;abl&quot;``、``&quot;mark&quot;``、``&quot;exp&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">elem</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">若变量为二维数组，指定要比较的数组下标（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">order</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">排序方向： - ``0`` — 升序（默认） - ``1`` — 降序</p></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "add_chara", "desc": "添加角色（ADDCHARA 指令的 Python 封装）。\n\n根据 CSV 模板编号从 CSV 文件中加载并创建一个新角色，\n追加到当前角色列表的末尾。\n\nPa", "url": "./chara-ops.html#function-add_chara"}, {"name": "del_chara", "desc": "删除指定角色（DELCHARA 指令的 Python 封装）。\n\n从角色列表中删除指定索引位置的角色，后续角色会自动前移填补空缺。\n\nParameters\n--", "url": "./chara-ops.html#function-del_chara"}, {"name": "del_all_chara", "desc": "删除所有角色（DELALLCHARA 指令的 Python 封装）。\n\n清空当前角色列表，保留主人角色（索引 ``0`` 的角色通常不会被删除）。\n\nRetur", "url": "./chara-ops.html#function-del_all_chara"}, {"name": "find_chara", "desc": "按 CSV 编号查找角色（FINDCHARA 指令的 Python 封装）。\n\n在角色列表中搜索具有指定 CSV 编号的角色。\n\nParameters\n----", "url": "./chara-ops.html#function-find_chara"}, {"name": "chara_count", "desc": "获取当前角色总数。\n\nReturns\n-------\nint\n    角色列表中的角色数量（包含主人角色）。", "url": "./chara-ops.html#function-chara_count"}, {"name": "copy_chara", "desc": "复制角色数据（COPYCHARA 指令的 Python 封装）。\n\n将源角色的所有数据（属性、能力、经验等）复制到目标角色。\n\nParameters\n-----", "url": "./chara-ops.html#function-copy_chara"}, {"name": "swap_chara", "desc": "交换两个角色的位置（SWAPCHARA 指令的 Python 封装）。\n\nParameters\n----------\nx : int\n    第一个角色的列表索", "url": "./chara-ops.html#function-swap_chara"}, {"name": "pickup_chara", "desc": "按顺序提取指定角色（PICKUPCHARA 指令的 Python 封装）。\n\n将指定索引的角色按给定顺序重新排列到列表前端，\n未被指定的角色保持相对顺序排在后面", "url": "./chara-ops.html#function-pickup_chara"}, {"name": "find_chara_by_var", "desc": "按角色变量值查找角色（FINDCHARA 指令的 Python 封装）。\n\n在角色变量数组中搜索第一个匹配指定值的元素。\n\nParameters\n-------", "url": "./chara-ops.html#function-find_chara_by_var"}, {"name": "find_last_chara_by_var", "desc": "按角色变量值反向查找角色（FINDLASTCHARA 指令的 Python 封装）。\n\n在角色变量数组中搜索最后一个匹配指定值的元素。\n\nParameters\n", "url": "./chara-ops.html#function-find_last_chara_by_var"}, {"name": "get_chara", "desc": "获取指定 CSV 编号的角色索引（GETCHARA 指令的 Python 封装）。\n\nParameters\n----------\ncsv_no : int\n  ", "url": "./chara-ops.html#function-get_chara"}, {"name": "get_sp_chara", "desc": "获取指定 CSV 编号的 SP 角色索引（GETSPCHARA 指令的 Python 封装）。\n\nParameters\n----------\ncsv_no : ", "url": "./chara-ops.html#function-get_sp_chara"}, {"name": "var_size", "desc": "获取指定变量数组的长度（VARSIZE 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    变量名称（例", "url": "./chara-ops.html#function-var_size"}, {"name": "add_sp_chara", "desc": "添加 SP 角色（ADDSPCHARA 指令的 Python 封装）。\n\n添加一个特殊角色，并自动将其 ``CFLAG:0`` 设置为 ``1``。\n\nPara", "url": "./chara-ops.html#function-add_sp_chara"}, {"name": "add_void_chara", "desc": "添加空白角色（ADDVOIDCHARA 指令的 Python 封装）。\n\n创建一个没有任何预设数据的空白角色，所有属性均为默认值。\n\nReturns\n-----", "url": "./chara-ops.html#function-add_void_chara"}, {"name": "add_copy_chara", "desc": "复制并添加新角色（ADDCOPYCHARA 指令的 Python 封装）。\n\n复制指定索引角色的全部数据，并将副本作为新角色追加到列表末尾。\n\nParamete", "url": "./chara-ops.html#function-add_copy_chara"}, {"name": "sort_chara", "desc": "对角色列表进行排序（SORTCHARA 指令的 Python 封装）。\n\n根据指定的角色变量值对角色列表重新排序。\n\nParameters\n----------", "url": "./chara-ops.html#function-sort_chara"}, {"name": "add_chara", "desc": "添加角色（ADDCHARA 指令的 Python 封装）。\n\n根据 CSV 模板编号从 CSV 文件中加载并创建一个新角色，\n追加到当前角色列表的末尾。\n\nPa", "url": "./chara-ops.html#function-add_chara"}, {"name": "del_chara", "desc": "删除指定角色（DELCHARA 指令的 Python 封装）。\n\n从角色列表中删除指定索引位置的角色，后续角色会自动前移填补空缺。\n\nParameters\n--", "url": "./chara-ops.html#function-del_chara"}, {"name": "del_all_chara", "desc": "删除所有角色（DELALLCHARA 指令的 Python 封装）。\n\n清空当前角色列表，保留主人角色（索引 ``0`` 的角色通常不会被删除）。\n\nRetur", "url": "./chara-ops.html#function-del_all_chara"}, {"name": "find_chara", "desc": "按 CSV 编号查找角色（FINDCHARA 指令的 Python 封装）。\n\n在角色列表中搜索具有指定 CSV 编号的角色。\n\nParameters\n----", "url": "./chara-ops.html#function-find_chara"}, {"name": "chara_count", "desc": "获取当前角色总数。\n\nReturns\n-------\nint\n    角色列表中的角色数量（包含主人角色）。", "url": "./chara-ops.html#function-chara_count"}, {"name": "copy_chara", "desc": "复制角色数据（COPYCHARA 指令的 Python 封装）。\n\n将源角色的所有数据（属性、能力、经验等）复制到目标角色。\n\nParameters\n-----", "url": "./chara-ops.html#function-copy_chara"}, {"name": "swap_chara", "desc": "交换两个角色的位置（SWAPCHARA 指令的 Python 封装）。\n\nParameters\n----------\nx : int\n    第一个角色的列表索", "url": "./chara-ops.html#function-swap_chara"}, {"name": "pickup_chara", "desc": "按顺序提取指定角色（PICKUPCHARA 指令的 Python 封装）。\n\n将指定索引的角色按给定顺序重新排列到列表前端，\n未被指定的角色保持相对顺序排在后面", "url": "./chara-ops.html#function-pickup_chara"}, {"name": "find_chara_by_var", "desc": "按角色变量值查找角色（FINDCHARA 指令的 Python 封装）。\n\n在角色变量数组中搜索第一个匹配指定值的元素。\n\nParameters\n-------", "url": "./chara-ops.html#function-find_chara_by_var"}, {"name": "find_last_chara_by_var", "desc": "按角色变量值反向查找角色（FINDLASTCHARA 指令的 Python 封装）。\n\n在角色变量数组中搜索最后一个匹配指定值的元素。\n\nParameters\n", "url": "./chara-ops.html#function-find_last_chara_by_var"}, {"name": "get_chara", "desc": "获取指定 CSV 编号的角色索引（GETCHARA 指令的 Python 封装）。\n\nParameters\n----------\ncsv_no : int\n  ", "url": "./chara-ops.html#function-get_chara"}, {"name": "get_sp_chara", "desc": "获取指定 CSV 编号的 SP 角色索引（GETSPCHARA 指令的 Python 封装）。\n\nParameters\n----------\ncsv_no : ", "url": "./chara-ops.html#function-get_sp_chara"}, {"name": "var_size", "desc": "获取指定变量数组的长度（VARSIZE 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    变量名称（例", "url": "./chara-ops.html#function-var_size"}, {"name": "add_sp_chara", "desc": "添加 SP 角色（ADDSPCHARA 指令的 Python 封装）。\n\n添加一个特殊角色，并自动将其 ``CFLAG:0`` 设置为 ``1``。\n\nPara", "url": "./chara-ops.html#function-add_sp_chara"}, {"name": "add_void_chara", "desc": "添加空白角色（ADDVOIDCHARA 指令的 Python 封装）。\n\n创建一个没有任何预设数据的空白角色，所有属性均为默认值。\n\nReturns\n-----", "url": "./chara-ops.html#function-add_void_chara"}, {"name": "add_copy_chara", "desc": "复制并添加新角色（ADDCOPYCHARA 指令的 Python 封装）。\n\n复制指定索引角色的全部数据，并将副本作为新角色追加到列表末尾。\n\nParamete", "url": "./chara-ops.html#function-add_copy_chara"}, {"name": "sort_chara", "desc": "对角色列表进行排序（SORTCHARA 指令的 Python 封装）。\n\n根据指定的角色变量值对角色列表重新排序。\n\nParameters\n----------", "url": "./chara-ops.html#function-sort_chara"}, {"name": "add_chara", "desc": "添加角色（ADDCHARA 指令的 Python 封装）。\n\n根据 CSV 模板编号从 CSV 文件中加载并创建一个新角色，\n追加到当前角色列表的末尾。\n\nPa", "url": "./chara-ops.html#function-add_chara"}, {"name": "del_chara", "desc": "删除指定角色（DELCHARA 指令的 Python 封装）。\n\n从角色列表中删除指定索引位置的角色，后续角色会自动前移填补空缺。\n\nParameters\n--", "url": "./chara-ops.html#function-del_chara"}, {"name": "del_all_chara", "desc": "删除所有角色（DELALLCHARA 指令的 Python 封装）。\n\n清空当前角色列表，保留主人角色（索引 ``0`` 的角色通常不会被删除）。\n\nRetur", "url": "./chara-ops.html#function-del_all_chara"}, {"name": "find_chara", "desc": "按 CSV 编号查找角色（FINDCHARA 指令的 Python 封装）。\n\n在角色列表中搜索具有指定 CSV 编号的角色。\n\nParameters\n----", "url": "./chara-ops.html#function-find_chara"}, {"name": "chara_count", "desc": "获取当前角色总数。\n\nReturns\n-------\nint\n    角色列表中的角色数量（包含主人角色）。", "url": "./chara-ops.html#function-chara_count"}, {"name": "copy_chara", "desc": "复制角色数据（COPYCHARA 指令的 Python 封装）。\n\n将源角色的所有数据（属性、能力、经验等）复制到目标角色。\n\nParameters\n-----", "url": "./chara-ops.html#function-copy_chara"}, {"name": "swap_chara", "desc": "交换两个角色的位置（SWAPCHARA 指令的 Python 封装）。\n\nParameters\n----------\nx : int\n    第一个角色的列表索", "url": "./chara-ops.html#function-swap_chara"}, {"name": "pickup_chara", "desc": "按顺序提取指定角色（PICKUPCHARA 指令的 Python 封装）。\n\n将指定索引的角色按给定顺序重新排列到列表前端，\n未被指定的角色保持相对顺序排在后面", "url": "./chara-ops.html#function-pickup_chara"}, {"name": "find_chara_by_var", "desc": "按角色变量值查找角色（FINDCHARA 指令的 Python 封装）。\n\n在角色变量数组中搜索第一个匹配指定值的元素。\n\nParameters\n-------", "url": "./chara-ops.html#function-find_chara_by_var"}, {"name": "find_last_chara_by_var", "desc": "按角色变量值反向查找角色（FINDLASTCHARA 指令的 Python 封装）。\n\n在角色变量数组中搜索最后一个匹配指定值的元素。\n\nParameters\n", "url": "./chara-ops.html#function-find_last_chara_by_var"}, {"name": "get_chara", "desc": "获取指定 CSV 编号的角色索引（GETCHARA 指令的 Python 封装）。\n\nParameters\n----------\ncsv_no : int\n  ", "url": "./chara-ops.html#function-get_chara"}, {"name": "get_sp_chara", "desc": "获取指定 CSV 编号的 SP 角色索引（GETSPCHARA 指令的 Python 封装）。\n\nParameters\n----------\ncsv_no : ", "url": "./chara-ops.html#function-get_sp_chara"}, {"name": "var_size", "desc": "获取指定变量数组的长度（VARSIZE 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    变量名称（例", "url": "./chara-ops.html#function-var_size"}, {"name": "add_sp_chara", "desc": "添加 SP 角色（ADDSPCHARA 指令的 Python 封装）。\n\n添加一个特殊角色，并自动将其 ``CFLAG:0`` 设置为 ``1``。\n\nPara", "url": "./chara-ops.html#function-add_sp_chara"}, {"name": "add_void_chara", "desc": "添加空白角色（ADDVOIDCHARA 指令的 Python 封装）。\n\n创建一个没有任何预设数据的空白角色，所有属性均为默认值。\n\nReturns\n-----", "url": "./chara-ops.html#function-add_void_chara"}, {"name": "add_copy_chara", "desc": "复制并添加新角色（ADDCOPYCHARA 指令的 Python 封装）。\n\n复制指定索引角色的全部数据，并将副本作为新角色追加到列表末尾。\n\nParamete", "url": "./chara-ops.html#function-add_copy_chara"}, {"name": "sort_chara", "desc": "对角色列表进行排序（SORTCHARA 指令的 Python 封装）。\n\n根据指定的角色变量值对角色列表重新排序。\n\nParameters\n----------", "url": "./chara-ops.html#function-sort_chara"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

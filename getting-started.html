@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — Getting Started</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="index.html" data-key="index">首页</a>
+      <a class="nav-link" href="getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="index.html">Pyera</a> / Getting Started</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh">
+<div class="page-header">
+  <h1>快速开始</h1>
+  <p class="page-subtitle">从零开始构建你的第一个 Pyera 项目</p>
+</div>
+<div class="gs-grid">
+  <div class="gs-card">
+    <div class="gs-step">1</div>
+    <h3>项目结构</h3>
+    <p>在 Emuera 游戏根目录下创建 <code>py/</code> 文件夹，将 Python 脚本放在其中：</p>
+    <pre><code>game_root/
+  py/
+    main.py          # 主入口
+    my_module.py     # 可选模块
+  csv/
+  era/
+  emuera.config</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card">
+    <div class="gs-step">2</div>
+    <h3>编写第一个事件</h3>
+    <pre><code class="language-python">import pyera
+
+def system_title():
+    pyera.clear_display()
+    pyera.print_line("=== My Game ===")
+    pyera.print_button("[0] Start", 0)
+    pyera.new_line()
+    pyera.print_button("[1] Load", 1)
+    pyera.new_line()
+    pyera.refresh(True)
+
+def event_first():
+    pyera.clear_display()
+    pyera.print_line("Welcome!")
+    pyera.read_any_key()
+    pyera.begin("title")</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card">
+    <div class="gs-step">3</div>
+    <h3>角色数据访问</h3>
+    <pre><code class="language-python">count = pyera.chara_count()
+for i in range(count):
+    c = pyera.chara(i)
+    pyera.print_line(f"[{i}] {c.name}: ABL[0]={c.abl[0]}")</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card">
+    <div class="gs-step">4</div>
+    <h3>异步与第三方库</h3>
+    <pre><code class="language-python">import asyncio
+from pyera._async_utils import run_on_main, ensure_main_loop
+
+async def fetch_and_display():
+    data = await some_async_http_call()
+    await run_on_main(pyera.print_line, data["message"])
+
+def event_shop():
+    ensure_main_loop(fetch_and_display())</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card gs-card-wide">
+    <div class="gs-step">5</div>
+    <h3>调试技巧</h3>
+    <ul>
+      <li>设置环境变量 <code>PYERA_DEBUG=1</code> 启用调试输出</li>
+      <li>使用 <code>pyera.enable_trace(True)</code> 记录 C# 调用序列</li>
+      <li>使用 <code>pyera.log("message")</code> 输出调试日志</li>
+      <li>stub 模式下可直接运行 pytest 测试</li>
+    </ul>
+  </div>
+</div>
+</div><div class="lang-content" data-lang="en">
+<div class="page-header">
+  <h1>Getting Started</h1>
+  <p class="page-subtitle">Build your first Pyera project from scratch</p>
+</div>
+<div class="gs-grid">
+  <div class="gs-card">
+    <div class="gs-step">1</div>
+    <h3>Project Structure</h3>
+    <p>Create a <code>py/</code> folder in the Emuera game root and place Python scripts inside:</p>
+    <pre><code>game_root/
+  py/
+    main.py          # Main entry
+    my_module.py     # Optional modules
+  csv/
+  era/
+  emuera.config</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card">
+    <div class="gs-step">2</div>
+    <h3>Write Your First Event</h3>
+    <pre><code class="language-python">import pyera
+
+def system_title():
+    pyera.clear_display()
+    pyera.print_line("=== My Game ===")
+    pyera.print_button("[0] Start", 0)
+    pyera.new_line()
+    pyera.print_button("[1] Load", 1)
+    pyera.new_line()
+    pyera.refresh(True)
+
+def event_first():
+    pyera.clear_display()
+    pyera.print_line("Welcome!")
+    pyera.read_any_key()
+    pyera.begin("title")</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card">
+    <div class="gs-step">3</div>
+    <h3>Character Data Access</h3>
+    <pre><code class="language-python">count = pyera.chara_count()
+for i in range(count):
+    c = pyera.chara(i)
+    pyera.print_line(f"[{i}] {c.name}: ABL[0]={c.abl[0]}")</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card">
+    <div class="gs-step">4</div>
+    <h3>Async & Third-Party Libraries</h3>
+    <pre><code class="language-python">import asyncio
+from pyera._async_utils import run_on_main, ensure_main_loop
+
+async def fetch_and_display():
+    data = await some_async_http_call()
+    await run_on_main(pyera.print_line, data["message"])
+
+def event_shop():
+    ensure_main_loop(fetch_and_display())</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card gs-card-wide">
+    <div class="gs-step">5</div>
+    <h3>Debugging Tips</h3>
+    <ul>
+      <li>Set env var <code>PYERA_DEBUG=1</code> to enable debug output</li>
+      <li>Use <code>pyera.enable_trace(True)</code> to record C# call sequences</li>
+      <li>Use <code>pyera.log("message")</code> for debug logging</li>
+      <li>Run pytest directly in stub mode</li>
+    </ul>
+  </div>
+</div>
+</div><div class="lang-content" data-lang="ja">
+<div class="page-header">
+  <h1>クイックスタート</h1>
+  <p class="page-subtitle">最初の Pyera プロジェクトをゼロから構築</p>
+</div>
+<div class="gs-grid">
+  <div class="gs-card">
+    <div class="gs-step">1</div>
+    <h3>プロジェクト構成</h3>
+    <p>Emuera ゲームのルートに <code>py/</code> フォルダを作成し、Python スクリプトを配置：</p>
+    <pre><code>game_root/
+  py/
+    main.py          # メインエントリ
+    my_module.py     # オプションモジュール
+  csv/
+  era/
+  emuera.config</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card">
+    <div class="gs-step">2</div>
+    <h3>最初のイベントを書く</h3>
+    <pre><code class="language-python">import pyera
+
+def system_title():
+    pyera.clear_display()
+    pyera.print_line("=== My Game ===")
+    pyera.print_button("[0] Start", 0)
+    pyera.new_line()
+    pyera.print_button("[1] Load", 1)
+    pyera.new_line()
+    pyera.refresh(True)
+
+def event_first():
+    pyera.clear_display()
+    pyera.print_line("Welcome!")
+    pyera.read_any_key()
+    pyera.begin("title")</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card">
+    <div class="gs-step">3</div>
+    <h3>キャラクターデータへのアクセス</h3>
+    <pre><code class="language-python">count = pyera.chara_count()
+for i in range(count):
+    c = pyera.chara(i)
+    pyera.print_line(f"[{i}] {c.name}: ABL[0]={c.abl[0]}")</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card">
+    <div class="gs-step">4</div>
+    <h3>非同期とサードパーティライブラリ</h3>
+    <pre><code class="language-python">import asyncio
+from pyera._async_utils import run_on_main, ensure_main_loop
+
+async def fetch_and_display():
+    data = await some_async_http_call()
+    await run_on_main(pyera.print_line, data["message"])
+
+def event_shop():
+    ensure_main_loop(fetch_and_display())</code><button class="copy-btn">📋</button></pre>
+  </div>
+  <div class="gs-card gs-card-wide">
+    <div class="gs-step">5</div>
+    <h3>デバッグのヒント</h3>
+    <ul>
+      <li>環境変数 <code>PYERA_DEBUG=1</code> を設定してデバッグ出力を有効化</li>
+      <li><code>pyera.enable_trace(True)</code> で C# 呼び出しシーケンスを記録</li>
+      <li><code>pyera.log("message")</code> でデバッグログを出力</li>
+      <li>stub モードで pytest を直接実行可能</li>
+    </ul>
+  </div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[]</script>
+<script src="js/lang.js"></script>
+</body>
+</html>

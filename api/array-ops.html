@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 数组操作</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 数组操作</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>数组操作</h1>
+<div class="api-card" id="function-var_set">
+<div class="api-header">
+<div><span class="api-name">var_set</span>
+ <span class="api-erb">VARSET</span>
+</div>
+<div class="api-sig">var_set(name: str, value: int, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置整数型数组变量的值（VARSET 指令的 Python 封装）。</p>
+<p>将指定数组变量从 *start* 到 *end*（不含）的所有元素设置为 *value*。</p>
+<p>Parameters
+----------
+name : str
+    目标变量名（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。
+value : int
+    要填充的整数值。
+start : int, optional
+    起始索引（默认为 ``0``）。
+end : int, optional
+    结束索引（``-1`` 表示数组末尾）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标变量名（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要填充的整数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束索引（``-1`` 表示数组末尾）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-svar_set">
+<div class="api-header">
+<div><span class="api-name">svar_set</span>
+ <span class="api-erb">VARSET</span>
+</div>
+<div class="api-sig">svar_set(name: str, value: str, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置字符串型数组变量的值（VARSET 指令的 Python 封装，字符串版）。</p>
+<p>将指定字符串数组变量从 *start* 到 *end*（不含）的所有元素设置为 *value*。</p>
+<p>Parameters
+----------
+name : str
+    目标变量名（例如 ``&quot;str&quot;``、``&quot;tstr&quot;``）。
+value : str
+    要填充的字符串值。
+start : int, optional
+    起始索引（默认为 ``0``）。
+end : int, optional
+    结束索引（``-1`` 表示数组末尾）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标变量名（例如 ``&quot;str&quot;``、``&quot;tstr&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要填充的字符串值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束索引（``-1`` 表示数组末尾）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-cvar_set">
+<div class="api-header">
+<div><span class="api-name">cvar_set</span>
+ <span class="api-erb">CVARSET</span>
+</div>
+<div class="api-sig">cvar_set(name: str, index: int, value: int, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置整数型角色数组变量的值（CVARSET 指令的 Python 封装）。</p>
+<p>对角色数组变量 ``name:index`` 的 *start* ~ *end* 范围进行批量赋值。</p>
+<p>Parameters
+----------
+name : str
+    角色变量名（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。
+index : int
+    变量的二维下标。
+value : int
+    要填充的整数值。
+start : int, optional
+    起始角色索引（默认为 ``0``）。
+end : int, optional
+    结束角色索引（``-1`` 表示到最后一个角色）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色变量名（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">变量的二维下标。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要填充的整数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始角色索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束角色索引（``-1`` 表示到最后一个角色）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csvar_set">
+<div class="api-header">
+<div><span class="api-name">csvar_set</span>
+ <span class="api-erb">CVARSET</span>
+</div>
+<div class="api-sig">csvar_set(name: str, index: int, value: str, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置字符串型角色数组变量的值（CVARSET 指令的 Python 封装，字符串版）。</p>
+<p>对角色字符串数组变量 ``name:index`` 的 *start* ~ *end* 范围进行批量赋值。</p>
+<p>Parameters
+----------
+name : str
+    角色字符串变量名（例如 ``&quot;cstr&quot;``）。
+index : int
+    变量的二维下标。
+value : str
+    要填充的字符串值。
+start : int, optional
+    起始角色索引（默认为 ``0``）。
+end : int, optional
+    结束角色索引（``-1`` 表示到最后一个角色）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色字符串变量名（例如 ``&quot;cstr&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">变量的二维下标。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要填充的字符串值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始角色索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束角色索引（``-1`` 表示到最后一个角色）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_copy">
+<div class="api-header">
+<div><span class="api-name">array_copy</span>
+ <span class="api-erb">ARRAYCOPY</span>
+</div>
+<div class="api-sig">array_copy(dest_name: str, src_name: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>复制整个数组（ARRAYCOPY 指令的 Python 封装）。</p>
+<p>将源数组的全部内容复制到目标数组。两个数组的长度可以不同，
+引擎会以较短者为准进行复制。</p>
+<p>Parameters
+----------
+dest_name : str
+    目标数组变量名。
+src_name : str
+    源数组变量名。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">dest_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">src_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源数组变量名。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_sort">
+<div class="api-header">
+<div><span class="api-name">array_sort</span>
+ <span class="api-erb">ARRAYSORT</span>
+</div>
+<div class="api-sig">array_sort(name: str, order: SortOrder = SortOrder.ASCENDING, start: int = 0, count: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>对数组进行排序（ARRAYSORT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    要排序的数组变量名。
+order : SortOrder, optional
+    排序方向，``SortOrder.ASCENDING``（升序，默认）或
+    ``SortOrder.DESCENDING``（降序）。
+start : int, optional
+    排序起始索引（默认为 ``0``）。
+count : int, optional
+    要排序的元素数量；``-1`` 表示从 *start* 到数组末尾。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要排序的数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">order</span><span class="param-type-tag">SortOrder</span><span class="param-default-val">= SortOrder.ASCENDING</span></div><p class="param-desc-text">排序方向，``SortOrder.ASCENDING``（升序，默认）或 ``SortOrder.DESCENDING``（降序）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">排序起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">count</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">要排序的元素数量；``-1`` 表示从 *start* 到数组末尾。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_shift">
+<div class="api-header">
+<div><span class="api-name">array_shift</span>
+ <span class="api-erb">ARRAYSHIFT</span>
+</div>
+<div class="api-sig">array_shift(name: str, shift: int, default: int = 0, start: int = 0, num: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>平移整数数组元素（ARRAYSHIFT 指令的 Python 封装）。</p>
+<p>将数组中指定范围的元素整体平移，空出的位置用 *default* 填充。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+shift : int
+    平移位数。正值向右平移，负值向左平移。
+default : int, optional
+    填充空缺位置的默认值（默认为 ``0``）。
+start : int, optional
+    平移操作的起始索引（默认为 ``0``）。
+num : int, optional
+    参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">shift</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">平移位数。正值向右平移，负值向左平移。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">填充空缺位置的默认值（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">平移操作的起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">num</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_shift_str">
+<div class="api-header">
+<div><span class="api-name">array_shift_str</span>
+ <span class="api-erb">ARRAYSHIFT</span>
+</div>
+<div class="api-sig">array_shift_str(name: str, shift: int, default: str = '', start: int = 0, num: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>平移字符串数组元素（ARRAYSHIFT 指令的 Python 封装，字符串版）。</p>
+<p>将字符串数组中指定范围的元素整体平移，空出的位置用 *default* 填充。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+shift : int
+    平移位数。正值向右平移，负值向左平移。
+default : str, optional
+    填充空缺位置的默认字符串（默认为空字符串 ``&quot;&quot;``）。
+start : int, optional
+    平移操作的起始索引（默认为 ``0``）。
+num : int, optional
+    参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">shift</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">平移位数。正值向右平移，负值向左平移。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">填充空缺位置的默认字符串（默认为空字符串 ``&quot;&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">平移操作的起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">num</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_remove">
+<div class="api-header">
+<div><span class="api-name">array_remove</span>
+ <span class="api-erb">ARRAYREMOVE</span>
+</div>
+<div class="api-sig">array_remove(name: str, start: int, num: int = 1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>删除数组元素（ARRAYREMOVE 指令的 Python 封装）。</p>
+<p>从数组中删除从 *start* 开始的 *num* 个元素，
+后续元素自动左移填补空缺。数组末尾保留原值（不会被清零）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int
+    删除操作的起始索引。
+num : int, optional
+    要删除的元素数量（默认为 ``1``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">删除操作的起始索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">num</span><span class="param-type-tag">int</span><span class="param-default-val">= 1</span></div><p class="param-desc-text">要删除的元素数量（默认为 ``1``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_bit">
+<div class="api-header">
+<div><span class="api-name">get_bit</span>
+ <span class="api-erb">GETBIT</span>
+</div>
+<div class="api-sig">get_bit(value: int, bit: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定二进制位是否置位（GETBIT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要检查的整数值。
+bit : int
+    位索引（从 ``0`` 开始，``0`` 表示最低位）。</p>
+<p>Returns
+-------
+int
+    若该位为 ``1`` 则返回 ``1``，否则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要检查的整数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">位索引（从 ``0`` 开始，``0`` 表示最低位）。 若该位为 ``1`` 则返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-set_bit">
+<div class="api-header">
+<div><span class="api-name">set_bit</span>
+ <span class="api-erb">SETBIT</span>
+</div>
+<div class="api-sig">set_bit(name: str, bit: int, index: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将指定二进制位置位（SETBIT 指令的 Python 封装）。</p>
+<p>将变量 ``name[index]`` 的第 *bit* 位设置为 ``1``。</p>
+<p>Parameters
+----------
+name : str
+    目标位运算变量名（通常为一维整数数组）。
+bit : int
+    要置位的位索引（从 ``0`` 开始）。
+index : int, optional
+    变量数组索引（默认为 ``0``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标位运算变量名（通常为一维整数数组）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要置位的位索引（从 ``0`` 开始）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">变量数组索引（默认为 ``0``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-clear_bit">
+<div class="api-header">
+<div><span class="api-name">clear_bit</span>
+ <span class="api-erb">CLEARBIT</span>
+</div>
+<div class="api-sig">clear_bit(name: str, bit: int, index: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>清除指定二进制位（CLEARBIT 指令的 Python 封装）。</p>
+<p>将变量 ``name[index]`` 的第 *bit* 位清零。</p>
+<p>Parameters
+----------
+name : str
+    目标位运算变量名。
+bit : int
+    要清零的位索引（从 ``0`` 开始）。
+index : int, optional
+    变量数组索引（默认为 ``0``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标位运算变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要清零的位索引（从 ``0`` 开始）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">变量数组索引（默认为 ``0``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-invert_bit">
+<div class="api-header">
+<div><span class="api-name">invert_bit</span>
+ <span class="api-erb">INVERTBIT</span>
+</div>
+<div class="api-sig">invert_bit(name: str, bit: int, index: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>翻转指定二进制位（INVERTBIT 指令的 Python 封装）。</p>
+<p>将变量 ``name[index]`` 的第 *bit* 位取反（``1`` 变 ``0``，``0`` 变 ``1``）。</p>
+<p>Parameters
+----------
+name : str
+    目标位运算变量名。
+bit : int
+    要翻转的位索引（从 ``0`` 开始）。
+index : int, optional
+    变量数组索引（默认为 ``0``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标位运算变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要翻转的位索引（从 ``0`` 开始）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">变量数组索引（默认为 ``0``）。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Array Operations</h1>
+<div class="api-card" id="function-var_set">
+<div class="api-header">
+<div><span class="api-name">var_set</span>
+ <span class="api-erb">VARSET</span>
+</div>
+<div class="api-sig">var_set(name: str, value: int, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置整数型数组变量的值（VARSET 指令的 Python 封装）。</p>
+<p>将指定数组变量从 *start* 到 *end*（不含）的所有元素设置为 *value*。</p>
+<p>Parameters
+----------
+name : str
+    目标变量名（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。
+value : int
+    要填充的整数值。
+start : int, optional
+    起始索引（默认为 ``0``）。
+end : int, optional
+    结束索引（``-1`` 表示数组末尾）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标变量名（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要填充的整数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束索引（``-1`` 表示数组末尾）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-svar_set">
+<div class="api-header">
+<div><span class="api-name">svar_set</span>
+ <span class="api-erb">VARSET</span>
+</div>
+<div class="api-sig">svar_set(name: str, value: str, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置字符串型数组变量的值（VARSET 指令的 Python 封装，字符串版）。</p>
+<p>将指定字符串数组变量从 *start* 到 *end*（不含）的所有元素设置为 *value*。</p>
+<p>Parameters
+----------
+name : str
+    目标变量名（例如 ``&quot;str&quot;``、``&quot;tstr&quot;``）。
+value : str
+    要填充的字符串值。
+start : int, optional
+    起始索引（默认为 ``0``）。
+end : int, optional
+    结束索引（``-1`` 表示数组末尾）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标变量名（例如 ``&quot;str&quot;``、``&quot;tstr&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要填充的字符串值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束索引（``-1`` 表示数组末尾）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-cvar_set">
+<div class="api-header">
+<div><span class="api-name">cvar_set</span>
+ <span class="api-erb">CVARSET</span>
+</div>
+<div class="api-sig">cvar_set(name: str, index: int, value: int, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置整数型角色数组变量的值（CVARSET 指令的 Python 封装）。</p>
+<p>对角色数组变量 ``name:index`` 的 *start* ~ *end* 范围进行批量赋值。</p>
+<p>Parameters
+----------
+name : str
+    角色变量名（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。
+index : int
+    变量的二维下标。
+value : int
+    要填充的整数值。
+start : int, optional
+    起始角色索引（默认为 ``0``）。
+end : int, optional
+    结束角色索引（``-1`` 表示到最后一个角色）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色变量名（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">变量的二维下标。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要填充的整数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始角色索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束角色索引（``-1`` 表示到最后一个角色）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csvar_set">
+<div class="api-header">
+<div><span class="api-name">csvar_set</span>
+ <span class="api-erb">CVARSET</span>
+</div>
+<div class="api-sig">csvar_set(name: str, index: int, value: str, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置字符串型角色数组变量的值（CVARSET 指令的 Python 封装，字符串版）。</p>
+<p>对角色字符串数组变量 ``name:index`` 的 *start* ~ *end* 范围进行批量赋值。</p>
+<p>Parameters
+----------
+name : str
+    角色字符串变量名（例如 ``&quot;cstr&quot;``）。
+index : int
+    变量的二维下标。
+value : str
+    要填充的字符串值。
+start : int, optional
+    起始角色索引（默认为 ``0``）。
+end : int, optional
+    结束角色索引（``-1`` 表示到最后一个角色）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色字符串变量名（例如 ``&quot;cstr&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">变量的二维下标。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要填充的字符串值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始角色索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束角色索引（``-1`` 表示到最后一个角色）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_copy">
+<div class="api-header">
+<div><span class="api-name">array_copy</span>
+ <span class="api-erb">ARRAYCOPY</span>
+</div>
+<div class="api-sig">array_copy(dest_name: str, src_name: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>复制整个数组（ARRAYCOPY 指令的 Python 封装）。</p>
+<p>将源数组的全部内容复制到目标数组。两个数组的长度可以不同，
+引擎会以较短者为准进行复制。</p>
+<p>Parameters
+----------
+dest_name : str
+    目标数组变量名。
+src_name : str
+    源数组变量名。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">dest_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">src_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源数组变量名。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_sort">
+<div class="api-header">
+<div><span class="api-name">array_sort</span>
+ <span class="api-erb">ARRAYSORT</span>
+</div>
+<div class="api-sig">array_sort(name: str, order: SortOrder = SortOrder.ASCENDING, start: int = 0, count: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>对数组进行排序（ARRAYSORT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    要排序的数组变量名。
+order : SortOrder, optional
+    排序方向，``SortOrder.ASCENDING``（升序，默认）或
+    ``SortOrder.DESCENDING``（降序）。
+start : int, optional
+    排序起始索引（默认为 ``0``）。
+count : int, optional
+    要排序的元素数量；``-1`` 表示从 *start* 到数组末尾。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要排序的数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">order</span><span class="param-type-tag">SortOrder</span><span class="param-default-val">= SortOrder.ASCENDING</span></div><p class="param-desc-text">排序方向，``SortOrder.ASCENDING``（升序，默认）或 ``SortOrder.DESCENDING``（降序）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">排序起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">count</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">要排序的元素数量；``-1`` 表示从 *start* 到数组末尾。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_shift">
+<div class="api-header">
+<div><span class="api-name">array_shift</span>
+ <span class="api-erb">ARRAYSHIFT</span>
+</div>
+<div class="api-sig">array_shift(name: str, shift: int, default: int = 0, start: int = 0, num: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>平移整数数组元素（ARRAYSHIFT 指令的 Python 封装）。</p>
+<p>将数组中指定范围的元素整体平移，空出的位置用 *default* 填充。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+shift : int
+    平移位数。正值向右平移，负值向左平移。
+default : int, optional
+    填充空缺位置的默认值（默认为 ``0``）。
+start : int, optional
+    平移操作的起始索引（默认为 ``0``）。
+num : int, optional
+    参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">shift</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">平移位数。正值向右平移，负值向左平移。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">填充空缺位置的默认值（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">平移操作的起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">num</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_shift_str">
+<div class="api-header">
+<div><span class="api-name">array_shift_str</span>
+ <span class="api-erb">ARRAYSHIFT</span>
+</div>
+<div class="api-sig">array_shift_str(name: str, shift: int, default: str = '', start: int = 0, num: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>平移字符串数组元素（ARRAYSHIFT 指令的 Python 封装，字符串版）。</p>
+<p>将字符串数组中指定范围的元素整体平移，空出的位置用 *default* 填充。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+shift : int
+    平移位数。正值向右平移，负值向左平移。
+default : str, optional
+    填充空缺位置的默认字符串（默认为空字符串 ``&quot;&quot;``）。
+start : int, optional
+    平移操作的起始索引（默认为 ``0``）。
+num : int, optional
+    参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">shift</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">平移位数。正值向右平移，负值向左平移。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">填充空缺位置的默认字符串（默认为空字符串 ``&quot;&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">平移操作的起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">num</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_remove">
+<div class="api-header">
+<div><span class="api-name">array_remove</span>
+ <span class="api-erb">ARRAYREMOVE</span>
+</div>
+<div class="api-sig">array_remove(name: str, start: int, num: int = 1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>删除数组元素（ARRAYREMOVE 指令的 Python 封装）。</p>
+<p>从数组中删除从 *start* 开始的 *num* 个元素，
+后续元素自动左移填补空缺。数组末尾保留原值（不会被清零）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int
+    删除操作的起始索引。
+num : int, optional
+    要删除的元素数量（默认为 ``1``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">删除操作的起始索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">num</span><span class="param-type-tag">int</span><span class="param-default-val">= 1</span></div><p class="param-desc-text">要删除的元素数量（默认为 ``1``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_bit">
+<div class="api-header">
+<div><span class="api-name">get_bit</span>
+ <span class="api-erb">GETBIT</span>
+</div>
+<div class="api-sig">get_bit(value: int, bit: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定二进制位是否置位（GETBIT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要检查的整数值。
+bit : int
+    位索引（从 ``0`` 开始，``0`` 表示最低位）。</p>
+<p>Returns
+-------
+int
+    若该位为 ``1`` 则返回 ``1``，否则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要检查的整数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">位索引（从 ``0`` 开始，``0`` 表示最低位）。 若该位为 ``1`` 则返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-set_bit">
+<div class="api-header">
+<div><span class="api-name">set_bit</span>
+ <span class="api-erb">SETBIT</span>
+</div>
+<div class="api-sig">set_bit(name: str, bit: int, index: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将指定二进制位置位（SETBIT 指令的 Python 封装）。</p>
+<p>将变量 ``name[index]`` 的第 *bit* 位设置为 ``1``。</p>
+<p>Parameters
+----------
+name : str
+    目标位运算变量名（通常为一维整数数组）。
+bit : int
+    要置位的位索引（从 ``0`` 开始）。
+index : int, optional
+    变量数组索引（默认为 ``0``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标位运算变量名（通常为一维整数数组）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要置位的位索引（从 ``0`` 开始）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">变量数组索引（默认为 ``0``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-clear_bit">
+<div class="api-header">
+<div><span class="api-name">clear_bit</span>
+ <span class="api-erb">CLEARBIT</span>
+</div>
+<div class="api-sig">clear_bit(name: str, bit: int, index: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>清除指定二进制位（CLEARBIT 指令的 Python 封装）。</p>
+<p>将变量 ``name[index]`` 的第 *bit* 位清零。</p>
+<p>Parameters
+----------
+name : str
+    目标位运算变量名。
+bit : int
+    要清零的位索引（从 ``0`` 开始）。
+index : int, optional
+    变量数组索引（默认为 ``0``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标位运算变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要清零的位索引（从 ``0`` 开始）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">变量数组索引（默认为 ``0``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-invert_bit">
+<div class="api-header">
+<div><span class="api-name">invert_bit</span>
+ <span class="api-erb">INVERTBIT</span>
+</div>
+<div class="api-sig">invert_bit(name: str, bit: int, index: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>翻转指定二进制位（INVERTBIT 指令的 Python 封装）。</p>
+<p>将变量 ``name[index]`` 的第 *bit* 位取反（``1`` 变 ``0``，``0`` 变 ``1``）。</p>
+<p>Parameters
+----------
+name : str
+    目标位运算变量名。
+bit : int
+    要翻转的位索引（从 ``0`` 开始）。
+index : int, optional
+    变量数组索引（默认为 ``0``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标位运算变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要翻转的位索引（从 ``0`` 开始）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">变量数组索引（默认为 ``0``）。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>配列操作</h1>
+<div class="api-card" id="function-var_set">
+<div class="api-header">
+<div><span class="api-name">var_set</span>
+ <span class="api-erb">VARSET</span>
+</div>
+<div class="api-sig">var_set(name: str, value: int, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置整数型数组变量的值（VARSET 指令的 Python 封装）。</p>
+<p>将指定数组变量从 *start* 到 *end*（不含）的所有元素设置为 *value*。</p>
+<p>Parameters
+----------
+name : str
+    目标变量名（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。
+value : int
+    要填充的整数值。
+start : int, optional
+    起始索引（默认为 ``0``）。
+end : int, optional
+    结束索引（``-1`` 表示数组末尾）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标变量名（例如 ``&quot;flag&quot;``、``&quot;item&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要填充的整数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束索引（``-1`` 表示数组末尾）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-svar_set">
+<div class="api-header">
+<div><span class="api-name">svar_set</span>
+ <span class="api-erb">VARSET</span>
+</div>
+<div class="api-sig">svar_set(name: str, value: str, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置字符串型数组变量的值（VARSET 指令的 Python 封装，字符串版）。</p>
+<p>将指定字符串数组变量从 *start* 到 *end*（不含）的所有元素设置为 *value*。</p>
+<p>Parameters
+----------
+name : str
+    目标变量名（例如 ``&quot;str&quot;``、``&quot;tstr&quot;``）。
+value : str
+    要填充的字符串值。
+start : int, optional
+    起始索引（默认为 ``0``）。
+end : int, optional
+    结束索引（``-1`` 表示数组末尾）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标变量名（例如 ``&quot;str&quot;``、``&quot;tstr&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要填充的字符串值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束索引（``-1`` 表示数组末尾）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-cvar_set">
+<div class="api-header">
+<div><span class="api-name">cvar_set</span>
+ <span class="api-erb">CVARSET</span>
+</div>
+<div class="api-sig">cvar_set(name: str, index: int, value: int, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置整数型角色数组变量的值（CVARSET 指令的 Python 封装）。</p>
+<p>对角色数组变量 ``name:index`` 的 *start* ~ *end* 范围进行批量赋值。</p>
+<p>Parameters
+----------
+name : str
+    角色变量名（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。
+index : int
+    变量的二维下标。
+value : int
+    要填充的整数值。
+start : int, optional
+    起始角色索引（默认为 ``0``）。
+end : int, optional
+    结束角色索引（``-1`` 表示到最后一个角色）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色变量名（例如 ``&quot;cflag&quot;``、``&quot;abl&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">变量的二维下标。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要填充的整数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始角色索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束角色索引（``-1`` 表示到最后一个角色）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csvar_set">
+<div class="api-header">
+<div><span class="api-name">csvar_set</span>
+ <span class="api-erb">CVARSET</span>
+</div>
+<div class="api-sig">csvar_set(name: str, index: int, value: str, start: int = 0, end: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>批量设置字符串型角色数组变量的值（CVARSET 指令的 Python 封装，字符串版）。</p>
+<p>对角色字符串数组变量 ``name:index`` 的 *start* ~ *end* 范围进行批量赋值。</p>
+<p>Parameters
+----------
+name : str
+    角色字符串变量名（例如 ``&quot;cstr&quot;``）。
+index : int
+    变量的二维下标。
+value : str
+    要填充的字符串值。
+start : int, optional
+    起始角色索引（默认为 ``0``）。
+end : int, optional
+    结束角色索引（``-1`` 表示到最后一个角色）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">角色字符串变量名（例如 ``&quot;cstr&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">变量的二维下标。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要填充的字符串值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">起始角色索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">结束角色索引（``-1`` 表示到最后一个角色）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_copy">
+<div class="api-header">
+<div><span class="api-name">array_copy</span>
+ <span class="api-erb">ARRAYCOPY</span>
+</div>
+<div class="api-sig">array_copy(dest_name: str, src_name: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>复制整个数组（ARRAYCOPY 指令的 Python 封装）。</p>
+<p>将源数组的全部内容复制到目标数组。两个数组的长度可以不同，
+引擎会以较短者为准进行复制。</p>
+<p>Parameters
+----------
+dest_name : str
+    目标数组变量名。
+src_name : str
+    源数组变量名。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">dest_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">src_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源数组变量名。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_sort">
+<div class="api-header">
+<div><span class="api-name">array_sort</span>
+ <span class="api-erb">ARRAYSORT</span>
+</div>
+<div class="api-sig">array_sort(name: str, order: SortOrder = SortOrder.ASCENDING, start: int = 0, count: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>对数组进行排序（ARRAYSORT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    要排序的数组变量名。
+order : SortOrder, optional
+    排序方向，``SortOrder.ASCENDING``（升序，默认）或
+    ``SortOrder.DESCENDING``（降序）。
+start : int, optional
+    排序起始索引（默认为 ``0``）。
+count : int, optional
+    要排序的元素数量；``-1`` 表示从 *start* 到数组末尾。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要排序的数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">order</span><span class="param-type-tag">SortOrder</span><span class="param-default-val">= SortOrder.ASCENDING</span></div><p class="param-desc-text">排序方向，``SortOrder.ASCENDING``（升序，默认）或 ``SortOrder.DESCENDING``（降序）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">排序起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">count</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">要排序的元素数量；``-1`` 表示从 *start* 到数组末尾。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_shift">
+<div class="api-header">
+<div><span class="api-name">array_shift</span>
+ <span class="api-erb">ARRAYSHIFT</span>
+</div>
+<div class="api-sig">array_shift(name: str, shift: int, default: int = 0, start: int = 0, num: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>平移整数数组元素（ARRAYSHIFT 指令的 Python 封装）。</p>
+<p>将数组中指定范围的元素整体平移，空出的位置用 *default* 填充。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+shift : int
+    平移位数。正值向右平移，负值向左平移。
+default : int, optional
+    填充空缺位置的默认值（默认为 ``0``）。
+start : int, optional
+    平移操作的起始索引（默认为 ``0``）。
+num : int, optional
+    参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">shift</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">平移位数。正值向右平移，负值向左平移。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">填充空缺位置的默认值（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">平移操作的起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">num</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_shift_str">
+<div class="api-header">
+<div><span class="api-name">array_shift_str</span>
+ <span class="api-erb">ARRAYSHIFT</span>
+</div>
+<div class="api-sig">array_shift_str(name: str, shift: int, default: str = '', start: int = 0, num: int = -1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>平移字符串数组元素（ARRAYSHIFT 指令的 Python 封装，字符串版）。</p>
+<p>将字符串数组中指定范围的元素整体平移，空出的位置用 *default* 填充。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+shift : int
+    平移位数。正值向右平移，负值向左平移。
+default : str, optional
+    填充空缺位置的默认字符串（默认为空字符串 ``&quot;&quot;``）。
+start : int, optional
+    平移操作的起始索引（默认为 ``0``）。
+num : int, optional
+    参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">shift</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">平移位数。正值向右平移，负值向左平移。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">填充空缺位置的默认字符串（默认为空字符串 ``&quot;&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">平移操作的起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">num</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">参与平移的元素数量；``-1`` 表示从 *start* 到数组末尾。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-array_remove">
+<div class="api-header">
+<div><span class="api-name">array_remove</span>
+ <span class="api-erb">ARRAYREMOVE</span>
+</div>
+<div class="api-sig">array_remove(name: str, start: int, num: int = 1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>删除数组元素（ARRAYREMOVE 指令的 Python 封装）。</p>
+<p>从数组中删除从 *start* 开始的 *num* 个元素，
+后续元素自动左移填补空缺。数组末尾保留原值（不会被清零）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int
+    删除操作的起始索引。
+num : int, optional
+    要删除的元素数量（默认为 ``1``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">删除操作的起始索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">num</span><span class="param-type-tag">int</span><span class="param-default-val">= 1</span></div><p class="param-desc-text">要删除的元素数量（默认为 ``1``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_bit">
+<div class="api-header">
+<div><span class="api-name">get_bit</span>
+ <span class="api-erb">GETBIT</span>
+</div>
+<div class="api-sig">get_bit(value: int, bit: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定二进制位是否置位（GETBIT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要检查的整数值。
+bit : int
+    位索引（从 ``0`` 开始，``0`` 表示最低位）。</p>
+<p>Returns
+-------
+int
+    若该位为 ``1`` 则返回 ``1``，否则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要检查的整数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">位索引（从 ``0`` 开始，``0`` 表示最低位）。 若该位为 ``1`` 则返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-set_bit">
+<div class="api-header">
+<div><span class="api-name">set_bit</span>
+ <span class="api-erb">SETBIT</span>
+</div>
+<div class="api-sig">set_bit(name: str, bit: int, index: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将指定二进制位置位（SETBIT 指令的 Python 封装）。</p>
+<p>将变量 ``name[index]`` 的第 *bit* 位设置为 ``1``。</p>
+<p>Parameters
+----------
+name : str
+    目标位运算变量名（通常为一维整数数组）。
+bit : int
+    要置位的位索引（从 ``0`` 开始）。
+index : int, optional
+    变量数组索引（默认为 ``0``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标位运算变量名（通常为一维整数数组）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要置位的位索引（从 ``0`` 开始）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">变量数组索引（默认为 ``0``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-clear_bit">
+<div class="api-header">
+<div><span class="api-name">clear_bit</span>
+ <span class="api-erb">CLEARBIT</span>
+</div>
+<div class="api-sig">clear_bit(name: str, bit: int, index: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>清除指定二进制位（CLEARBIT 指令的 Python 封装）。</p>
+<p>将变量 ``name[index]`` 的第 *bit* 位清零。</p>
+<p>Parameters
+----------
+name : str
+    目标位运算变量名。
+bit : int
+    要清零的位索引（从 ``0`` 开始）。
+index : int, optional
+    变量数组索引（默认为 ``0``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标位运算变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要清零的位索引（从 ``0`` 开始）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">变量数组索引（默认为 ``0``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-invert_bit">
+<div class="api-header">
+<div><span class="api-name">invert_bit</span>
+ <span class="api-erb">INVERTBIT</span>
+</div>
+<div class="api-sig">invert_bit(name: str, bit: int, index: int = 0) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>翻转指定二进制位（INVERTBIT 指令的 Python 封装）。</p>
+<p>将变量 ``name[index]`` 的第 *bit* 位取反（``1`` 变 ``0``，``0`` 变 ``1``）。</p>
+<p>Parameters
+----------
+name : str
+    目标位运算变量名。
+bit : int
+    要翻转的位索引（从 ``0`` 开始）。
+index : int, optional
+    变量数组索引（默认为 ``0``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标位运算变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">bit</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要翻转的位索引（从 ``0`` 开始）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">变量数组索引（默认为 ``0``）。</p></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "var_set", "desc": "批量设置整数型数组变量的值（VARSET 指令的 Python 封装）。\n\n将指定数组变量从 *start* 到 *end*（不含）的所有元素设置为 *valu", "url": "./array-ops.html#function-var_set"}, {"name": "svar_set", "desc": "批量设置字符串型数组变量的值（VARSET 指令的 Python 封装，字符串版）。\n\n将指定字符串数组变量从 *start* 到 *end*（不含）的所有元素", "url": "./array-ops.html#function-svar_set"}, {"name": "cvar_set", "desc": "批量设置整数型角色数组变量的值（CVARSET 指令的 Python 封装）。\n\n对角色数组变量 ``name:index`` 的 *start* ~ *end", "url": "./array-ops.html#function-cvar_set"}, {"name": "csvar_set", "desc": "批量设置字符串型角色数组变量的值（CVARSET 指令的 Python 封装，字符串版）。\n\n对角色字符串数组变量 ``name:index`` 的 *star", "url": "./array-ops.html#function-csvar_set"}, {"name": "array_copy", "desc": "复制整个数组（ARRAYCOPY 指令的 Python 封装）。\n\n将源数组的全部内容复制到目标数组。两个数组的长度可以不同，\n引擎会以较短者为准进行复制。\n\n", "url": "./array-ops.html#function-array_copy"}, {"name": "array_sort", "desc": "对数组进行排序（ARRAYSORT 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    要排序的数组变量", "url": "./array-ops.html#function-array_sort"}, {"name": "array_shift", "desc": "平移整数数组元素（ARRAYSHIFT 指令的 Python 封装）。\n\n将数组中指定范围的元素整体平移，空出的位置用 *default* 填充。\n\nParam", "url": "./array-ops.html#function-array_shift"}, {"name": "array_shift_str", "desc": "平移字符串数组元素（ARRAYSHIFT 指令的 Python 封装，字符串版）。\n\n将字符串数组中指定范围的元素整体平移，空出的位置用 *default* 填", "url": "./array-ops.html#function-array_shift_str"}, {"name": "array_remove", "desc": "删除数组元素（ARRAYREMOVE 指令的 Python 封装）。\n\n从数组中删除从 *start* 开始的 *num* 个元素，\n后续元素自动左移填补空缺。", "url": "./array-ops.html#function-array_remove"}, {"name": "get_bit", "desc": "检查指定二进制位是否置位（GETBIT 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要检查的整", "url": "./array-ops.html#function-get_bit"}, {"name": "set_bit", "desc": "将指定二进制位置位（SETBIT 指令的 Python 封装）。\n\n将变量 ``name[index]`` 的第 *bit* 位设置为 ``1``。\n\nPara", "url": "./array-ops.html#function-set_bit"}, {"name": "clear_bit", "desc": "清除指定二进制位（CLEARBIT 指令的 Python 封装）。\n\n将变量 ``name[index]`` 的第 *bit* 位清零。\n\nParameters", "url": "./array-ops.html#function-clear_bit"}, {"name": "invert_bit", "desc": "翻转指定二进制位（INVERTBIT 指令的 Python 封装）。\n\n将变量 ``name[index]`` 的第 *bit* 位取反（``1`` 变 ``0", "url": "./array-ops.html#function-invert_bit"}, {"name": "var_set", "desc": "批量设置整数型数组变量的值（VARSET 指令的 Python 封装）。\n\n将指定数组变量从 *start* 到 *end*（不含）的所有元素设置为 *valu", "url": "./array-ops.html#function-var_set"}, {"name": "svar_set", "desc": "批量设置字符串型数组变量的值（VARSET 指令的 Python 封装，字符串版）。\n\n将指定字符串数组变量从 *start* 到 *end*（不含）的所有元素", "url": "./array-ops.html#function-svar_set"}, {"name": "cvar_set", "desc": "批量设置整数型角色数组变量的值（CVARSET 指令的 Python 封装）。\n\n对角色数组变量 ``name:index`` 的 *start* ~ *end", "url": "./array-ops.html#function-cvar_set"}, {"name": "csvar_set", "desc": "批量设置字符串型角色数组变量的值（CVARSET 指令的 Python 封装，字符串版）。\n\n对角色字符串数组变量 ``name:index`` 的 *star", "url": "./array-ops.html#function-csvar_set"}, {"name": "array_copy", "desc": "复制整个数组（ARRAYCOPY 指令的 Python 封装）。\n\n将源数组的全部内容复制到目标数组。两个数组的长度可以不同，\n引擎会以较短者为准进行复制。\n\n", "url": "./array-ops.html#function-array_copy"}, {"name": "array_sort", "desc": "对数组进行排序（ARRAYSORT 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    要排序的数组变量", "url": "./array-ops.html#function-array_sort"}, {"name": "array_shift", "desc": "平移整数数组元素（ARRAYSHIFT 指令的 Python 封装）。\n\n将数组中指定范围的元素整体平移，空出的位置用 *default* 填充。\n\nParam", "url": "./array-ops.html#function-array_shift"}, {"name": "array_shift_str", "desc": "平移字符串数组元素（ARRAYSHIFT 指令的 Python 封装，字符串版）。\n\n将字符串数组中指定范围的元素整体平移，空出的位置用 *default* 填", "url": "./array-ops.html#function-array_shift_str"}, {"name": "array_remove", "desc": "删除数组元素（ARRAYREMOVE 指令的 Python 封装）。\n\n从数组中删除从 *start* 开始的 *num* 个元素，\n后续元素自动左移填补空缺。", "url": "./array-ops.html#function-array_remove"}, {"name": "get_bit", "desc": "检查指定二进制位是否置位（GETBIT 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要检查的整", "url": "./array-ops.html#function-get_bit"}, {"name": "set_bit", "desc": "将指定二进制位置位（SETBIT 指令的 Python 封装）。\n\n将变量 ``name[index]`` 的第 *bit* 位设置为 ``1``。\n\nPara", "url": "./array-ops.html#function-set_bit"}, {"name": "clear_bit", "desc": "清除指定二进制位（CLEARBIT 指令的 Python 封装）。\n\n将变量 ``name[index]`` 的第 *bit* 位清零。\n\nParameters", "url": "./array-ops.html#function-clear_bit"}, {"name": "invert_bit", "desc": "翻转指定二进制位（INVERTBIT 指令的 Python 封装）。\n\n将变量 ``name[index]`` 的第 *bit* 位取反（``1`` 变 ``0", "url": "./array-ops.html#function-invert_bit"}, {"name": "var_set", "desc": "批量设置整数型数组变量的值（VARSET 指令的 Python 封装）。\n\n将指定数组变量从 *start* 到 *end*（不含）的所有元素设置为 *valu", "url": "./array-ops.html#function-var_set"}, {"name": "svar_set", "desc": "批量设置字符串型数组变量的值（VARSET 指令的 Python 封装，字符串版）。\n\n将指定字符串数组变量从 *start* 到 *end*（不含）的所有元素", "url": "./array-ops.html#function-svar_set"}, {"name": "cvar_set", "desc": "批量设置整数型角色数组变量的值（CVARSET 指令的 Python 封装）。\n\n对角色数组变量 ``name:index`` 的 *start* ~ *end", "url": "./array-ops.html#function-cvar_set"}, {"name": "csvar_set", "desc": "批量设置字符串型角色数组变量的值（CVARSET 指令的 Python 封装，字符串版）。\n\n对角色字符串数组变量 ``name:index`` 的 *star", "url": "./array-ops.html#function-csvar_set"}, {"name": "array_copy", "desc": "复制整个数组（ARRAYCOPY 指令的 Python 封装）。\n\n将源数组的全部内容复制到目标数组。两个数组的长度可以不同，\n引擎会以较短者为准进行复制。\n\n", "url": "./array-ops.html#function-array_copy"}, {"name": "array_sort", "desc": "对数组进行排序（ARRAYSORT 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    要排序的数组变量", "url": "./array-ops.html#function-array_sort"}, {"name": "array_shift", "desc": "平移整数数组元素（ARRAYSHIFT 指令的 Python 封装）。\n\n将数组中指定范围的元素整体平移，空出的位置用 *default* 填充。\n\nParam", "url": "./array-ops.html#function-array_shift"}, {"name": "array_shift_str", "desc": "平移字符串数组元素（ARRAYSHIFT 指令的 Python 封装，字符串版）。\n\n将字符串数组中指定范围的元素整体平移，空出的位置用 *default* 填", "url": "./array-ops.html#function-array_shift_str"}, {"name": "array_remove", "desc": "删除数组元素（ARRAYREMOVE 指令的 Python 封装）。\n\n从数组中删除从 *start* 开始的 *num* 个元素，\n后续元素自动左移填补空缺。", "url": "./array-ops.html#function-array_remove"}, {"name": "get_bit", "desc": "检查指定二进制位是否置位（GETBIT 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要检查的整", "url": "./array-ops.html#function-get_bit"}, {"name": "set_bit", "desc": "将指定二进制位置位（SETBIT 指令的 Python 封装）。\n\n将变量 ``name[index]`` 的第 *bit* 位设置为 ``1``。\n\nPara", "url": "./array-ops.html#function-set_bit"}, {"name": "clear_bit", "desc": "清除指定二进制位（CLEARBIT 指令的 Python 封装）。\n\n将变量 ``name[index]`` 的第 *bit* 位清零。\n\nParameters", "url": "./array-ops.html#function-clear_bit"}, {"name": "invert_bit", "desc": "翻转指定二进制位（INVERTBIT 指令的 Python 封装）。\n\n将变量 ``name[index]`` 的第 *bit* 位取反（``1`` 变 ``0", "url": "./array-ops.html#function-invert_bit"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

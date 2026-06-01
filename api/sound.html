@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 音效 / BGM</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 音效 / BGM</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>音效 / BGM</h1>
+<div class="api-card" id="function-play_sound">
+<div class="api-header">
+<div><span class="api-name">play_sound</span>
+ <span class="api-erb">PLAYSOUND</span>
+</div>
+<div class="api-sig">play_sound(filename: str, repeat: int = 1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>播放音效文件（PLAYSOUND 指令的 Python 封装）。</p>
+<p>从 ``sound/`` 目录加载并播放指定的音效文件。
+引擎会自动寻找一个空闲的音效通道进行播放。</p>
+<p>Parameters
+----------
+filename : str
+    音效文件名（例如 ``&quot;se_click.wav&quot;``）。
+repeat : int, optional
+    重复播放次数（默认为 ``1``）。
+    使用 ``-1`` 表示无限循环播放。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">filename</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">音效文件名（例如 ``&quot;se_click.wav&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">repeat</span><span class="param-type-tag">int</span><span class="param-default-val">= 1</span></div><p class="param-desc-text">重复播放次数（默认为 ``1``）。 使用 ``-1`` 表示无限循环播放。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-stop_sound">
+<div class="api-header">
+<div><span class="api-name">stop_sound</span>
+ <span class="api-erb">STOPSOUND</span>
+</div>
+<div class="api-sig">stop_sound() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>停止所有正在播放的音效（STOPSOUND 指令的 Python 封装）。</p>
+<p>立即终止所有音效通道中的播放，不影响背景音乐（BGM）。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-play_bgm">
+<div class="api-header">
+<div><span class="api-name">play_bgm</span>
+ <span class="api-erb">PLAYBGM</span>
+</div>
+<div class="api-sig">play_bgm(filename: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>播放背景音乐（PLAYBGM 指令的 Python 封装）。</p>
+<p>从 ``sound/`` 目录加载并播放指定的音乐文件，默认无限循环。
+如果当前已有 BGM 正在播放，会先停止旧的 BGM 再播放新的。</p>
+<p>Parameters
+----------
+filename : str
+    音乐文件名（例如 ``&quot;bgm_title.mp3&quot;``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">filename</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">音乐文件名（例如 ``&quot;bgm_title.mp3&quot;``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-stop_bgm">
+<div class="api-header">
+<div><span class="api-name">stop_bgm</span>
+ <span class="api-erb">STOPBGM</span>
+</div>
+<div class="api-sig">stop_bgm() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>停止背景音乐（STOPBGM 指令的 Python 封装）。</p>
+<p>终止当前播放的背景音乐。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-set_sound_volume">
+<div class="api-header">
+<div><span class="api-name">set_sound_volume</span>
+ <span class="api-erb">SETSOUNDVOLUME</span>
+</div>
+<div class="api-sig">set_sound_volume(volume: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置音效音量（SETSOUNDVOLUME 指令的 Python 封装）。</p>
+<p>调整所有音效通道的音量大小。</p>
+<p>Parameters
+----------
+volume : int
+    音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。
+    超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">volume</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。 超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-set_bgm_volume">
+<div class="api-header">
+<div><span class="api-name">set_bgm_volume</span>
+ <span class="api-erb">SETBGMVOLUME</span>
+</div>
+<div class="api-sig">set_bgm_volume(volume: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置背景音乐音量（SETBGMVOLUME 指令的 Python 封装）。</p>
+<p>调整背景音乐的音量大小。</p>
+<p>Parameters
+----------
+volume : int
+    音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。
+    超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">volume</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。 超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Sound / BGM</h1>
+<div class="api-card" id="function-play_sound">
+<div class="api-header">
+<div><span class="api-name">play_sound</span>
+ <span class="api-erb">PLAYSOUND</span>
+</div>
+<div class="api-sig">play_sound(filename: str, repeat: int = 1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>播放音效文件（PLAYSOUND 指令的 Python 封装）。</p>
+<p>从 ``sound/`` 目录加载并播放指定的音效文件。
+引擎会自动寻找一个空闲的音效通道进行播放。</p>
+<p>Parameters
+----------
+filename : str
+    音效文件名（例如 ``&quot;se_click.wav&quot;``）。
+repeat : int, optional
+    重复播放次数（默认为 ``1``）。
+    使用 ``-1`` 表示无限循环播放。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">filename</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">音效文件名（例如 ``&quot;se_click.wav&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">repeat</span><span class="param-type-tag">int</span><span class="param-default-val">= 1</span></div><p class="param-desc-text">重复播放次数（默认为 ``1``）。 使用 ``-1`` 表示无限循环播放。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-stop_sound">
+<div class="api-header">
+<div><span class="api-name">stop_sound</span>
+ <span class="api-erb">STOPSOUND</span>
+</div>
+<div class="api-sig">stop_sound() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>停止所有正在播放的音效（STOPSOUND 指令的 Python 封装）。</p>
+<p>立即终止所有音效通道中的播放，不影响背景音乐（BGM）。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-play_bgm">
+<div class="api-header">
+<div><span class="api-name">play_bgm</span>
+ <span class="api-erb">PLAYBGM</span>
+</div>
+<div class="api-sig">play_bgm(filename: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>播放背景音乐（PLAYBGM 指令的 Python 封装）。</p>
+<p>从 ``sound/`` 目录加载并播放指定的音乐文件，默认无限循环。
+如果当前已有 BGM 正在播放，会先停止旧的 BGM 再播放新的。</p>
+<p>Parameters
+----------
+filename : str
+    音乐文件名（例如 ``&quot;bgm_title.mp3&quot;``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">filename</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">音乐文件名（例如 ``&quot;bgm_title.mp3&quot;``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-stop_bgm">
+<div class="api-header">
+<div><span class="api-name">stop_bgm</span>
+ <span class="api-erb">STOPBGM</span>
+</div>
+<div class="api-sig">stop_bgm() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>停止背景音乐（STOPBGM 指令的 Python 封装）。</p>
+<p>终止当前播放的背景音乐。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-set_sound_volume">
+<div class="api-header">
+<div><span class="api-name">set_sound_volume</span>
+ <span class="api-erb">SETSOUNDVOLUME</span>
+</div>
+<div class="api-sig">set_sound_volume(volume: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置音效音量（SETSOUNDVOLUME 指令的 Python 封装）。</p>
+<p>调整所有音效通道的音量大小。</p>
+<p>Parameters
+----------
+volume : int
+    音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。
+    超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">volume</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。 超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-set_bgm_volume">
+<div class="api-header">
+<div><span class="api-name">set_bgm_volume</span>
+ <span class="api-erb">SETBGMVOLUME</span>
+</div>
+<div class="api-sig">set_bgm_volume(volume: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置背景音乐音量（SETBGMVOLUME 指令的 Python 封装）。</p>
+<p>调整背景音乐的音量大小。</p>
+<p>Parameters
+----------
+volume : int
+    音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。
+    超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">volume</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。 超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>効果音 / BGM</h1>
+<div class="api-card" id="function-play_sound">
+<div class="api-header">
+<div><span class="api-name">play_sound</span>
+ <span class="api-erb">PLAYSOUND</span>
+</div>
+<div class="api-sig">play_sound(filename: str, repeat: int = 1) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>播放音效文件（PLAYSOUND 指令的 Python 封装）。</p>
+<p>从 ``sound/`` 目录加载并播放指定的音效文件。
+引擎会自动寻找一个空闲的音效通道进行播放。</p>
+<p>Parameters
+----------
+filename : str
+    音效文件名（例如 ``&quot;se_click.wav&quot;``）。
+repeat : int, optional
+    重复播放次数（默认为 ``1``）。
+    使用 ``-1`` 表示无限循环播放。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">filename</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">音效文件名（例如 ``&quot;se_click.wav&quot;``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">repeat</span><span class="param-type-tag">int</span><span class="param-default-val">= 1</span></div><p class="param-desc-text">重复播放次数（默认为 ``1``）。 使用 ``-1`` 表示无限循环播放。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-stop_sound">
+<div class="api-header">
+<div><span class="api-name">stop_sound</span>
+ <span class="api-erb">STOPSOUND</span>
+</div>
+<div class="api-sig">stop_sound() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>停止所有正在播放的音效（STOPSOUND 指令的 Python 封装）。</p>
+<p>立即终止所有音效通道中的播放，不影响背景音乐（BGM）。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-play_bgm">
+<div class="api-header">
+<div><span class="api-name">play_bgm</span>
+ <span class="api-erb">PLAYBGM</span>
+</div>
+<div class="api-sig">play_bgm(filename: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>播放背景音乐（PLAYBGM 指令的 Python 封装）。</p>
+<p>从 ``sound/`` 目录加载并播放指定的音乐文件，默认无限循环。
+如果当前已有 BGM 正在播放，会先停止旧的 BGM 再播放新的。</p>
+<p>Parameters
+----------
+filename : str
+    音乐文件名（例如 ``&quot;bgm_title.mp3&quot;``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">filename</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">音乐文件名（例如 ``&quot;bgm_title.mp3&quot;``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-stop_bgm">
+<div class="api-header">
+<div><span class="api-name">stop_bgm</span>
+ <span class="api-erb">STOPBGM</span>
+</div>
+<div class="api-sig">stop_bgm() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>停止背景音乐（STOPBGM 指令的 Python 封装）。</p>
+<p>终止当前播放的背景音乐。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-set_sound_volume">
+<div class="api-header">
+<div><span class="api-name">set_sound_volume</span>
+ <span class="api-erb">SETSOUNDVOLUME</span>
+</div>
+<div class="api-sig">set_sound_volume(volume: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置音效音量（SETSOUNDVOLUME 指令的 Python 封装）。</p>
+<p>调整所有音效通道的音量大小。</p>
+<p>Parameters
+----------
+volume : int
+    音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。
+    超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">volume</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。 超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-set_bgm_volume">
+<div class="api-header">
+<div><span class="api-name">set_bgm_volume</span>
+ <span class="api-erb">SETBGMVOLUME</span>
+</div>
+<div class="api-sig">set_bgm_volume(volume: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置背景音乐音量（SETBGMVOLUME 指令的 Python 封装）。</p>
+<p>调整背景音乐的音量大小。</p>
+<p>Parameters
+----------
+volume : int
+    音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。
+    超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">volume</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">音量值，范围 ``0`` ~ ``100``（``0`` 为静音，``100`` 为最大音量）。 超出范围的值会被自动截断到 ``[0, 100]`` 区间。</p></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "play_sound", "desc": "播放音效文件（PLAYSOUND 指令的 Python 封装）。\n\n从 ``sound/`` 目录加载并播放指定的音效文件。\n引擎会自动寻找一个空闲的音效通道进", "url": "./sound.html#function-play_sound"}, {"name": "stop_sound", "desc": "停止所有正在播放的音效（STOPSOUND 指令的 Python 封装）。\n\n立即终止所有音效通道中的播放，不影响背景音乐（BGM）。\n\nReturns\n---", "url": "./sound.html#function-stop_sound"}, {"name": "play_bgm", "desc": "播放背景音乐（PLAYBGM 指令的 Python 封装）。\n\n从 ``sound/`` 目录加载并播放指定的音乐文件，默认无限循环。\n如果当前已有 BGM 正", "url": "./sound.html#function-play_bgm"}, {"name": "stop_bgm", "desc": "停止背景音乐（STOPBGM 指令的 Python 封装）。\n\n终止当前播放的背景音乐。\n\nReturns\n-------\nNone", "url": "./sound.html#function-stop_bgm"}, {"name": "set_sound_volume", "desc": "设置音效音量（SETSOUNDVOLUME 指令的 Python 封装）。\n\n调整所有音效通道的音量大小。\n\nParameters\n----------\nvol", "url": "./sound.html#function-set_sound_volume"}, {"name": "set_bgm_volume", "desc": "设置背景音乐音量（SETBGMVOLUME 指令的 Python 封装）。\n\n调整背景音乐的音量大小。\n\nParameters\n----------\nvolum", "url": "./sound.html#function-set_bgm_volume"}, {"name": "play_sound", "desc": "播放音效文件（PLAYSOUND 指令的 Python 封装）。\n\n从 ``sound/`` 目录加载并播放指定的音效文件。\n引擎会自动寻找一个空闲的音效通道进", "url": "./sound.html#function-play_sound"}, {"name": "stop_sound", "desc": "停止所有正在播放的音效（STOPSOUND 指令的 Python 封装）。\n\n立即终止所有音效通道中的播放，不影响背景音乐（BGM）。\n\nReturns\n---", "url": "./sound.html#function-stop_sound"}, {"name": "play_bgm", "desc": "播放背景音乐（PLAYBGM 指令的 Python 封装）。\n\n从 ``sound/`` 目录加载并播放指定的音乐文件，默认无限循环。\n如果当前已有 BGM 正", "url": "./sound.html#function-play_bgm"}, {"name": "stop_bgm", "desc": "停止背景音乐（STOPBGM 指令的 Python 封装）。\n\n终止当前播放的背景音乐。\n\nReturns\n-------\nNone", "url": "./sound.html#function-stop_bgm"}, {"name": "set_sound_volume", "desc": "设置音效音量（SETSOUNDVOLUME 指令的 Python 封装）。\n\n调整所有音效通道的音量大小。\n\nParameters\n----------\nvol", "url": "./sound.html#function-set_sound_volume"}, {"name": "set_bgm_volume", "desc": "设置背景音乐音量（SETBGMVOLUME 指令的 Python 封装）。\n\n调整背景音乐的音量大小。\n\nParameters\n----------\nvolum", "url": "./sound.html#function-set_bgm_volume"}, {"name": "play_sound", "desc": "播放音效文件（PLAYSOUND 指令的 Python 封装）。\n\n从 ``sound/`` 目录加载并播放指定的音效文件。\n引擎会自动寻找一个空闲的音效通道进", "url": "./sound.html#function-play_sound"}, {"name": "stop_sound", "desc": "停止所有正在播放的音效（STOPSOUND 指令的 Python 封装）。\n\n立即终止所有音效通道中的播放，不影响背景音乐（BGM）。\n\nReturns\n---", "url": "./sound.html#function-stop_sound"}, {"name": "play_bgm", "desc": "播放背景音乐（PLAYBGM 指令的 Python 封装）。\n\n从 ``sound/`` 目录加载并播放指定的音乐文件，默认无限循环。\n如果当前已有 BGM 正", "url": "./sound.html#function-play_bgm"}, {"name": "stop_bgm", "desc": "停止背景音乐（STOPBGM 指令的 Python 封装）。\n\n终止当前播放的背景音乐。\n\nReturns\n-------\nNone", "url": "./sound.html#function-stop_bgm"}, {"name": "set_sound_volume", "desc": "设置音效音量（SETSOUNDVOLUME 指令的 Python 封装）。\n\n调整所有音效通道的音量大小。\n\nParameters\n----------\nvol", "url": "./sound.html#function-set_sound_volume"}, {"name": "set_bgm_volume", "desc": "设置背景音乐音量（SETBGMVOLUME 指令的 Python 封装）。\n\n调整背景音乐的音量大小。\n\nParameters\n----------\nvolum", "url": "./sound.html#function-set_bgm_volume"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

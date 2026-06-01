@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — Python scripting layer for Emuera</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="index.html" data-key="index">首页</a>
+      <a class="nav-link" href="getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb">Pyera</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<div class="hero">
+  <h1 class="hero-title">Pyera</h1>
+  <p class="tagline">用 Python 语法编写 Emuera 游戏</p>
+  <div class="version-pill">v0.3.0</div>
+</div>
+<div class="features">
+<div class="feature-card">
+  <div class="feature-icon"><span>API</span></div>
+  <h3>Pythonic API</h3>
+  <p>用 Python 语法替代繁琐的 ERB，享受现代 IDE 的自动补全和类型检查。</p>
+</div>
+<div class="feature-card">
+  <div class="feature-icon"><span>STUB</span></div>
+  <h3>Stub 模式</h3>
+  <p>无需 C# 运行时即可开发和测试，完整兼容 pytest 和 CI 流水线。</p>
+</div>
+<div class="feature-card">
+  <div class="feature-icon"><span>ASYNC</span></div>
+  <h3>异步集成</h3>
+  <p>内置 asyncio 支持，可在事件处理器中安全调用 aiohttp、httpx 等第三方库。</p>
+</div>
+<div class="feature-card">
+  <div class="feature-icon"><span>SAFE</span></div>
+  <h3>线程安全</h3>
+  <p>事件注册表和日志系统均使用线程锁保护，后台线程与主线程安全协作。</p>
+</div>
+</div>
+<div class="quick-start">
+  <div class="quick-start-inner">
+    <h2>快速安装</h2>
+    <pre><code class="language-python"># py/main.py
+import pyera
+
+def system_title():
+    pyera.clear_display()
+    pyera.print_line("Hello Pyera!")
+    pyera.print_button("[0] Start", 0)
+    pyera.new_line()
+    pyera.refresh(True)</code><button class="copy-btn">📋</button></pre>
+    <p><a href="getting-started.html">查看更多 →</a></p>
+  </div>
+</div>
+<div class="content">
+  <h2>模块概览</h2>
+  <div class="module-grid">
+    <a class="module-card" href="api/display.html"><div class="name">显示 / 输出</div><div class="desc">PRINT、DRAWLINE、SETCOLOR 等显示控制指令</div></a>
+<a class="module-card" href="api/input.html"><div class="name">输入</div><div class="desc">INPUT、TINPUT、BINPUT 等输入等待指令</div></a>
+<a class="module-card" href="api/flow.html"><div class="name">流程控制</div><div class="desc">BEGIN、CALL、QUIT、JUMP 等流程控制指令</div></a>
+<a class="module-card" href="api/chara-ops.html"><div class="name">角色操作</div><div class="desc">ADDCHARA、DELCHARA、SWAPCHARA 等角色操作指令</div></a>
+<a class="module-card" href="api/array-ops.html"><div class="name">数组操作</div><div class="desc">VARSET、ARRAYCOPY、ARRAYSORT、SETBIT 等数组指令</div></a>
+<a class="module-card" href="api/csv.html"><div class="name">CSV 数据</div><div class="desc">CSV 角色模板数据查询指令</div></a>
+<a class="module-card" href="api/save-load.html"><div class="name">存档 / 读档</div><div class="desc">SAVEGAME、LOADGAME、SAVEDATA 等存档指令</div></a>
+<a class="module-card" href="api/builtin.html"><div class="name">内置函数</div><div class="desc">MAX、MIN、LIMIT、MATCH、RAND 等数学与字符串函数</div></a>
+<a class="module-card" href="api/sound.html"><div class="name">音效 / BGM</div><div class="desc">PLAYSOUND、PLAYBGM、音量控制等音频指令</div></a>
+<a class="module-card" href="api/vars.html"><div class="name">变量代理</div><div class="desc">FLAG、MONEY、DAY 等全局变量的字典式访问</div></a>
+<a class="module-card" href="api/chara-class.html"><div class="name">角色类</div><div class="desc">Chara 类封装单个角色的所有变量访问</div></a>
+<a class="module-card" href="api/async.html"><div class="name">异步工具</div><div class="desc">asyncio 集成与主线程安全调用工具</div></a>
+<a class="module-card" href="api/events.html"><div class="name">事件注册</div><div class="desc">@event 装饰器与事件注册系统</div></a>
+<a class="module-card" href="api/logging.html"><div class="name">日志系统</div><div class="desc">调试日志记录与缓冲区管理</div></a>
+<a class="module-card" href="api/types.html"><div class="name">类型定义</div><div class="desc">枚举、常量和颜色解析工具</div></a>
+<a class="module-card" href="api/utils.html"><div class="name">工具函数</div><div class="desc">纯 Python 实现的辅助函数集合</div></a>
+<a class="module-card" href="api/exceptions.html"><div class="name">异常</div><div class="desc">Pyera 异常体系</div></a>
+<a class="module-card" href="api/core.html"><div class="name">核心桥接</div><div class="desc">Python ↔ C# 引擎桥接层</div></a>
+
+  </div>
+</div>
+</div><div class="lang-content" data-lang="en" id="content-en">
+<div class="hero">
+  <h1 class="hero-title">Pyera</h1>
+  <p class="tagline">Write Emuera games in Python</p>
+  <div class="version-pill">v0.3.0</div>
+</div>
+<div class="features">
+<div class="feature-card">
+  <div class="feature-icon"><span>API</span></div>
+  <h3>Pythonic API</h3>
+  <p>Replace tedious ERB with Python syntax, enjoy IDE autocompletion and type checking.</p>
+</div>
+<div class="feature-card">
+  <div class="feature-icon"><span>STUB</span></div>
+  <h3>Stub Mode</h3>
+  <p>Develop and test without C# runtime. Fully compatible with pytest and CI pipelines.</p>
+</div>
+<div class="feature-card">
+  <div class="feature-icon"><span>ASYNC</span></div>
+  <h3>Async Integration</h3>
+  <p>Built-in asyncio support. Safely call aiohttp, httpx and other third-party libraries from event handlers.</p>
+</div>
+<div class="feature-card">
+  <div class="feature-icon"><span>SAFE</span></div>
+  <h3>Thread-Safe</h3>
+  <p>Event registry and logging system are protected by thread locks. Background threads cooperate safely with the main thread.</p>
+</div>
+</div>
+<div class="quick-start">
+  <div class="quick-start-inner">
+    <h2>Quick Install</h2>
+    <pre><code class="language-python"># py/main.py
+import pyera
+
+def system_title():
+    pyera.clear_display()
+    pyera.print_line("Hello Pyera!")
+    pyera.print_button("[0] Start", 0)
+    pyera.new_line()
+    pyera.refresh(True)</code><button class="copy-btn">📋</button></pre>
+    <p><a href="getting-started.html">Read more →</a></p>
+  </div>
+</div>
+<div class="content">
+  <h2>Module Overview</h2>
+  <div class="module-grid">
+    <a class="module-card" href="api/display.html"><div class="name">显示 / 输出</div><div class="desc">PRINT、DRAWLINE、SETCOLOR 等显示控制指令</div></a>
+<a class="module-card" href="api/input.html"><div class="name">输入</div><div class="desc">INPUT、TINPUT、BINPUT 等输入等待指令</div></a>
+<a class="module-card" href="api/flow.html"><div class="name">流程控制</div><div class="desc">BEGIN、CALL、QUIT、JUMP 等流程控制指令</div></a>
+<a class="module-card" href="api/chara-ops.html"><div class="name">角色操作</div><div class="desc">ADDCHARA、DELCHARA、SWAPCHARA 等角色操作指令</div></a>
+<a class="module-card" href="api/array-ops.html"><div class="name">数组操作</div><div class="desc">VARSET、ARRAYCOPY、ARRAYSORT、SETBIT 等数组指令</div></a>
+<a class="module-card" href="api/csv.html"><div class="name">CSV 数据</div><div class="desc">CSV 角色模板数据查询指令</div></a>
+<a class="module-card" href="api/save-load.html"><div class="name">存档 / 读档</div><div class="desc">SAVEGAME、LOADGAME、SAVEDATA 等存档指令</div></a>
+<a class="module-card" href="api/builtin.html"><div class="name">内置函数</div><div class="desc">MAX、MIN、LIMIT、MATCH、RAND 等数学与字符串函数</div></a>
+<a class="module-card" href="api/sound.html"><div class="name">音效 / BGM</div><div class="desc">PLAYSOUND、PLAYBGM、音量控制等音频指令</div></a>
+<a class="module-card" href="api/vars.html"><div class="name">变量代理</div><div class="desc">FLAG、MONEY、DAY 等全局变量的字典式访问</div></a>
+<a class="module-card" href="api/chara-class.html"><div class="name">角色类</div><div class="desc">Chara 类封装单个角色的所有变量访问</div></a>
+<a class="module-card" href="api/async.html"><div class="name">异步工具</div><div class="desc">asyncio 集成与主线程安全调用工具</div></a>
+<a class="module-card" href="api/events.html"><div class="name">事件注册</div><div class="desc">@event 装饰器与事件注册系统</div></a>
+<a class="module-card" href="api/logging.html"><div class="name">日志系统</div><div class="desc">调试日志记录与缓冲区管理</div></a>
+<a class="module-card" href="api/types.html"><div class="name">类型定义</div><div class="desc">枚举、常量和颜色解析工具</div></a>
+<a class="module-card" href="api/utils.html"><div class="name">工具函数</div><div class="desc">纯 Python 实现的辅助函数集合</div></a>
+<a class="module-card" href="api/exceptions.html"><div class="name">异常</div><div class="desc">Pyera 异常体系</div></a>
+<a class="module-card" href="api/core.html"><div class="name">核心桥接</div><div class="desc">Python ↔ C# 引擎桥接层</div></a>
+
+  </div>
+</div>
+</div><div class="lang-content" data-lang="ja" id="content-ja">
+<div class="hero">
+  <h1 class="hero-title">Pyera</h1>
+  <p class="tagline">Python で Emuera ゲームを作成</p>
+  <div class="version-pill">v0.3.0</div>
+</div>
+<div class="features">
+<div class="feature-card">
+  <div class="feature-icon"><span>API</span></div>
+  <h3>Pythonic API</h3>
+  <p>面倒な ERB を Python 構文で置き換え、IDE の自動補完と型チェックを享受。</p>
+</div>
+<div class="feature-card">
+  <div class="feature-icon"><span>STUB</span></div>
+  <h3>スタブモード</h3>
+  <p>C# ランタイムなしで開発・テスト可能。pytest や CI パイプラインと完全互換。</p>
+</div>
+<div class="feature-card">
+  <div class="feature-icon"><span>ASYNC</span></div>
+  <h3>非同期統合</h3>
+  <p>asyncio サポートを内蔵。aiohttp、httpx などのサードパーティライブラリをイベントハンドラから安全に呼び出し可能。</p>
+</div>
+<div class="feature-card">
+  <div class="feature-icon"><span>SAFE</span></div>
+  <h3>スレッドセーフ</h3>
+  <p>イベント登録表とログシステムはスレッドロックで保護。バックグラウンドスレッドがメインスレッドと安全に協調。</p>
+</div>
+</div>
+<div class="quick-start">
+  <div class="quick-start-inner">
+    <h2>クイックインストール</h2>
+    <pre><code class="language-python"># py/main.py
+import pyera
+
+def system_title():
+    pyera.clear_display()
+    pyera.print_line("Hello Pyera!")
+    pyera.print_button("[0] Start", 0)
+    pyera.new_line()
+    pyera.refresh(True)</code><button class="copy-btn">📋</button></pre>
+    <p><a href="getting-started.html">詳細を見る →</a></p>
+  </div>
+</div>
+<div class="content">
+  <h2>モジュール一覧</h2>
+  <div class="module-grid">
+    <a class="module-card" href="api/display.html"><div class="name">显示 / 输出</div><div class="desc">PRINT、DRAWLINE、SETCOLOR 等显示控制指令</div></a>
+<a class="module-card" href="api/input.html"><div class="name">输入</div><div class="desc">INPUT、TINPUT、BINPUT 等输入等待指令</div></a>
+<a class="module-card" href="api/flow.html"><div class="name">流程控制</div><div class="desc">BEGIN、CALL、QUIT、JUMP 等流程控制指令</div></a>
+<a class="module-card" href="api/chara-ops.html"><div class="name">角色操作</div><div class="desc">ADDCHARA、DELCHARA、SWAPCHARA 等角色操作指令</div></a>
+<a class="module-card" href="api/array-ops.html"><div class="name">数组操作</div><div class="desc">VARSET、ARRAYCOPY、ARRAYSORT、SETBIT 等数组指令</div></a>
+<a class="module-card" href="api/csv.html"><div class="name">CSV 数据</div><div class="desc">CSV 角色模板数据查询指令</div></a>
+<a class="module-card" href="api/save-load.html"><div class="name">存档 / 读档</div><div class="desc">SAVEGAME、LOADGAME、SAVEDATA 等存档指令</div></a>
+<a class="module-card" href="api/builtin.html"><div class="name">内置函数</div><div class="desc">MAX、MIN、LIMIT、MATCH、RAND 等数学与字符串函数</div></a>
+<a class="module-card" href="api/sound.html"><div class="name">音效 / BGM</div><div class="desc">PLAYSOUND、PLAYBGM、音量控制等音频指令</div></a>
+<a class="module-card" href="api/vars.html"><div class="name">变量代理</div><div class="desc">FLAG、MONEY、DAY 等全局变量的字典式访问</div></a>
+<a class="module-card" href="api/chara-class.html"><div class="name">角色类</div><div class="desc">Chara 类封装单个角色的所有变量访问</div></a>
+<a class="module-card" href="api/async.html"><div class="name">异步工具</div><div class="desc">asyncio 集成与主线程安全调用工具</div></a>
+<a class="module-card" href="api/events.html"><div class="name">事件注册</div><div class="desc">@event 装饰器与事件注册系统</div></a>
+<a class="module-card" href="api/logging.html"><div class="name">日志系统</div><div class="desc">调试日志记录与缓冲区管理</div></a>
+<a class="module-card" href="api/types.html"><div class="name">类型定义</div><div class="desc">枚举、常量和颜色解析工具</div></a>
+<a class="module-card" href="api/utils.html"><div class="name">工具函数</div><div class="desc">纯 Python 实现的辅助函数集合</div></a>
+<a class="module-card" href="api/exceptions.html"><div class="name">异常</div><div class="desc">Pyera 异常体系</div></a>
+<a class="module-card" href="api/core.html"><div class="name">核心桥接</div><div class="desc">Python ↔ C# 引擎桥接层</div></a>
+
+  </div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[]</script>
+<script src="js/lang.js"></script>
+</body>
+</html>

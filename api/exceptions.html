@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 异常</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 异常</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>异常</h1>
+<div class="api-card" id="class-PyeraError">
+<div class="api-header">
+<div><span class="api-name">PyeraError</span>
+</div>
+<div class="api-sig">PyeraError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Base exception for all pyera runtime errors.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraApiError">
+<div class="api-header">
+<div><span class="api-name">PyeraApiError</span>
+</div>
+<div class="api-sig">PyeraApiError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when a C# engine API call fails or returns unexpectedly.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraVariableError">
+<div class="api-header">
+<div><span class="api-name">PyeraVariableError</span>
+</div>
+<div class="api-sig">PyeraVariableError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when variable access (get/set) fails in the engine.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraNotInitializedError">
+<div class="api-header">
+<div><span class="api-name">PyeraNotInitializedError</span>
+</div>
+<div class="api-sig">PyeraNotInitializedError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when pyera_native is not available and an engine call is attempted.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraTypeError">
+<div class="api-header">
+<div><span class="api-name">PyeraTypeError</span>
+</div>
+<div class="api-sig">PyeraTypeError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when an argument type does not match the C# API expectation.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraValidationError">
+<div class="api-header">
+<div><span class="api-name">PyeraValidationError</span>
+</div>
+<div class="api-sig">PyeraValidationError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when input validation fails before reaching the engine.</p></div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, message: str = '', detail: str = '')</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化异常对象。</p>
+<p>Parameters
+----------
+message : str, optional
+    异常的主要错误信息（默认为空字符串）。
+detail : str, optional
+    异常的详细补充信息，例如底层堆栈跟踪或调试上下文
+    （默认为空字符串）。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">message</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">异常的主要错误信息（默认为空字符串）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">detail</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">异常的详细补充信息，例如底层堆栈跟踪或调试上下文 （默认为空字符串）。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Exceptions</h1>
+<div class="api-card" id="class-PyeraError">
+<div class="api-header">
+<div><span class="api-name">PyeraError</span>
+</div>
+<div class="api-sig">PyeraError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Base exception for all pyera runtime errors.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraApiError">
+<div class="api-header">
+<div><span class="api-name">PyeraApiError</span>
+</div>
+<div class="api-sig">PyeraApiError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when a C# engine API call fails or returns unexpectedly.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraVariableError">
+<div class="api-header">
+<div><span class="api-name">PyeraVariableError</span>
+</div>
+<div class="api-sig">PyeraVariableError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when variable access (get/set) fails in the engine.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraNotInitializedError">
+<div class="api-header">
+<div><span class="api-name">PyeraNotInitializedError</span>
+</div>
+<div class="api-sig">PyeraNotInitializedError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when pyera_native is not available and an engine call is attempted.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraTypeError">
+<div class="api-header">
+<div><span class="api-name">PyeraTypeError</span>
+</div>
+<div class="api-sig">PyeraTypeError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when an argument type does not match the C# API expectation.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraValidationError">
+<div class="api-header">
+<div><span class="api-name">PyeraValidationError</span>
+</div>
+<div class="api-sig">PyeraValidationError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when input validation fails before reaching the engine.</p></div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, message: str = '', detail: str = '')</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化异常对象。</p>
+<p>Parameters
+----------
+message : str, optional
+    异常的主要错误信息（默认为空字符串）。
+detail : str, optional
+    异常的详细补充信息，例如底层堆栈跟踪或调试上下文
+    （默认为空字符串）。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">message</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">异常的主要错误信息（默认为空字符串）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">detail</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">异常的详细补充信息，例如底层堆栈跟踪或调试上下文 （默认为空字符串）。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>例外</h1>
+<div class="api-card" id="class-PyeraError">
+<div class="api-header">
+<div><span class="api-name">PyeraError</span>
+</div>
+<div class="api-sig">PyeraError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Base exception for all pyera runtime errors.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraApiError">
+<div class="api-header">
+<div><span class="api-name">PyeraApiError</span>
+</div>
+<div class="api-sig">PyeraApiError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when a C# engine API call fails or returns unexpectedly.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraVariableError">
+<div class="api-header">
+<div><span class="api-name">PyeraVariableError</span>
+</div>
+<div class="api-sig">PyeraVariableError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when variable access (get/set) fails in the engine.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraNotInitializedError">
+<div class="api-header">
+<div><span class="api-name">PyeraNotInitializedError</span>
+</div>
+<div class="api-sig">PyeraNotInitializedError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when pyera_native is not available and an engine call is attempted.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraTypeError">
+<div class="api-header">
+<div><span class="api-name">PyeraTypeError</span>
+</div>
+<div class="api-sig">PyeraTypeError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when an argument type does not match the C# API expectation.</p></div>
+</div>
+</div>
+<div class="api-card" id="class-PyeraValidationError">
+<div class="api-header">
+<div><span class="api-name">PyeraValidationError</span>
+</div>
+<div class="api-sig">PyeraValidationError</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>Raised when input validation fails before reaching the engine.</p></div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, message: str = '', detail: str = '')</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>初始化异常对象。</p>
+<p>Parameters
+----------
+message : str, optional
+    异常的主要错误信息（默认为空字符串）。
+detail : str, optional
+    异常的详细补充信息，例如底层堆栈跟踪或调试上下文
+    （默认为空字符串）。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">message</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">异常的主要错误信息（默认为空字符串）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">detail</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">异常的详细补充信息，例如底层堆栈跟踪或调试上下文 （默认为空字符串）。</p></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "PyeraError", "desc": "Base exception for all pyera runtime errors.", "url": "./exceptions.html#class-PyeraError"}, {"name": "PyeraApiError", "desc": "Raised when a C# engine API call fails or returns unexpectedly.", "url": "./exceptions.html#class-PyeraApiError"}, {"name": "PyeraVariableError", "desc": "Raised when variable access (get/set) fails in the engine.", "url": "./exceptions.html#class-PyeraVariableError"}, {"name": "PyeraNotInitializedError", "desc": "Raised when pyera_native is not available and an engine call is attempted.", "url": "./exceptions.html#class-PyeraNotInitializedError"}, {"name": "PyeraTypeError", "desc": "Raised when an argument type does not match the C# API expectation.", "url": "./exceptions.html#class-PyeraTypeError"}, {"name": "PyeraValidationError", "desc": "Raised when input validation fails before reaching the engine.", "url": "./exceptions.html#class-PyeraValidationError"}, {"name": "__init__", "desc": "初始化异常对象。\n\nParameters\n----------\nmessage : str, optional\n    异常的主要错误信息（默认为空字符串）。\n", "url": "./exceptions.html#function-__init__"}, {"name": "PyeraError", "desc": "Base exception for all pyera runtime errors.", "url": "./exceptions.html#class-PyeraError"}, {"name": "PyeraApiError", "desc": "Raised when a C# engine API call fails or returns unexpectedly.", "url": "./exceptions.html#class-PyeraApiError"}, {"name": "PyeraVariableError", "desc": "Raised when variable access (get/set) fails in the engine.", "url": "./exceptions.html#class-PyeraVariableError"}, {"name": "PyeraNotInitializedError", "desc": "Raised when pyera_native is not available and an engine call is attempted.", "url": "./exceptions.html#class-PyeraNotInitializedError"}, {"name": "PyeraTypeError", "desc": "Raised when an argument type does not match the C# API expectation.", "url": "./exceptions.html#class-PyeraTypeError"}, {"name": "PyeraValidationError", "desc": "Raised when input validation fails before reaching the engine.", "url": "./exceptions.html#class-PyeraValidationError"}, {"name": "__init__", "desc": "初始化异常对象。\n\nParameters\n----------\nmessage : str, optional\n    异常的主要错误信息（默认为空字符串）。\n", "url": "./exceptions.html#function-__init__"}, {"name": "PyeraError", "desc": "Base exception for all pyera runtime errors.", "url": "./exceptions.html#class-PyeraError"}, {"name": "PyeraApiError", "desc": "Raised when a C# engine API call fails or returns unexpectedly.", "url": "./exceptions.html#class-PyeraApiError"}, {"name": "PyeraVariableError", "desc": "Raised when variable access (get/set) fails in the engine.", "url": "./exceptions.html#class-PyeraVariableError"}, {"name": "PyeraNotInitializedError", "desc": "Raised when pyera_native is not available and an engine call is attempted.", "url": "./exceptions.html#class-PyeraNotInitializedError"}, {"name": "PyeraTypeError", "desc": "Raised when an argument type does not match the C# API expectation.", "url": "./exceptions.html#class-PyeraTypeError"}, {"name": "PyeraValidationError", "desc": "Raised when input validation fails before reaching the engine.", "url": "./exceptions.html#class-PyeraValidationError"}, {"name": "__init__", "desc": "初始化异常对象。\n\nParameters\n----------\nmessage : str, optional\n    异常的主要错误信息（默认为空字符串）。\n", "url": "./exceptions.html#function-__init__"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

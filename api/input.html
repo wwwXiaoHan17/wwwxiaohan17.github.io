@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 输入</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 输入</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>输入</h1>
+<div class="api-card" id="function-wait_input">
+<div class="api-header">
+<div><span class="api-name">wait_input</span>
+ <span class="api-erb">INPUT</span>
+</div>
+<div class="api-sig">wait_input() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入整数（INPUT 指令的 Python 封装）。</p>
+<p>阻塞当前线程，直到玩家在输入框中输入一个整数并确认。
+输入值会被引擎存入 ``RESULT`` 变量。</p>
+<p>Returns
+-------
+int
+    玩家输入的整数值；出错或 stub 模式下返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_str">
+<div class="api-header">
+<div><span class="api-name">wait_input_str</span>
+ <span class="api-erb">INPUTS</span>
+</div>
+<div class="api-sig">wait_input_str() -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入字符串（INPUTS 指令的 Python 封装）。</p>
+<p>阻塞当前线程，直到玩家在输入框中输入字符串并确认。
+输入值会被引擎存入 ``RESULTS`` 变量。</p>
+<p>Returns
+-------
+str
+    玩家输入的字符串；出错或 stub 模式下返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_one">
+<div class="api-header">
+<div><span class="api-name">wait_input_one</span>
+ <span class="api-erb">ONEINPUT</span>
+</div>
+<div class="api-sig">wait_input_one() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入单个数字（ONEINPUT 指令的 Python 封装）。</p>
+<p>只接受一位数字（``0`` ~ ``9``）的输入，适合制作数字选择菜单。</p>
+<p>Returns
+-------
+int
+    玩家输入的单个数字；出错返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-read_any_key">
+<div class="api-header">
+<div><span class="api-name">read_any_key</span>
+ <span class="api-erb">WAITKEY</span>
+</div>
+<div class="api-sig">read_any_key() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家按下任意键（WAITKEY 指令的 Python 封装）。</p>
+<p>阻塞当前线程，直到键盘或鼠标有任何输入。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-tinput">
+<div class="api-header">
+<div><span class="api-name">tinput</span>
+ <span class="api-erb">TINPUT</span>
+</div>
+<div class="api-sig">tinput(timeout: int, default_val: int = 0, one_input: bool = False, display_time: bool = True) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>带超时的整数输入（TINPUT 指令的 Python 封装）。</p>
+<p>在指定时间内等待玩家输入整数，超时后自动返回默认值。</p>
+<p>Parameters
+----------
+timeout : int
+    超时时间，单位毫秒。
+default_val : int, optional
+    超时后返回的默认值（默认为 ``0``）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个数字输入（相当于 ONETINPUT）。
+display_time : bool, optional
+    是否在屏幕上显示倒计时（默认为 ``True``）。</p>
+<p>Returns
+-------
+int
+    玩家输入的整数值，或超时后的 *default_val*。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">超时时间，单位毫秒。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default_val</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">超时后返回的默认值（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个数字输入（相当于 ONETINPUT）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">display_time</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否在屏幕上显示倒计时（默认为 ``True``）。 玩家输入的整数值，或超时后的 *default_val*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-tinputs">
+<div class="api-header">
+<div><span class="api-name">tinputs</span>
+ <span class="api-erb">TINPUTS</span>
+</div>
+<div class="api-sig">tinputs(timeout: int, default_str: str = '', one_input: bool = False, display_time: bool = True) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>带超时的字符串输入（TINPUTS 指令的 Python 封装）。</p>
+<p>在指定时间内等待玩家输入字符串，超时后自动返回默认值。</p>
+<p>Parameters
+----------
+timeout : int
+    超时时间，单位毫秒。
+default_str : str, optional
+    超时后返回的默认字符串（默认为空字符串）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个字符输入。
+display_time : bool, optional
+    是否在屏幕上显示倒计时（默认为 ``True``）。</p>
+<p>Returns
+-------
+str
+    玩家输入的字符串，或超时后的 *default_str*。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">超时时间，单位毫秒。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default_str</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">超时后返回的默认字符串（默认为空字符串）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个字符输入。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">display_time</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否在屏幕上显示倒计时（默认为 ``True``）。 玩家输入的字符串，或超时后的 *default_str*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-one_inputs">
+<div class="api-header">
+<div><span class="api-name">one_inputs</span>
+ <span class="api-erb">ONEINPUTS</span>
+</div>
+<div class="api-sig">one_inputs() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入单个字符（ONEINPUTS 指令的 Python 封装）。</p>
+<p>只接受一个字符的输入，返回该字符的整数编码。</p>
+<p>Returns
+-------
+int
+    输入字符的编码值；出错返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-input_any">
+<div class="api-header">
+<div><span class="api-name">input_any</span>
+ <span class="api-erb">INPUTANY</span>
+</div>
+<div class="api-sig">input_any() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>接受任意类型输入并返回整数（INPUTANY 指令的 Python 封装）。</p>
+<p>允许输入整数或字符串，若输入为字符串则返回 ``0``。</p>
+<p>Returns
+-------
+int
+    输入的整数值，或字符串输入时返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-input_any_str">
+<div class="api-header">
+<div><span class="api-name">input_any_str</span>
+ <span class="api-erb">INPUTANY</span>
+</div>
+<div class="api-sig">input_any_str() -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>接受任意类型输入并返回字符串（INPUTANY 指令的 Python 封装，字符串版）。</p>
+<p>允许输入整数或字符串，若输入为整数则转换为十进制字符串。</p>
+<p>Returns
+-------
+str
+    输入的字符串值，或整数输入时的字符串表示。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-input_mouse_key">
+<div class="api-header">
+<div><span class="api-name">input_mouse_key</span>
+ <span class="api-erb">INPUTMOUSEKEY</span>
+</div>
+<div class="api-sig">input_mouse_key(timeout: int = 0) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取原始的鼠标/键盘输入码（INPUTMOUSEKEY 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+timeout : int, optional
+    超时时间（单位毫秒）；``0`` 表示无限等待（默认为 ``0``）。</p>
+<p>Returns
+-------
+int
+    鼠标按键或键盘按键的原始编码值。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">超时时间（单位毫秒）；``0`` 表示无限等待（默认为 ``0``）。 鼠标按键或键盘按键的原始编码值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_button">
+<div class="api-header">
+<div><span class="api-name">wait_input_button</span>
+ <span class="api-erb">ONEBINPUT</span>
+</div>
+<div class="api-sig">wait_input_button(default_val: int = 0, mouse: bool = False, one_input: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家点击整数型按钮（BINPUT / ONEBINPUT 指令的 Python 封装）。</p>
+<p>扫描屏幕上当前显示的所有整数型按钮（``PRINTBUTTON`` 生成的按钮），
+等待玩家点击其中一个。如果屏幕上没有任何整数按钮，立即返回 *default_val*。</p>
+<p>Parameters
+----------
+default_val : int, optional
+    无可用按钮时返回的默认值（默认为 ``0``）。
+mouse : bool, optional
+    是否允许鼠标点击按钮（默认为 ``False``，仅键盘选择）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个数字快捷选择（ONEBINPUT 行为）。</p>
+<p>Returns
+-------
+int
+    被点击按钮对应的整数值，或 *default_val*。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">default_val</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">无可用按钮时返回的默认值（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">mouse</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否允许鼠标点击按钮（默认为 ``False``，仅键盘选择）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个数字快捷选择（ONEBINPUT 行为）。 被点击按钮对应的整数值，或 *default_val*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_button_str">
+<div class="api-header">
+<div><span class="api-name">wait_input_button_str</span>
+ <span class="api-erb">ONEBINPUTS</span>
+</div>
+<div class="api-sig">wait_input_button_str(default_str: str = '', mouse: bool = False, one_input: bool = False) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家点击字符串型按钮（BINPUTS / ONEBINPUTS 指令的 Python 封装）。</p>
+<p>扫描屏幕上当前显示的所有字符串型按钮，等待玩家点击其中一个。
+如果屏幕上没有任何字符串按钮，立即返回 *default_str*。</p>
+<p>Parameters
+----------
+default_str : str, optional
+    无可用按钮时返回的默认字符串（默认为空字符串）。
+mouse : bool, optional
+    是否允许鼠标点击按钮（默认为 ``False``）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个字符快捷选择。</p>
+<p>Returns
+-------
+str
+    被点击按钮对应的字符串值，或 *default_str*。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">default_str</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">无可用按钮时返回的默认字符串（默认为空字符串）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">mouse</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否允许鼠标点击按钮（默认为 ``False``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个字符快捷选择。 被点击按钮对应的字符串值，或 *default_str*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-mouse_x">
+<div class="api-header">
+<div><span class="api-name">mouse_x</span>
+ <span class="api-erb">MOUSEX</span>
+</div>
+<div class="api-sig">mouse_x() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取鼠标在窗口中的 X 坐标（MOUSEX 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    鼠标光标相对于窗口客户区的水平像素坐标。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-mouse_y">
+<div class="api-header">
+<div><span class="api-name">mouse_y</span>
+ <span class="api-erb">MOUSEY</span>
+</div>
+<div class="api-sig">mouse_y() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取鼠标在窗口中的 Y 坐标（MOUSEY 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    鼠标光标相对于窗口客户区的垂直像素坐标。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-mouse_b">
+<div class="api-header">
+<div><span class="api-name">mouse_b</span>
+ <span class="api-erb">MOUSEB</span>
+</div>
+<div class="api-sig">mouse_b() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取鼠标按键状态（MOUSEB 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    当前鼠标按键状态的位掩码值（与 ``Control.MouseButtons`` 等价）。
+    常见值：``1`` = 左键，``2`` = 右键，``4`` = 中键。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-client_width">
+<div class="api-header">
+<div><span class="api-name">client_width</span>
+ <span class="api-erb">CLIENTWIDTH</span>
+</div>
+<div class="api-sig">client_width() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取窗口客户区宽度（CLIENTWIDTH 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    窗口客户区的宽度（像素）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-client_height">
+<div class="api-header">
+<div><span class="api-name">client_height</span>
+ <span class="api-erb">CLIENTHEIGHT</span>
+</div>
+<div class="api-sig">client_height() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取窗口客户区高度（CLIENTHEIGHT 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    窗口客户区的高度（像素）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_key">
+<div class="api-header">
+<div><span class="api-name">get_key</span>
+ <span class="api-erb">GETKEY</span>
+</div>
+<div class="api-sig">get_key(keycode: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定按键是否被按下（GETKEY 指令的 Python 封装）。</p>
+<p>检测当前时刻键盘上某个虚拟键码对应的按键是否处于按下状态。</p>
+<p>Parameters
+----------
+keycode : int
+    虚拟键码（Virtual-Key Code），例如 ``13`` 是回车键，``27`` 是 ESC。</p>
+<p>Returns
+-------
+int
+    按键被按住返回 ``1``，否则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">keycode</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">虚拟键码（Virtual-Key Code），例如 ``13`` 是回车键，``27`` 是 ESC。 按键被按住返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_key_triggered">
+<div class="api-header">
+<div><span class="api-name">get_key_triggered</span>
+ <span class="api-erb">GETKEYTRIGGERED</span>
+</div>
+<div class="api-sig">get_key_triggered(keycode: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定按键是否被触发（GETKEYTRIGGERED 指令的 Python 封装）。</p>
+<p>与 ``get_key`` 的区别在于检测的是&quot;触发&quot;状态（切换位），
+即按键从释放到按下的那次转变。</p>
+<p>Parameters
+----------
+keycode : int
+    虚拟键码。</p>
+<p>Returns
+-------
+int
+    按键被触发返回 ``1``，否则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">keycode</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">虚拟键码。 按键被触发返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-await_time">
+<div class="api-header">
+<div><span class="api-name">await_time</span>
+ <span class="api-erb">AWAIT</span>
+</div>
+<div class="api-sig">await_time(ms: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>让出 UI 线程指定毫秒数（AWAIT 指令的 Python 封装）。</p>
+<p>非阻塞式等待，期间允许 UI 更新和消息处理。</p>
+<p>Parameters
+----------
+ms : int
+    等待时间，单位毫秒。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">ms</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">等待时间，单位毫秒。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-force_wait">
+<div class="api-header">
+<div><span class="api-name">force_wait</span>
+ <span class="api-erb">FORCEWAIT</span>
+</div>
+<div class="api-sig">force_wait() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制等待玩家按键（FORCEWAIT 指令的 Python 封装）。</p>
+<p>阻塞当前线程直到玩家按下任意键，此等待无法被跳过（skip-proof）。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-t_wait">
+<div class="api-header">
+<div><span class="api-name">t_wait</span>
+ <span class="api-erb">TWAIT</span>
+</div>
+<div class="api-sig">t_wait(time: int, allow_skip: bool = False) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>带超时的等待（TWAIT 指令的 Python 封装）。</p>
+<p>阻塞当前线程，在超时前或玩家按键时返回。</p>
+<p>Parameters
+----------
+time : int
+    超时时间，单位毫秒。
+allow_skip : bool, optional
+    若 ``True``，则玩家在超时前按键会提前结束等待（默认为 ``False``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">time</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">超时时间，单位毫秒。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">allow_skip</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True``，则玩家在超时前按键会提前结束等待（默认为 ``False``）。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Input</h1>
+<div class="api-card" id="function-wait_input">
+<div class="api-header">
+<div><span class="api-name">wait_input</span>
+ <span class="api-erb">INPUT</span>
+</div>
+<div class="api-sig">wait_input() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入整数（INPUT 指令的 Python 封装）。</p>
+<p>阻塞当前线程，直到玩家在输入框中输入一个整数并确认。
+输入值会被引擎存入 ``RESULT`` 变量。</p>
+<p>Returns
+-------
+int
+    玩家输入的整数值；出错或 stub 模式下返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_str">
+<div class="api-header">
+<div><span class="api-name">wait_input_str</span>
+ <span class="api-erb">INPUTS</span>
+</div>
+<div class="api-sig">wait_input_str() -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入字符串（INPUTS 指令的 Python 封装）。</p>
+<p>阻塞当前线程，直到玩家在输入框中输入字符串并确认。
+输入值会被引擎存入 ``RESULTS`` 变量。</p>
+<p>Returns
+-------
+str
+    玩家输入的字符串；出错或 stub 模式下返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_one">
+<div class="api-header">
+<div><span class="api-name">wait_input_one</span>
+ <span class="api-erb">ONEINPUT</span>
+</div>
+<div class="api-sig">wait_input_one() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入单个数字（ONEINPUT 指令的 Python 封装）。</p>
+<p>只接受一位数字（``0`` ~ ``9``）的输入，适合制作数字选择菜单。</p>
+<p>Returns
+-------
+int
+    玩家输入的单个数字；出错返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-read_any_key">
+<div class="api-header">
+<div><span class="api-name">read_any_key</span>
+ <span class="api-erb">WAITKEY</span>
+</div>
+<div class="api-sig">read_any_key() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家按下任意键（WAITKEY 指令的 Python 封装）。</p>
+<p>阻塞当前线程，直到键盘或鼠标有任何输入。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-tinput">
+<div class="api-header">
+<div><span class="api-name">tinput</span>
+ <span class="api-erb">TINPUT</span>
+</div>
+<div class="api-sig">tinput(timeout: int, default_val: int = 0, one_input: bool = False, display_time: bool = True) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>带超时的整数输入（TINPUT 指令的 Python 封装）。</p>
+<p>在指定时间内等待玩家输入整数，超时后自动返回默认值。</p>
+<p>Parameters
+----------
+timeout : int
+    超时时间，单位毫秒。
+default_val : int, optional
+    超时后返回的默认值（默认为 ``0``）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个数字输入（相当于 ONETINPUT）。
+display_time : bool, optional
+    是否在屏幕上显示倒计时（默认为 ``True``）。</p>
+<p>Returns
+-------
+int
+    玩家输入的整数值，或超时后的 *default_val*。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">超时时间，单位毫秒。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default_val</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">超时后返回的默认值（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个数字输入（相当于 ONETINPUT）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">display_time</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否在屏幕上显示倒计时（默认为 ``True``）。 玩家输入的整数值，或超时后的 *default_val*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-tinputs">
+<div class="api-header">
+<div><span class="api-name">tinputs</span>
+ <span class="api-erb">TINPUTS</span>
+</div>
+<div class="api-sig">tinputs(timeout: int, default_str: str = '', one_input: bool = False, display_time: bool = True) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>带超时的字符串输入（TINPUTS 指令的 Python 封装）。</p>
+<p>在指定时间内等待玩家输入字符串，超时后自动返回默认值。</p>
+<p>Parameters
+----------
+timeout : int
+    超时时间，单位毫秒。
+default_str : str, optional
+    超时后返回的默认字符串（默认为空字符串）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个字符输入。
+display_time : bool, optional
+    是否在屏幕上显示倒计时（默认为 ``True``）。</p>
+<p>Returns
+-------
+str
+    玩家输入的字符串，或超时后的 *default_str*。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">超时时间，单位毫秒。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default_str</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">超时后返回的默认字符串（默认为空字符串）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个字符输入。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">display_time</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否在屏幕上显示倒计时（默认为 ``True``）。 玩家输入的字符串，或超时后的 *default_str*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-one_inputs">
+<div class="api-header">
+<div><span class="api-name">one_inputs</span>
+ <span class="api-erb">ONEINPUTS</span>
+</div>
+<div class="api-sig">one_inputs() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入单个字符（ONEINPUTS 指令的 Python 封装）。</p>
+<p>只接受一个字符的输入，返回该字符的整数编码。</p>
+<p>Returns
+-------
+int
+    输入字符的编码值；出错返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-input_any">
+<div class="api-header">
+<div><span class="api-name">input_any</span>
+ <span class="api-erb">INPUTANY</span>
+</div>
+<div class="api-sig">input_any() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>接受任意类型输入并返回整数（INPUTANY 指令的 Python 封装）。</p>
+<p>允许输入整数或字符串，若输入为字符串则返回 ``0``。</p>
+<p>Returns
+-------
+int
+    输入的整数值，或字符串输入时返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-input_any_str">
+<div class="api-header">
+<div><span class="api-name">input_any_str</span>
+ <span class="api-erb">INPUTANY</span>
+</div>
+<div class="api-sig">input_any_str() -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>接受任意类型输入并返回字符串（INPUTANY 指令的 Python 封装，字符串版）。</p>
+<p>允许输入整数或字符串，若输入为整数则转换为十进制字符串。</p>
+<p>Returns
+-------
+str
+    输入的字符串值，或整数输入时的字符串表示。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-input_mouse_key">
+<div class="api-header">
+<div><span class="api-name">input_mouse_key</span>
+ <span class="api-erb">INPUTMOUSEKEY</span>
+</div>
+<div class="api-sig">input_mouse_key(timeout: int = 0) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取原始的鼠标/键盘输入码（INPUTMOUSEKEY 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+timeout : int, optional
+    超时时间（单位毫秒）；``0`` 表示无限等待（默认为 ``0``）。</p>
+<p>Returns
+-------
+int
+    鼠标按键或键盘按键的原始编码值。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">超时时间（单位毫秒）；``0`` 表示无限等待（默认为 ``0``）。 鼠标按键或键盘按键的原始编码值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_button">
+<div class="api-header">
+<div><span class="api-name">wait_input_button</span>
+ <span class="api-erb">ONEBINPUT</span>
+</div>
+<div class="api-sig">wait_input_button(default_val: int = 0, mouse: bool = False, one_input: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家点击整数型按钮（BINPUT / ONEBINPUT 指令的 Python 封装）。</p>
+<p>扫描屏幕上当前显示的所有整数型按钮（``PRINTBUTTON`` 生成的按钮），
+等待玩家点击其中一个。如果屏幕上没有任何整数按钮，立即返回 *default_val*。</p>
+<p>Parameters
+----------
+default_val : int, optional
+    无可用按钮时返回的默认值（默认为 ``0``）。
+mouse : bool, optional
+    是否允许鼠标点击按钮（默认为 ``False``，仅键盘选择）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个数字快捷选择（ONEBINPUT 行为）。</p>
+<p>Returns
+-------
+int
+    被点击按钮对应的整数值，或 *default_val*。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">default_val</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">无可用按钮时返回的默认值（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">mouse</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否允许鼠标点击按钮（默认为 ``False``，仅键盘选择）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个数字快捷选择（ONEBINPUT 行为）。 被点击按钮对应的整数值，或 *default_val*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_button_str">
+<div class="api-header">
+<div><span class="api-name">wait_input_button_str</span>
+ <span class="api-erb">ONEBINPUTS</span>
+</div>
+<div class="api-sig">wait_input_button_str(default_str: str = '', mouse: bool = False, one_input: bool = False) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家点击字符串型按钮（BINPUTS / ONEBINPUTS 指令的 Python 封装）。</p>
+<p>扫描屏幕上当前显示的所有字符串型按钮，等待玩家点击其中一个。
+如果屏幕上没有任何字符串按钮，立即返回 *default_str*。</p>
+<p>Parameters
+----------
+default_str : str, optional
+    无可用按钮时返回的默认字符串（默认为空字符串）。
+mouse : bool, optional
+    是否允许鼠标点击按钮（默认为 ``False``）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个字符快捷选择。</p>
+<p>Returns
+-------
+str
+    被点击按钮对应的字符串值，或 *default_str*。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">default_str</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">无可用按钮时返回的默认字符串（默认为空字符串）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">mouse</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否允许鼠标点击按钮（默认为 ``False``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个字符快捷选择。 被点击按钮对应的字符串值，或 *default_str*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-mouse_x">
+<div class="api-header">
+<div><span class="api-name">mouse_x</span>
+ <span class="api-erb">MOUSEX</span>
+</div>
+<div class="api-sig">mouse_x() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取鼠标在窗口中的 X 坐标（MOUSEX 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    鼠标光标相对于窗口客户区的水平像素坐标。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-mouse_y">
+<div class="api-header">
+<div><span class="api-name">mouse_y</span>
+ <span class="api-erb">MOUSEY</span>
+</div>
+<div class="api-sig">mouse_y() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取鼠标在窗口中的 Y 坐标（MOUSEY 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    鼠标光标相对于窗口客户区的垂直像素坐标。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-mouse_b">
+<div class="api-header">
+<div><span class="api-name">mouse_b</span>
+ <span class="api-erb">MOUSEB</span>
+</div>
+<div class="api-sig">mouse_b() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取鼠标按键状态（MOUSEB 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    当前鼠标按键状态的位掩码值（与 ``Control.MouseButtons`` 等价）。
+    常见值：``1`` = 左键，``2`` = 右键，``4`` = 中键。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-client_width">
+<div class="api-header">
+<div><span class="api-name">client_width</span>
+ <span class="api-erb">CLIENTWIDTH</span>
+</div>
+<div class="api-sig">client_width() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取窗口客户区宽度（CLIENTWIDTH 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    窗口客户区的宽度（像素）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-client_height">
+<div class="api-header">
+<div><span class="api-name">client_height</span>
+ <span class="api-erb">CLIENTHEIGHT</span>
+</div>
+<div class="api-sig">client_height() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取窗口客户区高度（CLIENTHEIGHT 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    窗口客户区的高度（像素）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_key">
+<div class="api-header">
+<div><span class="api-name">get_key</span>
+ <span class="api-erb">GETKEY</span>
+</div>
+<div class="api-sig">get_key(keycode: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定按键是否被按下（GETKEY 指令的 Python 封装）。</p>
+<p>检测当前时刻键盘上某个虚拟键码对应的按键是否处于按下状态。</p>
+<p>Parameters
+----------
+keycode : int
+    虚拟键码（Virtual-Key Code），例如 ``13`` 是回车键，``27`` 是 ESC。</p>
+<p>Returns
+-------
+int
+    按键被按住返回 ``1``，否则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">keycode</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">虚拟键码（Virtual-Key Code），例如 ``13`` 是回车键，``27`` 是 ESC。 按键被按住返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_key_triggered">
+<div class="api-header">
+<div><span class="api-name">get_key_triggered</span>
+ <span class="api-erb">GETKEYTRIGGERED</span>
+</div>
+<div class="api-sig">get_key_triggered(keycode: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定按键是否被触发（GETKEYTRIGGERED 指令的 Python 封装）。</p>
+<p>与 ``get_key`` 的区别在于检测的是&quot;触发&quot;状态（切换位），
+即按键从释放到按下的那次转变。</p>
+<p>Parameters
+----------
+keycode : int
+    虚拟键码。</p>
+<p>Returns
+-------
+int
+    按键被触发返回 ``1``，否则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">keycode</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">虚拟键码。 按键被触发返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-await_time">
+<div class="api-header">
+<div><span class="api-name">await_time</span>
+ <span class="api-erb">AWAIT</span>
+</div>
+<div class="api-sig">await_time(ms: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>让出 UI 线程指定毫秒数（AWAIT 指令的 Python 封装）。</p>
+<p>非阻塞式等待，期间允许 UI 更新和消息处理。</p>
+<p>Parameters
+----------
+ms : int
+    等待时间，单位毫秒。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">ms</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">等待时间，单位毫秒。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-force_wait">
+<div class="api-header">
+<div><span class="api-name">force_wait</span>
+ <span class="api-erb">FORCEWAIT</span>
+</div>
+<div class="api-sig">force_wait() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制等待玩家按键（FORCEWAIT 指令的 Python 封装）。</p>
+<p>阻塞当前线程直到玩家按下任意键，此等待无法被跳过（skip-proof）。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-t_wait">
+<div class="api-header">
+<div><span class="api-name">t_wait</span>
+ <span class="api-erb">TWAIT</span>
+</div>
+<div class="api-sig">t_wait(time: int, allow_skip: bool = False) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>带超时的等待（TWAIT 指令的 Python 封装）。</p>
+<p>阻塞当前线程，在超时前或玩家按键时返回。</p>
+<p>Parameters
+----------
+time : int
+    超时时间，单位毫秒。
+allow_skip : bool, optional
+    若 ``True``，则玩家在超时前按键会提前结束等待（默认为 ``False``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">time</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">超时时间，单位毫秒。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">allow_skip</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True``，则玩家在超时前按键会提前结束等待（默认为 ``False``）。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>入力</h1>
+<div class="api-card" id="function-wait_input">
+<div class="api-header">
+<div><span class="api-name">wait_input</span>
+ <span class="api-erb">INPUT</span>
+</div>
+<div class="api-sig">wait_input() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入整数（INPUT 指令的 Python 封装）。</p>
+<p>阻塞当前线程，直到玩家在输入框中输入一个整数并确认。
+输入值会被引擎存入 ``RESULT`` 变量。</p>
+<p>Returns
+-------
+int
+    玩家输入的整数值；出错或 stub 模式下返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_str">
+<div class="api-header">
+<div><span class="api-name">wait_input_str</span>
+ <span class="api-erb">INPUTS</span>
+</div>
+<div class="api-sig">wait_input_str() -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入字符串（INPUTS 指令的 Python 封装）。</p>
+<p>阻塞当前线程，直到玩家在输入框中输入字符串并确认。
+输入值会被引擎存入 ``RESULTS`` 变量。</p>
+<p>Returns
+-------
+str
+    玩家输入的字符串；出错或 stub 模式下返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_one">
+<div class="api-header">
+<div><span class="api-name">wait_input_one</span>
+ <span class="api-erb">ONEINPUT</span>
+</div>
+<div class="api-sig">wait_input_one() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入单个数字（ONEINPUT 指令的 Python 封装）。</p>
+<p>只接受一位数字（``0`` ~ ``9``）的输入，适合制作数字选择菜单。</p>
+<p>Returns
+-------
+int
+    玩家输入的单个数字；出错返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-read_any_key">
+<div class="api-header">
+<div><span class="api-name">read_any_key</span>
+ <span class="api-erb">WAITKEY</span>
+</div>
+<div class="api-sig">read_any_key() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家按下任意键（WAITKEY 指令的 Python 封装）。</p>
+<p>阻塞当前线程，直到键盘或鼠标有任何输入。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-tinput">
+<div class="api-header">
+<div><span class="api-name">tinput</span>
+ <span class="api-erb">TINPUT</span>
+</div>
+<div class="api-sig">tinput(timeout: int, default_val: int = 0, one_input: bool = False, display_time: bool = True) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>带超时的整数输入（TINPUT 指令的 Python 封装）。</p>
+<p>在指定时间内等待玩家输入整数，超时后自动返回默认值。</p>
+<p>Parameters
+----------
+timeout : int
+    超时时间，单位毫秒。
+default_val : int, optional
+    超时后返回的默认值（默认为 ``0``）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个数字输入（相当于 ONETINPUT）。
+display_time : bool, optional
+    是否在屏幕上显示倒计时（默认为 ``True``）。</p>
+<p>Returns
+-------
+int
+    玩家输入的整数值，或超时后的 *default_val*。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">超时时间，单位毫秒。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default_val</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">超时后返回的默认值（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个数字输入（相当于 ONETINPUT）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">display_time</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否在屏幕上显示倒计时（默认为 ``True``）。 玩家输入的整数值，或超时后的 *default_val*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-tinputs">
+<div class="api-header">
+<div><span class="api-name">tinputs</span>
+ <span class="api-erb">TINPUTS</span>
+</div>
+<div class="api-sig">tinputs(timeout: int, default_str: str = '', one_input: bool = False, display_time: bool = True) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>带超时的字符串输入（TINPUTS 指令的 Python 封装）。</p>
+<p>在指定时间内等待玩家输入字符串，超时后自动返回默认值。</p>
+<p>Parameters
+----------
+timeout : int
+    超时时间，单位毫秒。
+default_str : str, optional
+    超时后返回的默认字符串（默认为空字符串）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个字符输入。
+display_time : bool, optional
+    是否在屏幕上显示倒计时（默认为 ``True``）。</p>
+<p>Returns
+-------
+str
+    玩家输入的字符串，或超时后的 *default_str*。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">超时时间，单位毫秒。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default_str</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">超时后返回的默认字符串（默认为空字符串）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个字符输入。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">display_time</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否在屏幕上显示倒计时（默认为 ``True``）。 玩家输入的字符串，或超时后的 *default_str*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-one_inputs">
+<div class="api-header">
+<div><span class="api-name">one_inputs</span>
+ <span class="api-erb">ONEINPUTS</span>
+</div>
+<div class="api-sig">one_inputs() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家输入单个字符（ONEINPUTS 指令的 Python 封装）。</p>
+<p>只接受一个字符的输入，返回该字符的整数编码。</p>
+<p>Returns
+-------
+int
+    输入字符的编码值；出错返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-input_any">
+<div class="api-header">
+<div><span class="api-name">input_any</span>
+ <span class="api-erb">INPUTANY</span>
+</div>
+<div class="api-sig">input_any() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>接受任意类型输入并返回整数（INPUTANY 指令的 Python 封装）。</p>
+<p>允许输入整数或字符串，若输入为字符串则返回 ``0``。</p>
+<p>Returns
+-------
+int
+    输入的整数值，或字符串输入时返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-input_any_str">
+<div class="api-header">
+<div><span class="api-name">input_any_str</span>
+ <span class="api-erb">INPUTANY</span>
+</div>
+<div class="api-sig">input_any_str() -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>接受任意类型输入并返回字符串（INPUTANY 指令的 Python 封装，字符串版）。</p>
+<p>允许输入整数或字符串，若输入为整数则转换为十进制字符串。</p>
+<p>Returns
+-------
+str
+    输入的字符串值，或整数输入时的字符串表示。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-input_mouse_key">
+<div class="api-header">
+<div><span class="api-name">input_mouse_key</span>
+ <span class="api-erb">INPUTMOUSEKEY</span>
+</div>
+<div class="api-sig">input_mouse_key(timeout: int = 0) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取原始的鼠标/键盘输入码（INPUTMOUSEKEY 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+timeout : int, optional
+    超时时间（单位毫秒）；``0`` 表示无限等待（默认为 ``0``）。</p>
+<p>Returns
+-------
+int
+    鼠标按键或键盘按键的原始编码值。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">超时时间（单位毫秒）；``0`` 表示无限等待（默认为 ``0``）。 鼠标按键或键盘按键的原始编码值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_button">
+<div class="api-header">
+<div><span class="api-name">wait_input_button</span>
+ <span class="api-erb">ONEBINPUT</span>
+</div>
+<div class="api-sig">wait_input_button(default_val: int = 0, mouse: bool = False, one_input: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家点击整数型按钮（BINPUT / ONEBINPUT 指令的 Python 封装）。</p>
+<p>扫描屏幕上当前显示的所有整数型按钮（``PRINTBUTTON`` 生成的按钮），
+等待玩家点击其中一个。如果屏幕上没有任何整数按钮，立即返回 *default_val*。</p>
+<p>Parameters
+----------
+default_val : int, optional
+    无可用按钮时返回的默认值（默认为 ``0``）。
+mouse : bool, optional
+    是否允许鼠标点击按钮（默认为 ``False``，仅键盘选择）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个数字快捷选择（ONEBINPUT 行为）。</p>
+<p>Returns
+-------
+int
+    被点击按钮对应的整数值，或 *default_val*。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">default_val</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">无可用按钮时返回的默认值（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">mouse</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否允许鼠标点击按钮（默认为 ``False``，仅键盘选择）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个数字快捷选择（ONEBINPUT 行为）。 被点击按钮对应的整数值，或 *default_val*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-wait_input_button_str">
+<div class="api-header">
+<div><span class="api-name">wait_input_button_str</span>
+ <span class="api-erb">ONEBINPUTS</span>
+</div>
+<div class="api-sig">wait_input_button_str(default_str: str = '', mouse: bool = False, one_input: bool = False) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>等待玩家点击字符串型按钮（BINPUTS / ONEBINPUTS 指令的 Python 封装）。</p>
+<p>扫描屏幕上当前显示的所有字符串型按钮，等待玩家点击其中一个。
+如果屏幕上没有任何字符串按钮，立即返回 *default_str*。</p>
+<p>Parameters
+----------
+default_str : str, optional
+    无可用按钮时返回的默认字符串（默认为空字符串）。
+mouse : bool, optional
+    是否允许鼠标点击按钮（默认为 ``False``）。
+one_input : bool, optional
+    若 ``True`` 则只接受单个字符快捷选择。</p>
+<p>Returns
+-------
+str
+    被点击按钮对应的字符串值，或 *default_str*。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">default_str</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">无可用按钮时返回的默认字符串（默认为空字符串）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">mouse</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否允许鼠标点击按钮（默认为 ``False``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">one_input</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True`` 则只接受单个字符快捷选择。 被点击按钮对应的字符串值，或 *default_str*。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-mouse_x">
+<div class="api-header">
+<div><span class="api-name">mouse_x</span>
+ <span class="api-erb">MOUSEX</span>
+</div>
+<div class="api-sig">mouse_x() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取鼠标在窗口中的 X 坐标（MOUSEX 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    鼠标光标相对于窗口客户区的水平像素坐标。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-mouse_y">
+<div class="api-header">
+<div><span class="api-name">mouse_y</span>
+ <span class="api-erb">MOUSEY</span>
+</div>
+<div class="api-sig">mouse_y() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取鼠标在窗口中的 Y 坐标（MOUSEY 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    鼠标光标相对于窗口客户区的垂直像素坐标。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-mouse_b">
+<div class="api-header">
+<div><span class="api-name">mouse_b</span>
+ <span class="api-erb">MOUSEB</span>
+</div>
+<div class="api-sig">mouse_b() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取鼠标按键状态（MOUSEB 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    当前鼠标按键状态的位掩码值（与 ``Control.MouseButtons`` 等价）。
+    常见值：``1`` = 左键，``2`` = 右键，``4`` = 中键。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-client_width">
+<div class="api-header">
+<div><span class="api-name">client_width</span>
+ <span class="api-erb">CLIENTWIDTH</span>
+</div>
+<div class="api-sig">client_width() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取窗口客户区宽度（CLIENTWIDTH 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    窗口客户区的宽度（像素）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-client_height">
+<div class="api-header">
+<div><span class="api-name">client_height</span>
+ <span class="api-erb">CLIENTHEIGHT</span>
+</div>
+<div class="api-sig">client_height() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取窗口客户区高度（CLIENTHEIGHT 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    窗口客户区的高度（像素）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_key">
+<div class="api-header">
+<div><span class="api-name">get_key</span>
+ <span class="api-erb">GETKEY</span>
+</div>
+<div class="api-sig">get_key(keycode: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定按键是否被按下（GETKEY 指令的 Python 封装）。</p>
+<p>检测当前时刻键盘上某个虚拟键码对应的按键是否处于按下状态。</p>
+<p>Parameters
+----------
+keycode : int
+    虚拟键码（Virtual-Key Code），例如 ``13`` 是回车键，``27`` 是 ESC。</p>
+<p>Returns
+-------
+int
+    按键被按住返回 ``1``，否则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">keycode</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">虚拟键码（Virtual-Key Code），例如 ``13`` 是回车键，``27`` 是 ESC。 按键被按住返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_key_triggered">
+<div class="api-header">
+<div><span class="api-name">get_key_triggered</span>
+ <span class="api-erb">GETKEYTRIGGERED</span>
+</div>
+<div class="api-sig">get_key_triggered(keycode: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定按键是否被触发（GETKEYTRIGGERED 指令的 Python 封装）。</p>
+<p>与 ``get_key`` 的区别在于检测的是&quot;触发&quot;状态（切换位），
+即按键从释放到按下的那次转变。</p>
+<p>Parameters
+----------
+keycode : int
+    虚拟键码。</p>
+<p>Returns
+-------
+int
+    按键被触发返回 ``1``，否则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">keycode</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">虚拟键码。 按键被触发返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-await_time">
+<div class="api-header">
+<div><span class="api-name">await_time</span>
+ <span class="api-erb">AWAIT</span>
+</div>
+<div class="api-sig">await_time(ms: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>让出 UI 线程指定毫秒数（AWAIT 指令的 Python 封装）。</p>
+<p>非阻塞式等待，期间允许 UI 更新和消息处理。</p>
+<p>Parameters
+----------
+ms : int
+    等待时间，单位毫秒。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">ms</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">等待时间，单位毫秒。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-force_wait">
+<div class="api-header">
+<div><span class="api-name">force_wait</span>
+ <span class="api-erb">FORCEWAIT</span>
+</div>
+<div class="api-sig">force_wait() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制等待玩家按键（FORCEWAIT 指令的 Python 封装）。</p>
+<p>阻塞当前线程直到玩家按下任意键，此等待无法被跳过（skip-proof）。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-t_wait">
+<div class="api-header">
+<div><span class="api-name">t_wait</span>
+ <span class="api-erb">TWAIT</span>
+</div>
+<div class="api-sig">t_wait(time: int, allow_skip: bool = False) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>带超时的等待（TWAIT 指令的 Python 封装）。</p>
+<p>阻塞当前线程，在超时前或玩家按键时返回。</p>
+<p>Parameters
+----------
+time : int
+    超时时间，单位毫秒。
+allow_skip : bool, optional
+    若 ``True``，则玩家在超时前按键会提前结束等待（默认为 ``False``）。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">time</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">超时时间，单位毫秒。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">allow_skip</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若 ``True``，则玩家在超时前按键会提前结束等待（默认为 ``False``）。</p></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "wait_input", "desc": "等待玩家输入整数（INPUT 指令的 Python 封装）。\n\n阻塞当前线程，直到玩家在输入框中输入一个整数并确认。\n输入值会被引擎存入 ``RESULT`` ", "url": "./input.html#function-wait_input"}, {"name": "wait_input_str", "desc": "等待玩家输入字符串（INPUTS 指令的 Python 封装）。\n\n阻塞当前线程，直到玩家在输入框中输入字符串并确认。\n输入值会被引擎存入 ``RESULTS`", "url": "./input.html#function-wait_input_str"}, {"name": "wait_input_one", "desc": "等待玩家输入单个数字（ONEINPUT 指令的 Python 封装）。\n\n只接受一位数字（``0`` ~ ``9``）的输入，适合制作数字选择菜单。\n\nRetu", "url": "./input.html#function-wait_input_one"}, {"name": "read_any_key", "desc": "等待玩家按下任意键（WAITKEY 指令的 Python 封装）。\n\n阻塞当前线程，直到键盘或鼠标有任何输入。\n\nReturns\n-------\nNone", "url": "./input.html#function-read_any_key"}, {"name": "tinput", "desc": "带超时的整数输入（TINPUT 指令的 Python 封装）。\n\n在指定时间内等待玩家输入整数，超时后自动返回默认值。\n\nParameters\n--------", "url": "./input.html#function-tinput"}, {"name": "tinputs", "desc": "带超时的字符串输入（TINPUTS 指令的 Python 封装）。\n\n在指定时间内等待玩家输入字符串，超时后自动返回默认值。\n\nParameters\n-----", "url": "./input.html#function-tinputs"}, {"name": "one_inputs", "desc": "等待玩家输入单个字符（ONEINPUTS 指令的 Python 封装）。\n\n只接受一个字符的输入，返回该字符的整数编码。\n\nReturns\n-------\nin", "url": "./input.html#function-one_inputs"}, {"name": "input_any", "desc": "接受任意类型输入并返回整数（INPUTANY 指令的 Python 封装）。\n\n允许输入整数或字符串，若输入为字符串则返回 ``0``。\n\nReturns\n--", "url": "./input.html#function-input_any"}, {"name": "input_any_str", "desc": "接受任意类型输入并返回字符串（INPUTANY 指令的 Python 封装，字符串版）。\n\n允许输入整数或字符串，若输入为整数则转换为十进制字符串。\n\nRetu", "url": "./input.html#function-input_any_str"}, {"name": "input_mouse_key", "desc": "获取原始的鼠标/键盘输入码（INPUTMOUSEKEY 指令的 Python 封装）。\n\nParameters\n----------\ntimeout : int", "url": "./input.html#function-input_mouse_key"}, {"name": "wait_input_button", "desc": "等待玩家点击整数型按钮（BINPUT / ONEBINPUT 指令的 Python 封装）。\n\n扫描屏幕上当前显示的所有整数型按钮（``PRINTBUTTON`", "url": "./input.html#function-wait_input_button"}, {"name": "wait_input_button_str", "desc": "等待玩家点击字符串型按钮（BINPUTS / ONEBINPUTS 指令的 Python 封装）。\n\n扫描屏幕上当前显示的所有字符串型按钮，等待玩家点击其中一个", "url": "./input.html#function-wait_input_button_str"}, {"name": "mouse_x", "desc": "获取鼠标在窗口中的 X 坐标（MOUSEX 指令的 Python 封装）。\n\nReturns\n-------\nint\n    鼠标光标相对于窗口客户区的水平像素", "url": "./input.html#function-mouse_x"}, {"name": "mouse_y", "desc": "获取鼠标在窗口中的 Y 坐标（MOUSEY 指令的 Python 封装）。\n\nReturns\n-------\nint\n    鼠标光标相对于窗口客户区的垂直像素", "url": "./input.html#function-mouse_y"}, {"name": "mouse_b", "desc": "获取鼠标按键状态（MOUSEB 指令的 Python 封装）。\n\nReturns\n-------\nint\n    当前鼠标按键状态的位掩码值（与 ``Contr", "url": "./input.html#function-mouse_b"}, {"name": "client_width", "desc": "获取窗口客户区宽度（CLIENTWIDTH 指令的 Python 封装）。\n\nReturns\n-------\nint\n    窗口客户区的宽度（像素）。", "url": "./input.html#function-client_width"}, {"name": "client_height", "desc": "获取窗口客户区高度（CLIENTHEIGHT 指令的 Python 封装）。\n\nReturns\n-------\nint\n    窗口客户区的高度（像素）。", "url": "./input.html#function-client_height"}, {"name": "get_key", "desc": "检查指定按键是否被按下（GETKEY 指令的 Python 封装）。\n\n检测当前时刻键盘上某个虚拟键码对应的按键是否处于按下状态。\n\nParameters\n--", "url": "./input.html#function-get_key"}, {"name": "get_key_triggered", "desc": "检查指定按键是否被触发（GETKEYTRIGGERED 指令的 Python 封装）。\n\n与 ``get_key`` 的区别在于检测的是\"触发\"状态（切换位），", "url": "./input.html#function-get_key_triggered"}, {"name": "await_time", "desc": "让出 UI 线程指定毫秒数（AWAIT 指令的 Python 封装）。\n\n非阻塞式等待，期间允许 UI 更新和消息处理。\n\nParameters\n-------", "url": "./input.html#function-await_time"}, {"name": "force_wait", "desc": "强制等待玩家按键（FORCEWAIT 指令的 Python 封装）。\n\n阻塞当前线程直到玩家按下任意键，此等待无法被跳过（skip-proof）。\n\nRetur", "url": "./input.html#function-force_wait"}, {"name": "t_wait", "desc": "带超时的等待（TWAIT 指令的 Python 封装）。\n\n阻塞当前线程，在超时前或玩家按键时返回。\n\nParameters\n----------\ntime :", "url": "./input.html#function-t_wait"}, {"name": "wait_input", "desc": "等待玩家输入整数（INPUT 指令的 Python 封装）。\n\n阻塞当前线程，直到玩家在输入框中输入一个整数并确认。\n输入值会被引擎存入 ``RESULT`` ", "url": "./input.html#function-wait_input"}, {"name": "wait_input_str", "desc": "等待玩家输入字符串（INPUTS 指令的 Python 封装）。\n\n阻塞当前线程，直到玩家在输入框中输入字符串并确认。\n输入值会被引擎存入 ``RESULTS`", "url": "./input.html#function-wait_input_str"}, {"name": "wait_input_one", "desc": "等待玩家输入单个数字（ONEINPUT 指令的 Python 封装）。\n\n只接受一位数字（``0`` ~ ``9``）的输入，适合制作数字选择菜单。\n\nRetu", "url": "./input.html#function-wait_input_one"}, {"name": "read_any_key", "desc": "等待玩家按下任意键（WAITKEY 指令的 Python 封装）。\n\n阻塞当前线程，直到键盘或鼠标有任何输入。\n\nReturns\n-------\nNone", "url": "./input.html#function-read_any_key"}, {"name": "tinput", "desc": "带超时的整数输入（TINPUT 指令的 Python 封装）。\n\n在指定时间内等待玩家输入整数，超时后自动返回默认值。\n\nParameters\n--------", "url": "./input.html#function-tinput"}, {"name": "tinputs", "desc": "带超时的字符串输入（TINPUTS 指令的 Python 封装）。\n\n在指定时间内等待玩家输入字符串，超时后自动返回默认值。\n\nParameters\n-----", "url": "./input.html#function-tinputs"}, {"name": "one_inputs", "desc": "等待玩家输入单个字符（ONEINPUTS 指令的 Python 封装）。\n\n只接受一个字符的输入，返回该字符的整数编码。\n\nReturns\n-------\nin", "url": "./input.html#function-one_inputs"}, {"name": "input_any", "desc": "接受任意类型输入并返回整数（INPUTANY 指令的 Python 封装）。\n\n允许输入整数或字符串，若输入为字符串则返回 ``0``。\n\nReturns\n--", "url": "./input.html#function-input_any"}, {"name": "input_any_str", "desc": "接受任意类型输入并返回字符串（INPUTANY 指令的 Python 封装，字符串版）。\n\n允许输入整数或字符串，若输入为整数则转换为十进制字符串。\n\nRetu", "url": "./input.html#function-input_any_str"}, {"name": "input_mouse_key", "desc": "获取原始的鼠标/键盘输入码（INPUTMOUSEKEY 指令的 Python 封装）。\n\nParameters\n----------\ntimeout : int", "url": "./input.html#function-input_mouse_key"}, {"name": "wait_input_button", "desc": "等待玩家点击整数型按钮（BINPUT / ONEBINPUT 指令的 Python 封装）。\n\n扫描屏幕上当前显示的所有整数型按钮（``PRINTBUTTON`", "url": "./input.html#function-wait_input_button"}, {"name": "wait_input_button_str", "desc": "等待玩家点击字符串型按钮（BINPUTS / ONEBINPUTS 指令的 Python 封装）。\n\n扫描屏幕上当前显示的所有字符串型按钮，等待玩家点击其中一个", "url": "./input.html#function-wait_input_button_str"}, {"name": "mouse_x", "desc": "获取鼠标在窗口中的 X 坐标（MOUSEX 指令的 Python 封装）。\n\nReturns\n-------\nint\n    鼠标光标相对于窗口客户区的水平像素", "url": "./input.html#function-mouse_x"}, {"name": "mouse_y", "desc": "获取鼠标在窗口中的 Y 坐标（MOUSEY 指令的 Python 封装）。\n\nReturns\n-------\nint\n    鼠标光标相对于窗口客户区的垂直像素", "url": "./input.html#function-mouse_y"}, {"name": "mouse_b", "desc": "获取鼠标按键状态（MOUSEB 指令的 Python 封装）。\n\nReturns\n-------\nint\n    当前鼠标按键状态的位掩码值（与 ``Contr", "url": "./input.html#function-mouse_b"}, {"name": "client_width", "desc": "获取窗口客户区宽度（CLIENTWIDTH 指令的 Python 封装）。\n\nReturns\n-------\nint\n    窗口客户区的宽度（像素）。", "url": "./input.html#function-client_width"}, {"name": "client_height", "desc": "获取窗口客户区高度（CLIENTHEIGHT 指令的 Python 封装）。\n\nReturns\n-------\nint\n    窗口客户区的高度（像素）。", "url": "./input.html#function-client_height"}, {"name": "get_key", "desc": "检查指定按键是否被按下（GETKEY 指令的 Python 封装）。\n\n检测当前时刻键盘上某个虚拟键码对应的按键是否处于按下状态。\n\nParameters\n--", "url": "./input.html#function-get_key"}, {"name": "get_key_triggered", "desc": "检查指定按键是否被触发（GETKEYTRIGGERED 指令的 Python 封装）。\n\n与 ``get_key`` 的区别在于检测的是\"触发\"状态（切换位），", "url": "./input.html#function-get_key_triggered"}, {"name": "await_time", "desc": "让出 UI 线程指定毫秒数（AWAIT 指令的 Python 封装）。\n\n非阻塞式等待，期间允许 UI 更新和消息处理。\n\nParameters\n-------", "url": "./input.html#function-await_time"}, {"name": "force_wait", "desc": "强制等待玩家按键（FORCEWAIT 指令的 Python 封装）。\n\n阻塞当前线程直到玩家按下任意键，此等待无法被跳过（skip-proof）。\n\nRetur", "url": "./input.html#function-force_wait"}, {"name": "t_wait", "desc": "带超时的等待（TWAIT 指令的 Python 封装）。\n\n阻塞当前线程，在超时前或玩家按键时返回。\n\nParameters\n----------\ntime :", "url": "./input.html#function-t_wait"}, {"name": "wait_input", "desc": "等待玩家输入整数（INPUT 指令的 Python 封装）。\n\n阻塞当前线程，直到玩家在输入框中输入一个整数并确认。\n输入值会被引擎存入 ``RESULT`` ", "url": "./input.html#function-wait_input"}, {"name": "wait_input_str", "desc": "等待玩家输入字符串（INPUTS 指令的 Python 封装）。\n\n阻塞当前线程，直到玩家在输入框中输入字符串并确认。\n输入值会被引擎存入 ``RESULTS`", "url": "./input.html#function-wait_input_str"}, {"name": "wait_input_one", "desc": "等待玩家输入单个数字（ONEINPUT 指令的 Python 封装）。\n\n只接受一位数字（``0`` ~ ``9``）的输入，适合制作数字选择菜单。\n\nRetu", "url": "./input.html#function-wait_input_one"}, {"name": "read_any_key", "desc": "等待玩家按下任意键（WAITKEY 指令的 Python 封装）。\n\n阻塞当前线程，直到键盘或鼠标有任何输入。\n\nReturns\n-------\nNone", "url": "./input.html#function-read_any_key"}, {"name": "tinput", "desc": "带超时的整数输入（TINPUT 指令的 Python 封装）。\n\n在指定时间内等待玩家输入整数，超时后自动返回默认值。\n\nParameters\n--------", "url": "./input.html#function-tinput"}, {"name": "tinputs", "desc": "带超时的字符串输入（TINPUTS 指令的 Python 封装）。\n\n在指定时间内等待玩家输入字符串，超时后自动返回默认值。\n\nParameters\n-----", "url": "./input.html#function-tinputs"}, {"name": "one_inputs", "desc": "等待玩家输入单个字符（ONEINPUTS 指令的 Python 封装）。\n\n只接受一个字符的输入，返回该字符的整数编码。\n\nReturns\n-------\nin", "url": "./input.html#function-one_inputs"}, {"name": "input_any", "desc": "接受任意类型输入并返回整数（INPUTANY 指令的 Python 封装）。\n\n允许输入整数或字符串，若输入为字符串则返回 ``0``。\n\nReturns\n--", "url": "./input.html#function-input_any"}, {"name": "input_any_str", "desc": "接受任意类型输入并返回字符串（INPUTANY 指令的 Python 封装，字符串版）。\n\n允许输入整数或字符串，若输入为整数则转换为十进制字符串。\n\nRetu", "url": "./input.html#function-input_any_str"}, {"name": "input_mouse_key", "desc": "获取原始的鼠标/键盘输入码（INPUTMOUSEKEY 指令的 Python 封装）。\n\nParameters\n----------\ntimeout : int", "url": "./input.html#function-input_mouse_key"}, {"name": "wait_input_button", "desc": "等待玩家点击整数型按钮（BINPUT / ONEBINPUT 指令的 Python 封装）。\n\n扫描屏幕上当前显示的所有整数型按钮（``PRINTBUTTON`", "url": "./input.html#function-wait_input_button"}, {"name": "wait_input_button_str", "desc": "等待玩家点击字符串型按钮（BINPUTS / ONEBINPUTS 指令的 Python 封装）。\n\n扫描屏幕上当前显示的所有字符串型按钮，等待玩家点击其中一个", "url": "./input.html#function-wait_input_button_str"}, {"name": "mouse_x", "desc": "获取鼠标在窗口中的 X 坐标（MOUSEX 指令的 Python 封装）。\n\nReturns\n-------\nint\n    鼠标光标相对于窗口客户区的水平像素", "url": "./input.html#function-mouse_x"}, {"name": "mouse_y", "desc": "获取鼠标在窗口中的 Y 坐标（MOUSEY 指令的 Python 封装）。\n\nReturns\n-------\nint\n    鼠标光标相对于窗口客户区的垂直像素", "url": "./input.html#function-mouse_y"}, {"name": "mouse_b", "desc": "获取鼠标按键状态（MOUSEB 指令的 Python 封装）。\n\nReturns\n-------\nint\n    当前鼠标按键状态的位掩码值（与 ``Contr", "url": "./input.html#function-mouse_b"}, {"name": "client_width", "desc": "获取窗口客户区宽度（CLIENTWIDTH 指令的 Python 封装）。\n\nReturns\n-------\nint\n    窗口客户区的宽度（像素）。", "url": "./input.html#function-client_width"}, {"name": "client_height", "desc": "获取窗口客户区高度（CLIENTHEIGHT 指令的 Python 封装）。\n\nReturns\n-------\nint\n    窗口客户区的高度（像素）。", "url": "./input.html#function-client_height"}, {"name": "get_key", "desc": "检查指定按键是否被按下（GETKEY 指令的 Python 封装）。\n\n检测当前时刻键盘上某个虚拟键码对应的按键是否处于按下状态。\n\nParameters\n--", "url": "./input.html#function-get_key"}, {"name": "get_key_triggered", "desc": "检查指定按键是否被触发（GETKEYTRIGGERED 指令的 Python 封装）。\n\n与 ``get_key`` 的区别在于检测的是\"触发\"状态（切换位），", "url": "./input.html#function-get_key_triggered"}, {"name": "await_time", "desc": "让出 UI 线程指定毫秒数（AWAIT 指令的 Python 封装）。\n\n非阻塞式等待，期间允许 UI 更新和消息处理。\n\nParameters\n-------", "url": "./input.html#function-await_time"}, {"name": "force_wait", "desc": "强制等待玩家按键（FORCEWAIT 指令的 Python 封装）。\n\n阻塞当前线程直到玩家按下任意键，此等待无法被跳过（skip-proof）。\n\nRetur", "url": "./input.html#function-force_wait"}, {"name": "t_wait", "desc": "带超时的等待（TWAIT 指令的 Python 封装）。\n\n阻塞当前线程，在超时前或玩家按键时返回。\n\nParameters\n----------\ntime :", "url": "./input.html#function-t_wait"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — CSV 数据</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / CSV 数据</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>CSV 数据</h1>
+<div class="api-card" id="function-csv_exist">
+<div class="api-header">
+<div><span class="api-name">csv_exist</span>
+ <span class="api-erb">EXISTCSV</span>
+</div>
+<div class="api-sig">csv_exist(chara_no: int, sp: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定编号的 CSV 角色模板是否存在（EXISTCSV 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号（CSVNO）。
+sp : bool, optional
+    是否检查 SP 角色模板（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    如果模板存在返回 ``1``，否则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号（CSVNO）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sp</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否检查 SP 角色模板（默认为 ``False``）。 如果模板存在返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_name">
+<div class="api-header">
+<div><span class="api-name">csv_name</span>
+</div>
+<div class="api-sig">csv_name(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的名称（NAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    角色名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 角色名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_callname">
+<div class="api-header">
+<div><span class="api-name">csv_callname</span>
+</div>
+<div class="api-sig">csv_callname(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的称呼（CALLNAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    角色称呼字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 角色称呼字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_nickname">
+<div class="api-header">
+<div><span class="api-name">csv_nickname</span>
+</div>
+<div class="api-sig">csv_nickname(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的昵称（NICKNAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    角色昵称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 角色昵称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_mastername">
+<div class="api-header">
+<div><span class="api-name">csv_mastername</span>
+</div>
+<div class="api-sig">csv_mastername(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的主名称（MASTERNAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    主名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 主名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_cstr">
+<div class="api-header">
+<div><span class="api-name">csv_cstr</span>
+</div>
+<div class="api-sig">csv_cstr(chara_no: int, index: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的字符串型自定义数据（CSTR 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    CSTR 数组索引。</p>
+<p>Returns
+-------
+str
+    CSTR 字段值；若不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">CSTR 数组索引。 CSTR 字段值；若不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_base">
+<div class="api-header">
+<div><span class="api-name">csv_base</span>
+</div>
+<div class="api-sig">csv_base(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的基础属性值（BASE 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    BASE 数组索引。</p>
+<p>Returns
+-------
+int
+    BASE 字段值；若不存在则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">BASE 数组索引。 BASE 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_abl">
+<div class="api-header">
+<div><span class="api-name">csv_abl</span>
+</div>
+<div class="api-sig">csv_abl(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的能力值（ABL 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    ABL 数组索引。</p>
+<p>Returns
+-------
+int
+    ABL 字段值；若不存在则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">ABL 数组索引。 ABL 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_talent">
+<div class="api-header">
+<div><span class="api-name">csv_talent</span>
+</div>
+<div class="api-sig">csv_talent(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的天赋值（TALENT 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    TALENT 数组索引。</p>
+<p>Returns
+-------
+int
+    TALENT 字段值；若不存在则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">TALENT 数组索引。 TALENT 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_exp">
+<div class="api-header">
+<div><span class="api-name">csv_exp</span>
+</div>
+<div class="api-sig">csv_exp(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的经验值（EXP 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    EXP 数组索引。</p>
+<p>Returns
+-------
+int
+    EXP 字段值；若不存在则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">EXP 数组索引。 EXP 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_mark">
+<div class="api-header">
+<div><span class="api-name">csv_mark</span>
+</div>
+<div class="api-sig">csv_mark(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的刻印值（MARK 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    MARK 数组索引。</p>
+<p>Returns
+-------
+int
+    MARK 字段值；若不存在则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">MARK 数组索引。 MARK 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_juel">
+<div class="api-header">
+<div><span class="api-name">csv_juel</span>
+</div>
+<div class="api-sig">csv_juel(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的珠值（JUEL 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    JUEL 数组索引。</p>
+<p>Returns
+-------
+int
+    JUEL 字段值；若不存在则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">JUEL 数组索引。 JUEL 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_relation">
+<div class="api-header">
+<div><span class="api-name">csv_relation</span>
+</div>
+<div class="api-sig">csv_relation(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的关系值（RELATION 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    RELATION 数组索引。</p>
+<p>Returns
+-------
+int
+    RELATION 字段值；若不存在则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">RELATION 数组索引。 RELATION 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_cflag">
+<div class="api-header">
+<div><span class="api-name">csv_cflag</span>
+</div>
+<div class="api-sig">csv_cflag(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的角色标志值（CFLAG 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    CFLAG 数组索引。</p>
+<p>Returns
+-------
+int
+    CFLAG 字段值；若不存在则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">CFLAG 数组索引。 CFLAG 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>CSV Data</h1>
+<div class="api-card" id="function-csv_exist">
+<div class="api-header">
+<div><span class="api-name">csv_exist</span>
+ <span class="api-erb">EXISTCSV</span>
+</div>
+<div class="api-sig">csv_exist(chara_no: int, sp: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定编号的 CSV 角色模板是否存在（EXISTCSV 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号（CSVNO）。
+sp : bool, optional
+    是否检查 SP 角色模板（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    如果模板存在返回 ``1``，否则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号（CSVNO）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sp</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否检查 SP 角色模板（默认为 ``False``）。 如果模板存在返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_name">
+<div class="api-header">
+<div><span class="api-name">csv_name</span>
+</div>
+<div class="api-sig">csv_name(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的名称（NAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    角色名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 角色名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_callname">
+<div class="api-header">
+<div><span class="api-name">csv_callname</span>
+</div>
+<div class="api-sig">csv_callname(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的称呼（CALLNAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    角色称呼字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 角色称呼字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_nickname">
+<div class="api-header">
+<div><span class="api-name">csv_nickname</span>
+</div>
+<div class="api-sig">csv_nickname(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的昵称（NICKNAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    角色昵称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 角色昵称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_mastername">
+<div class="api-header">
+<div><span class="api-name">csv_mastername</span>
+</div>
+<div class="api-sig">csv_mastername(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的主名称（MASTERNAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    主名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 主名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_cstr">
+<div class="api-header">
+<div><span class="api-name">csv_cstr</span>
+</div>
+<div class="api-sig">csv_cstr(chara_no: int, index: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的字符串型自定义数据（CSTR 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    CSTR 数组索引。</p>
+<p>Returns
+-------
+str
+    CSTR 字段值；若不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">CSTR 数组索引。 CSTR 字段值；若不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_base">
+<div class="api-header">
+<div><span class="api-name">csv_base</span>
+</div>
+<div class="api-sig">csv_base(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的基础属性值（BASE 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    BASE 数组索引。</p>
+<p>Returns
+-------
+int
+    BASE 字段值；若不存在则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">BASE 数组索引。 BASE 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_abl">
+<div class="api-header">
+<div><span class="api-name">csv_abl</span>
+</div>
+<div class="api-sig">csv_abl(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的能力值（ABL 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    ABL 数组索引。</p>
+<p>Returns
+-------
+int
+    ABL 字段值；若不存在则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">ABL 数组索引。 ABL 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_talent">
+<div class="api-header">
+<div><span class="api-name">csv_talent</span>
+</div>
+<div class="api-sig">csv_talent(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的天赋值（TALENT 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    TALENT 数组索引。</p>
+<p>Returns
+-------
+int
+    TALENT 字段值；若不存在则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">TALENT 数组索引。 TALENT 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_exp">
+<div class="api-header">
+<div><span class="api-name">csv_exp</span>
+</div>
+<div class="api-sig">csv_exp(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的经验值（EXP 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    EXP 数组索引。</p>
+<p>Returns
+-------
+int
+    EXP 字段值；若不存在则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">EXP 数组索引。 EXP 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_mark">
+<div class="api-header">
+<div><span class="api-name">csv_mark</span>
+</div>
+<div class="api-sig">csv_mark(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的刻印值（MARK 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    MARK 数组索引。</p>
+<p>Returns
+-------
+int
+    MARK 字段值；若不存在则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">MARK 数组索引。 MARK 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_juel">
+<div class="api-header">
+<div><span class="api-name">csv_juel</span>
+</div>
+<div class="api-sig">csv_juel(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的珠值（JUEL 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    JUEL 数组索引。</p>
+<p>Returns
+-------
+int
+    JUEL 字段值；若不存在则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">JUEL 数组索引。 JUEL 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_relation">
+<div class="api-header">
+<div><span class="api-name">csv_relation</span>
+</div>
+<div class="api-sig">csv_relation(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的关系值（RELATION 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    RELATION 数组索引。</p>
+<p>Returns
+-------
+int
+    RELATION 字段值；若不存在则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">RELATION 数组索引。 RELATION 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_cflag">
+<div class="api-header">
+<div><span class="api-name">csv_cflag</span>
+</div>
+<div class="api-sig">csv_cflag(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的角色标志值（CFLAG 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    CFLAG 数组索引。</p>
+<p>Returns
+-------
+int
+    CFLAG 字段值；若不存在则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">CFLAG 数组索引。 CFLAG 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>CSV データ</h1>
+<div class="api-card" id="function-csv_exist">
+<div class="api-header">
+<div><span class="api-name">csv_exist</span>
+ <span class="api-erb">EXISTCSV</span>
+</div>
+<div class="api-sig">csv_exist(chara_no: int, sp: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查指定编号的 CSV 角色模板是否存在（EXISTCSV 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号（CSVNO）。
+sp : bool, optional
+    是否检查 SP 角色模板（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    如果模板存在返回 ``1``，否则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号（CSVNO）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sp</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否检查 SP 角色模板（默认为 ``False``）。 如果模板存在返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_name">
+<div class="api-header">
+<div><span class="api-name">csv_name</span>
+</div>
+<div class="api-sig">csv_name(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的名称（NAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    角色名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 角色名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_callname">
+<div class="api-header">
+<div><span class="api-name">csv_callname</span>
+</div>
+<div class="api-sig">csv_callname(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的称呼（CALLNAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    角色称呼字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 角色称呼字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_nickname">
+<div class="api-header">
+<div><span class="api-name">csv_nickname</span>
+</div>
+<div class="api-sig">csv_nickname(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的昵称（NICKNAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    角色昵称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 角色昵称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_mastername">
+<div class="api-header">
+<div><span class="api-name">csv_mastername</span>
+</div>
+<div class="api-sig">csv_mastername(chara_no: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的主名称（MASTERNAME 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。</p>
+<p>Returns
+-------
+str
+    主名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。 主名称字符串；若模板不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_cstr">
+<div class="api-header">
+<div><span class="api-name">csv_cstr</span>
+</div>
+<div class="api-sig">csv_cstr(chara_no: int, index: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的字符串型自定义数据（CSTR 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    CSTR 数组索引。</p>
+<p>Returns
+-------
+str
+    CSTR 字段值；若不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">CSTR 数组索引。 CSTR 字段值；若不存在则返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_base">
+<div class="api-header">
+<div><span class="api-name">csv_base</span>
+</div>
+<div class="api-sig">csv_base(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的基础属性值（BASE 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    BASE 数组索引。</p>
+<p>Returns
+-------
+int
+    BASE 字段值；若不存在则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">BASE 数组索引。 BASE 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_abl">
+<div class="api-header">
+<div><span class="api-name">csv_abl</span>
+</div>
+<div class="api-sig">csv_abl(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的能力值（ABL 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    ABL 数组索引。</p>
+<p>Returns
+-------
+int
+    ABL 字段值；若不存在则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">ABL 数组索引。 ABL 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_talent">
+<div class="api-header">
+<div><span class="api-name">csv_talent</span>
+</div>
+<div class="api-sig">csv_talent(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的天赋值（TALENT 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    TALENT 数组索引。</p>
+<p>Returns
+-------
+int
+    TALENT 字段值；若不存在则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">TALENT 数组索引。 TALENT 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_exp">
+<div class="api-header">
+<div><span class="api-name">csv_exp</span>
+</div>
+<div class="api-sig">csv_exp(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的经验值（EXP 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    EXP 数组索引。</p>
+<p>Returns
+-------
+int
+    EXP 字段值；若不存在则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">EXP 数组索引。 EXP 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_mark">
+<div class="api-header">
+<div><span class="api-name">csv_mark</span>
+</div>
+<div class="api-sig">csv_mark(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的刻印值（MARK 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    MARK 数组索引。</p>
+<p>Returns
+-------
+int
+    MARK 字段值；若不存在则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">MARK 数组索引。 MARK 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_juel">
+<div class="api-header">
+<div><span class="api-name">csv_juel</span>
+</div>
+<div class="api-sig">csv_juel(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的珠值（JUEL 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    JUEL 数组索引。</p>
+<p>Returns
+-------
+int
+    JUEL 字段值；若不存在则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">JUEL 数组索引。 JUEL 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_relation">
+<div class="api-header">
+<div><span class="api-name">csv_relation</span>
+</div>
+<div class="api-sig">csv_relation(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的关系值（RELATION 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    RELATION 数组索引。</p>
+<p>Returns
+-------
+int
+    RELATION 字段值；若不存在则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">RELATION 数组索引。 RELATION 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-csv_cflag">
+<div class="api-header">
+<div><span class="api-name">csv_cflag</span>
+</div>
+<div class="api-sig">csv_cflag(chara_no: int, index: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取指定 CSV 角色的角色标志值（CFLAG 字段）。</p>
+<p>Parameters
+----------
+chara_no : int
+    角色在 CSV 中的编号。
+index : int
+    CFLAG 数组索引。</p>
+<p>Returns
+-------
+int
+    CFLAG 字段值；若不存在则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">chara_no</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">角色在 CSV 中的编号。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">index</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">CFLAG 数组索引。 CFLAG 字段值；若不存在则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "csv_exist", "desc": "检查指定编号的 CSV 角色模板是否存在（EXISTCSV 指令的 Python 封装）。\n\nParameters\n----------\nchara_no : ", "url": "./csv.html#function-csv_exist"}, {"name": "csv_name", "desc": "获取指定 CSV 角色的名称（NAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_name"}, {"name": "csv_callname", "desc": "获取指定 CSV 角色的称呼（CALLNAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中", "url": "./csv.html#function-csv_callname"}, {"name": "csv_nickname", "desc": "获取指定 CSV 角色的昵称（NICKNAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中", "url": "./csv.html#function-csv_nickname"}, {"name": "csv_mastername", "desc": "获取指定 CSV 角色的主名称（MASTERNAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CS", "url": "./csv.html#function-csv_mastername"}, {"name": "csv_cstr", "desc": "获取指定 CSV 角色的字符串型自定义数据（CSTR 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CS", "url": "./csv.html#function-csv_cstr"}, {"name": "csv_base", "desc": "获取指定 CSV 角色的基础属性值（BASE 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的", "url": "./csv.html#function-csv_base"}, {"name": "csv_abl", "desc": "获取指定 CSV 角色的能力值（ABL 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_abl"}, {"name": "csv_talent", "desc": "获取指定 CSV 角色的天赋值（TALENT 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的", "url": "./csv.html#function-csv_talent"}, {"name": "csv_exp", "desc": "获取指定 CSV 角色的经验值（EXP 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_exp"}, {"name": "csv_mark", "desc": "获取指定 CSV 角色的刻印值（MARK 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号", "url": "./csv.html#function-csv_mark"}, {"name": "csv_juel", "desc": "获取指定 CSV 角色的珠值（JUEL 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_juel"}, {"name": "csv_relation", "desc": "获取指定 CSV 角色的关系值（RELATION 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV ", "url": "./csv.html#function-csv_relation"}, {"name": "csv_cflag", "desc": "获取指定 CSV 角色的角色标志值（CFLAG 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中", "url": "./csv.html#function-csv_cflag"}, {"name": "csv_exist", "desc": "检查指定编号的 CSV 角色模板是否存在（EXISTCSV 指令的 Python 封装）。\n\nParameters\n----------\nchara_no : ", "url": "./csv.html#function-csv_exist"}, {"name": "csv_name", "desc": "获取指定 CSV 角色的名称（NAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_name"}, {"name": "csv_callname", "desc": "获取指定 CSV 角色的称呼（CALLNAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中", "url": "./csv.html#function-csv_callname"}, {"name": "csv_nickname", "desc": "获取指定 CSV 角色的昵称（NICKNAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中", "url": "./csv.html#function-csv_nickname"}, {"name": "csv_mastername", "desc": "获取指定 CSV 角色的主名称（MASTERNAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CS", "url": "./csv.html#function-csv_mastername"}, {"name": "csv_cstr", "desc": "获取指定 CSV 角色的字符串型自定义数据（CSTR 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CS", "url": "./csv.html#function-csv_cstr"}, {"name": "csv_base", "desc": "获取指定 CSV 角色的基础属性值（BASE 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的", "url": "./csv.html#function-csv_base"}, {"name": "csv_abl", "desc": "获取指定 CSV 角色的能力值（ABL 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_abl"}, {"name": "csv_talent", "desc": "获取指定 CSV 角色的天赋值（TALENT 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的", "url": "./csv.html#function-csv_talent"}, {"name": "csv_exp", "desc": "获取指定 CSV 角色的经验值（EXP 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_exp"}, {"name": "csv_mark", "desc": "获取指定 CSV 角色的刻印值（MARK 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号", "url": "./csv.html#function-csv_mark"}, {"name": "csv_juel", "desc": "获取指定 CSV 角色的珠值（JUEL 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_juel"}, {"name": "csv_relation", "desc": "获取指定 CSV 角色的关系值（RELATION 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV ", "url": "./csv.html#function-csv_relation"}, {"name": "csv_cflag", "desc": "获取指定 CSV 角色的角色标志值（CFLAG 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中", "url": "./csv.html#function-csv_cflag"}, {"name": "csv_exist", "desc": "检查指定编号的 CSV 角色模板是否存在（EXISTCSV 指令的 Python 封装）。\n\nParameters\n----------\nchara_no : ", "url": "./csv.html#function-csv_exist"}, {"name": "csv_name", "desc": "获取指定 CSV 角色的名称（NAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_name"}, {"name": "csv_callname", "desc": "获取指定 CSV 角色的称呼（CALLNAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中", "url": "./csv.html#function-csv_callname"}, {"name": "csv_nickname", "desc": "获取指定 CSV 角色的昵称（NICKNAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中", "url": "./csv.html#function-csv_nickname"}, {"name": "csv_mastername", "desc": "获取指定 CSV 角色的主名称（MASTERNAME 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CS", "url": "./csv.html#function-csv_mastername"}, {"name": "csv_cstr", "desc": "获取指定 CSV 角色的字符串型自定义数据（CSTR 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CS", "url": "./csv.html#function-csv_cstr"}, {"name": "csv_base", "desc": "获取指定 CSV 角色的基础属性值（BASE 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的", "url": "./csv.html#function-csv_base"}, {"name": "csv_abl", "desc": "获取指定 CSV 角色的能力值（ABL 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_abl"}, {"name": "csv_talent", "desc": "获取指定 CSV 角色的天赋值（TALENT 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的", "url": "./csv.html#function-csv_talent"}, {"name": "csv_exp", "desc": "获取指定 CSV 角色的经验值（EXP 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_exp"}, {"name": "csv_mark", "desc": "获取指定 CSV 角色的刻印值（MARK 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号", "url": "./csv.html#function-csv_mark"}, {"name": "csv_juel", "desc": "获取指定 CSV 角色的珠值（JUEL 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中的编号。", "url": "./csv.html#function-csv_juel"}, {"name": "csv_relation", "desc": "获取指定 CSV 角色的关系值（RELATION 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV ", "url": "./csv.html#function-csv_relation"}, {"name": "csv_cflag", "desc": "获取指定 CSV 角色的角色标志值（CFLAG 字段）。\n\nParameters\n----------\nchara_no : int\n    角色在 CSV 中", "url": "./csv.html#function-csv_cflag"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

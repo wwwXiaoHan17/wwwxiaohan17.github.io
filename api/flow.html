@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 流程控制</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 流程控制</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>流程控制</h1>
+<div class="api-card" id="function-begin">
+<div class="api-header">
+<div><span class="api-name">begin</span>
+ <span class="api-erb">BEGIN</span>
+</div>
+<div class="api-sig">begin(mode: BeginMode) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>切换到指定的游戏模式（BEGIN 指令的 Python 封装）。</p>
+<p>该函数会在下一个输入等待点安全地切换游戏模式。
+如果当前正处于输入等待状态，则会将模式切换请求入队，
+待当前输入处理完毕后再执行切换。</p>
+<p>Parameters
+----------
+mode : BeginMode
+    目标模式字符串，可选值包括：
+    - ``'title'``   — 标题画面
+    - ``'shop'``    — 商店
+    - ``'train'``   — 训练/调教
+    - ``'aftertrain'`` — 训练结束后
+    - ``'ablup'``   — 能力升级
+    - ``'turnend'`` — 回合结束
+    - ``'first'``   — 首次启动</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+begin_force : 强制切换模式，不等待输入点。
+force_begin : 立即切换模式并执行 BEGIN。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">mode</span><span class="param-required">必需</span><span class="param-type-tag">BeginMode</span></div><p class="param-desc-text">目标模式字符串，可选值包括： - ``'title'``   — 标题画面 - ``'shop'``    — 商店 - ``'train'``   — 训练/调教 - ``'aftertrain'`` — 训练结束后 - ``'ablup'``   — 能力升级 - ``'turnend'`` — 回合结束 - ``'first'``   — 首次启动</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-begin_force">
+<div class="api-header">
+<div><span class="api-name">begin_force</span>
+ <span class="api-erb">BEGIN</span>
+</div>
+<div class="api-sig">begin_force(mode: BeginMode) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制切换到指定游戏模式（BEGIN 指令的强制版）。</p>
+<p>与 ``begin`` 不同，此函数会强制中断当前流程并立即切换模式，
+不会等待输入等待点。</p>
+<p>Parameters
+----------
+mode : BeginMode
+    目标模式字符串，取值与 ``begin`` 相同。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">mode</span><span class="param-required">必需</span><span class="param-type-tag">BeginMode</span></div><p class="param-desc-text">目标模式字符串，取值与 ``begin`` 相同。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-call">
+<div class="api-header">
+<div><span class="api-name">call</span>
+ <span class="api-erb">CALL</span>
+</div>
+<div class="api-sig">call(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>调用指定的函数（CALL 指令的 Python 封装）。</p>
+<p>调用顺序：先尝试调用 Python 侧注册的同名函数，
+若未找到则回退到 ERB 脚本中的函数。</p>
+<p>Parameters
+----------
+func_name : str
+    要调用的函数名称。</p>
+<p>Returns
+-------
+bool
+    如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要调用的函数名称。 如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-call_event">
+<div class="api-header">
+<div><span class="api-name">call_event</span>
+</div>
+<div class="api-sig">call_event(event_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>调用指定的事件函数（CALL 事件指令的 Python 封装）。</p>
+<p>与 ``call`` 类似，但专用于调用事件类型的函数。</p>
+<p>Parameters
+----------
+event_name : str
+    要调用的事件函数名称。</p>
+<p>Returns
+-------
+bool
+    如果成功找到并执行了事件函数则返回 ``True``，否则返回 ``False``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">event_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要调用的事件函数名称。 如果成功找到并执行了事件函数则返回 ``True``，否则返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-quit">
+<div class="api-header">
+<div><span class="api-name">quit</span>
+ <span class="api-erb">QUIT</span>
+</div>
+<div class="api-sig">quit() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>正常退出游戏（QUIT 指令的 Python 封装）。</p>
+<p>触发游戏的正常退出流程，保存必要状态后关闭程序。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-force_quit">
+<div class="api-header">
+<div><span class="api-name">force_quit</span>
+ <span class="api-erb">FORCEQUIT</span>
+</div>
+<div class="api-sig">force_quit() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制退出游戏（FORCEQUIT 指令的 Python 封装）。</p>
+<p>立即强制终止游戏进程，不等待任何未完成的操作。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-force_begin">
+<div class="api-header">
+<div><span class="api-name">force_begin</span>
+ <span class="api-erb">FORCE_BEGIN</span>
+</div>
+<div class="api-sig">force_begin(mode: BeginMode) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>立即切换模式并执行 BEGIN（FORCE_BEGIN 指令的 Python 封装）。</p>
+<p>与 ``begin_force`` 的区别在于，此函数会立即调用引擎的 ``Begin()`` 方法，
+而不是仅设置状态。</p>
+<p>Parameters
+----------
+mode : BeginMode
+    目标模式字符串，取值与 ``begin`` 相同。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">mode</span><span class="param-required">必需</span><span class="param-type-tag">BeginMode</span></div><p class="param-desc-text">目标模式字符串，取值与 ``begin`` 相同。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-restart">
+<div class="api-header">
+<div><span class="api-name">restart</span>
+ <span class="api-erb">RESTART</span>
+</div>
+<div class="api-sig">restart() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>重新开始当前函数（RESTART 指令的 Python 封装）。</p>
+<p>从当前函数的顶部重新执行，相当于在 ERB 中使用 ``RESTART``。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-set_result">
+<div class="api-header">
+<div><span class="api-name">set_result</span>
+</div>
+<div class="api-sig">set_result(value: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置整数型返回值 RESULT。</p>
+<p>通常在 ``call`` 调用返回前设置，供调用方读取。</p>
+<p>Parameters
+----------
+value : int
+    要写入 ``RESULT`` 的整数值。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+set_results : 设置字符串型返回值 ``RESULTS``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要写入 ``RESULT`` 的整数值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-set_results">
+<div class="api-header">
+<div><span class="api-name">set_results</span>
+</div>
+<div class="api-sig">set_results(value: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置字符串型返回值 RESULTS。</p>
+<p>通常在 ``call`` 调用返回前设置，供调用方读取。</p>
+<p>Parameters
+----------
+value : str
+    要写入 ``RESULTS`` 的字符串值。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+set_result : 设置整数型返回值 ``RESULT``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要写入 ``RESULTS`` 的字符串值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-quit_and_restart">
+<div class="api-header">
+<div><span class="api-name">quit_and_restart</span>
+ <span class="api-erb">QUIT_AND_RESTART</span>
+</div>
+<div class="api-sig">quit_and_restart() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>退出并重新启动游戏（QUIT_AND_RESTART 指令的 Python 封装）。</p>
+<p>触发游戏进程的重启，相当于关闭后重新打开程序。
+常用于应用设置更改后需要重启生效的场景。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-force_quit_and_restart">
+<div class="api-header">
+<div><span class="api-name">force_quit_and_restart</span>
+ <span class="api-erb">FORCE_QUIT_AND_RESTART</span>
+</div>
+<div class="api-sig">force_quit_and_restart() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制退出并重新启动游戏（FORCE_QUIT_AND_RESTART 指令的 Python 封装）。</p>
+<p>与 ``quit_and_restart`` 类似，但使用强制退出方式，
+不等待任何未完成的操作即直接重启。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-jump">
+<div class="api-header">
+<div><span class="api-name">jump</span>
+ <span class="api-erb">JUMP</span>
+</div>
+<div class="api-sig">jump(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>无条件跳转到指定函数（JUMP 指令的 Python 封装）。</p>
+<p>.. note::
+    在 Python 模式下，``jump`` 与 ``call`` 的行为差异较小，
+    因为 Python 函数执行完后自然返回到调用者。
+    若要模拟 ERB 中 &quot;不返回&quot; 的语义，建议在 ``jump`` 后使用
+    ``return`` 结束当前函数。</p>
+<p>Parameters
+----------
+func_name : str
+    目标函数名称。</p>
+<p>Returns
+-------
+bool
+    如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; def event_title():</p>
+<p>...     if some_condition:</p>
+<p>...         jump(&quot;event_special_title&quot;)</p>
+<p>...         return   # 确保不继续执行后续代码</p>
+<pre><code class="language-python">...     print_line(&quot;正常标题&quot;)</code><button class="copy-btn">📋</button></pre>
+<p>See Also
+--------
+call : 调用函数并返回。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标函数名称。 如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-try_call">
+<div class="api-header">
+<div><span class="api-name">try_call</span>
+ <span class="api-erb">TRYCALL</span>
+</div>
+<div class="api-sig">try_call(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>尝试调用函数，失败时不报错（TRYCALL 指令的 Python 封装）。</p>
+<p>当引擎未初始化时（stub 模式且 ``required=True``）会重新抛出
+:class:`PyeraNotInitializedError`，以便调用者知晓环境异常。
+其他异常（如函数不存在）则静默返回 ``False``。</p>
+<p>Parameters
+----------
+func_name : str
+    要尝试调用的函数名称。</p>
+<p>Returns
+-------
+bool
+    调用成功返回 ``True``，函数不存在返回 ``False``。</p>
+<p>Raises
+------
+PyeraNotInitializedError
+    当引擎未初始化时抛出。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要尝试调用的函数名称。 调用成功返回 ``True``，函数不存在返回 ``False``。 当引擎未初始化时抛出。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-try_jump">
+<div class="api-header">
+<div><span class="api-name">try_jump</span>
+ <span class="api-erb">TRYJUMP</span>
+</div>
+<div class="api-sig">try_jump(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>尝试跳转到函数，失败时不报错（TRYJUMP 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+func_name : str
+    要尝试跳转的目标函数名称。</p>
+<p>Returns
+-------
+bool
+    跳转成功返回 ``True``，函数不存在返回 ``False``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要尝试跳转的目标函数名称。 跳转成功返回 ``True``，函数不存在返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Flow Control</h1>
+<div class="api-card" id="function-begin">
+<div class="api-header">
+<div><span class="api-name">begin</span>
+ <span class="api-erb">BEGIN</span>
+</div>
+<div class="api-sig">begin(mode: BeginMode) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>切换到指定的游戏模式（BEGIN 指令的 Python 封装）。</p>
+<p>该函数会在下一个输入等待点安全地切换游戏模式。
+如果当前正处于输入等待状态，则会将模式切换请求入队，
+待当前输入处理完毕后再执行切换。</p>
+<p>Parameters
+----------
+mode : BeginMode
+    目标模式字符串，可选值包括：
+    - ``'title'``   — 标题画面
+    - ``'shop'``    — 商店
+    - ``'train'``   — 训练/调教
+    - ``'aftertrain'`` — 训练结束后
+    - ``'ablup'``   — 能力升级
+    - ``'turnend'`` — 回合结束
+    - ``'first'``   — 首次启动</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+begin_force : 强制切换模式，不等待输入点。
+force_begin : 立即切换模式并执行 BEGIN。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">mode</span><span class="param-required">必需</span><span class="param-type-tag">BeginMode</span></div><p class="param-desc-text">目标模式字符串，可选值包括： - ``'title'``   — 标题画面 - ``'shop'``    — 商店 - ``'train'``   — 训练/调教 - ``'aftertrain'`` — 训练结束后 - ``'ablup'``   — 能力升级 - ``'turnend'`` — 回合结束 - ``'first'``   — 首次启动</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-begin_force">
+<div class="api-header">
+<div><span class="api-name">begin_force</span>
+ <span class="api-erb">BEGIN</span>
+</div>
+<div class="api-sig">begin_force(mode: BeginMode) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制切换到指定游戏模式（BEGIN 指令的强制版）。</p>
+<p>与 ``begin`` 不同，此函数会强制中断当前流程并立即切换模式，
+不会等待输入等待点。</p>
+<p>Parameters
+----------
+mode : BeginMode
+    目标模式字符串，取值与 ``begin`` 相同。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">mode</span><span class="param-required">必需</span><span class="param-type-tag">BeginMode</span></div><p class="param-desc-text">目标模式字符串，取值与 ``begin`` 相同。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-call">
+<div class="api-header">
+<div><span class="api-name">call</span>
+ <span class="api-erb">CALL</span>
+</div>
+<div class="api-sig">call(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>调用指定的函数（CALL 指令的 Python 封装）。</p>
+<p>调用顺序：先尝试调用 Python 侧注册的同名函数，
+若未找到则回退到 ERB 脚本中的函数。</p>
+<p>Parameters
+----------
+func_name : str
+    要调用的函数名称。</p>
+<p>Returns
+-------
+bool
+    如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要调用的函数名称。 如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-call_event">
+<div class="api-header">
+<div><span class="api-name">call_event</span>
+</div>
+<div class="api-sig">call_event(event_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>调用指定的事件函数（CALL 事件指令的 Python 封装）。</p>
+<p>与 ``call`` 类似，但专用于调用事件类型的函数。</p>
+<p>Parameters
+----------
+event_name : str
+    要调用的事件函数名称。</p>
+<p>Returns
+-------
+bool
+    如果成功找到并执行了事件函数则返回 ``True``，否则返回 ``False``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">event_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要调用的事件函数名称。 如果成功找到并执行了事件函数则返回 ``True``，否则返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-quit">
+<div class="api-header">
+<div><span class="api-name">quit</span>
+ <span class="api-erb">QUIT</span>
+</div>
+<div class="api-sig">quit() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>正常退出游戏（QUIT 指令的 Python 封装）。</p>
+<p>触发游戏的正常退出流程，保存必要状态后关闭程序。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-force_quit">
+<div class="api-header">
+<div><span class="api-name">force_quit</span>
+ <span class="api-erb">FORCEQUIT</span>
+</div>
+<div class="api-sig">force_quit() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制退出游戏（FORCEQUIT 指令的 Python 封装）。</p>
+<p>立即强制终止游戏进程，不等待任何未完成的操作。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-force_begin">
+<div class="api-header">
+<div><span class="api-name">force_begin</span>
+ <span class="api-erb">FORCE_BEGIN</span>
+</div>
+<div class="api-sig">force_begin(mode: BeginMode) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>立即切换模式并执行 BEGIN（FORCE_BEGIN 指令的 Python 封装）。</p>
+<p>与 ``begin_force`` 的区别在于，此函数会立即调用引擎的 ``Begin()`` 方法，
+而不是仅设置状态。</p>
+<p>Parameters
+----------
+mode : BeginMode
+    目标模式字符串，取值与 ``begin`` 相同。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">mode</span><span class="param-required">必需</span><span class="param-type-tag">BeginMode</span></div><p class="param-desc-text">目标模式字符串，取值与 ``begin`` 相同。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-restart">
+<div class="api-header">
+<div><span class="api-name">restart</span>
+ <span class="api-erb">RESTART</span>
+</div>
+<div class="api-sig">restart() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>重新开始当前函数（RESTART 指令的 Python 封装）。</p>
+<p>从当前函数的顶部重新执行，相当于在 ERB 中使用 ``RESTART``。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-set_result">
+<div class="api-header">
+<div><span class="api-name">set_result</span>
+</div>
+<div class="api-sig">set_result(value: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置整数型返回值 RESULT。</p>
+<p>通常在 ``call`` 调用返回前设置，供调用方读取。</p>
+<p>Parameters
+----------
+value : int
+    要写入 ``RESULT`` 的整数值。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+set_results : 设置字符串型返回值 ``RESULTS``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要写入 ``RESULT`` 的整数值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-set_results">
+<div class="api-header">
+<div><span class="api-name">set_results</span>
+</div>
+<div class="api-sig">set_results(value: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置字符串型返回值 RESULTS。</p>
+<p>通常在 ``call`` 调用返回前设置，供调用方读取。</p>
+<p>Parameters
+----------
+value : str
+    要写入 ``RESULTS`` 的字符串值。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+set_result : 设置整数型返回值 ``RESULT``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要写入 ``RESULTS`` 的字符串值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-quit_and_restart">
+<div class="api-header">
+<div><span class="api-name">quit_and_restart</span>
+ <span class="api-erb">QUIT_AND_RESTART</span>
+</div>
+<div class="api-sig">quit_and_restart() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>退出并重新启动游戏（QUIT_AND_RESTART 指令的 Python 封装）。</p>
+<p>触发游戏进程的重启，相当于关闭后重新打开程序。
+常用于应用设置更改后需要重启生效的场景。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-force_quit_and_restart">
+<div class="api-header">
+<div><span class="api-name">force_quit_and_restart</span>
+ <span class="api-erb">FORCE_QUIT_AND_RESTART</span>
+</div>
+<div class="api-sig">force_quit_and_restart() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制退出并重新启动游戏（FORCE_QUIT_AND_RESTART 指令的 Python 封装）。</p>
+<p>与 ``quit_and_restart`` 类似，但使用强制退出方式，
+不等待任何未完成的操作即直接重启。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-jump">
+<div class="api-header">
+<div><span class="api-name">jump</span>
+ <span class="api-erb">JUMP</span>
+</div>
+<div class="api-sig">jump(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>无条件跳转到指定函数（JUMP 指令的 Python 封装）。</p>
+<p>.. note::
+    在 Python 模式下，``jump`` 与 ``call`` 的行为差异较小，
+    因为 Python 函数执行完后自然返回到调用者。
+    若要模拟 ERB 中 &quot;不返回&quot; 的语义，建议在 ``jump`` 后使用
+    ``return`` 结束当前函数。</p>
+<p>Parameters
+----------
+func_name : str
+    目标函数名称。</p>
+<p>Returns
+-------
+bool
+    如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; def event_title():</p>
+<p>...     if some_condition:</p>
+<p>...         jump(&quot;event_special_title&quot;)</p>
+<p>...         return   # 确保不继续执行后续代码</p>
+<pre><code class="language-python">...     print_line(&quot;正常标题&quot;)</code><button class="copy-btn">📋</button></pre>
+<p>See Also
+--------
+call : 调用函数并返回。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标函数名称。 如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-try_call">
+<div class="api-header">
+<div><span class="api-name">try_call</span>
+ <span class="api-erb">TRYCALL</span>
+</div>
+<div class="api-sig">try_call(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>尝试调用函数，失败时不报错（TRYCALL 指令的 Python 封装）。</p>
+<p>当引擎未初始化时（stub 模式且 ``required=True``）会重新抛出
+:class:`PyeraNotInitializedError`，以便调用者知晓环境异常。
+其他异常（如函数不存在）则静默返回 ``False``。</p>
+<p>Parameters
+----------
+func_name : str
+    要尝试调用的函数名称。</p>
+<p>Returns
+-------
+bool
+    调用成功返回 ``True``，函数不存在返回 ``False``。</p>
+<p>Raises
+------
+PyeraNotInitializedError
+    当引擎未初始化时抛出。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要尝试调用的函数名称。 调用成功返回 ``True``，函数不存在返回 ``False``。 当引擎未初始化时抛出。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-try_jump">
+<div class="api-header">
+<div><span class="api-name">try_jump</span>
+ <span class="api-erb">TRYJUMP</span>
+</div>
+<div class="api-sig">try_jump(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>尝试跳转到函数，失败时不报错（TRYJUMP 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+func_name : str
+    要尝试跳转的目标函数名称。</p>
+<p>Returns
+-------
+bool
+    跳转成功返回 ``True``，函数不存在返回 ``False``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要尝试跳转的目标函数名称。 跳转成功返回 ``True``，函数不存在返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>フロー制御</h1>
+<div class="api-card" id="function-begin">
+<div class="api-header">
+<div><span class="api-name">begin</span>
+ <span class="api-erb">BEGIN</span>
+</div>
+<div class="api-sig">begin(mode: BeginMode) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>切换到指定的游戏模式（BEGIN 指令的 Python 封装）。</p>
+<p>该函数会在下一个输入等待点安全地切换游戏模式。
+如果当前正处于输入等待状态，则会将模式切换请求入队，
+待当前输入处理完毕后再执行切换。</p>
+<p>Parameters
+----------
+mode : BeginMode
+    目标模式字符串，可选值包括：
+    - ``'title'``   — 标题画面
+    - ``'shop'``    — 商店
+    - ``'train'``   — 训练/调教
+    - ``'aftertrain'`` — 训练结束后
+    - ``'ablup'``   — 能力升级
+    - ``'turnend'`` — 回合结束
+    - ``'first'``   — 首次启动</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+begin_force : 强制切换模式，不等待输入点。
+force_begin : 立即切换模式并执行 BEGIN。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">mode</span><span class="param-required">必需</span><span class="param-type-tag">BeginMode</span></div><p class="param-desc-text">目标模式字符串，可选值包括： - ``'title'``   — 标题画面 - ``'shop'``    — 商店 - ``'train'``   — 训练/调教 - ``'aftertrain'`` — 训练结束后 - ``'ablup'``   — 能力升级 - ``'turnend'`` — 回合结束 - ``'first'``   — 首次启动</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-begin_force">
+<div class="api-header">
+<div><span class="api-name">begin_force</span>
+ <span class="api-erb">BEGIN</span>
+</div>
+<div class="api-sig">begin_force(mode: BeginMode) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制切换到指定游戏模式（BEGIN 指令的强制版）。</p>
+<p>与 ``begin`` 不同，此函数会强制中断当前流程并立即切换模式，
+不会等待输入等待点。</p>
+<p>Parameters
+----------
+mode : BeginMode
+    目标模式字符串，取值与 ``begin`` 相同。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">mode</span><span class="param-required">必需</span><span class="param-type-tag">BeginMode</span></div><p class="param-desc-text">目标模式字符串，取值与 ``begin`` 相同。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-call">
+<div class="api-header">
+<div><span class="api-name">call</span>
+ <span class="api-erb">CALL</span>
+</div>
+<div class="api-sig">call(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>调用指定的函数（CALL 指令的 Python 封装）。</p>
+<p>调用顺序：先尝试调用 Python 侧注册的同名函数，
+若未找到则回退到 ERB 脚本中的函数。</p>
+<p>Parameters
+----------
+func_name : str
+    要调用的函数名称。</p>
+<p>Returns
+-------
+bool
+    如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要调用的函数名称。 如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-call_event">
+<div class="api-header">
+<div><span class="api-name">call_event</span>
+</div>
+<div class="api-sig">call_event(event_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>调用指定的事件函数（CALL 事件指令的 Python 封装）。</p>
+<p>与 ``call`` 类似，但专用于调用事件类型的函数。</p>
+<p>Parameters
+----------
+event_name : str
+    要调用的事件函数名称。</p>
+<p>Returns
+-------
+bool
+    如果成功找到并执行了事件函数则返回 ``True``，否则返回 ``False``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">event_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要调用的事件函数名称。 如果成功找到并执行了事件函数则返回 ``True``，否则返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-quit">
+<div class="api-header">
+<div><span class="api-name">quit</span>
+ <span class="api-erb">QUIT</span>
+</div>
+<div class="api-sig">quit() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>正常退出游戏（QUIT 指令的 Python 封装）。</p>
+<p>触发游戏的正常退出流程，保存必要状态后关闭程序。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-force_quit">
+<div class="api-header">
+<div><span class="api-name">force_quit</span>
+ <span class="api-erb">FORCEQUIT</span>
+</div>
+<div class="api-sig">force_quit() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制退出游戏（FORCEQUIT 指令的 Python 封装）。</p>
+<p>立即强制终止游戏进程，不等待任何未完成的操作。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-force_begin">
+<div class="api-header">
+<div><span class="api-name">force_begin</span>
+ <span class="api-erb">FORCE_BEGIN</span>
+</div>
+<div class="api-sig">force_begin(mode: BeginMode) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>立即切换模式并执行 BEGIN（FORCE_BEGIN 指令的 Python 封装）。</p>
+<p>与 ``begin_force`` 的区别在于，此函数会立即调用引擎的 ``Begin()`` 方法，
+而不是仅设置状态。</p>
+<p>Parameters
+----------
+mode : BeginMode
+    目标模式字符串，取值与 ``begin`` 相同。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">mode</span><span class="param-required">必需</span><span class="param-type-tag">BeginMode</span></div><p class="param-desc-text">目标模式字符串，取值与 ``begin`` 相同。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-restart">
+<div class="api-header">
+<div><span class="api-name">restart</span>
+ <span class="api-erb">RESTART</span>
+</div>
+<div class="api-sig">restart() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>重新开始当前函数（RESTART 指令的 Python 封装）。</p>
+<p>从当前函数的顶部重新执行，相当于在 ERB 中使用 ``RESTART``。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-set_result">
+<div class="api-header">
+<div><span class="api-name">set_result</span>
+</div>
+<div class="api-sig">set_result(value: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置整数型返回值 RESULT。</p>
+<p>通常在 ``call`` 调用返回前设置，供调用方读取。</p>
+<p>Parameters
+----------
+value : int
+    要写入 ``RESULT`` 的整数值。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+set_results : 设置字符串型返回值 ``RESULTS``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要写入 ``RESULT`` 的整数值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-set_results">
+<div class="api-header">
+<div><span class="api-name">set_results</span>
+</div>
+<div class="api-sig">set_results(value: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置字符串型返回值 RESULTS。</p>
+<p>通常在 ``call`` 调用返回前设置，供调用方读取。</p>
+<p>Parameters
+----------
+value : str
+    要写入 ``RESULTS`` 的字符串值。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+set_result : 设置整数型返回值 ``RESULT``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要写入 ``RESULTS`` 的字符串值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-quit_and_restart">
+<div class="api-header">
+<div><span class="api-name">quit_and_restart</span>
+ <span class="api-erb">QUIT_AND_RESTART</span>
+</div>
+<div class="api-sig">quit_and_restart() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>退出并重新启动游戏（QUIT_AND_RESTART 指令的 Python 封装）。</p>
+<p>触发游戏进程的重启，相当于关闭后重新打开程序。
+常用于应用设置更改后需要重启生效的场景。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-force_quit_and_restart">
+<div class="api-header">
+<div><span class="api-name">force_quit_and_restart</span>
+ <span class="api-erb">FORCE_QUIT_AND_RESTART</span>
+</div>
+<div class="api-sig">force_quit_and_restart() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>强制退出并重新启动游戏（FORCE_QUIT_AND_RESTART 指令的 Python 封装）。</p>
+<p>与 ``quit_and_restart`` 类似，但使用强制退出方式，
+不等待任何未完成的操作即直接重启。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-jump">
+<div class="api-header">
+<div><span class="api-name">jump</span>
+ <span class="api-erb">JUMP</span>
+</div>
+<div class="api-sig">jump(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>无条件跳转到指定函数（JUMP 指令的 Python 封装）。</p>
+<p>.. note::
+    在 Python 模式下，``jump`` 与 ``call`` 的行为差异较小，
+    因为 Python 函数执行完后自然返回到调用者。
+    若要模拟 ERB 中 &quot;不返回&quot; 的语义，建议在 ``jump`` 后使用
+    ``return`` 结束当前函数。</p>
+<p>Parameters
+----------
+func_name : str
+    目标函数名称。</p>
+<p>Returns
+-------
+bool
+    如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; def event_title():</p>
+<p>...     if some_condition:</p>
+<p>...         jump(&quot;event_special_title&quot;)</p>
+<p>...         return   # 确保不继续执行后续代码</p>
+<pre><code class="language-python">...     print_line(&quot;正常标题&quot;)</code><button class="copy-btn">📋</button></pre>
+<p>See Also
+--------
+call : 调用函数并返回。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标函数名称。 如果成功找到并执行了函数则返回 ``True``，否则返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-try_call">
+<div class="api-header">
+<div><span class="api-name">try_call</span>
+ <span class="api-erb">TRYCALL</span>
+</div>
+<div class="api-sig">try_call(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>尝试调用函数，失败时不报错（TRYCALL 指令的 Python 封装）。</p>
+<p>当引擎未初始化时（stub 模式且 ``required=True``）会重新抛出
+:class:`PyeraNotInitializedError`，以便调用者知晓环境异常。
+其他异常（如函数不存在）则静默返回 ``False``。</p>
+<p>Parameters
+----------
+func_name : str
+    要尝试调用的函数名称。</p>
+<p>Returns
+-------
+bool
+    调用成功返回 ``True``，函数不存在返回 ``False``。</p>
+<p>Raises
+------
+PyeraNotInitializedError
+    当引擎未初始化时抛出。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要尝试调用的函数名称。 调用成功返回 ``True``，函数不存在返回 ``False``。 当引擎未初始化时抛出。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-try_jump">
+<div class="api-header">
+<div><span class="api-name">try_jump</span>
+ <span class="api-erb">TRYJUMP</span>
+</div>
+<div class="api-sig">try_jump(func_name: str) -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>尝试跳转到函数，失败时不报错（TRYJUMP 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+func_name : str
+    要尝试跳转的目标函数名称。</p>
+<p>Returns
+-------
+bool
+    跳转成功返回 ``True``，函数不存在返回 ``False``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func_name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要尝试跳转的目标函数名称。 跳转成功返回 ``True``，函数不存在返回 ``False``。</p></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "begin", "desc": "切换到指定的游戏模式（BEGIN 指令的 Python 封装）。\n\n该函数会在下一个输入等待点安全地切换游戏模式。\n如果当前正处于输入等待状态，则会将模式切换请", "url": "./flow.html#function-begin"}, {"name": "begin_force", "desc": "强制切换到指定游戏模式（BEGIN 指令的强制版）。\n\n与 ``begin`` 不同，此函数会强制中断当前流程并立即切换模式，\n不会等待输入等待点。\n\nPara", "url": "./flow.html#function-begin_force"}, {"name": "call", "desc": "调用指定的函数（CALL 指令的 Python 封装）。\n\n调用顺序：先尝试调用 Python 侧注册的同名函数，\n若未找到则回退到 ERB 脚本中的函数。\n\n", "url": "./flow.html#function-call"}, {"name": "call_event", "desc": "调用指定的事件函数（CALL 事件指令的 Python 封装）。\n\n与 ``call`` 类似，但专用于调用事件类型的函数。\n\nParameters\n-----", "url": "./flow.html#function-call_event"}, {"name": "quit", "desc": "正常退出游戏（QUIT 指令的 Python 封装）。\n\n触发游戏的正常退出流程，保存必要状态后关闭程序。\n\nReturns\n-------\nNone", "url": "./flow.html#function-quit"}, {"name": "force_quit", "desc": "强制退出游戏（FORCEQUIT 指令的 Python 封装）。\n\n立即强制终止游戏进程，不等待任何未完成的操作。\n\nReturns\n-------\nNone", "url": "./flow.html#function-force_quit"}, {"name": "force_begin", "desc": "立即切换模式并执行 BEGIN（FORCE_BEGIN 指令的 Python 封装）。\n\n与 ``begin_force`` 的区别在于，此函数会立即调用引擎的", "url": "./flow.html#function-force_begin"}, {"name": "restart", "desc": "重新开始当前函数（RESTART 指令的 Python 封装）。\n\n从当前函数的顶部重新执行，相当于在 ERB 中使用 ``RESTART``。\n\nReturn", "url": "./flow.html#function-restart"}, {"name": "set_result", "desc": "设置整数型返回值 RESULT。\n\n通常在 ``call`` 调用返回前设置，供调用方读取。\n\nParameters\n----------\nvalue : in", "url": "./flow.html#function-set_result"}, {"name": "set_results", "desc": "设置字符串型返回值 RESULTS。\n\n通常在 ``call`` 调用返回前设置，供调用方读取。\n\nParameters\n----------\nvalue : ", "url": "./flow.html#function-set_results"}, {"name": "quit_and_restart", "desc": "退出并重新启动游戏（QUIT_AND_RESTART 指令的 Python 封装）。\n\n触发游戏进程的重启，相当于关闭后重新打开程序。\n常用于应用设置更改后需要", "url": "./flow.html#function-quit_and_restart"}, {"name": "force_quit_and_restart", "desc": "强制退出并重新启动游戏（FORCE_QUIT_AND_RESTART 指令的 Python 封装）。\n\n与 ``quit_and_restart`` 类似，但使", "url": "./flow.html#function-force_quit_and_restart"}, {"name": "jump", "desc": "无条件跳转到指定函数（JUMP 指令的 Python 封装）。\n\n.. note::\n    在 Python 模式下，``jump`` 与 ``call`` ", "url": "./flow.html#function-jump"}, {"name": "try_call", "desc": "尝试调用函数，失败时不报错（TRYCALL 指令的 Python 封装）。\n\n当引擎未初始化时（stub 模式且 ``required=True``）会重新抛出", "url": "./flow.html#function-try_call"}, {"name": "try_jump", "desc": "尝试跳转到函数，失败时不报错（TRYJUMP 指令的 Python 封装）。\n\nParameters\n----------\nfunc_name : str\n  ", "url": "./flow.html#function-try_jump"}, {"name": "begin", "desc": "切换到指定的游戏模式（BEGIN 指令的 Python 封装）。\n\n该函数会在下一个输入等待点安全地切换游戏模式。\n如果当前正处于输入等待状态，则会将模式切换请", "url": "./flow.html#function-begin"}, {"name": "begin_force", "desc": "强制切换到指定游戏模式（BEGIN 指令的强制版）。\n\n与 ``begin`` 不同，此函数会强制中断当前流程并立即切换模式，\n不会等待输入等待点。\n\nPara", "url": "./flow.html#function-begin_force"}, {"name": "call", "desc": "调用指定的函数（CALL 指令的 Python 封装）。\n\n调用顺序：先尝试调用 Python 侧注册的同名函数，\n若未找到则回退到 ERB 脚本中的函数。\n\n", "url": "./flow.html#function-call"}, {"name": "call_event", "desc": "调用指定的事件函数（CALL 事件指令的 Python 封装）。\n\n与 ``call`` 类似，但专用于调用事件类型的函数。\n\nParameters\n-----", "url": "./flow.html#function-call_event"}, {"name": "quit", "desc": "正常退出游戏（QUIT 指令的 Python 封装）。\n\n触发游戏的正常退出流程，保存必要状态后关闭程序。\n\nReturns\n-------\nNone", "url": "./flow.html#function-quit"}, {"name": "force_quit", "desc": "强制退出游戏（FORCEQUIT 指令的 Python 封装）。\n\n立即强制终止游戏进程，不等待任何未完成的操作。\n\nReturns\n-------\nNone", "url": "./flow.html#function-force_quit"}, {"name": "force_begin", "desc": "立即切换模式并执行 BEGIN（FORCE_BEGIN 指令的 Python 封装）。\n\n与 ``begin_force`` 的区别在于，此函数会立即调用引擎的", "url": "./flow.html#function-force_begin"}, {"name": "restart", "desc": "重新开始当前函数（RESTART 指令的 Python 封装）。\n\n从当前函数的顶部重新执行，相当于在 ERB 中使用 ``RESTART``。\n\nReturn", "url": "./flow.html#function-restart"}, {"name": "set_result", "desc": "设置整数型返回值 RESULT。\n\n通常在 ``call`` 调用返回前设置，供调用方读取。\n\nParameters\n----------\nvalue : in", "url": "./flow.html#function-set_result"}, {"name": "set_results", "desc": "设置字符串型返回值 RESULTS。\n\n通常在 ``call`` 调用返回前设置，供调用方读取。\n\nParameters\n----------\nvalue : ", "url": "./flow.html#function-set_results"}, {"name": "quit_and_restart", "desc": "退出并重新启动游戏（QUIT_AND_RESTART 指令的 Python 封装）。\n\n触发游戏进程的重启，相当于关闭后重新打开程序。\n常用于应用设置更改后需要", "url": "./flow.html#function-quit_and_restart"}, {"name": "force_quit_and_restart", "desc": "强制退出并重新启动游戏（FORCE_QUIT_AND_RESTART 指令的 Python 封装）。\n\n与 ``quit_and_restart`` 类似，但使", "url": "./flow.html#function-force_quit_and_restart"}, {"name": "jump", "desc": "无条件跳转到指定函数（JUMP 指令的 Python 封装）。\n\n.. note::\n    在 Python 模式下，``jump`` 与 ``call`` ", "url": "./flow.html#function-jump"}, {"name": "try_call", "desc": "尝试调用函数，失败时不报错（TRYCALL 指令的 Python 封装）。\n\n当引擎未初始化时（stub 模式且 ``required=True``）会重新抛出", "url": "./flow.html#function-try_call"}, {"name": "try_jump", "desc": "尝试跳转到函数，失败时不报错（TRYJUMP 指令的 Python 封装）。\n\nParameters\n----------\nfunc_name : str\n  ", "url": "./flow.html#function-try_jump"}, {"name": "begin", "desc": "切换到指定的游戏模式（BEGIN 指令的 Python 封装）。\n\n该函数会在下一个输入等待点安全地切换游戏模式。\n如果当前正处于输入等待状态，则会将模式切换请", "url": "./flow.html#function-begin"}, {"name": "begin_force", "desc": "强制切换到指定游戏模式（BEGIN 指令的强制版）。\n\n与 ``begin`` 不同，此函数会强制中断当前流程并立即切换模式，\n不会等待输入等待点。\n\nPara", "url": "./flow.html#function-begin_force"}, {"name": "call", "desc": "调用指定的函数（CALL 指令的 Python 封装）。\n\n调用顺序：先尝试调用 Python 侧注册的同名函数，\n若未找到则回退到 ERB 脚本中的函数。\n\n", "url": "./flow.html#function-call"}, {"name": "call_event", "desc": "调用指定的事件函数（CALL 事件指令的 Python 封装）。\n\n与 ``call`` 类似，但专用于调用事件类型的函数。\n\nParameters\n-----", "url": "./flow.html#function-call_event"}, {"name": "quit", "desc": "正常退出游戏（QUIT 指令的 Python 封装）。\n\n触发游戏的正常退出流程，保存必要状态后关闭程序。\n\nReturns\n-------\nNone", "url": "./flow.html#function-quit"}, {"name": "force_quit", "desc": "强制退出游戏（FORCEQUIT 指令的 Python 封装）。\n\n立即强制终止游戏进程，不等待任何未完成的操作。\n\nReturns\n-------\nNone", "url": "./flow.html#function-force_quit"}, {"name": "force_begin", "desc": "立即切换模式并执行 BEGIN（FORCE_BEGIN 指令的 Python 封装）。\n\n与 ``begin_force`` 的区别在于，此函数会立即调用引擎的", "url": "./flow.html#function-force_begin"}, {"name": "restart", "desc": "重新开始当前函数（RESTART 指令的 Python 封装）。\n\n从当前函数的顶部重新执行，相当于在 ERB 中使用 ``RESTART``。\n\nReturn", "url": "./flow.html#function-restart"}, {"name": "set_result", "desc": "设置整数型返回值 RESULT。\n\n通常在 ``call`` 调用返回前设置，供调用方读取。\n\nParameters\n----------\nvalue : in", "url": "./flow.html#function-set_result"}, {"name": "set_results", "desc": "设置字符串型返回值 RESULTS。\n\n通常在 ``call`` 调用返回前设置，供调用方读取。\n\nParameters\n----------\nvalue : ", "url": "./flow.html#function-set_results"}, {"name": "quit_and_restart", "desc": "退出并重新启动游戏（QUIT_AND_RESTART 指令的 Python 封装）。\n\n触发游戏进程的重启，相当于关闭后重新打开程序。\n常用于应用设置更改后需要", "url": "./flow.html#function-quit_and_restart"}, {"name": "force_quit_and_restart", "desc": "强制退出并重新启动游戏（FORCE_QUIT_AND_RESTART 指令的 Python 封装）。\n\n与 ``quit_and_restart`` 类似，但使", "url": "./flow.html#function-force_quit_and_restart"}, {"name": "jump", "desc": "无条件跳转到指定函数（JUMP 指令的 Python 封装）。\n\n.. note::\n    在 Python 模式下，``jump`` 与 ``call`` ", "url": "./flow.html#function-jump"}, {"name": "try_call", "desc": "尝试调用函数，失败时不报错（TRYCALL 指令的 Python 封装）。\n\n当引擎未初始化时（stub 模式且 ``required=True``）会重新抛出", "url": "./flow.html#function-try_call"}, {"name": "try_jump", "desc": "尝试跳转到函数，失败时不报错（TRYJUMP 指令的 Python 封装）。\n\nParameters\n----------\nfunc_name : str\n  ", "url": "./flow.html#function-try_jump"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

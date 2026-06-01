@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 核心桥接</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 核心桥接</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>核心桥接</h1>
+<div class="api-card" id="function-enable_trace">
+<div class="api-header">
+<div><span class="api-name">enable_trace</span>
+</div>
+<div class="api-sig">enable_trace(enabled: bool = True) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>启用或禁用调用追踪。</p>
+<p>启用后，所有通过 :func:`call` 发起的 C# API 调用都会被记录到内部缓冲区，
+便于调试时分析调用序列。</p>
+<p>Parameters
+----------
+enabled : bool, optional
+    ``True`` 启用追踪（默认），``False`` 禁用。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+get_trace_log : 获取已记录的追踪日志。
+clear_trace_log : 清空追踪缓冲区。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">enabled</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">``True`` 启用追踪（默认），``False`` 禁用。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_trace_log">
+<div class="api-header">
+<div><span class="api-name">get_trace_log</span>
+</div>
+<div class="api-sig">get_trace_log() -&gt; list[str]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回已累计的调用追踪日志副本。</p>
+<p>Returns
+-------
+list[str]
+    追踪记录字符串列表。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-clear_trace_log">
+<div class="api-header">
+<div><span class="api-name">clear_trace_log</span>
+</div>
+<div class="api-sig">clear_trace_log() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>清空调用追踪缓冲区。</p>
+<p>与 :func:`get_trace_log` 配合使用，可在长时间运行或大量调用后
+释放内存并重置追踪状态。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+get_trace_log : 获取当前缓冲区内容。
+enable_trace : 启用或禁用追踪功能。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-set_trace_max_size">
+<div class="api-header">
+<div><span class="api-name">set_trace_max_size</span>
+</div>
+<div class="api-sig">set_trace_max_size(size: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置追踪日志缓冲区的最大条目数。</p>
+<p>超过上限后，旧的记录会自动丢弃（FIFO）。</p>
+<p>Parameters
+----------
+size : int
+    最大条目数。必须为正整数。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">size</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">最大条目数。必须为正整数。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-register_coerce">
+<div class="api-header">
+<div><span class="api-name">register_coerce</span>
+</div>
+<div class="api-sig">register_coerce(py_type: type, converter: Callable[[, Any]) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>注册自定义类型转换器，用于 Python → C# 的参数传递。</p>
+<p>当 ``call()`` 遇到 *py_type* 类型的参数时，会先用 *converter*
+转换后再传递给 C# 引擎。</p>
+<p>Parameters
+----------
+py_type : type
+    要匹配的 Python 类型。
+converter : callable
+    接收一个 Python 对象，返回转换后的值。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; import numpy as np</p>
+<pre><code class="language-python">&gt;&gt;&gt; register_coerce(np.ndarray, lambda arr: arr.tolist())</code><button class="copy-btn">📋</button></pre></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">py_type</span><span class="param-required">必需</span><span class="param-type-tag">type</span></div><p class="param-desc-text">要匹配的 Python 类型。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">converter</span><span class="param-required">必需</span><span class="param-type-tag">Callable[[, Any]</span></div><p class="param-desc-text">接收一个 Python 对象，返回转换后的值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-call">
+<div class="api-header">
+<div><span class="api-name">call</span>
+</div>
+<div class="api-sig">call(name: str, default: T = _UNSET, required: bool = False, *args) -&gt; T</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按名称调用 C# API 方法。</p>
+<p>这是 Python 侧与 C# 引擎交互的核心原语。所有其他模块的引擎调用
+最终都应通过此函数完成。</p>
+<p>Parameters
+----------
+name : str
+    ``pyera_native`` 模块上的方法名（即 ``PyApi`` 中的 ``public static`` 方法）。
+*args : Any
+    位置参数。列表会被自动强制转换为元组。
+default : Any, optional
+    Stub 模式或调用失败时的默认返回值。若未提供且 C# 返回 ``None``，
+    则返回 ``None``。
+required : bool, optional
+    若为 ``True``，在 stub 模式下会抛出 :class:`PyeraNotInitializedError`
+    而不是返回 *default*。</p>
+<p>Returns
+-------
+Any
+    C# 方法的返回值，或在不可用时的 *default*。</p>
+<p>Raises
+------
+PyeraApiError
+    若 C# 调用本身抛出了异常。
+PyeraNotInitializedError
+    若 ``required=True`` 且当前处于 stub 模式。</p>
+<p>Notes
+-----
+- 本函数在调用 C# 期间持有 Python GIL。若 C# 方法执行时间较长，
+  会阻塞 Python 的其他线程。
+- 建议在主线程中调用所有引擎 API。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">``pyera_native`` 模块上的方法名（即 ``PyApi`` 中的 ``public static`` 方法）。 位置参数。列表会被自动强制转换为元组。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default</span><span class="param-type-tag">T</span><span class="param-default-val">= _UNSET</span></div><p class="param-desc-text">Stub 模式或调用失败时的默认返回值。若未提供且 C# 返回 ``None``， 则返回 ``None``。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">required</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若为 ``True``，在 stub 模式下会抛出 :class:`PyeraNotInitializedError` 而不是返回 *default*。 C# 方法的返回值，或在不可用时的 *default*。 若 C# 调用本身抛出了异常。 若 ``required=True`` 且当前处于 stub 模式。 会阻塞 Python 的其他线程。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-close_debug_stream">
+<div class="api-header">
+<div><span class="api-name">close_debug_stream</span>
+</div>
+<div class="api-sig">close_debug_stream() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>关闭调试日志文件描述符并恢复原始 stdout/stderr。</p>
+<p>在游戏退出或需要释放资源时调用，确保日志文件被正确关闭。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_var_token">
+<div class="api-header">
+<div><span class="api-name">get_var_token</span>
+</div>
+<div class="api-sig">get_var_token(name: str) -&gt; Optional[Any]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>根据变量名获取引擎的 VariableToken 对象。</p>
+<p>这是访问 Emuera 变量系统的核心原语，用于替代直接调用
+``call(&quot;vars.get&quot;, ...)`` 的重复代码。</p>
+<p>Parameters
+----------
+name : str
+    变量名称（大小写不敏感，内部会自动转为小写）。</p>
+<p>Returns
+-------
+Any or None
+    引擎的 VariableToken 对象；若变量不存在或处于 stub 模式返回 ``None``。</p>
+<p>Notes
+-----
+返回的 token 是 C# 对象的 Python 引用。长时间大量持有 token 引用
+可能影响 C# 侧的垃圾回收。建议在需要时获取、使用完毕后释放引用。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量名称（大小写不敏感，内部会自动转为小写）。 引擎的 VariableToken 对象；若变量不存在或处于 stub 模式返回 ``None``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-var_get">
+<div class="api-header">
+<div><span class="api-name">var_get</span>
+</div>
+<div class="api-sig">var_get(token: Any, *indices) -&gt; Any</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>通过 VariableToken 安全读取变量值。</p>
+<p>封装了 ``token.Get(*indices)`` 调用，并将底层异常统一转换为
+:class:`PyeraVariableError`。</p>
+<p>Parameters
+----------
+token : Any
+    引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。
+*indices : int
+    变量下标，支持多维（例如 ``(chara_id, elem)``）。</p>
+<p>Returns
+-------
+Any
+    变量值（整数或字符串，取决于变量类型）。</p>
+<p>Raises
+------
+PyeraVariableError
+    当底层引擎读取失败时抛出。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">token</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div><p class="param-desc-text">引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。 变量下标，支持多维（例如 ``(chara_id, elem)``）。 变量值（整数或字符串，取决于变量类型）。 当底层引擎读取失败时抛出。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*indices</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-var_set">
+<div class="api-header">
+<div><span class="api-name">var_set</span>
+</div>
+<div class="api-sig">var_set(token: Any, value: Any, *indices) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>通过 VariableToken 安全写入变量值。</p>
+<p>封装了 ``token.Set(value, *indices)`` 调用，并将底层异常统一转换为
+:class:`PyeraVariableError`。</p>
+<p>Parameters
+----------
+token : Any
+    引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。
+value : Any
+    要写入的值（整数或字符串）。
+*indices : int
+    变量下标，支持多维。</p>
+<p>Returns
+-------
+None</p>
+<p>Raises
+------
+PyeraVariableError
+    当底层引擎写入失败时抛出。</p>
+<p>See Also
+--------
+get_var_token : 获取 VariableToken。
+var_get : 通过 VariableToken 读取变量值。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">token</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div><p class="param-desc-text">引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div><p class="param-desc-text">要写入的值（整数或字符串）。 变量下标，支持多维。 当底层引擎写入失败时抛出。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*indices</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_main_thread">
+<div class="api-header">
+<div><span class="api-name">is_main_thread</span>
+</div>
+<div class="api-sig">is_main_thread() -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查当前线程是否为主线程。</p>
+<p>Returns
+-------
+bool
+    当前线程是主线程时返回 ``True``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-ensure_main_thread">
+<div class="api-header">
+<div><span class="api-name">ensure_main_thread</span>
+</div>
+<div class="api-sig">ensure_main_thread(warn: bool = True) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>若当前不在主线程，发出警告。</p>
+<p>Emuera 引擎设计为单线程（UI 线程）。从后台线程调用引擎 API
+可能导致不可预测的行为。</p>
+<p>Parameters
+----------
+warn : bool, optional
+    为 ``True`` 时（默认），在非主线程调用时发出 :class:`RuntimeWarning`。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">warn</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">为 ``True`` 时（默认），在非主线程调用时发出 :class:`RuntimeWarning`。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, orig: Any) -&gt; None</div>
+</div>
+<div class="api-body">
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">orig</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-write">
+<div class="api-header">
+<div><span class="api-name">write</span>
+</div>
+<div class="api-sig">write(self, data: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">data</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-flush">
+<div class="api-header">
+<div><span class="api-name">flush</span>
+</div>
+<div class="api-sig">flush(self) -&gt; None</div>
+</div>
+<div class="api-body">
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-encoding">
+<div class="api-header">
+<div><span class="api-name">encoding</span>
+</div>
+<div class="api-sig">encoding(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-errors">
+<div class="api-header">
+<div><span class="api-name">errors</span>
+</div>
+<div class="api-sig">errors(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-isatty">
+<div class="api-header">
+<div><span class="api-name">isatty</span>
+</div>
+<div class="api-sig">isatty(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Core Bridge</h1>
+<div class="api-card" id="function-enable_trace">
+<div class="api-header">
+<div><span class="api-name">enable_trace</span>
+</div>
+<div class="api-sig">enable_trace(enabled: bool = True) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>启用或禁用调用追踪。</p>
+<p>启用后，所有通过 :func:`call` 发起的 C# API 调用都会被记录到内部缓冲区，
+便于调试时分析调用序列。</p>
+<p>Parameters
+----------
+enabled : bool, optional
+    ``True`` 启用追踪（默认），``False`` 禁用。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+get_trace_log : 获取已记录的追踪日志。
+clear_trace_log : 清空追踪缓冲区。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">enabled</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">``True`` 启用追踪（默认），``False`` 禁用。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_trace_log">
+<div class="api-header">
+<div><span class="api-name">get_trace_log</span>
+</div>
+<div class="api-sig">get_trace_log() -&gt; list[str]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回已累计的调用追踪日志副本。</p>
+<p>Returns
+-------
+list[str]
+    追踪记录字符串列表。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-clear_trace_log">
+<div class="api-header">
+<div><span class="api-name">clear_trace_log</span>
+</div>
+<div class="api-sig">clear_trace_log() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>清空调用追踪缓冲区。</p>
+<p>与 :func:`get_trace_log` 配合使用，可在长时间运行或大量调用后
+释放内存并重置追踪状态。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+get_trace_log : 获取当前缓冲区内容。
+enable_trace : 启用或禁用追踪功能。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-set_trace_max_size">
+<div class="api-header">
+<div><span class="api-name">set_trace_max_size</span>
+</div>
+<div class="api-sig">set_trace_max_size(size: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置追踪日志缓冲区的最大条目数。</p>
+<p>超过上限后，旧的记录会自动丢弃（FIFO）。</p>
+<p>Parameters
+----------
+size : int
+    最大条目数。必须为正整数。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">size</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">最大条目数。必须为正整数。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-register_coerce">
+<div class="api-header">
+<div><span class="api-name">register_coerce</span>
+</div>
+<div class="api-sig">register_coerce(py_type: type, converter: Callable[[, Any]) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>注册自定义类型转换器，用于 Python → C# 的参数传递。</p>
+<p>当 ``call()`` 遇到 *py_type* 类型的参数时，会先用 *converter*
+转换后再传递给 C# 引擎。</p>
+<p>Parameters
+----------
+py_type : type
+    要匹配的 Python 类型。
+converter : callable
+    接收一个 Python 对象，返回转换后的值。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; import numpy as np</p>
+<pre><code class="language-python">&gt;&gt;&gt; register_coerce(np.ndarray, lambda arr: arr.tolist())</code><button class="copy-btn">📋</button></pre></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">py_type</span><span class="param-required">必需</span><span class="param-type-tag">type</span></div><p class="param-desc-text">要匹配的 Python 类型。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">converter</span><span class="param-required">必需</span><span class="param-type-tag">Callable[[, Any]</span></div><p class="param-desc-text">接收一个 Python 对象，返回转换后的值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-call">
+<div class="api-header">
+<div><span class="api-name">call</span>
+</div>
+<div class="api-sig">call(name: str, default: T = _UNSET, required: bool = False, *args) -&gt; T</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按名称调用 C# API 方法。</p>
+<p>这是 Python 侧与 C# 引擎交互的核心原语。所有其他模块的引擎调用
+最终都应通过此函数完成。</p>
+<p>Parameters
+----------
+name : str
+    ``pyera_native`` 模块上的方法名（即 ``PyApi`` 中的 ``public static`` 方法）。
+*args : Any
+    位置参数。列表会被自动强制转换为元组。
+default : Any, optional
+    Stub 模式或调用失败时的默认返回值。若未提供且 C# 返回 ``None``，
+    则返回 ``None``。
+required : bool, optional
+    若为 ``True``，在 stub 模式下会抛出 :class:`PyeraNotInitializedError`
+    而不是返回 *default*。</p>
+<p>Returns
+-------
+Any
+    C# 方法的返回值，或在不可用时的 *default*。</p>
+<p>Raises
+------
+PyeraApiError
+    若 C# 调用本身抛出了异常。
+PyeraNotInitializedError
+    若 ``required=True`` 且当前处于 stub 模式。</p>
+<p>Notes
+-----
+- 本函数在调用 C# 期间持有 Python GIL。若 C# 方法执行时间较长，
+  会阻塞 Python 的其他线程。
+- 建议在主线程中调用所有引擎 API。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">``pyera_native`` 模块上的方法名（即 ``PyApi`` 中的 ``public static`` 方法）。 位置参数。列表会被自动强制转换为元组。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default</span><span class="param-type-tag">T</span><span class="param-default-val">= _UNSET</span></div><p class="param-desc-text">Stub 模式或调用失败时的默认返回值。若未提供且 C# 返回 ``None``， 则返回 ``None``。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">required</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若为 ``True``，在 stub 模式下会抛出 :class:`PyeraNotInitializedError` 而不是返回 *default*。 C# 方法的返回值，或在不可用时的 *default*。 若 C# 调用本身抛出了异常。 若 ``required=True`` 且当前处于 stub 模式。 会阻塞 Python 的其他线程。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-close_debug_stream">
+<div class="api-header">
+<div><span class="api-name">close_debug_stream</span>
+</div>
+<div class="api-sig">close_debug_stream() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>关闭调试日志文件描述符并恢复原始 stdout/stderr。</p>
+<p>在游戏退出或需要释放资源时调用，确保日志文件被正确关闭。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_var_token">
+<div class="api-header">
+<div><span class="api-name">get_var_token</span>
+</div>
+<div class="api-sig">get_var_token(name: str) -&gt; Optional[Any]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>根据变量名获取引擎的 VariableToken 对象。</p>
+<p>这是访问 Emuera 变量系统的核心原语，用于替代直接调用
+``call(&quot;vars.get&quot;, ...)`` 的重复代码。</p>
+<p>Parameters
+----------
+name : str
+    变量名称（大小写不敏感，内部会自动转为小写）。</p>
+<p>Returns
+-------
+Any or None
+    引擎的 VariableToken 对象；若变量不存在或处于 stub 模式返回 ``None``。</p>
+<p>Notes
+-----
+返回的 token 是 C# 对象的 Python 引用。长时间大量持有 token 引用
+可能影响 C# 侧的垃圾回收。建议在需要时获取、使用完毕后释放引用。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量名称（大小写不敏感，内部会自动转为小写）。 引擎的 VariableToken 对象；若变量不存在或处于 stub 模式返回 ``None``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-var_get">
+<div class="api-header">
+<div><span class="api-name">var_get</span>
+</div>
+<div class="api-sig">var_get(token: Any, *indices) -&gt; Any</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>通过 VariableToken 安全读取变量值。</p>
+<p>封装了 ``token.Get(*indices)`` 调用，并将底层异常统一转换为
+:class:`PyeraVariableError`。</p>
+<p>Parameters
+----------
+token : Any
+    引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。
+*indices : int
+    变量下标，支持多维（例如 ``(chara_id, elem)``）。</p>
+<p>Returns
+-------
+Any
+    变量值（整数或字符串，取决于变量类型）。</p>
+<p>Raises
+------
+PyeraVariableError
+    当底层引擎读取失败时抛出。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">token</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div><p class="param-desc-text">引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。 变量下标，支持多维（例如 ``(chara_id, elem)``）。 变量值（整数或字符串，取决于变量类型）。 当底层引擎读取失败时抛出。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*indices</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-var_set">
+<div class="api-header">
+<div><span class="api-name">var_set</span>
+</div>
+<div class="api-sig">var_set(token: Any, value: Any, *indices) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>通过 VariableToken 安全写入变量值。</p>
+<p>封装了 ``token.Set(value, *indices)`` 调用，并将底层异常统一转换为
+:class:`PyeraVariableError`。</p>
+<p>Parameters
+----------
+token : Any
+    引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。
+value : Any
+    要写入的值（整数或字符串）。
+*indices : int
+    变量下标，支持多维。</p>
+<p>Returns
+-------
+None</p>
+<p>Raises
+------
+PyeraVariableError
+    当底层引擎写入失败时抛出。</p>
+<p>See Also
+--------
+get_var_token : 获取 VariableToken。
+var_get : 通过 VariableToken 读取变量值。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">token</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div><p class="param-desc-text">引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div><p class="param-desc-text">要写入的值（整数或字符串）。 变量下标，支持多维。 当底层引擎写入失败时抛出。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*indices</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_main_thread">
+<div class="api-header">
+<div><span class="api-name">is_main_thread</span>
+</div>
+<div class="api-sig">is_main_thread() -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查当前线程是否为主线程。</p>
+<p>Returns
+-------
+bool
+    当前线程是主线程时返回 ``True``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-ensure_main_thread">
+<div class="api-header">
+<div><span class="api-name">ensure_main_thread</span>
+</div>
+<div class="api-sig">ensure_main_thread(warn: bool = True) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>若当前不在主线程，发出警告。</p>
+<p>Emuera 引擎设计为单线程（UI 线程）。从后台线程调用引擎 API
+可能导致不可预测的行为。</p>
+<p>Parameters
+----------
+warn : bool, optional
+    为 ``True`` 时（默认），在非主线程调用时发出 :class:`RuntimeWarning`。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">warn</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">为 ``True`` 时（默认），在非主线程调用时发出 :class:`RuntimeWarning`。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, orig: Any) -&gt; None</div>
+</div>
+<div class="api-body">
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">orig</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-write">
+<div class="api-header">
+<div><span class="api-name">write</span>
+</div>
+<div class="api-sig">write(self, data: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">data</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-flush">
+<div class="api-header">
+<div><span class="api-name">flush</span>
+</div>
+<div class="api-sig">flush(self) -&gt; None</div>
+</div>
+<div class="api-body">
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-encoding">
+<div class="api-header">
+<div><span class="api-name">encoding</span>
+</div>
+<div class="api-sig">encoding(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-errors">
+<div class="api-header">
+<div><span class="api-name">errors</span>
+</div>
+<div class="api-sig">errors(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-isatty">
+<div class="api-header">
+<div><span class="api-name">isatty</span>
+</div>
+<div class="api-sig">isatty(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>コアブリッジ</h1>
+<div class="api-card" id="function-enable_trace">
+<div class="api-header">
+<div><span class="api-name">enable_trace</span>
+</div>
+<div class="api-sig">enable_trace(enabled: bool = True) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>启用或禁用调用追踪。</p>
+<p>启用后，所有通过 :func:`call` 发起的 C# API 调用都会被记录到内部缓冲区，
+便于调试时分析调用序列。</p>
+<p>Parameters
+----------
+enabled : bool, optional
+    ``True`` 启用追踪（默认），``False`` 禁用。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+get_trace_log : 获取已记录的追踪日志。
+clear_trace_log : 清空追踪缓冲区。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">enabled</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">``True`` 启用追踪（默认），``False`` 禁用。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_trace_log">
+<div class="api-header">
+<div><span class="api-name">get_trace_log</span>
+</div>
+<div class="api-sig">get_trace_log() -&gt; list[str]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回已累计的调用追踪日志副本。</p>
+<p>Returns
+-------
+list[str]
+    追踪记录字符串列表。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-clear_trace_log">
+<div class="api-header">
+<div><span class="api-name">clear_trace_log</span>
+</div>
+<div class="api-sig">clear_trace_log() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>清空调用追踪缓冲区。</p>
+<p>与 :func:`get_trace_log` 配合使用，可在长时间运行或大量调用后
+释放内存并重置追踪状态。</p>
+<p>Returns
+-------
+None</p>
+<p>See Also
+--------
+get_trace_log : 获取当前缓冲区内容。
+enable_trace : 启用或禁用追踪功能。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-set_trace_max_size">
+<div class="api-header">
+<div><span class="api-name">set_trace_max_size</span>
+</div>
+<div class="api-sig">set_trace_max_size(size: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置追踪日志缓冲区的最大条目数。</p>
+<p>超过上限后，旧的记录会自动丢弃（FIFO）。</p>
+<p>Parameters
+----------
+size : int
+    最大条目数。必须为正整数。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">size</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">最大条目数。必须为正整数。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-register_coerce">
+<div class="api-header">
+<div><span class="api-name">register_coerce</span>
+</div>
+<div class="api-sig">register_coerce(py_type: type, converter: Callable[[, Any]) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>注册自定义类型转换器，用于 Python → C# 的参数传递。</p>
+<p>当 ``call()`` 遇到 *py_type* 类型的参数时，会先用 *converter*
+转换后再传递给 C# 引擎。</p>
+<p>Parameters
+----------
+py_type : type
+    要匹配的 Python 类型。
+converter : callable
+    接收一个 Python 对象，返回转换后的值。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; import numpy as np</p>
+<pre><code class="language-python">&gt;&gt;&gt; register_coerce(np.ndarray, lambda arr: arr.tolist())</code><button class="copy-btn">📋</button></pre></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">py_type</span><span class="param-required">必需</span><span class="param-type-tag">type</span></div><p class="param-desc-text">要匹配的 Python 类型。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">converter</span><span class="param-required">必需</span><span class="param-type-tag">Callable[[, Any]</span></div><p class="param-desc-text">接收一个 Python 对象，返回转换后的值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-call">
+<div class="api-header">
+<div><span class="api-name">call</span>
+</div>
+<div class="api-sig">call(name: str, default: T = _UNSET, required: bool = False, *args) -&gt; T</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>按名称调用 C# API 方法。</p>
+<p>这是 Python 侧与 C# 引擎交互的核心原语。所有其他模块的引擎调用
+最终都应通过此函数完成。</p>
+<p>Parameters
+----------
+name : str
+    ``pyera_native`` 模块上的方法名（即 ``PyApi`` 中的 ``public static`` 方法）。
+*args : Any
+    位置参数。列表会被自动强制转换为元组。
+default : Any, optional
+    Stub 模式或调用失败时的默认返回值。若未提供且 C# 返回 ``None``，
+    则返回 ``None``。
+required : bool, optional
+    若为 ``True``，在 stub 模式下会抛出 :class:`PyeraNotInitializedError`
+    而不是返回 *default*。</p>
+<p>Returns
+-------
+Any
+    C# 方法的返回值，或在不可用时的 *default*。</p>
+<p>Raises
+------
+PyeraApiError
+    若 C# 调用本身抛出了异常。
+PyeraNotInitializedError
+    若 ``required=True`` 且当前处于 stub 模式。</p>
+<p>Notes
+-----
+- 本函数在调用 C# 期间持有 Python GIL。若 C# 方法执行时间较长，
+  会阻塞 Python 的其他线程。
+- 建议在主线程中调用所有引擎 API。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">``pyera_native`` 模块上的方法名（即 ``PyApi`` 中的 ``public static`` 方法）。 位置参数。列表会被自动强制转换为元组。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">default</span><span class="param-type-tag">T</span><span class="param-default-val">= _UNSET</span></div><p class="param-desc-text">Stub 模式或调用失败时的默认返回值。若未提供且 C# 返回 ``None``， 则返回 ``None``。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">required</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">若为 ``True``，在 stub 模式下会抛出 :class:`PyeraNotInitializedError` 而不是返回 *default*。 C# 方法的返回值，或在不可用时的 *default*。 若 C# 调用本身抛出了异常。 若 ``required=True`` 且当前处于 stub 模式。 会阻塞 Python 的其他线程。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-close_debug_stream">
+<div class="api-header">
+<div><span class="api-name">close_debug_stream</span>
+</div>
+<div class="api-sig">close_debug_stream() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>关闭调试日志文件描述符并恢复原始 stdout/stderr。</p>
+<p>在游戏退出或需要释放资源时调用，确保日志文件被正确关闭。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_var_token">
+<div class="api-header">
+<div><span class="api-name">get_var_token</span>
+</div>
+<div class="api-sig">get_var_token(name: str) -&gt; Optional[Any]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>根据变量名获取引擎的 VariableToken 对象。</p>
+<p>这是访问 Emuera 变量系统的核心原语，用于替代直接调用
+``call(&quot;vars.get&quot;, ...)`` 的重复代码。</p>
+<p>Parameters
+----------
+name : str
+    变量名称（大小写不敏感，内部会自动转为小写）。</p>
+<p>Returns
+-------
+Any or None
+    引擎的 VariableToken 对象；若变量不存在或处于 stub 模式返回 ``None``。</p>
+<p>Notes
+-----
+返回的 token 是 C# 对象的 Python 引用。长时间大量持有 token 引用
+可能影响 C# 侧的垃圾回收。建议在需要时获取、使用完毕后释放引用。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">变量名称（大小写不敏感，内部会自动转为小写）。 引擎的 VariableToken 对象；若变量不存在或处于 stub 模式返回 ``None``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-var_get">
+<div class="api-header">
+<div><span class="api-name">var_get</span>
+</div>
+<div class="api-sig">var_get(token: Any, *indices) -&gt; Any</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>通过 VariableToken 安全读取变量值。</p>
+<p>封装了 ``token.Get(*indices)`` 调用，并将底层异常统一转换为
+:class:`PyeraVariableError`。</p>
+<p>Parameters
+----------
+token : Any
+    引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。
+*indices : int
+    变量下标，支持多维（例如 ``(chara_id, elem)``）。</p>
+<p>Returns
+-------
+Any
+    变量值（整数或字符串，取决于变量类型）。</p>
+<p>Raises
+------
+PyeraVariableError
+    当底层引擎读取失败时抛出。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">token</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div><p class="param-desc-text">引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。 变量下标，支持多维（例如 ``(chara_id, elem)``）。 变量值（整数或字符串，取决于变量类型）。 当底层引擎读取失败时抛出。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*indices</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-var_set">
+<div class="api-header">
+<div><span class="api-name">var_set</span>
+</div>
+<div class="api-sig">var_set(token: Any, value: Any, *indices) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>通过 VariableToken 安全写入变量值。</p>
+<p>封装了 ``token.Set(value, *indices)`` 调用，并将底层异常统一转换为
+:class:`PyeraVariableError`。</p>
+<p>Parameters
+----------
+token : Any
+    引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。
+value : Any
+    要写入的值（整数或字符串）。
+*indices : int
+    变量下标，支持多维。</p>
+<p>Returns
+-------
+None</p>
+<p>Raises
+------
+PyeraVariableError
+    当底层引擎写入失败时抛出。</p>
+<p>See Also
+--------
+get_var_token : 获取 VariableToken。
+var_get : 通过 VariableToken 读取变量值。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">token</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div><p class="param-desc-text">引擎的 VariableToken 对象（由 :func:`get_var_token` 获取）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div><p class="param-desc-text">要写入的值（整数或字符串）。 变量下标，支持多维。 当底层引擎写入失败时抛出。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*indices</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_main_thread">
+<div class="api-header">
+<div><span class="api-name">is_main_thread</span>
+</div>
+<div class="api-sig">is_main_thread() -&gt; bool</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查当前线程是否为主线程。</p>
+<p>Returns
+-------
+bool
+    当前线程是主线程时返回 ``True``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-ensure_main_thread">
+<div class="api-header">
+<div><span class="api-name">ensure_main_thread</span>
+</div>
+<div class="api-sig">ensure_main_thread(warn: bool = True) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>若当前不在主线程，发出警告。</p>
+<p>Emuera 引擎设计为单线程（UI 线程）。从后台线程调用引擎 API
+可能导致不可预测的行为。</p>
+<p>Parameters
+----------
+warn : bool, optional
+    为 ``True`` 时（默认），在非主线程调用时发出 :class:`RuntimeWarning`。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">warn</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">为 ``True`` 时（默认），在非主线程调用时发出 :class:`RuntimeWarning`。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-__init__">
+<div class="api-header">
+<div><span class="api-name">__init__</span>
+</div>
+<div class="api-sig">__init__(self, orig: Any) -&gt; None</div>
+</div>
+<div class="api-body">
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">orig</span><span class="param-required">必需</span><span class="param-type-tag">Any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-write">
+<div class="api-header">
+<div><span class="api-name">write</span>
+</div>
+<div class="api-sig">write(self, data: str) -&gt; None</div>
+</div>
+<div class="api-body">
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">data</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-flush">
+<div class="api-header">
+<div><span class="api-name">flush</span>
+</div>
+<div class="api-sig">flush(self) -&gt; None</div>
+</div>
+<div class="api-body">
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-encoding">
+<div class="api-header">
+<div><span class="api-name">encoding</span>
+</div>
+<div class="api-sig">encoding(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-errors">
+<div class="api-header">
+<div><span class="api-name">errors</span>
+</div>
+<div class="api-sig">errors(self) -&gt; str</div>
+</div>
+<div class="api-body">
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-isatty">
+<div class="api-header">
+<div><span class="api-name">isatty</span>
+</div>
+<div class="api-sig">isatty(self) -&gt; bool</div>
+</div>
+<div class="api-body">
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">self</span><span class="param-required">必需</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "enable_trace", "desc": "启用或禁用调用追踪。\n\n启用后，所有通过 :func:`call` 发起的 C# API 调用都会被记录到内部缓冲区，\n便于调试时分析调用序列。\n\nParame", "url": "./core.html#function-enable_trace"}, {"name": "get_trace_log", "desc": "返回已累计的调用追踪日志副本。\n\nReturns\n-------\nlist[str]\n    追踪记录字符串列表。", "url": "./core.html#function-get_trace_log"}, {"name": "clear_trace_log", "desc": "清空调用追踪缓冲区。\n\n与 :func:`get_trace_log` 配合使用，可在长时间运行或大量调用后\n释放内存并重置追踪状态。\n\nReturns\n---", "url": "./core.html#function-clear_trace_log"}, {"name": "set_trace_max_size", "desc": "设置追踪日志缓冲区的最大条目数。\n\n超过上限后，旧的记录会自动丢弃（FIFO）。\n\nParameters\n----------\nsize : int\n    最", "url": "./core.html#function-set_trace_max_size"}, {"name": "register_coerce", "desc": "注册自定义类型转换器，用于 Python → C# 的参数传递。\n\n当 ``call()`` 遇到 *py_type* 类型的参数时，会先用 *converte", "url": "./core.html#function-register_coerce"}, {"name": "call", "desc": "按名称调用 C# API 方法。\n\n这是 Python 侧与 C# 引擎交互的核心原语。所有其他模块的引擎调用\n最终都应通过此函数完成。\n\nParameters", "url": "./core.html#function-call"}, {"name": "close_debug_stream", "desc": "关闭调试日志文件描述符并恢复原始 stdout/stderr。\n\n在游戏退出或需要释放资源时调用，确保日志文件被正确关闭。\n\nReturns\n-------\nN", "url": "./core.html#function-close_debug_stream"}, {"name": "get_var_token", "desc": "根据变量名获取引擎的 VariableToken 对象。\n\n这是访问 Emuera 变量系统的核心原语，用于替代直接调用\n``call(\"vars.get\", ", "url": "./core.html#function-get_var_token"}, {"name": "var_get", "desc": "通过 VariableToken 安全读取变量值。\n\n封装了 ``token.Get(*indices)`` 调用，并将底层异常统一转换为\n:class:`Py", "url": "./core.html#function-var_get"}, {"name": "var_set", "desc": "通过 VariableToken 安全写入变量值。\n\n封装了 ``token.Set(value, *indices)`` 调用，并将底层异常统一转换为\n:cl", "url": "./core.html#function-var_set"}, {"name": "is_main_thread", "desc": "检查当前线程是否为主线程。\n\nReturns\n-------\nbool\n    当前线程是主线程时返回 ``True``。", "url": "./core.html#function-is_main_thread"}, {"name": "ensure_main_thread", "desc": "若当前不在主线程，发出警告。\n\nEmuera 引擎设计为单线程（UI 线程）。从后台线程调用引擎 API\n可能导致不可预测的行为。\n\nParameters\n--", "url": "./core.html#function-ensure_main_thread"}, {"name": "__init__", "desc": "", "url": "./core.html#function-__init__"}, {"name": "write", "desc": "", "url": "./core.html#function-write"}, {"name": "flush", "desc": "", "url": "./core.html#function-flush"}, {"name": "encoding", "desc": "", "url": "./core.html#function-encoding"}, {"name": "errors", "desc": "", "url": "./core.html#function-errors"}, {"name": "isatty", "desc": "", "url": "./core.html#function-isatty"}, {"name": "enable_trace", "desc": "启用或禁用调用追踪。\n\n启用后，所有通过 :func:`call` 发起的 C# API 调用都会被记录到内部缓冲区，\n便于调试时分析调用序列。\n\nParame", "url": "./core.html#function-enable_trace"}, {"name": "get_trace_log", "desc": "返回已累计的调用追踪日志副本。\n\nReturns\n-------\nlist[str]\n    追踪记录字符串列表。", "url": "./core.html#function-get_trace_log"}, {"name": "clear_trace_log", "desc": "清空调用追踪缓冲区。\n\n与 :func:`get_trace_log` 配合使用，可在长时间运行或大量调用后\n释放内存并重置追踪状态。\n\nReturns\n---", "url": "./core.html#function-clear_trace_log"}, {"name": "set_trace_max_size", "desc": "设置追踪日志缓冲区的最大条目数。\n\n超过上限后，旧的记录会自动丢弃（FIFO）。\n\nParameters\n----------\nsize : int\n    最", "url": "./core.html#function-set_trace_max_size"}, {"name": "register_coerce", "desc": "注册自定义类型转换器，用于 Python → C# 的参数传递。\n\n当 ``call()`` 遇到 *py_type* 类型的参数时，会先用 *converte", "url": "./core.html#function-register_coerce"}, {"name": "call", "desc": "按名称调用 C# API 方法。\n\n这是 Python 侧与 C# 引擎交互的核心原语。所有其他模块的引擎调用\n最终都应通过此函数完成。\n\nParameters", "url": "./core.html#function-call"}, {"name": "close_debug_stream", "desc": "关闭调试日志文件描述符并恢复原始 stdout/stderr。\n\n在游戏退出或需要释放资源时调用，确保日志文件被正确关闭。\n\nReturns\n-------\nN", "url": "./core.html#function-close_debug_stream"}, {"name": "get_var_token", "desc": "根据变量名获取引擎的 VariableToken 对象。\n\n这是访问 Emuera 变量系统的核心原语，用于替代直接调用\n``call(\"vars.get\", ", "url": "./core.html#function-get_var_token"}, {"name": "var_get", "desc": "通过 VariableToken 安全读取变量值。\n\n封装了 ``token.Get(*indices)`` 调用，并将底层异常统一转换为\n:class:`Py", "url": "./core.html#function-var_get"}, {"name": "var_set", "desc": "通过 VariableToken 安全写入变量值。\n\n封装了 ``token.Set(value, *indices)`` 调用，并将底层异常统一转换为\n:cl", "url": "./core.html#function-var_set"}, {"name": "is_main_thread", "desc": "检查当前线程是否为主线程。\n\nReturns\n-------\nbool\n    当前线程是主线程时返回 ``True``。", "url": "./core.html#function-is_main_thread"}, {"name": "ensure_main_thread", "desc": "若当前不在主线程，发出警告。\n\nEmuera 引擎设计为单线程（UI 线程）。从后台线程调用引擎 API\n可能导致不可预测的行为。\n\nParameters\n--", "url": "./core.html#function-ensure_main_thread"}, {"name": "__init__", "desc": "", "url": "./core.html#function-__init__"}, {"name": "write", "desc": "", "url": "./core.html#function-write"}, {"name": "flush", "desc": "", "url": "./core.html#function-flush"}, {"name": "encoding", "desc": "", "url": "./core.html#function-encoding"}, {"name": "errors", "desc": "", "url": "./core.html#function-errors"}, {"name": "isatty", "desc": "", "url": "./core.html#function-isatty"}, {"name": "enable_trace", "desc": "启用或禁用调用追踪。\n\n启用后，所有通过 :func:`call` 发起的 C# API 调用都会被记录到内部缓冲区，\n便于调试时分析调用序列。\n\nParame", "url": "./core.html#function-enable_trace"}, {"name": "get_trace_log", "desc": "返回已累计的调用追踪日志副本。\n\nReturns\n-------\nlist[str]\n    追踪记录字符串列表。", "url": "./core.html#function-get_trace_log"}, {"name": "clear_trace_log", "desc": "清空调用追踪缓冲区。\n\n与 :func:`get_trace_log` 配合使用，可在长时间运行或大量调用后\n释放内存并重置追踪状态。\n\nReturns\n---", "url": "./core.html#function-clear_trace_log"}, {"name": "set_trace_max_size", "desc": "设置追踪日志缓冲区的最大条目数。\n\n超过上限后，旧的记录会自动丢弃（FIFO）。\n\nParameters\n----------\nsize : int\n    最", "url": "./core.html#function-set_trace_max_size"}, {"name": "register_coerce", "desc": "注册自定义类型转换器，用于 Python → C# 的参数传递。\n\n当 ``call()`` 遇到 *py_type* 类型的参数时，会先用 *converte", "url": "./core.html#function-register_coerce"}, {"name": "call", "desc": "按名称调用 C# API 方法。\n\n这是 Python 侧与 C# 引擎交互的核心原语。所有其他模块的引擎调用\n最终都应通过此函数完成。\n\nParameters", "url": "./core.html#function-call"}, {"name": "close_debug_stream", "desc": "关闭调试日志文件描述符并恢复原始 stdout/stderr。\n\n在游戏退出或需要释放资源时调用，确保日志文件被正确关闭。\n\nReturns\n-------\nN", "url": "./core.html#function-close_debug_stream"}, {"name": "get_var_token", "desc": "根据变量名获取引擎的 VariableToken 对象。\n\n这是访问 Emuera 变量系统的核心原语，用于替代直接调用\n``call(\"vars.get\", ", "url": "./core.html#function-get_var_token"}, {"name": "var_get", "desc": "通过 VariableToken 安全读取变量值。\n\n封装了 ``token.Get(*indices)`` 调用，并将底层异常统一转换为\n:class:`Py", "url": "./core.html#function-var_get"}, {"name": "var_set", "desc": "通过 VariableToken 安全写入变量值。\n\n封装了 ``token.Set(value, *indices)`` 调用，并将底层异常统一转换为\n:cl", "url": "./core.html#function-var_set"}, {"name": "is_main_thread", "desc": "检查当前线程是否为主线程。\n\nReturns\n-------\nbool\n    当前线程是主线程时返回 ``True``。", "url": "./core.html#function-is_main_thread"}, {"name": "ensure_main_thread", "desc": "若当前不在主线程，发出警告。\n\nEmuera 引擎设计为单线程（UI 线程）。从后台线程调用引擎 API\n可能导致不可预测的行为。\n\nParameters\n--", "url": "./core.html#function-ensure_main_thread"}, {"name": "__init__", "desc": "", "url": "./core.html#function-__init__"}, {"name": "write", "desc": "", "url": "./core.html#function-write"}, {"name": "flush", "desc": "", "url": "./core.html#function-flush"}, {"name": "encoding", "desc": "", "url": "./core.html#function-encoding"}, {"name": "errors", "desc": "", "url": "./core.html#function-errors"}, {"name": "isatty", "desc": "", "url": "./core.html#function-isatty"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

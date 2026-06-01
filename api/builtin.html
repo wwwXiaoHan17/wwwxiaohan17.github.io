@@ -1,0 +1,4304 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 内置函数</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 内置函数</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>内置函数</h1>
+<div class="api-card" id="function-max_">
+<div class="api-header">
+<div><span class="api-name">max_</span>
+ <span class="api-erb">MAX</span>
+</div>
+<div class="api-sig">max_(a: int, b: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回两个整数中的较大值（MAX 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+a : int
+    第一个整数。
+b : int
+    第二个整数。</p>
+<p>Returns
+-------
+int
+    *a* 和 *b* 中较大的那个。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">a</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第一个整数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">b</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第二个整数。 *a* 和 *b* 中较大的那个。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-min_">
+<div class="api-header">
+<div><span class="api-name">min_</span>
+ <span class="api-erb">MIN</span>
+</div>
+<div class="api-sig">min_(a: int, b: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回两个整数中的较小值（MIN 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+a : int
+    第一个整数。
+b : int
+    第二个整数。</p>
+<p>Returns
+-------
+int
+    *a* 和 *b* 中较小的那个。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">a</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第一个整数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">b</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第二个整数。 *a* 和 *b* 中较小的那个。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-limit">
+<div class="api-header">
+<div><span class="api-name">limit</span>
+ <span class="api-erb">LIMIT</span>
+</div>
+<div class="api-sig">limit(value: int, min_val: int, max_val: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将整数限制在指定闭区间内（LIMIT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要限制的原始值。
+min_val : int
+    下限值。
+max_val : int
+    上限值。</p>
+<p>Returns
+-------
+int
+    被限制后的值。若 *value* 小于 *min_val* 返回 *min_val*；
+    若大于 *max_val* 返回 *max_val*；否则返回原值。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要限制的原始值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">min_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">下限值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">上限值。 被限制后的值。若 *value* 小于 *min_val* 返回 *min_val*； 若大于 *max_val* 返回 *max_val*；否则返回原值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-abs_">
+<div class="api-header">
+<div><span class="api-name">abs_</span>
+ <span class="api-erb">ABS</span>
+</div>
+<div class="api-sig">abs_(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的绝对值（ABS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    输入整数。</p>
+<p>Returns
+-------
+int
+    *value* 的绝对值。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数。 *value* 的绝对值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-power_">
+<div class="api-header">
+<div><span class="api-name">power_</span>
+ <span class="api-erb">POWER</span>
+</div>
+<div class="api-sig">power_(base: int, exp: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算整数的幂次方（POWER 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+base : int
+    底数。
+exp : int
+    指数。</p>
+<p>Returns
+-------
+int
+    ``base ** exp`` 的整数结果。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">base</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">底数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">exp</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">指数。 ``base ** exp`` 的整数结果。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-match">
+<div class="api-header">
+<div><span class="api-name">match</span>
+ <span class="api-erb">MATCH</span>
+</div>
+<div class="api-sig">match(name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计整数数组中指定值的出现次数（MATCH 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+target : int
+    要匹配的值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    匹配元素的总数量。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 匹配元素的总数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-smatch">
+<div class="api-header">
+<div><span class="api-name">smatch</span>
+ <span class="api-erb">MATCH</span>
+</div>
+<div class="api-sig">smatch(name: str, target: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计字符串数组中指定值的出现次数（MATCH 指令的 Python 封装，字符串版）。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+target : str
+    要匹配的字符串。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    匹配元素的总数量。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要匹配的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 匹配元素的总数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-cmatch">
+<div class="api-header">
+<div><span class="api-name">cmatch</span>
+ <span class="api-erb">CMATCH</span>
+</div>
+<div class="api-sig">cmatch(name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计角色整数数组中指定值的出现次数（CMATCH 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标角色数组变量名。
+target : int
+    要匹配的值。
+start : int, optional
+    搜索起始角色索引（默认为 ``0``）。
+end : int, optional
+    搜索结束角色索引（``-1`` 表示到最后一个角色）。</p>
+<p>Returns
+-------
+int
+    匹配角色的总数量。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标角色数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始角色索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束角色索引（``-1`` 表示到最后一个角色）。 匹配角色的总数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sum_array">
+<div class="api-header">
+<div><span class="api-name">sum_array</span>
+ <span class="api-erb">SUMARRAY</span>
+</div>
+<div class="api-sig">sum_array(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算整数数组的元素总和（SUMARRAY 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    求和起始索引（默认为 ``0``）。
+end : int, optional
+    求和结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    数组元素的总和。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">求和起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">求和结束索引（``-1`` 表示到数组末尾）。 数组元素的总和。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-find_array">
+<div class="api-header">
+<div><span class="api-name">find_array</span>
+ <span class="api-erb">FINDARRAY</span>
+</div>
+<div class="api-sig">find_array(name: str, target: int, start: int = 0, end: int = -1, exact: bool = True, last: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在整数数组中查找指定值（FINDARRAY 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+target : int
+    要查找的值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。
+exact : bool, optional
+    是否进行精确匹配（默认为 ``True``）。
+last : bool, optional
+    是否从末尾开始反向查找（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    找到的数组索引；未找到返回 ``-1``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要查找的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">exact</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否进行精确匹配（默认为 ``True``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">last</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否从末尾开始反向查找（默认为 ``False``）。 找到的数组索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sfind_array">
+<div class="api-header">
+<div><span class="api-name">sfind_array</span>
+ <span class="api-erb">FINDARRAY</span>
+</div>
+<div class="api-sig">sfind_array(name: str, target: str, start: int = 0, end: int = -1, exact: bool = True, last: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在字符串数组中查找指定值（FINDARRAY 指令的 Python 封装，字符串版）。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+target : str
+    要查找的字符串。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。
+exact : bool, optional
+    是否进行精确匹配（默认为 ``True``）。
+last : bool, optional
+    是否从末尾开始反向查找（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    找到的数组索引；未找到返回 ``-1``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要查找的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">exact</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否进行精确匹配（默认为 ``True``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">last</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否从末尾开始反向查找（默认为 ``False``）。 找到的数组索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-in_range">
+<div class="api-header">
+<div><span class="api-name">in_range</span>
+ <span class="api-erb">INRANGE</span>
+</div>
+<div class="api-sig">in_range(value: int, min_val: int, max_val: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断整数是否在指定闭区间内（INRANGE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要判断的值。
+min_val : int
+    区间下限。
+max_val : int
+    区间上限。</p>
+<p>Returns
+-------
+int
+    若 *value* 在 ``[min_val, max_val]`` 范围内返回 ``1``，否则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要判断的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">min_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">区间下限。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">区间上限。 若 *value* 在 ``[min_val, max_val]`` 范围内返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_len_sjis">
+<div class="api-header">
+<div><span class="api-name">str_len_sjis</span>
+ <span class="api-erb">STRLENS</span>
+</div>
+<div class="api-sig">str_len_sjis(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算字符串在 Shift-JIS 编码下的字节长度（STRLENS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    输入字符串。</p>
+<p>Returns
+-------
+int
+    Shift-JIS 编码后的字节长度。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">输入字符串。 Shift-JIS 编码后的字节长度。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_len_u">
+<div class="api-header">
+<div><span class="api-name">str_len_u</span>
+ <span class="api-erb">STRLENSU</span>
+</div>
+<div class="api-sig">str_len_u(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算字符串的 Unicode 字符数（STRLENSU 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    输入字符串。</p>
+<p>Returns
+-------
+int
+    Unicode 字符数量（与 Python ``len(s)`` 等价）。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">输入字符串。 Unicode 字符数量（与 Python ``len(s)`` 等价）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_find">
+<div class="api-header">
+<div><span class="api-name">str_find</span>
+ <span class="api-erb">STRFIND</span>
+</div>
+<div class="api-sig">str_find(s: str, sub: str, start: int = 0) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在字符串中查找子串首次出现的位置（STRFIND 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    被搜索的字符串。
+sub : str
+    要查找的子串。
+start : int, optional
+    搜索起始位置（默认为 ``0``）。</p>
+<p>Returns
+-------
+int
+    子串首次出现的索引；未找到返回 ``-1``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">被搜索的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sub</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要查找的子串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始位置（默认为 ``0``）。 子串首次出现的索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_find_u">
+<div class="api-header">
+<div><span class="api-name">str_find_u</span>
+ <span class="api-erb">STRFINDU</span>
+</div>
+<div class="api-sig">str_find_u(s: str, sub: str, start: int = 0) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在字符串中查找子串首次出现的位置（STRFINDU 指令的 Python 封装）。</p>
+<p>与 ``str_find`` 功能相同，区别在于按 Unicode 字符计数位置。</p>
+<p>Parameters
+----------
+s : str
+    被搜索的字符串。
+sub : str
+    要查找的子串。
+start : int, optional
+    搜索起始位置（默认为 ``0``）。</p>
+<p>Returns
+-------
+int
+    子串首次出现的 Unicode 字符索引；未找到返回 ``-1``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">被搜索的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sub</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要查找的子串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始位置（默认为 ``0``）。 子串首次出现的 Unicode 字符索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-substring">
+<div class="api-header">
+<div><span class="api-name">substring</span>
+ <span class="api-erb">SUBSTRING</span>
+</div>
+<div class="api-sig">substring(s: str, start: int, length: int = -1) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>截取字符串的子串（SUBSTRING 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    源字符串。
+start : int
+    截取起始索引。
+length : int, optional
+    截取长度；``-1`` 表示截取到字符串末尾。</p>
+<p>Returns
+-------
+str
+    截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">截取起始索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">length</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">截取长度；``-1`` 表示截取到字符串末尾。 截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-substring_u">
+<div class="api-header">
+<div><span class="api-name">substring_u</span>
+ <span class="api-erb">SUBSTRINGU</span>
+</div>
+<div class="api-sig">substring_u(s: str, start: int, length: int = -1) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>截取字符串的子串（SUBSTRINGU 指令的 Python 封装）。</p>
+<p>与 ``substring`` 功能相同，区别在于按 Unicode 字符计数位置和长度。</p>
+<p>Parameters
+----------
+s : str
+    源字符串。
+start : int
+    截取起始索引（Unicode 字符位置）。
+length : int, optional
+    截取长度（Unicode 字符数）；``-1`` 表示截取到字符串末尾。</p>
+<p>Returns
+-------
+str
+    截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">截取起始索引（Unicode 字符位置）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">length</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">截取长度（Unicode 字符数）；``-1`` 表示截取到字符串末尾。 截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_count">
+<div class="api-header">
+<div><span class="api-name">str_count</span>
+ <span class="api-erb">STRCOUNT</span>
+</div>
+<div class="api-sig">str_count(s: str, sub: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计子串在字符串中的出现次数（STRCOUNT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    被搜索的字符串。
+sub : str
+    要统计的子串。</p>
+<p>Returns
+-------
+int
+    子串出现次数；任一参数为空返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">被搜索的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sub</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要统计的子串。 子串出现次数；任一参数为空返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_join">
+<div class="api-header">
+<div><span class="api-name">str_join</span>
+ <span class="api-erb">STRJOIN</span>
+</div>
+<div class="api-sig">str_join(delimiter: str, *parts) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>用分隔符连接多个字符串（STRJOIN 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+delimiter : str
+    分隔符字符串。
+*parts : str
+    可变参数，要连接的字符串序列。</p>
+<p>Returns
+-------
+str
+    连接后的结果字符串。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">delimiter</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">分隔符字符串。 可变参数，要连接的字符串序列。 连接后的结果字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*parts</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-replace">
+<div class="api-header">
+<div><span class="api-name">replace</span>
+ <span class="api-erb">REPLACE</span>
+</div>
+<div class="api-sig">replace(s: str, old: str, new: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>替换字符串中的子串（REPLACE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    源字符串。
+old : str
+    要被替换的子串。
+new : str
+    用于替换的新子串。</p>
+<p>Returns
+-------
+str
+    替换后的字符串；*old* 未出现时返回原字符串。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">old</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要被替换的子串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">new</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">用于替换的新子串。 替换后的字符串；*old* 未出现时返回原字符串。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-to_str">
+<div class="api-header">
+<div><span class="api-name">to_str</span>
+ <span class="api-erb">TOSTR</span>
+</div>
+<div class="api-sig">to_str(value: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将整数转换为字符串（TOSTR 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要转换的整数。</p>
+<p>Returns
+-------
+str
+    对应的十进制字符串表示。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要转换的整数。 对应的十进制字符串表示。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-to_int">
+<div class="api-header">
+<div><span class="api-name">to_int</span>
+ <span class="api-erb">TOINT</span>
+</div>
+<div class="api-sig">to_int(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将字符串转换为整数（TOINT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    要转换的字符串。</p>
+<p>Returns
+-------
+int
+    转换后的整数值；无法转换时返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要转换的字符串。 转换后的整数值；无法转换时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-group_match">
+<div class="api-header">
+<div><span class="api-name">group_match</span>
+ <span class="api-erb">GROUPMATCH</span>
+</div>
+<div class="api-sig">group_match(target: int, *values) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断目标值是否匹配给定的任意一个值（GROUPMATCH 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+target : int
+    要比较的目标值。
+*values : int
+    可变参数，一组参考值。</p>
+<p>Returns
+-------
+int
+    若 *target* 与任一参考值相等则返回 ``1``，否则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要比较的目标值。 可变参数，一组参考值。 若 *target* 与任一参考值相等则返回 ``1``，否则返回 ``0``。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*values</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sign">
+<div class="api-header">
+<div><span class="api-name">sign</span>
+ <span class="api-erb">SIGN</span>
+</div>
+<div class="api-sig">sign(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的符号（SIGN 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    输入整数。</p>
+<p>Returns
+-------
+int
+    正数返回 ``1``，负数返回 ``-1``，零返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数。 正数返回 ``1``，负数返回 ``-1``，零返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-money_str">
+<div class="api-header">
+<div><span class="api-name">money_str</span>
+ <span class="api-erb">MONEYSTR</span>
+</div>
+<div class="api-sig">money_str(value: int, unit: str = '') -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>格式化金额字符串（MONEYSTR 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    金额数值。
+unit : str, optional
+    货币单位（默认为空，使用引擎配置中的 MoneyLabel）。</p>
+<p>Returns
+-------
+str
+    格式化后的金额字符串（例如 ``&quot;1000G&quot;``）。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">金额数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">unit</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">货币单位（默认为空，使用引擎配置中的 MoneyLabel）。 格式化后的金额字符串（例如 ``&quot;1000G&quot;``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_palam_lv">
+<div class="api-header">
+<div><span class="api-name">get_palam_lv</span>
+ <span class="api-erb">GETPALAMLV</span>
+</div>
+<div class="api-sig">get_palam_lv(value: int, max_lv: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>根据数值计算 PALAM 等级（GETPALAMLV 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    当前 PALAM 数值。
+max_lv : int
+    最大等级上限。</p>
+<p>Returns
+-------
+int
+    计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">当前 PALAM 数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_lv</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">最大等级上限。 计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_exp_lv">
+<div class="api-header">
+<div><span class="api-name">get_exp_lv</span>
+ <span class="api-erb">GETEXPLV</span>
+</div>
+<div class="api-sig">get_exp_lv(value: int, max_lv: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>根据数值计算 EXP 等级（GETEXPLV 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    当前 EXP 数值。
+max_lv : int
+    最大等级上限。</p>
+<p>Returns
+-------
+int
+    计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">当前 EXP 数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_lv</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">最大等级上限。 计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-save_nos">
+<div class="api-header">
+<div><span class="api-name">save_nos</span>
+ <span class="api-erb">SAVENOS</span>
+</div>
+<div class="api-sig">save_nos() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取配置的存档槽位总数（SAVENOS 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    引擎配置中允许的存档槽位数量。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-is_skip">
+<div class="api-header">
+<div><span class="api-name">is_skip</span>
+ <span class="api-erb">ISSKIP</span>
+</div>
+<div class="api-sig">is_skip() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查是否处于消息跳过状态（ISSKIP 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    若玩家当前按住跳过键或处于自动跳过模式返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_config">
+<div class="api-header">
+<div><span class="api-name">get_config</span>
+ <span class="api-erb">GETCONFIG</span>
+</div>
+<div class="api-sig">get_config(name: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取整数型配置项（GETCONFIG 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    配置项名称（例如 ``&quot;maxLine&quot;``、``&quot;printCPerLine&quot;``）。</p>
+<p>Returns
+-------
+int
+    配置项的整数值；配置不存在返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">配置项名称（例如 ``&quot;maxLine&quot;``、``&quot;printCPerLine&quot;``）。 配置项的整数值；配置不存在返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_configs">
+<div class="api-header">
+<div><span class="api-name">get_configs</span>
+ <span class="api-erb">GETCONFIGS</span>
+</div>
+<div class="api-sig">get_configs(name: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取字符串型配置项（GETCONFIGS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    配置项名称（例如 ``&quot;fontName&quot;``）。</p>
+<p>Returns
+-------
+str
+    配置项的字符串值；配置不存在返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">配置项名称（例如 ``&quot;fontName&quot;``）。 配置项的字符串值；配置不存在返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-rand">
+<div class="api-header">
+<div><span class="api-name">rand</span>
+ <span class="api-erb">RAND</span>
+</div>
+<div class="api-sig">rand(max_val: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>生成随机整数（RAND 指令的 Python 封装）。</p>
+<p>返回范围 ``[0, max_val)`` 内的伪随机整数。</p>
+<p>Parameters
+----------
+max_val : int
+    随机数上限（不包含）。</p>
+<p>Returns
+-------
+int
+    随机整数值；*max_val* &lt;= 0 时返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">max_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">随机数上限（不包含）。 随机整数值；*max_val* &lt;= 0 时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_time">
+<div class="api-header">
+<div><span class="api-name">get_time</span>
+ <span class="api-erb">GETTIME</span>
+</div>
+<div class="api-sig">get_time() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间戳（GETTIME 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    当前时间的打包整数值，格式为 ``yyyymmddHHMMSSmmm``
+    （年、月、日、时、分、秒、毫秒）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_time_str">
+<div class="api-header">
+<div><span class="api-name">get_time_str</span>
+</div>
+<div class="api-sig">get_time_str() -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间的格式化字符串。</p>
+<p>Returns
+-------
+str
+    当前时间的字符串表示，格式为 ``&quot;yyyy/MM/dd HH:mm:ss&quot;``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_millisecond">
+<div class="api-header">
+<div><span class="api-name">get_millisecond</span>
+ <span class="api-erb">GETMILLISECOND</span>
+</div>
+<div class="api-sig">get_millisecond() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间的毫秒部分（GETMILLISECOND 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    自系统启动以来的毫秒数（与 ``DateTime.Now.Ticks / 10000`` 等价）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_second">
+<div class="api-header">
+<div><span class="api-name">get_second</span>
+ <span class="api-erb">GETSECOND</span>
+</div>
+<div class="api-sig">get_second() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间的秒部分（GETSECOND 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    自系统启动以来的秒数（与 ``DateTime.Now.Ticks / 10000000`` 等价）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-randomize">
+<div class="api-header">
+<div><span class="api-name">randomize</span>
+ <span class="api-erb">RANDOMIZE</span>
+</div>
+<div class="api-sig">randomize(seed: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置随机数种子（RANDOMIZE 指令的 Python 封装）。</p>
+<p>在使用旧版随机数生成器时生效（新版随机器为自动种子管理）。</p>
+<p>Parameters
+----------
+seed : int
+    随机数种子值。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">seed</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">随机数种子值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-init_rand">
+<div class="api-header">
+<div><span class="api-name">init_rand</span>
+ <span class="api-erb">INITRAND</span>
+</div>
+<div class="api-sig">init_rand() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>重新初始化随机数生成器（INITRAND 指令的 Python 封装）。</p>
+<p>在使用旧版随机数生成器时，使用当前时间作为新种子重新初始化。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-dump_rand">
+<div class="api-header">
+<div><span class="api-name">dump_rand</span>
+ <span class="api-erb">DUMPRAND</span>
+</div>
+<div class="api-sig">dump_rand() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出当前随机数生成器状态（DUMPRAND 指令的 Python 封装）。</p>
+<p>将当前随机序列的内部状态打印到控制台，便于调试。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-sqrt">
+<div class="api-header">
+<div><span class="api-name">sqrt</span>
+ <span class="api-erb">SQRT</span>
+</div>
+<div class="api-sig">sqrt(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的平方根（SQRT 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python ``math.isqrt`` 实现。</p>
+<p>Parameters
+----------
+value : int
+    输入整数（必须非负）。</p>
+<p>Returns
+-------
+int
+    平方根的整数部分（向下取整）。</p>
+<p>Raises
+------
+ValueError
+    若 *value* 为负数。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数（必须非负）。 平方根的整数部分（向下取整）。 若 *value* 为负数。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-cbrt">
+<div class="api-header">
+<div><span class="api-name">cbrt</span>
+ <span class="api-erb">CBRT</span>
+</div>
+<div class="api-sig">cbrt(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的立方根（CBRT 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python 实现。</p>
+<p>Parameters
+----------
+value : int
+    输入整数。</p>
+<p>Returns
+-------
+int
+    立方根的整数部分（符号与输入一致）。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数。 立方根的整数部分（符号与输入一致）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_">
+<div class="api-header">
+<div><span class="api-name">log_</span>
+ <span class="api-erb">LOG</span>
+</div>
+<div class="api-sig">log_(value: int, base: int = 10) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的对数（LOG 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python ``math.log`` 实现。</p>
+<p>Parameters
+----------
+value : int
+    真数（必须为正）。
+base : int, optional
+    对数的底数（默认为 ``10``）。</p>
+<p>Returns
+-------
+int
+    对数值的整数部分（向下取整）。</p>
+<p>Raises
+------
+ValueError
+    若 *value* &lt;= 0 或 *base* &lt;= 0。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">真数（必须为正）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">base</span><span class="param-type-tag">int</span><span class="param-default-val">= 10</span></div><p class="param-desc-text">对数的底数（默认为 ``10``）。 对数值的整数部分（向下取整）。 若 *value* &lt;= 0 或 *base* &lt;= 0。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-exp_">
+<div class="api-header">
+<div><span class="api-name">exp_</span>
+ <span class="api-erb">EXP</span>
+</div>
+<div class="api-sig">exp_(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回 e 的幂次方（EXP 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python ``math.exp`` 实现。</p>
+<p>Parameters
+----------
+value : int
+    指数。</p>
+<p>Returns
+-------
+int
+    ``e ** value`` 的整数部分。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">指数。 ``e ** value`` 的整数部分。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-max_array">
+<div class="api-header">
+<div><span class="api-name">max_array</span>
+ <span class="api-erb">MAXARRAY</span>
+</div>
+<div class="api-sig">max_array(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数数组中的最大值（MAXARRAY 指令的 Python 封装）。</p>
+<p>遍历指定变量数组，返回最大元素值。空数组返回 ``0``。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    数组中的最大值；数组为空时返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 数组中的最大值；数组为空时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-min_array">
+<div class="api-header">
+<div><span class="api-name">min_array</span>
+ <span class="api-erb">MINARRAY</span>
+</div>
+<div class="api-sig">min_array(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数数组中的最小值（MINARRAY 指令的 Python 封装）。</p>
+<p>遍历指定变量数组，返回最小元素值。空数组返回 ``0``。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    数组中的最小值；数组为空时返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 数组中的最小值；数组为空时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_num">
+<div class="api-header">
+<div><span class="api-name">get_num</span>
+ <span class="api-erb">GETNUM</span>
+</div>
+<div class="api-sig">get_num(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计数组中非零元素的数量（GETNUM 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    统计起始索引（默认为 ``0``）。
+end : int, optional
+    统计结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    非零元素的数量。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">统计起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">统计结束索引（``-1`` 表示到数组末尾）。 非零元素的数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_num_s">
+<div class="api-header">
+<div><span class="api-name">get_num_s</span>
+ <span class="api-erb">GETNUMS</span>
+</div>
+<div class="api-sig">get_num_s(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计字符串数组中非空元素的数量（GETNUMS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+start : int, optional
+    统计起始索引（默认为 ``0``）。
+end : int, optional
+    统计结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    非空字符串的数量。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">统计起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">统计结束索引（``-1`` 表示到数组末尾）。 非空字符串的数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-exist_file">
+<div class="api-header">
+<div><span class="api-name">exist_file</span>
+ <span class="api-erb">EXISTFILE</span>
+</div>
+<div class="api-sig">exist_file(path: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查文件是否存在（EXISTFILE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+path : str
+    文件路径（相对于游戏根目录）。</p>
+<p>Returns
+-------
+int
+    文件存在返回 ``1``，否则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">文件路径（相对于游戏根目录）。 文件存在返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-exist_dir">
+<div class="api-header">
+<div><span class="api-name">exist_dir</span>
+</div>
+<div class="api-sig">exist_dir(path: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查目录是否存在。</p>
+<p>Parameters
+----------
+path : str
+    目录路径。</p>
+<p>Returns
+-------
+int
+    目录存在返回 ``1``，否则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目录路径。 目录存在返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-save_text">
+<div class="api-header">
+<div><span class="api-name">save_text</span>
+ <span class="api-erb">SAVETEXT</span>
+</div>
+<div class="api-sig">save_text(path: str, text: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将文本保存到文件（SAVETEXT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+path : str
+    文件路径。
+text : str
+    要保存的文本内容。</p>
+<p>Returns
+-------
+int
+    成功返回 ``1``，失败返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">文件路径。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">text</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要保存的文本内容。 成功返回 ``1``，失败返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-load_text">
+<div class="api-header">
+<div><span class="api-name">load_text</span>
+ <span class="api-erb">LOADTEXT</span>
+</div>
+<div class="api-sig">load_text(path: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>从文件加载文本（LOADTEXT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+path : str
+    文件路径。</p>
+<p>Returns
+-------
+str
+    文件内容；失败时返回空字符串。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">文件路径。 文件内容；失败时返回空字符串。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_numeric">
+<div class="api-header">
+<div><span class="api-name">is_numeric</span>
+ <span class="api-erb">ISNUMERIC</span>
+</div>
+<div class="api-sig">is_numeric(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查字符串是否为数字（ISNUMERIC 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    要检查的字符串。</p>
+<p>Returns
+-------
+int
+    是有效数字返回 ``1``，否则返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要检查的字符串。 是有效数字返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-escape_str">
+<div class="api-header">
+<div><span class="api-name">escape_str</span>
+ <span class="api-erb">ESCAPE</span>
+</div>
+<div class="api-sig">escape_str(s: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>转义字符串中的特殊字符（ESCAPE 指令的 Python 封装）。</p>
+<p>    将 ``\``、``&quot;``、``
+``、````、``   `` 等字符转义为安全形式。
+    与 ``json.dumps`` 不同，本函数**不会**为结果添加外层引号。</p>
+<p>    Parameters
+    ----------
+    s : str
+        源字符串。</p>
+<p>    Returns
+    -------
+    str
+        转义后的字符串。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。 Returns str 转义后的字符串。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-nosames">
+<div class="api-header">
+<div><span class="api-name">nosames</span>
+ <span class="api-erb">NOSAMES</span>
+</div>
+<div class="api-sig">nosames(*values) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查所有值互不相同（NOSAMES 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+*values : int
+    要检查的整数序列。</p>
+<p>Returns
+-------
+int
+    全部不同返回 ``1``，有重复返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*values</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-allsames">
+<div class="api-header">
+<div><span class="api-name">allsames</span>
+ <span class="api-erb">ALLSAMES</span>
+</div>
+<div class="api-sig">allsames(*values) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查所有值完全相同（ALLSAMES 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+*values : int
+    要检查的整数序列。</p>
+<p>Returns
+-------
+int
+    全部相同返回 ``1``，有不同返回 ``0``。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*values</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Built-in Functions</h1>
+<div class="api-card" id="function-max_">
+<div class="api-header">
+<div><span class="api-name">max_</span>
+ <span class="api-erb">MAX</span>
+</div>
+<div class="api-sig">max_(a: int, b: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回两个整数中的较大值（MAX 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+a : int
+    第一个整数。
+b : int
+    第二个整数。</p>
+<p>Returns
+-------
+int
+    *a* 和 *b* 中较大的那个。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">a</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第一个整数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">b</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第二个整数。 *a* 和 *b* 中较大的那个。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-min_">
+<div class="api-header">
+<div><span class="api-name">min_</span>
+ <span class="api-erb">MIN</span>
+</div>
+<div class="api-sig">min_(a: int, b: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回两个整数中的较小值（MIN 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+a : int
+    第一个整数。
+b : int
+    第二个整数。</p>
+<p>Returns
+-------
+int
+    *a* 和 *b* 中较小的那个。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">a</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第一个整数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">b</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第二个整数。 *a* 和 *b* 中较小的那个。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-limit">
+<div class="api-header">
+<div><span class="api-name">limit</span>
+ <span class="api-erb">LIMIT</span>
+</div>
+<div class="api-sig">limit(value: int, min_val: int, max_val: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将整数限制在指定闭区间内（LIMIT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要限制的原始值。
+min_val : int
+    下限值。
+max_val : int
+    上限值。</p>
+<p>Returns
+-------
+int
+    被限制后的值。若 *value* 小于 *min_val* 返回 *min_val*；
+    若大于 *max_val* 返回 *max_val*；否则返回原值。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要限制的原始值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">min_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">下限值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">上限值。 被限制后的值。若 *value* 小于 *min_val* 返回 *min_val*； 若大于 *max_val* 返回 *max_val*；否则返回原值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-abs_">
+<div class="api-header">
+<div><span class="api-name">abs_</span>
+ <span class="api-erb">ABS</span>
+</div>
+<div class="api-sig">abs_(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的绝对值（ABS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    输入整数。</p>
+<p>Returns
+-------
+int
+    *value* 的绝对值。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数。 *value* 的绝对值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-power_">
+<div class="api-header">
+<div><span class="api-name">power_</span>
+ <span class="api-erb">POWER</span>
+</div>
+<div class="api-sig">power_(base: int, exp: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算整数的幂次方（POWER 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+base : int
+    底数。
+exp : int
+    指数。</p>
+<p>Returns
+-------
+int
+    ``base ** exp`` 的整数结果。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">base</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">底数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">exp</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">指数。 ``base ** exp`` 的整数结果。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-match">
+<div class="api-header">
+<div><span class="api-name">match</span>
+ <span class="api-erb">MATCH</span>
+</div>
+<div class="api-sig">match(name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计整数数组中指定值的出现次数（MATCH 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+target : int
+    要匹配的值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    匹配元素的总数量。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 匹配元素的总数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-smatch">
+<div class="api-header">
+<div><span class="api-name">smatch</span>
+ <span class="api-erb">MATCH</span>
+</div>
+<div class="api-sig">smatch(name: str, target: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计字符串数组中指定值的出现次数（MATCH 指令的 Python 封装，字符串版）。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+target : str
+    要匹配的字符串。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    匹配元素的总数量。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要匹配的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 匹配元素的总数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-cmatch">
+<div class="api-header">
+<div><span class="api-name">cmatch</span>
+ <span class="api-erb">CMATCH</span>
+</div>
+<div class="api-sig">cmatch(name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计角色整数数组中指定值的出现次数（CMATCH 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标角色数组变量名。
+target : int
+    要匹配的值。
+start : int, optional
+    搜索起始角色索引（默认为 ``0``）。
+end : int, optional
+    搜索结束角色索引（``-1`` 表示到最后一个角色）。</p>
+<p>Returns
+-------
+int
+    匹配角色的总数量。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标角色数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始角色索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束角色索引（``-1`` 表示到最后一个角色）。 匹配角色的总数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sum_array">
+<div class="api-header">
+<div><span class="api-name">sum_array</span>
+ <span class="api-erb">SUMARRAY</span>
+</div>
+<div class="api-sig">sum_array(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算整数数组的元素总和（SUMARRAY 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    求和起始索引（默认为 ``0``）。
+end : int, optional
+    求和结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    数组元素的总和。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">求和起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">求和结束索引（``-1`` 表示到数组末尾）。 数组元素的总和。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-find_array">
+<div class="api-header">
+<div><span class="api-name">find_array</span>
+ <span class="api-erb">FINDARRAY</span>
+</div>
+<div class="api-sig">find_array(name: str, target: int, start: int = 0, end: int = -1, exact: bool = True, last: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在整数数组中查找指定值（FINDARRAY 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+target : int
+    要查找的值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。
+exact : bool, optional
+    是否进行精确匹配（默认为 ``True``）。
+last : bool, optional
+    是否从末尾开始反向查找（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    找到的数组索引；未找到返回 ``-1``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要查找的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">exact</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否进行精确匹配（默认为 ``True``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">last</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否从末尾开始反向查找（默认为 ``False``）。 找到的数组索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sfind_array">
+<div class="api-header">
+<div><span class="api-name">sfind_array</span>
+ <span class="api-erb">FINDARRAY</span>
+</div>
+<div class="api-sig">sfind_array(name: str, target: str, start: int = 0, end: int = -1, exact: bool = True, last: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在字符串数组中查找指定值（FINDARRAY 指令的 Python 封装，字符串版）。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+target : str
+    要查找的字符串。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。
+exact : bool, optional
+    是否进行精确匹配（默认为 ``True``）。
+last : bool, optional
+    是否从末尾开始反向查找（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    找到的数组索引；未找到返回 ``-1``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要查找的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">exact</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否进行精确匹配（默认为 ``True``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">last</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否从末尾开始反向查找（默认为 ``False``）。 找到的数组索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-in_range">
+<div class="api-header">
+<div><span class="api-name">in_range</span>
+ <span class="api-erb">INRANGE</span>
+</div>
+<div class="api-sig">in_range(value: int, min_val: int, max_val: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断整数是否在指定闭区间内（INRANGE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要判断的值。
+min_val : int
+    区间下限。
+max_val : int
+    区间上限。</p>
+<p>Returns
+-------
+int
+    若 *value* 在 ``[min_val, max_val]`` 范围内返回 ``1``，否则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要判断的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">min_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">区间下限。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">区间上限。 若 *value* 在 ``[min_val, max_val]`` 范围内返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_len_sjis">
+<div class="api-header">
+<div><span class="api-name">str_len_sjis</span>
+ <span class="api-erb">STRLENS</span>
+</div>
+<div class="api-sig">str_len_sjis(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算字符串在 Shift-JIS 编码下的字节长度（STRLENS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    输入字符串。</p>
+<p>Returns
+-------
+int
+    Shift-JIS 编码后的字节长度。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">输入字符串。 Shift-JIS 编码后的字节长度。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_len_u">
+<div class="api-header">
+<div><span class="api-name">str_len_u</span>
+ <span class="api-erb">STRLENSU</span>
+</div>
+<div class="api-sig">str_len_u(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算字符串的 Unicode 字符数（STRLENSU 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    输入字符串。</p>
+<p>Returns
+-------
+int
+    Unicode 字符数量（与 Python ``len(s)`` 等价）。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">输入字符串。 Unicode 字符数量（与 Python ``len(s)`` 等价）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_find">
+<div class="api-header">
+<div><span class="api-name">str_find</span>
+ <span class="api-erb">STRFIND</span>
+</div>
+<div class="api-sig">str_find(s: str, sub: str, start: int = 0) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在字符串中查找子串首次出现的位置（STRFIND 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    被搜索的字符串。
+sub : str
+    要查找的子串。
+start : int, optional
+    搜索起始位置（默认为 ``0``）。</p>
+<p>Returns
+-------
+int
+    子串首次出现的索引；未找到返回 ``-1``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">被搜索的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sub</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要查找的子串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始位置（默认为 ``0``）。 子串首次出现的索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_find_u">
+<div class="api-header">
+<div><span class="api-name">str_find_u</span>
+ <span class="api-erb">STRFINDU</span>
+</div>
+<div class="api-sig">str_find_u(s: str, sub: str, start: int = 0) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在字符串中查找子串首次出现的位置（STRFINDU 指令的 Python 封装）。</p>
+<p>与 ``str_find`` 功能相同，区别在于按 Unicode 字符计数位置。</p>
+<p>Parameters
+----------
+s : str
+    被搜索的字符串。
+sub : str
+    要查找的子串。
+start : int, optional
+    搜索起始位置（默认为 ``0``）。</p>
+<p>Returns
+-------
+int
+    子串首次出现的 Unicode 字符索引；未找到返回 ``-1``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">被搜索的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sub</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要查找的子串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始位置（默认为 ``0``）。 子串首次出现的 Unicode 字符索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-substring">
+<div class="api-header">
+<div><span class="api-name">substring</span>
+ <span class="api-erb">SUBSTRING</span>
+</div>
+<div class="api-sig">substring(s: str, start: int, length: int = -1) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>截取字符串的子串（SUBSTRING 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    源字符串。
+start : int
+    截取起始索引。
+length : int, optional
+    截取长度；``-1`` 表示截取到字符串末尾。</p>
+<p>Returns
+-------
+str
+    截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">截取起始索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">length</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">截取长度；``-1`` 表示截取到字符串末尾。 截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-substring_u">
+<div class="api-header">
+<div><span class="api-name">substring_u</span>
+ <span class="api-erb">SUBSTRINGU</span>
+</div>
+<div class="api-sig">substring_u(s: str, start: int, length: int = -1) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>截取字符串的子串（SUBSTRINGU 指令的 Python 封装）。</p>
+<p>与 ``substring`` 功能相同，区别在于按 Unicode 字符计数位置和长度。</p>
+<p>Parameters
+----------
+s : str
+    源字符串。
+start : int
+    截取起始索引（Unicode 字符位置）。
+length : int, optional
+    截取长度（Unicode 字符数）；``-1`` 表示截取到字符串末尾。</p>
+<p>Returns
+-------
+str
+    截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">截取起始索引（Unicode 字符位置）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">length</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">截取长度（Unicode 字符数）；``-1`` 表示截取到字符串末尾。 截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_count">
+<div class="api-header">
+<div><span class="api-name">str_count</span>
+ <span class="api-erb">STRCOUNT</span>
+</div>
+<div class="api-sig">str_count(s: str, sub: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计子串在字符串中的出现次数（STRCOUNT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    被搜索的字符串。
+sub : str
+    要统计的子串。</p>
+<p>Returns
+-------
+int
+    子串出现次数；任一参数为空返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">被搜索的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sub</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要统计的子串。 子串出现次数；任一参数为空返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_join">
+<div class="api-header">
+<div><span class="api-name">str_join</span>
+ <span class="api-erb">STRJOIN</span>
+</div>
+<div class="api-sig">str_join(delimiter: str, *parts) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>用分隔符连接多个字符串（STRJOIN 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+delimiter : str
+    分隔符字符串。
+*parts : str
+    可变参数，要连接的字符串序列。</p>
+<p>Returns
+-------
+str
+    连接后的结果字符串。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">delimiter</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">分隔符字符串。 可变参数，要连接的字符串序列。 连接后的结果字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*parts</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-replace">
+<div class="api-header">
+<div><span class="api-name">replace</span>
+ <span class="api-erb">REPLACE</span>
+</div>
+<div class="api-sig">replace(s: str, old: str, new: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>替换字符串中的子串（REPLACE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    源字符串。
+old : str
+    要被替换的子串。
+new : str
+    用于替换的新子串。</p>
+<p>Returns
+-------
+str
+    替换后的字符串；*old* 未出现时返回原字符串。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">old</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要被替换的子串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">new</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">用于替换的新子串。 替换后的字符串；*old* 未出现时返回原字符串。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-to_str">
+<div class="api-header">
+<div><span class="api-name">to_str</span>
+ <span class="api-erb">TOSTR</span>
+</div>
+<div class="api-sig">to_str(value: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将整数转换为字符串（TOSTR 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要转换的整数。</p>
+<p>Returns
+-------
+str
+    对应的十进制字符串表示。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要转换的整数。 对应的十进制字符串表示。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-to_int">
+<div class="api-header">
+<div><span class="api-name">to_int</span>
+ <span class="api-erb">TOINT</span>
+</div>
+<div class="api-sig">to_int(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将字符串转换为整数（TOINT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    要转换的字符串。</p>
+<p>Returns
+-------
+int
+    转换后的整数值；无法转换时返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要转换的字符串。 转换后的整数值；无法转换时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-group_match">
+<div class="api-header">
+<div><span class="api-name">group_match</span>
+ <span class="api-erb">GROUPMATCH</span>
+</div>
+<div class="api-sig">group_match(target: int, *values) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断目标值是否匹配给定的任意一个值（GROUPMATCH 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+target : int
+    要比较的目标值。
+*values : int
+    可变参数，一组参考值。</p>
+<p>Returns
+-------
+int
+    若 *target* 与任一参考值相等则返回 ``1``，否则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要比较的目标值。 可变参数，一组参考值。 若 *target* 与任一参考值相等则返回 ``1``，否则返回 ``0``。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*values</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sign">
+<div class="api-header">
+<div><span class="api-name">sign</span>
+ <span class="api-erb">SIGN</span>
+</div>
+<div class="api-sig">sign(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的符号（SIGN 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    输入整数。</p>
+<p>Returns
+-------
+int
+    正数返回 ``1``，负数返回 ``-1``，零返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数。 正数返回 ``1``，负数返回 ``-1``，零返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-money_str">
+<div class="api-header">
+<div><span class="api-name">money_str</span>
+ <span class="api-erb">MONEYSTR</span>
+</div>
+<div class="api-sig">money_str(value: int, unit: str = '') -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>格式化金额字符串（MONEYSTR 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    金额数值。
+unit : str, optional
+    货币单位（默认为空，使用引擎配置中的 MoneyLabel）。</p>
+<p>Returns
+-------
+str
+    格式化后的金额字符串（例如 ``&quot;1000G&quot;``）。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">金额数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">unit</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">货币单位（默认为空，使用引擎配置中的 MoneyLabel）。 格式化后的金额字符串（例如 ``&quot;1000G&quot;``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_palam_lv">
+<div class="api-header">
+<div><span class="api-name">get_palam_lv</span>
+ <span class="api-erb">GETPALAMLV</span>
+</div>
+<div class="api-sig">get_palam_lv(value: int, max_lv: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>根据数值计算 PALAM 等级（GETPALAMLV 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    当前 PALAM 数值。
+max_lv : int
+    最大等级上限。</p>
+<p>Returns
+-------
+int
+    计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">当前 PALAM 数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_lv</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">最大等级上限。 计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_exp_lv">
+<div class="api-header">
+<div><span class="api-name">get_exp_lv</span>
+ <span class="api-erb">GETEXPLV</span>
+</div>
+<div class="api-sig">get_exp_lv(value: int, max_lv: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>根据数值计算 EXP 等级（GETEXPLV 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    当前 EXP 数值。
+max_lv : int
+    最大等级上限。</p>
+<p>Returns
+-------
+int
+    计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">当前 EXP 数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_lv</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">最大等级上限。 计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-save_nos">
+<div class="api-header">
+<div><span class="api-name">save_nos</span>
+ <span class="api-erb">SAVENOS</span>
+</div>
+<div class="api-sig">save_nos() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取配置的存档槽位总数（SAVENOS 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    引擎配置中允许的存档槽位数量。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-is_skip">
+<div class="api-header">
+<div><span class="api-name">is_skip</span>
+ <span class="api-erb">ISSKIP</span>
+</div>
+<div class="api-sig">is_skip() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查是否处于消息跳过状态（ISSKIP 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    若玩家当前按住跳过键或处于自动跳过模式返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_config">
+<div class="api-header">
+<div><span class="api-name">get_config</span>
+ <span class="api-erb">GETCONFIG</span>
+</div>
+<div class="api-sig">get_config(name: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取整数型配置项（GETCONFIG 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    配置项名称（例如 ``&quot;maxLine&quot;``、``&quot;printCPerLine&quot;``）。</p>
+<p>Returns
+-------
+int
+    配置项的整数值；配置不存在返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">配置项名称（例如 ``&quot;maxLine&quot;``、``&quot;printCPerLine&quot;``）。 配置项的整数值；配置不存在返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_configs">
+<div class="api-header">
+<div><span class="api-name">get_configs</span>
+ <span class="api-erb">GETCONFIGS</span>
+</div>
+<div class="api-sig">get_configs(name: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取字符串型配置项（GETCONFIGS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    配置项名称（例如 ``&quot;fontName&quot;``）。</p>
+<p>Returns
+-------
+str
+    配置项的字符串值；配置不存在返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">配置项名称（例如 ``&quot;fontName&quot;``）。 配置项的字符串值；配置不存在返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-rand">
+<div class="api-header">
+<div><span class="api-name">rand</span>
+ <span class="api-erb">RAND</span>
+</div>
+<div class="api-sig">rand(max_val: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>生成随机整数（RAND 指令的 Python 封装）。</p>
+<p>返回范围 ``[0, max_val)`` 内的伪随机整数。</p>
+<p>Parameters
+----------
+max_val : int
+    随机数上限（不包含）。</p>
+<p>Returns
+-------
+int
+    随机整数值；*max_val* &lt;= 0 时返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">max_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">随机数上限（不包含）。 随机整数值；*max_val* &lt;= 0 时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_time">
+<div class="api-header">
+<div><span class="api-name">get_time</span>
+ <span class="api-erb">GETTIME</span>
+</div>
+<div class="api-sig">get_time() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间戳（GETTIME 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    当前时间的打包整数值，格式为 ``yyyymmddHHMMSSmmm``
+    （年、月、日、时、分、秒、毫秒）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_time_str">
+<div class="api-header">
+<div><span class="api-name">get_time_str</span>
+</div>
+<div class="api-sig">get_time_str() -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间的格式化字符串。</p>
+<p>Returns
+-------
+str
+    当前时间的字符串表示，格式为 ``&quot;yyyy/MM/dd HH:mm:ss&quot;``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_millisecond">
+<div class="api-header">
+<div><span class="api-name">get_millisecond</span>
+ <span class="api-erb">GETMILLISECOND</span>
+</div>
+<div class="api-sig">get_millisecond() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间的毫秒部分（GETMILLISECOND 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    自系统启动以来的毫秒数（与 ``DateTime.Now.Ticks / 10000`` 等价）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_second">
+<div class="api-header">
+<div><span class="api-name">get_second</span>
+ <span class="api-erb">GETSECOND</span>
+</div>
+<div class="api-sig">get_second() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间的秒部分（GETSECOND 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    自系统启动以来的秒数（与 ``DateTime.Now.Ticks / 10000000`` 等价）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-randomize">
+<div class="api-header">
+<div><span class="api-name">randomize</span>
+ <span class="api-erb">RANDOMIZE</span>
+</div>
+<div class="api-sig">randomize(seed: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置随机数种子（RANDOMIZE 指令的 Python 封装）。</p>
+<p>在使用旧版随机数生成器时生效（新版随机器为自动种子管理）。</p>
+<p>Parameters
+----------
+seed : int
+    随机数种子值。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">seed</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">随机数种子值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-init_rand">
+<div class="api-header">
+<div><span class="api-name">init_rand</span>
+ <span class="api-erb">INITRAND</span>
+</div>
+<div class="api-sig">init_rand() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>重新初始化随机数生成器（INITRAND 指令的 Python 封装）。</p>
+<p>在使用旧版随机数生成器时，使用当前时间作为新种子重新初始化。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-dump_rand">
+<div class="api-header">
+<div><span class="api-name">dump_rand</span>
+ <span class="api-erb">DUMPRAND</span>
+</div>
+<div class="api-sig">dump_rand() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出当前随机数生成器状态（DUMPRAND 指令的 Python 封装）。</p>
+<p>将当前随机序列的内部状态打印到控制台，便于调试。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-sqrt">
+<div class="api-header">
+<div><span class="api-name">sqrt</span>
+ <span class="api-erb">SQRT</span>
+</div>
+<div class="api-sig">sqrt(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的平方根（SQRT 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python ``math.isqrt`` 实现。</p>
+<p>Parameters
+----------
+value : int
+    输入整数（必须非负）。</p>
+<p>Returns
+-------
+int
+    平方根的整数部分（向下取整）。</p>
+<p>Raises
+------
+ValueError
+    若 *value* 为负数。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数（必须非负）。 平方根的整数部分（向下取整）。 若 *value* 为负数。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-cbrt">
+<div class="api-header">
+<div><span class="api-name">cbrt</span>
+ <span class="api-erb">CBRT</span>
+</div>
+<div class="api-sig">cbrt(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的立方根（CBRT 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python 实现。</p>
+<p>Parameters
+----------
+value : int
+    输入整数。</p>
+<p>Returns
+-------
+int
+    立方根的整数部分（符号与输入一致）。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数。 立方根的整数部分（符号与输入一致）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_">
+<div class="api-header">
+<div><span class="api-name">log_</span>
+ <span class="api-erb">LOG</span>
+</div>
+<div class="api-sig">log_(value: int, base: int = 10) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的对数（LOG 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python ``math.log`` 实现。</p>
+<p>Parameters
+----------
+value : int
+    真数（必须为正）。
+base : int, optional
+    对数的底数（默认为 ``10``）。</p>
+<p>Returns
+-------
+int
+    对数值的整数部分（向下取整）。</p>
+<p>Raises
+------
+ValueError
+    若 *value* &lt;= 0 或 *base* &lt;= 0。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">真数（必须为正）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">base</span><span class="param-type-tag">int</span><span class="param-default-val">= 10</span></div><p class="param-desc-text">对数的底数（默认为 ``10``）。 对数值的整数部分（向下取整）。 若 *value* &lt;= 0 或 *base* &lt;= 0。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-exp_">
+<div class="api-header">
+<div><span class="api-name">exp_</span>
+ <span class="api-erb">EXP</span>
+</div>
+<div class="api-sig">exp_(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回 e 的幂次方（EXP 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python ``math.exp`` 实现。</p>
+<p>Parameters
+----------
+value : int
+    指数。</p>
+<p>Returns
+-------
+int
+    ``e ** value`` 的整数部分。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">指数。 ``e ** value`` 的整数部分。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-max_array">
+<div class="api-header">
+<div><span class="api-name">max_array</span>
+ <span class="api-erb">MAXARRAY</span>
+</div>
+<div class="api-sig">max_array(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数数组中的最大值（MAXARRAY 指令的 Python 封装）。</p>
+<p>遍历指定变量数组，返回最大元素值。空数组返回 ``0``。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    数组中的最大值；数组为空时返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 数组中的最大值；数组为空时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-min_array">
+<div class="api-header">
+<div><span class="api-name">min_array</span>
+ <span class="api-erb">MINARRAY</span>
+</div>
+<div class="api-sig">min_array(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数数组中的最小值（MINARRAY 指令的 Python 封装）。</p>
+<p>遍历指定变量数组，返回最小元素值。空数组返回 ``0``。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    数组中的最小值；数组为空时返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 数组中的最小值；数组为空时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_num">
+<div class="api-header">
+<div><span class="api-name">get_num</span>
+ <span class="api-erb">GETNUM</span>
+</div>
+<div class="api-sig">get_num(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计数组中非零元素的数量（GETNUM 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    统计起始索引（默认为 ``0``）。
+end : int, optional
+    统计结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    非零元素的数量。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">统计起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">统计结束索引（``-1`` 表示到数组末尾）。 非零元素的数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_num_s">
+<div class="api-header">
+<div><span class="api-name">get_num_s</span>
+ <span class="api-erb">GETNUMS</span>
+</div>
+<div class="api-sig">get_num_s(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计字符串数组中非空元素的数量（GETNUMS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+start : int, optional
+    统计起始索引（默认为 ``0``）。
+end : int, optional
+    统计结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    非空字符串的数量。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">统计起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">统计结束索引（``-1`` 表示到数组末尾）。 非空字符串的数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-exist_file">
+<div class="api-header">
+<div><span class="api-name">exist_file</span>
+ <span class="api-erb">EXISTFILE</span>
+</div>
+<div class="api-sig">exist_file(path: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查文件是否存在（EXISTFILE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+path : str
+    文件路径（相对于游戏根目录）。</p>
+<p>Returns
+-------
+int
+    文件存在返回 ``1``，否则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">文件路径（相对于游戏根目录）。 文件存在返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-exist_dir">
+<div class="api-header">
+<div><span class="api-name">exist_dir</span>
+</div>
+<div class="api-sig">exist_dir(path: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查目录是否存在。</p>
+<p>Parameters
+----------
+path : str
+    目录路径。</p>
+<p>Returns
+-------
+int
+    目录存在返回 ``1``，否则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目录路径。 目录存在返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-save_text">
+<div class="api-header">
+<div><span class="api-name">save_text</span>
+ <span class="api-erb">SAVETEXT</span>
+</div>
+<div class="api-sig">save_text(path: str, text: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将文本保存到文件（SAVETEXT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+path : str
+    文件路径。
+text : str
+    要保存的文本内容。</p>
+<p>Returns
+-------
+int
+    成功返回 ``1``，失败返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">文件路径。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">text</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要保存的文本内容。 成功返回 ``1``，失败返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-load_text">
+<div class="api-header">
+<div><span class="api-name">load_text</span>
+ <span class="api-erb">LOADTEXT</span>
+</div>
+<div class="api-sig">load_text(path: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>从文件加载文本（LOADTEXT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+path : str
+    文件路径。</p>
+<p>Returns
+-------
+str
+    文件内容；失败时返回空字符串。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">文件路径。 文件内容；失败时返回空字符串。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_numeric">
+<div class="api-header">
+<div><span class="api-name">is_numeric</span>
+ <span class="api-erb">ISNUMERIC</span>
+</div>
+<div class="api-sig">is_numeric(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查字符串是否为数字（ISNUMERIC 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    要检查的字符串。</p>
+<p>Returns
+-------
+int
+    是有效数字返回 ``1``，否则返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要检查的字符串。 是有效数字返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-escape_str">
+<div class="api-header">
+<div><span class="api-name">escape_str</span>
+ <span class="api-erb">ESCAPE</span>
+</div>
+<div class="api-sig">escape_str(s: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>转义字符串中的特殊字符（ESCAPE 指令的 Python 封装）。</p>
+<p>    将 ``\``、``&quot;``、``
+``、````、``   `` 等字符转义为安全形式。
+    与 ``json.dumps`` 不同，本函数**不会**为结果添加外层引号。</p>
+<p>    Parameters
+    ----------
+    s : str
+        源字符串。</p>
+<p>    Returns
+    -------
+    str
+        转义后的字符串。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。 Returns str 转义后的字符串。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-nosames">
+<div class="api-header">
+<div><span class="api-name">nosames</span>
+ <span class="api-erb">NOSAMES</span>
+</div>
+<div class="api-sig">nosames(*values) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查所有值互不相同（NOSAMES 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+*values : int
+    要检查的整数序列。</p>
+<p>Returns
+-------
+int
+    全部不同返回 ``1``，有重复返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*values</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-allsames">
+<div class="api-header">
+<div><span class="api-name">allsames</span>
+ <span class="api-erb">ALLSAMES</span>
+</div>
+<div class="api-sig">allsames(*values) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查所有值完全相同（ALLSAMES 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+*values : int
+    要检查的整数序列。</p>
+<p>Returns
+-------
+int
+    全部相同返回 ``1``，有不同返回 ``0``。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*values</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>組み込み関数</h1>
+<div class="api-card" id="function-max_">
+<div class="api-header">
+<div><span class="api-name">max_</span>
+ <span class="api-erb">MAX</span>
+</div>
+<div class="api-sig">max_(a: int, b: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回两个整数中的较大值（MAX 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+a : int
+    第一个整数。
+b : int
+    第二个整数。</p>
+<p>Returns
+-------
+int
+    *a* 和 *b* 中较大的那个。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">a</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第一个整数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">b</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第二个整数。 *a* 和 *b* 中较大的那个。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-min_">
+<div class="api-header">
+<div><span class="api-name">min_</span>
+ <span class="api-erb">MIN</span>
+</div>
+<div class="api-sig">min_(a: int, b: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回两个整数中的较小值（MIN 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+a : int
+    第一个整数。
+b : int
+    第二个整数。</p>
+<p>Returns
+-------
+int
+    *a* 和 *b* 中较小的那个。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">a</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第一个整数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">b</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">第二个整数。 *a* 和 *b* 中较小的那个。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-limit">
+<div class="api-header">
+<div><span class="api-name">limit</span>
+ <span class="api-erb">LIMIT</span>
+</div>
+<div class="api-sig">limit(value: int, min_val: int, max_val: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将整数限制在指定闭区间内（LIMIT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要限制的原始值。
+min_val : int
+    下限值。
+max_val : int
+    上限值。</p>
+<p>Returns
+-------
+int
+    被限制后的值。若 *value* 小于 *min_val* 返回 *min_val*；
+    若大于 *max_val* 返回 *max_val*；否则返回原值。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要限制的原始值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">min_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">下限值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">上限值。 被限制后的值。若 *value* 小于 *min_val* 返回 *min_val*； 若大于 *max_val* 返回 *max_val*；否则返回原值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-abs_">
+<div class="api-header">
+<div><span class="api-name">abs_</span>
+ <span class="api-erb">ABS</span>
+</div>
+<div class="api-sig">abs_(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的绝对值（ABS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    输入整数。</p>
+<p>Returns
+-------
+int
+    *value* 的绝对值。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数。 *value* 的绝对值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-power_">
+<div class="api-header">
+<div><span class="api-name">power_</span>
+ <span class="api-erb">POWER</span>
+</div>
+<div class="api-sig">power_(base: int, exp: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算整数的幂次方（POWER 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+base : int
+    底数。
+exp : int
+    指数。</p>
+<p>Returns
+-------
+int
+    ``base ** exp`` 的整数结果。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">base</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">底数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">exp</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">指数。 ``base ** exp`` 的整数结果。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-match">
+<div class="api-header">
+<div><span class="api-name">match</span>
+ <span class="api-erb">MATCH</span>
+</div>
+<div class="api-sig">match(name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计整数数组中指定值的出现次数（MATCH 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+target : int
+    要匹配的值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    匹配元素的总数量。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 匹配元素的总数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-smatch">
+<div class="api-header">
+<div><span class="api-name">smatch</span>
+ <span class="api-erb">MATCH</span>
+</div>
+<div class="api-sig">smatch(name: str, target: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计字符串数组中指定值的出现次数（MATCH 指令的 Python 封装，字符串版）。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+target : str
+    要匹配的字符串。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    匹配元素的总数量。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要匹配的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 匹配元素的总数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-cmatch">
+<div class="api-header">
+<div><span class="api-name">cmatch</span>
+ <span class="api-erb">CMATCH</span>
+</div>
+<div class="api-sig">cmatch(name: str, target: int, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计角色整数数组中指定值的出现次数（CMATCH 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标角色数组变量名。
+target : int
+    要匹配的值。
+start : int, optional
+    搜索起始角色索引（默认为 ``0``）。
+end : int, optional
+    搜索结束角色索引（``-1`` 表示到最后一个角色）。</p>
+<p>Returns
+-------
+int
+    匹配角色的总数量。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标角色数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要匹配的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始角色索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束角色索引（``-1`` 表示到最后一个角色）。 匹配角色的总数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sum_array">
+<div class="api-header">
+<div><span class="api-name">sum_array</span>
+ <span class="api-erb">SUMARRAY</span>
+</div>
+<div class="api-sig">sum_array(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算整数数组的元素总和（SUMARRAY 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    求和起始索引（默认为 ``0``）。
+end : int, optional
+    求和结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    数组元素的总和。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">求和起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">求和结束索引（``-1`` 表示到数组末尾）。 数组元素的总和。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-find_array">
+<div class="api-header">
+<div><span class="api-name">find_array</span>
+ <span class="api-erb">FINDARRAY</span>
+</div>
+<div class="api-sig">find_array(name: str, target: int, start: int = 0, end: int = -1, exact: bool = True, last: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在整数数组中查找指定值（FINDARRAY 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+target : int
+    要查找的值。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。
+exact : bool, optional
+    是否进行精确匹配（默认为 ``True``）。
+last : bool, optional
+    是否从末尾开始反向查找（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    找到的数组索引；未找到返回 ``-1``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要查找的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">exact</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否进行精确匹配（默认为 ``True``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">last</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否从末尾开始反向查找（默认为 ``False``）。 找到的数组索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sfind_array">
+<div class="api-header">
+<div><span class="api-name">sfind_array</span>
+ <span class="api-erb">FINDARRAY</span>
+</div>
+<div class="api-sig">sfind_array(name: str, target: str, start: int = 0, end: int = -1, exact: bool = True, last: bool = False) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在字符串数组中查找指定值（FINDARRAY 指令的 Python 封装，字符串版）。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+target : str
+    要查找的字符串。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。
+exact : bool, optional
+    是否进行精确匹配（默认为 ``True``）。
+last : bool, optional
+    是否从末尾开始反向查找（默认为 ``False``）。</p>
+<p>Returns
+-------
+int
+    找到的数组索引；未找到返回 ``-1``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要查找的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">exact</span><span class="param-type-tag">bool</span><span class="param-default-val">= True</span></div><p class="param-desc-text">是否进行精确匹配（默认为 ``True``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">last</span><span class="param-type-tag">bool</span><span class="param-default-val">= False</span></div><p class="param-desc-text">是否从末尾开始反向查找（默认为 ``False``）。 找到的数组索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-in_range">
+<div class="api-header">
+<div><span class="api-name">in_range</span>
+ <span class="api-erb">INRANGE</span>
+</div>
+<div class="api-sig">in_range(value: int, min_val: int, max_val: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断整数是否在指定闭区间内（INRANGE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要判断的值。
+min_val : int
+    区间下限。
+max_val : int
+    区间上限。</p>
+<p>Returns
+-------
+int
+    若 *value* 在 ``[min_val, max_val]`` 范围内返回 ``1``，否则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要判断的值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">min_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">区间下限。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">区间上限。 若 *value* 在 ``[min_val, max_val]`` 范围内返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_len_sjis">
+<div class="api-header">
+<div><span class="api-name">str_len_sjis</span>
+ <span class="api-erb">STRLENS</span>
+</div>
+<div class="api-sig">str_len_sjis(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算字符串在 Shift-JIS 编码下的字节长度（STRLENS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    输入字符串。</p>
+<p>Returns
+-------
+int
+    Shift-JIS 编码后的字节长度。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">输入字符串。 Shift-JIS 编码后的字节长度。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_len_u">
+<div class="api-header">
+<div><span class="api-name">str_len_u</span>
+ <span class="api-erb">STRLENSU</span>
+</div>
+<div class="api-sig">str_len_u(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>计算字符串的 Unicode 字符数（STRLENSU 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    输入字符串。</p>
+<p>Returns
+-------
+int
+    Unicode 字符数量（与 Python ``len(s)`` 等价）。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">输入字符串。 Unicode 字符数量（与 Python ``len(s)`` 等价）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_find">
+<div class="api-header">
+<div><span class="api-name">str_find</span>
+ <span class="api-erb">STRFIND</span>
+</div>
+<div class="api-sig">str_find(s: str, sub: str, start: int = 0) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在字符串中查找子串首次出现的位置（STRFIND 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    被搜索的字符串。
+sub : str
+    要查找的子串。
+start : int, optional
+    搜索起始位置（默认为 ``0``）。</p>
+<p>Returns
+-------
+int
+    子串首次出现的索引；未找到返回 ``-1``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">被搜索的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sub</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要查找的子串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始位置（默认为 ``0``）。 子串首次出现的索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_find_u">
+<div class="api-header">
+<div><span class="api-name">str_find_u</span>
+ <span class="api-erb">STRFINDU</span>
+</div>
+<div class="api-sig">str_find_u(s: str, sub: str, start: int = 0) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在字符串中查找子串首次出现的位置（STRFINDU 指令的 Python 封装）。</p>
+<p>与 ``str_find`` 功能相同，区别在于按 Unicode 字符计数位置。</p>
+<p>Parameters
+----------
+s : str
+    被搜索的字符串。
+sub : str
+    要查找的子串。
+start : int, optional
+    搜索起始位置（默认为 ``0``）。</p>
+<p>Returns
+-------
+int
+    子串首次出现的 Unicode 字符索引；未找到返回 ``-1``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">被搜索的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sub</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要查找的子串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始位置（默认为 ``0``）。 子串首次出现的 Unicode 字符索引；未找到返回 ``-1``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-substring">
+<div class="api-header">
+<div><span class="api-name">substring</span>
+ <span class="api-erb">SUBSTRING</span>
+</div>
+<div class="api-sig">substring(s: str, start: int, length: int = -1) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>截取字符串的子串（SUBSTRING 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    源字符串。
+start : int
+    截取起始索引。
+length : int, optional
+    截取长度；``-1`` 表示截取到字符串末尾。</p>
+<p>Returns
+-------
+str
+    截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">截取起始索引。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">length</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">截取长度；``-1`` 表示截取到字符串末尾。 截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-substring_u">
+<div class="api-header">
+<div><span class="api-name">substring_u</span>
+ <span class="api-erb">SUBSTRINGU</span>
+</div>
+<div class="api-sig">substring_u(s: str, start: int, length: int = -1) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>截取字符串的子串（SUBSTRINGU 指令的 Python 封装）。</p>
+<p>与 ``substring`` 功能相同，区别在于按 Unicode 字符计数位置和长度。</p>
+<p>Parameters
+----------
+s : str
+    源字符串。
+start : int
+    截取起始索引（Unicode 字符位置）。
+length : int, optional
+    截取长度（Unicode 字符数）；``-1`` 表示截取到字符串末尾。</p>
+<p>Returns
+-------
+str
+    截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">截取起始索引（Unicode 字符位置）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">length</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">截取长度（Unicode 字符数）；``-1`` 表示截取到字符串末尾。 截取后的子串；参数无效时返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_count">
+<div class="api-header">
+<div><span class="api-name">str_count</span>
+ <span class="api-erb">STRCOUNT</span>
+</div>
+<div class="api-sig">str_count(s: str, sub: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计子串在字符串中的出现次数（STRCOUNT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    被搜索的字符串。
+sub : str
+    要统计的子串。</p>
+<p>Returns
+-------
+int
+    子串出现次数；任一参数为空返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">被搜索的字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">sub</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要统计的子串。 子串出现次数；任一参数为空返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-str_join">
+<div class="api-header">
+<div><span class="api-name">str_join</span>
+ <span class="api-erb">STRJOIN</span>
+</div>
+<div class="api-sig">str_join(delimiter: str, *parts) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>用分隔符连接多个字符串（STRJOIN 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+delimiter : str
+    分隔符字符串。
+*parts : str
+    可变参数，要连接的字符串序列。</p>
+<p>Returns
+-------
+str
+    连接后的结果字符串。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">delimiter</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">分隔符字符串。 可变参数，要连接的字符串序列。 连接后的结果字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*parts</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-replace">
+<div class="api-header">
+<div><span class="api-name">replace</span>
+ <span class="api-erb">REPLACE</span>
+</div>
+<div class="api-sig">replace(s: str, old: str, new: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>替换字符串中的子串（REPLACE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    源字符串。
+old : str
+    要被替换的子串。
+new : str
+    用于替换的新子串。</p>
+<p>Returns
+-------
+str
+    替换后的字符串；*old* 未出现时返回原字符串。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">old</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要被替换的子串。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">new</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">用于替换的新子串。 替换后的字符串；*old* 未出现时返回原字符串。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-to_str">
+<div class="api-header">
+<div><span class="api-name">to_str</span>
+ <span class="api-erb">TOSTR</span>
+</div>
+<div class="api-sig">to_str(value: int) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将整数转换为字符串（TOSTR 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    要转换的整数。</p>
+<p>Returns
+-------
+str
+    对应的十进制字符串表示。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要转换的整数。 对应的十进制字符串表示。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-to_int">
+<div class="api-header">
+<div><span class="api-name">to_int</span>
+ <span class="api-erb">TOINT</span>
+</div>
+<div class="api-sig">to_int(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将字符串转换为整数（TOINT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    要转换的字符串。</p>
+<p>Returns
+-------
+int
+    转换后的整数值；无法转换时返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要转换的字符串。 转换后的整数值；无法转换时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-group_match">
+<div class="api-header">
+<div><span class="api-name">group_match</span>
+ <span class="api-erb">GROUPMATCH</span>
+</div>
+<div class="api-sig">group_match(target: int, *values) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>判断目标值是否匹配给定的任意一个值（GROUPMATCH 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+target : int
+    要比较的目标值。
+*values : int
+    可变参数，一组参考值。</p>
+<p>Returns
+-------
+int
+    若 *target* 与任一参考值相等则返回 ``1``，否则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">target</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">要比较的目标值。 可变参数，一组参考值。 若 *target* 与任一参考值相等则返回 ``1``，否则返回 ``0``。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*values</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-sign">
+<div class="api-header">
+<div><span class="api-name">sign</span>
+ <span class="api-erb">SIGN</span>
+</div>
+<div class="api-sig">sign(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的符号（SIGN 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    输入整数。</p>
+<p>Returns
+-------
+int
+    正数返回 ``1``，负数返回 ``-1``，零返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数。 正数返回 ``1``，负数返回 ``-1``，零返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-money_str">
+<div class="api-header">
+<div><span class="api-name">money_str</span>
+ <span class="api-erb">MONEYSTR</span>
+</div>
+<div class="api-sig">money_str(value: int, unit: str = '') -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>格式化金额字符串（MONEYSTR 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    金额数值。
+unit : str, optional
+    货币单位（默认为空，使用引擎配置中的 MoneyLabel）。</p>
+<p>Returns
+-------
+str
+    格式化后的金额字符串（例如 ``&quot;1000G&quot;``）。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">金额数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">unit</span><span class="param-type-tag">str</span><span class="param-default-val">= ''</span></div><p class="param-desc-text">货币单位（默认为空，使用引擎配置中的 MoneyLabel）。 格式化后的金额字符串（例如 ``&quot;1000G&quot;``）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_palam_lv">
+<div class="api-header">
+<div><span class="api-name">get_palam_lv</span>
+ <span class="api-erb">GETPALAMLV</span>
+</div>
+<div class="api-sig">get_palam_lv(value: int, max_lv: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>根据数值计算 PALAM 等级（GETPALAMLV 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    当前 PALAM 数值。
+max_lv : int
+    最大等级上限。</p>
+<p>Returns
+-------
+int
+    计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">当前 PALAM 数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_lv</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">最大等级上限。 计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_exp_lv">
+<div class="api-header">
+<div><span class="api-name">get_exp_lv</span>
+ <span class="api-erb">GETEXPLV</span>
+</div>
+<div class="api-sig">get_exp_lv(value: int, max_lv: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>根据数值计算 EXP 等级（GETEXPLV 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+value : int
+    当前 EXP 数值。
+max_lv : int
+    最大等级上限。</p>
+<p>Returns
+-------
+int
+    计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">当前 EXP 数值。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">max_lv</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">最大等级上限。 计算出的等级值（``0`` ~ *max_lv*）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-save_nos">
+<div class="api-header">
+<div><span class="api-name">save_nos</span>
+ <span class="api-erb">SAVENOS</span>
+</div>
+<div class="api-sig">save_nos() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取配置的存档槽位总数（SAVENOS 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    引擎配置中允许的存档槽位数量。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-is_skip">
+<div class="api-header">
+<div><span class="api-name">is_skip</span>
+ <span class="api-erb">ISSKIP</span>
+</div>
+<div class="api-sig">is_skip() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查是否处于消息跳过状态（ISSKIP 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    若玩家当前按住跳过键或处于自动跳过模式返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_config">
+<div class="api-header">
+<div><span class="api-name">get_config</span>
+ <span class="api-erb">GETCONFIG</span>
+</div>
+<div class="api-sig">get_config(name: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取整数型配置项（GETCONFIG 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    配置项名称（例如 ``&quot;maxLine&quot;``、``&quot;printCPerLine&quot;``）。</p>
+<p>Returns
+-------
+int
+    配置项的整数值；配置不存在返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">配置项名称（例如 ``&quot;maxLine&quot;``、``&quot;printCPerLine&quot;``）。 配置项的整数值；配置不存在返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_configs">
+<div class="api-header">
+<div><span class="api-name">get_configs</span>
+ <span class="api-erb">GETCONFIGS</span>
+</div>
+<div class="api-sig">get_configs(name: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取字符串型配置项（GETCONFIGS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    配置项名称（例如 ``&quot;fontName&quot;``）。</p>
+<p>Returns
+-------
+str
+    配置项的字符串值；配置不存在返回空字符串 ``&quot;&quot;``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">配置项名称（例如 ``&quot;fontName&quot;``）。 配置项的字符串值；配置不存在返回空字符串 ``&quot;&quot;``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-rand">
+<div class="api-header">
+<div><span class="api-name">rand</span>
+ <span class="api-erb">RAND</span>
+</div>
+<div class="api-sig">rand(max_val: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>生成随机整数（RAND 指令的 Python 封装）。</p>
+<p>返回范围 ``[0, max_val)`` 内的伪随机整数。</p>
+<p>Parameters
+----------
+max_val : int
+    随机数上限（不包含）。</p>
+<p>Returns
+-------
+int
+    随机整数值；*max_val* &lt;= 0 时返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">max_val</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">随机数上限（不包含）。 随机整数值；*max_val* &lt;= 0 时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_time">
+<div class="api-header">
+<div><span class="api-name">get_time</span>
+ <span class="api-erb">GETTIME</span>
+</div>
+<div class="api-sig">get_time() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间戳（GETTIME 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    当前时间的打包整数值，格式为 ``yyyymmddHHMMSSmmm``
+    （年、月、日、时、分、秒、毫秒）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_time_str">
+<div class="api-header">
+<div><span class="api-name">get_time_str</span>
+</div>
+<div class="api-sig">get_time_str() -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间的格式化字符串。</p>
+<p>Returns
+-------
+str
+    当前时间的字符串表示，格式为 ``&quot;yyyy/MM/dd HH:mm:ss&quot;``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_millisecond">
+<div class="api-header">
+<div><span class="api-name">get_millisecond</span>
+ <span class="api-erb">GETMILLISECOND</span>
+</div>
+<div class="api-sig">get_millisecond() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间的毫秒部分（GETMILLISECOND 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    自系统启动以来的毫秒数（与 ``DateTime.Now.Ticks / 10000`` 等价）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-get_second">
+<div class="api-header">
+<div><span class="api-name">get_second</span>
+ <span class="api-erb">GETSECOND</span>
+</div>
+<div class="api-sig">get_second() -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取当前时间的秒部分（GETSECOND 指令的 Python 封装）。</p>
+<p>Returns
+-------
+int
+    自系统启动以来的秒数（与 ``DateTime.Now.Ticks / 10000000`` 等价）。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-randomize">
+<div class="api-header">
+<div><span class="api-name">randomize</span>
+ <span class="api-erb">RANDOMIZE</span>
+</div>
+<div class="api-sig">randomize(seed: int) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>设置随机数种子（RANDOMIZE 指令的 Python 封装）。</p>
+<p>在使用旧版随机数生成器时生效（新版随机器为自动种子管理）。</p>
+<p>Parameters
+----------
+seed : int
+    随机数种子值。</p>
+<p>Returns
+-------
+None</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">seed</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">随机数种子值。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-init_rand">
+<div class="api-header">
+<div><span class="api-name">init_rand</span>
+ <span class="api-erb">INITRAND</span>
+</div>
+<div class="api-sig">init_rand() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>重新初始化随机数生成器（INITRAND 指令的 Python 封装）。</p>
+<p>在使用旧版随机数生成器时，使用当前时间作为新种子重新初始化。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-dump_rand">
+<div class="api-header">
+<div><span class="api-name">dump_rand</span>
+ <span class="api-erb">DUMPRAND</span>
+</div>
+<div class="api-sig">dump_rand() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输出当前随机数生成器状态（DUMPRAND 指令的 Python 封装）。</p>
+<p>将当前随机序列的内部状态打印到控制台，便于调试。</p>
+<p>Returns
+-------
+None</p></div>
+</div>
+</div>
+<div class="api-card" id="function-sqrt">
+<div class="api-header">
+<div><span class="api-name">sqrt</span>
+ <span class="api-erb">SQRT</span>
+</div>
+<div class="api-sig">sqrt(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的平方根（SQRT 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python ``math.isqrt`` 实现。</p>
+<p>Parameters
+----------
+value : int
+    输入整数（必须非负）。</p>
+<p>Returns
+-------
+int
+    平方根的整数部分（向下取整）。</p>
+<p>Raises
+------
+ValueError
+    若 *value* 为负数。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数（必须非负）。 平方根的整数部分（向下取整）。 若 *value* 为负数。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-cbrt">
+<div class="api-header">
+<div><span class="api-name">cbrt</span>
+ <span class="api-erb">CBRT</span>
+</div>
+<div class="api-sig">cbrt(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的立方根（CBRT 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python 实现。</p>
+<p>Parameters
+----------
+value : int
+    输入整数。</p>
+<p>Returns
+-------
+int
+    立方根的整数部分（符号与输入一致）。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">输入整数。 立方根的整数部分（符号与输入一致）。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-log_">
+<div class="api-header">
+<div><span class="api-name">log_</span>
+ <span class="api-erb">LOG</span>
+</div>
+<div class="api-sig">log_(value: int, base: int = 10) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数的对数（LOG 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python ``math.log`` 实现。</p>
+<p>Parameters
+----------
+value : int
+    真数（必须为正）。
+base : int, optional
+    对数的底数（默认为 ``10``）。</p>
+<p>Returns
+-------
+int
+    对数值的整数部分（向下取整）。</p>
+<p>Raises
+------
+ValueError
+    若 *value* &lt;= 0 或 *base* &lt;= 0。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">真数（必须为正）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">base</span><span class="param-type-tag">int</span><span class="param-default-val">= 10</span></div><p class="param-desc-text">对数的底数（默认为 ``10``）。 对数值的整数部分（向下取整）。 若 *value* &lt;= 0 或 *base* &lt;= 0。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-exp_">
+<div class="api-header">
+<div><span class="api-name">exp_</span>
+ <span class="api-erb">EXP</span>
+</div>
+<div class="api-sig">exp_(value: int) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回 e 的幂次方（EXP 指令的 Python 封装）。</p>
+<p>由于 C# 侧未暴露此方法，使用纯 Python ``math.exp`` 实现。</p>
+<p>Parameters
+----------
+value : int
+    指数。</p>
+<p>Returns
+-------
+int
+    ``e ** value`` 的整数部分。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">int</span></div><p class="param-desc-text">指数。 ``e ** value`` 的整数部分。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-max_array">
+<div class="api-header">
+<div><span class="api-name">max_array</span>
+ <span class="api-erb">MAXARRAY</span>
+</div>
+<div class="api-sig">max_array(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数数组中的最大值（MAXARRAY 指令的 Python 封装）。</p>
+<p>遍历指定变量数组，返回最大元素值。空数组返回 ``0``。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    数组中的最大值；数组为空时返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 数组中的最大值；数组为空时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-min_array">
+<div class="api-header">
+<div><span class="api-name">min_array</span>
+ <span class="api-erb">MINARRAY</span>
+</div>
+<div class="api-sig">min_array(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>返回整数数组中的最小值（MINARRAY 指令的 Python 封装）。</p>
+<p>遍历指定变量数组，返回最小元素值。空数组返回 ``0``。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    搜索起始索引（默认为 ``0``）。
+end : int, optional
+    搜索结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    数组中的最小值；数组为空时返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">搜索起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">搜索结束索引（``-1`` 表示到数组末尾）。 数组中的最小值；数组为空时返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_num">
+<div class="api-header">
+<div><span class="api-name">get_num</span>
+ <span class="api-erb">GETNUM</span>
+</div>
+<div class="api-sig">get_num(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计数组中非零元素的数量（GETNUM 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标数组变量名。
+start : int, optional
+    统计起始索引（默认为 ``0``）。
+end : int, optional
+    统计结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    非零元素的数量。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">统计起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">统计结束索引（``-1`` 表示到数组末尾）。 非零元素的数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-get_num_s">
+<div class="api-header">
+<div><span class="api-name">get_num_s</span>
+ <span class="api-erb">GETNUMS</span>
+</div>
+<div class="api-sig">get_num_s(name: str, start: int = 0, end: int = -1) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>统计字符串数组中非空元素的数量（GETNUMS 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+name : str
+    目标字符串数组变量名。
+start : int, optional
+    统计起始索引（默认为 ``0``）。
+end : int, optional
+    统计结束索引（``-1`` 表示到数组末尾）。</p>
+<p>Returns
+-------
+int
+    非空字符串的数量。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">name</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目标字符串数组变量名。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">start</span><span class="param-type-tag">int</span><span class="param-default-val">= 0</span></div><p class="param-desc-text">统计起始索引（默认为 ``0``）。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">end</span><span class="param-type-tag">int</span><span class="param-default-val">= -1</span></div><p class="param-desc-text">统计结束索引（``-1`` 表示到数组末尾）。 非空字符串的数量。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-exist_file">
+<div class="api-header">
+<div><span class="api-name">exist_file</span>
+ <span class="api-erb">EXISTFILE</span>
+</div>
+<div class="api-sig">exist_file(path: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查文件是否存在（EXISTFILE 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+path : str
+    文件路径（相对于游戏根目录）。</p>
+<p>Returns
+-------
+int
+    文件存在返回 ``1``，否则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">文件路径（相对于游戏根目录）。 文件存在返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-exist_dir">
+<div class="api-header">
+<div><span class="api-name">exist_dir</span>
+</div>
+<div class="api-sig">exist_dir(path: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查目录是否存在。</p>
+<p>Parameters
+----------
+path : str
+    目录路径。</p>
+<p>Returns
+-------
+int
+    目录存在返回 ``1``，否则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">目录路径。 目录存在返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-save_text">
+<div class="api-header">
+<div><span class="api-name">save_text</span>
+ <span class="api-erb">SAVETEXT</span>
+</div>
+<div class="api-sig">save_text(path: str, text: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将文本保存到文件（SAVETEXT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+path : str
+    文件路径。
+text : str
+    要保存的文本内容。</p>
+<p>Returns
+-------
+int
+    成功返回 ``1``，失败返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">文件路径。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">text</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要保存的文本内容。 成功返回 ``1``，失败返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-load_text">
+<div class="api-header">
+<div><span class="api-name">load_text</span>
+ <span class="api-erb">LOADTEXT</span>
+</div>
+<div class="api-sig">load_text(path: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>从文件加载文本（LOADTEXT 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+path : str
+    文件路径。</p>
+<p>Returns
+-------
+str
+    文件内容；失败时返回空字符串。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">path</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">文件路径。 文件内容；失败时返回空字符串。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-is_numeric">
+<div class="api-header">
+<div><span class="api-name">is_numeric</span>
+ <span class="api-erb">ISNUMERIC</span>
+</div>
+<div class="api-sig">is_numeric(s: str) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查字符串是否为数字（ISNUMERIC 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+s : str
+    要检查的字符串。</p>
+<p>Returns
+-------
+int
+    是有效数字返回 ``1``，否则返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">要检查的字符串。 是有效数字返回 ``1``，否则返回 ``0``。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-escape_str">
+<div class="api-header">
+<div><span class="api-name">escape_str</span>
+ <span class="api-erb">ESCAPE</span>
+</div>
+<div class="api-sig">escape_str(s: str) -&gt; str</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>转义字符串中的特殊字符（ESCAPE 指令的 Python 封装）。</p>
+<p>    将 ``\``、``&quot;``、``
+``、````、``   `` 等字符转义为安全形式。
+    与 ``json.dumps`` 不同，本函数**不会**为结果添加外层引号。</p>
+<p>    Parameters
+    ----------
+    s : str
+        源字符串。</p>
+<p>    Returns
+    -------
+    str
+        转义后的字符串。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">s</span><span class="param-required">必需</span><span class="param-type-tag">str</span></div><p class="param-desc-text">源字符串。 Returns str 转义后的字符串。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-nosames">
+<div class="api-header">
+<div><span class="api-name">nosames</span>
+ <span class="api-erb">NOSAMES</span>
+</div>
+<div class="api-sig">nosames(*values) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查所有值互不相同（NOSAMES 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+*values : int
+    要检查的整数序列。</p>
+<p>Returns
+-------
+int
+    全部不同返回 ``1``，有重复返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*values</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-allsames">
+<div class="api-header">
+<div><span class="api-name">allsames</span>
+ <span class="api-erb">ALLSAMES</span>
+</div>
+<div class="api-sig">allsames(*values) -&gt; int</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>检查所有值完全相同（ALLSAMES 指令的 Python 封装）。</p>
+<p>Parameters
+----------
+*values : int
+    要检查的整数序列。</p>
+<p>Returns
+-------
+int
+    全部相同返回 ``1``，有不同返回 ``0``。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">*values</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "max_", "desc": "返回两个整数中的较大值（MAX 指令的 Python 封装）。\n\nParameters\n----------\na : int\n    第一个整数。\nb : in", "url": "./builtin.html#function-max_"}, {"name": "min_", "desc": "返回两个整数中的较小值（MIN 指令的 Python 封装）。\n\nParameters\n----------\na : int\n    第一个整数。\nb : in", "url": "./builtin.html#function-min_"}, {"name": "limit", "desc": "将整数限制在指定闭区间内（LIMIT 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要限制的原始", "url": "./builtin.html#function-limit"}, {"name": "abs_", "desc": "返回整数的绝对值（ABS 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    输入整数。\n\nRetur", "url": "./builtin.html#function-abs_"}, {"name": "power_", "desc": "计算整数的幂次方（POWER 指令的 Python 封装）。\n\nParameters\n----------\nbase : int\n    底数。\nexp : i", "url": "./builtin.html#function-power_"}, {"name": "match", "desc": "统计整数数组中指定值的出现次数（MATCH 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组", "url": "./builtin.html#function-match"}, {"name": "smatch", "desc": "统计字符串数组中指定值的出现次数（MATCH 指令的 Python 封装，字符串版）。\n\nParameters\n----------\nname : str\n  ", "url": "./builtin.html#function-smatch"}, {"name": "cmatch", "desc": "统计角色整数数组中指定值的出现次数（CMATCH 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目", "url": "./builtin.html#function-cmatch"}, {"name": "sum_array", "desc": "计算整数数组的元素总和（SUMARRAY 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组变", "url": "./builtin.html#function-sum_array"}, {"name": "find_array", "desc": "在整数数组中查找指定值（FINDARRAY 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组", "url": "./builtin.html#function-find_array"}, {"name": "sfind_array", "desc": "在字符串数组中查找指定值（FINDARRAY 指令的 Python 封装，字符串版）。\n\nParameters\n----------\nname : str\n  ", "url": "./builtin.html#function-sfind_array"}, {"name": "in_range", "desc": "判断整数是否在指定闭区间内（INRANGE 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要判断", "url": "./builtin.html#function-in_range"}, {"name": "str_len_sjis", "desc": "计算字符串在 Shift-JIS 编码下的字节长度（STRLENS 指令的 Python 封装）。\n\nParameters\n----------\ns : str", "url": "./builtin.html#function-str_len_sjis"}, {"name": "str_len_u", "desc": "计算字符串的 Unicode 字符数（STRLENSU 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    输", "url": "./builtin.html#function-str_len_u"}, {"name": "str_find", "desc": "在字符串中查找子串首次出现的位置（STRFIND 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    被搜索的", "url": "./builtin.html#function-str_find"}, {"name": "str_find_u", "desc": "在字符串中查找子串首次出现的位置（STRFINDU 指令的 Python 封装）。\n\n与 ``str_find`` 功能相同，区别在于按 Unicode 字符计", "url": "./builtin.html#function-str_find_u"}, {"name": "substring", "desc": "截取字符串的子串（SUBSTRING 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    源字符串。\nstar", "url": "./builtin.html#function-substring"}, {"name": "substring_u", "desc": "截取字符串的子串（SUBSTRINGU 指令的 Python 封装）。\n\n与 ``substring`` 功能相同，区别在于按 Unicode 字符计数位置和长", "url": "./builtin.html#function-substring_u"}, {"name": "str_count", "desc": "统计子串在字符串中的出现次数（STRCOUNT 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    被搜索的字", "url": "./builtin.html#function-str_count"}, {"name": "str_join", "desc": "用分隔符连接多个字符串（STRJOIN 指令的 Python 封装）。\n\nParameters\n----------\ndelimiter : str\n    分", "url": "./builtin.html#function-str_join"}, {"name": "replace", "desc": "替换字符串中的子串（REPLACE 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    源字符串。\nold :", "url": "./builtin.html#function-replace"}, {"name": "to_str", "desc": "将整数转换为字符串（TOSTR 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要转换的整数。\n\n", "url": "./builtin.html#function-to_str"}, {"name": "to_int", "desc": "将字符串转换为整数（TOINT 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    要转换的字符串。\n\nRet", "url": "./builtin.html#function-to_int"}, {"name": "group_match", "desc": "判断目标值是否匹配给定的任意一个值（GROUPMATCH 指令的 Python 封装）。\n\nParameters\n----------\ntarget : int", "url": "./builtin.html#function-group_match"}, {"name": "sign", "desc": "返回整数的符号（SIGN 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    输入整数。\n\nRetur", "url": "./builtin.html#function-sign"}, {"name": "money_str", "desc": "格式化金额字符串（MONEYSTR 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    金额数值。\nu", "url": "./builtin.html#function-money_str"}, {"name": "get_palam_lv", "desc": "根据数值计算 PALAM 等级（GETPALAMLV 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n  ", "url": "./builtin.html#function-get_palam_lv"}, {"name": "get_exp_lv", "desc": "根据数值计算 EXP 等级（GETEXPLV 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    当前", "url": "./builtin.html#function-get_exp_lv"}, {"name": "save_nos", "desc": "获取配置的存档槽位总数（SAVENOS 指令的 Python 封装）。\n\nReturns\n-------\nint\n    引擎配置中允许的存档槽位数量。", "url": "./builtin.html#function-save_nos"}, {"name": "is_skip", "desc": "检查是否处于消息跳过状态（ISSKIP 指令的 Python 封装）。\n\nReturns\n-------\nint\n    若玩家当前按住跳过键或处于自动跳过模式", "url": "./builtin.html#function-is_skip"}, {"name": "get_config", "desc": "获取整数型配置项（GETCONFIG 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    配置项名称（例", "url": "./builtin.html#function-get_config"}, {"name": "get_configs", "desc": "获取字符串型配置项（GETCONFIGS 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    配置项名称", "url": "./builtin.html#function-get_configs"}, {"name": "rand", "desc": "生成随机整数（RAND 指令的 Python 封装）。\n\n返回范围 ``[0, max_val)`` 内的伪随机整数。\n\nParameters\n--------", "url": "./builtin.html#function-rand"}, {"name": "get_time", "desc": "获取当前时间戳（GETTIME 指令的 Python 封装）。\n\nReturns\n-------\nint\n    当前时间的打包整数值，格式为 ``yyyymm", "url": "./builtin.html#function-get_time"}, {"name": "get_time_str", "desc": "获取当前时间的格式化字符串。\n\nReturns\n-------\nstr\n    当前时间的字符串表示，格式为 ``\"yyyy/MM/dd HH:mm:ss\"``", "url": "./builtin.html#function-get_time_str"}, {"name": "get_millisecond", "desc": "获取当前时间的毫秒部分（GETMILLISECOND 指令的 Python 封装）。\n\nReturns\n-------\nint\n    自系统启动以来的毫秒数（", "url": "./builtin.html#function-get_millisecond"}, {"name": "get_second", "desc": "获取当前时间的秒部分（GETSECOND 指令的 Python 封装）。\n\nReturns\n-------\nint\n    自系统启动以来的秒数（与 ``Dat", "url": "./builtin.html#function-get_second"}, {"name": "randomize", "desc": "设置随机数种子（RANDOMIZE 指令的 Python 封装）。\n\n在使用旧版随机数生成器时生效（新版随机器为自动种子管理）。\n\nParameters\n---", "url": "./builtin.html#function-randomize"}, {"name": "init_rand", "desc": "重新初始化随机数生成器（INITRAND 指令的 Python 封装）。\n\n在使用旧版随机数生成器时，使用当前时间作为新种子重新初始化。\n\nReturns\n--", "url": "./builtin.html#function-init_rand"}, {"name": "dump_rand", "desc": "输出当前随机数生成器状态（DUMPRAND 指令的 Python 封装）。\n\n将当前随机序列的内部状态打印到控制台，便于调试。\n\nReturns\n-------", "url": "./builtin.html#function-dump_rand"}, {"name": "sqrt", "desc": "返回整数的平方根（SQRT 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python ``math.isqrt`` 实现。\n\nPara", "url": "./builtin.html#function-sqrt"}, {"name": "cbrt", "desc": "返回整数的立方根（CBRT 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python 实现。\n\nParameters\n--------", "url": "./builtin.html#function-cbrt"}, {"name": "log_", "desc": "返回整数的对数（LOG 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python ``math.log`` 实现。\n\nParamete", "url": "./builtin.html#function-log_"}, {"name": "exp_", "desc": "返回 e 的幂次方（EXP 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python ``math.exp`` 实现。\n\nParame", "url": "./builtin.html#function-exp_"}, {"name": "max_array", "desc": "返回整数数组中的最大值（MAXARRAY 指令的 Python 封装）。\n\n遍历指定变量数组，返回最大元素值。空数组返回 ``0``。\n\nParameters\n", "url": "./builtin.html#function-max_array"}, {"name": "min_array", "desc": "返回整数数组中的最小值（MINARRAY 指令的 Python 封装）。\n\n遍历指定变量数组，返回最小元素值。空数组返回 ``0``。\n\nParameters\n", "url": "./builtin.html#function-min_array"}, {"name": "get_num", "desc": "统计数组中非零元素的数量（GETNUM 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组变量", "url": "./builtin.html#function-get_num"}, {"name": "get_num_s", "desc": "统计字符串数组中非空元素的数量（GETNUMS 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标", "url": "./builtin.html#function-get_num_s"}, {"name": "exist_file", "desc": "检查文件是否存在（EXISTFILE 指令的 Python 封装）。\n\nParameters\n----------\npath : str\n    文件路径（相对", "url": "./builtin.html#function-exist_file"}, {"name": "exist_dir", "desc": "检查目录是否存在。\n\nParameters\n----------\npath : str\n    目录路径。\n\nReturns\n-------\nint\n    目", "url": "./builtin.html#function-exist_dir"}, {"name": "save_text", "desc": "将文本保存到文件（SAVETEXT 指令的 Python 封装）。\n\nParameters\n----------\npath : str\n    文件路径。\nte", "url": "./builtin.html#function-save_text"}, {"name": "load_text", "desc": "从文件加载文本（LOADTEXT 指令的 Python 封装）。\n\nParameters\n----------\npath : str\n    文件路径。\n\nRe", "url": "./builtin.html#function-load_text"}, {"name": "is_numeric", "desc": "检查字符串是否为数字（ISNUMERIC 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    要检查的字符串。", "url": "./builtin.html#function-is_numeric"}, {"name": "escape_str", "desc": "转义字符串中的特殊字符（ESCAPE 指令的 Python 封装）。\n\n    将 ``\\``、``\"``、``\n``、``\r``、``   `` 等字符转义为", "url": "./builtin.html#function-escape_str"}, {"name": "nosames", "desc": "检查所有值互不相同（NOSAMES 指令的 Python 封装）。\n\nParameters\n----------\n*values : int\n    要检查的整", "url": "./builtin.html#function-nosames"}, {"name": "allsames", "desc": "检查所有值完全相同（ALLSAMES 指令的 Python 封装）。\n\nParameters\n----------\n*values : int\n    要检查的", "url": "./builtin.html#function-allsames"}, {"name": "max_", "desc": "返回两个整数中的较大值（MAX 指令的 Python 封装）。\n\nParameters\n----------\na : int\n    第一个整数。\nb : in", "url": "./builtin.html#function-max_"}, {"name": "min_", "desc": "返回两个整数中的较小值（MIN 指令的 Python 封装）。\n\nParameters\n----------\na : int\n    第一个整数。\nb : in", "url": "./builtin.html#function-min_"}, {"name": "limit", "desc": "将整数限制在指定闭区间内（LIMIT 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要限制的原始", "url": "./builtin.html#function-limit"}, {"name": "abs_", "desc": "返回整数的绝对值（ABS 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    输入整数。\n\nRetur", "url": "./builtin.html#function-abs_"}, {"name": "power_", "desc": "计算整数的幂次方（POWER 指令的 Python 封装）。\n\nParameters\n----------\nbase : int\n    底数。\nexp : i", "url": "./builtin.html#function-power_"}, {"name": "match", "desc": "统计整数数组中指定值的出现次数（MATCH 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组", "url": "./builtin.html#function-match"}, {"name": "smatch", "desc": "统计字符串数组中指定值的出现次数（MATCH 指令的 Python 封装，字符串版）。\n\nParameters\n----------\nname : str\n  ", "url": "./builtin.html#function-smatch"}, {"name": "cmatch", "desc": "统计角色整数数组中指定值的出现次数（CMATCH 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目", "url": "./builtin.html#function-cmatch"}, {"name": "sum_array", "desc": "计算整数数组的元素总和（SUMARRAY 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组变", "url": "./builtin.html#function-sum_array"}, {"name": "find_array", "desc": "在整数数组中查找指定值（FINDARRAY 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组", "url": "./builtin.html#function-find_array"}, {"name": "sfind_array", "desc": "在字符串数组中查找指定值（FINDARRAY 指令的 Python 封装，字符串版）。\n\nParameters\n----------\nname : str\n  ", "url": "./builtin.html#function-sfind_array"}, {"name": "in_range", "desc": "判断整数是否在指定闭区间内（INRANGE 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要判断", "url": "./builtin.html#function-in_range"}, {"name": "str_len_sjis", "desc": "计算字符串在 Shift-JIS 编码下的字节长度（STRLENS 指令的 Python 封装）。\n\nParameters\n----------\ns : str", "url": "./builtin.html#function-str_len_sjis"}, {"name": "str_len_u", "desc": "计算字符串的 Unicode 字符数（STRLENSU 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    输", "url": "./builtin.html#function-str_len_u"}, {"name": "str_find", "desc": "在字符串中查找子串首次出现的位置（STRFIND 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    被搜索的", "url": "./builtin.html#function-str_find"}, {"name": "str_find_u", "desc": "在字符串中查找子串首次出现的位置（STRFINDU 指令的 Python 封装）。\n\n与 ``str_find`` 功能相同，区别在于按 Unicode 字符计", "url": "./builtin.html#function-str_find_u"}, {"name": "substring", "desc": "截取字符串的子串（SUBSTRING 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    源字符串。\nstar", "url": "./builtin.html#function-substring"}, {"name": "substring_u", "desc": "截取字符串的子串（SUBSTRINGU 指令的 Python 封装）。\n\n与 ``substring`` 功能相同，区别在于按 Unicode 字符计数位置和长", "url": "./builtin.html#function-substring_u"}, {"name": "str_count", "desc": "统计子串在字符串中的出现次数（STRCOUNT 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    被搜索的字", "url": "./builtin.html#function-str_count"}, {"name": "str_join", "desc": "用分隔符连接多个字符串（STRJOIN 指令的 Python 封装）。\n\nParameters\n----------\ndelimiter : str\n    分", "url": "./builtin.html#function-str_join"}, {"name": "replace", "desc": "替换字符串中的子串（REPLACE 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    源字符串。\nold :", "url": "./builtin.html#function-replace"}, {"name": "to_str", "desc": "将整数转换为字符串（TOSTR 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要转换的整数。\n\n", "url": "./builtin.html#function-to_str"}, {"name": "to_int", "desc": "将字符串转换为整数（TOINT 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    要转换的字符串。\n\nRet", "url": "./builtin.html#function-to_int"}, {"name": "group_match", "desc": "判断目标值是否匹配给定的任意一个值（GROUPMATCH 指令的 Python 封装）。\n\nParameters\n----------\ntarget : int", "url": "./builtin.html#function-group_match"}, {"name": "sign", "desc": "返回整数的符号（SIGN 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    输入整数。\n\nRetur", "url": "./builtin.html#function-sign"}, {"name": "money_str", "desc": "格式化金额字符串（MONEYSTR 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    金额数值。\nu", "url": "./builtin.html#function-money_str"}, {"name": "get_palam_lv", "desc": "根据数值计算 PALAM 等级（GETPALAMLV 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n  ", "url": "./builtin.html#function-get_palam_lv"}, {"name": "get_exp_lv", "desc": "根据数值计算 EXP 等级（GETEXPLV 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    当前", "url": "./builtin.html#function-get_exp_lv"}, {"name": "save_nos", "desc": "获取配置的存档槽位总数（SAVENOS 指令的 Python 封装）。\n\nReturns\n-------\nint\n    引擎配置中允许的存档槽位数量。", "url": "./builtin.html#function-save_nos"}, {"name": "is_skip", "desc": "检查是否处于消息跳过状态（ISSKIP 指令的 Python 封装）。\n\nReturns\n-------\nint\n    若玩家当前按住跳过键或处于自动跳过模式", "url": "./builtin.html#function-is_skip"}, {"name": "get_config", "desc": "获取整数型配置项（GETCONFIG 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    配置项名称（例", "url": "./builtin.html#function-get_config"}, {"name": "get_configs", "desc": "获取字符串型配置项（GETCONFIGS 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    配置项名称", "url": "./builtin.html#function-get_configs"}, {"name": "rand", "desc": "生成随机整数（RAND 指令的 Python 封装）。\n\n返回范围 ``[0, max_val)`` 内的伪随机整数。\n\nParameters\n--------", "url": "./builtin.html#function-rand"}, {"name": "get_time", "desc": "获取当前时间戳（GETTIME 指令的 Python 封装）。\n\nReturns\n-------\nint\n    当前时间的打包整数值，格式为 ``yyyymm", "url": "./builtin.html#function-get_time"}, {"name": "get_time_str", "desc": "获取当前时间的格式化字符串。\n\nReturns\n-------\nstr\n    当前时间的字符串表示，格式为 ``\"yyyy/MM/dd HH:mm:ss\"``", "url": "./builtin.html#function-get_time_str"}, {"name": "get_millisecond", "desc": "获取当前时间的毫秒部分（GETMILLISECOND 指令的 Python 封装）。\n\nReturns\n-------\nint\n    自系统启动以来的毫秒数（", "url": "./builtin.html#function-get_millisecond"}, {"name": "get_second", "desc": "获取当前时间的秒部分（GETSECOND 指令的 Python 封装）。\n\nReturns\n-------\nint\n    自系统启动以来的秒数（与 ``Dat", "url": "./builtin.html#function-get_second"}, {"name": "randomize", "desc": "设置随机数种子（RANDOMIZE 指令的 Python 封装）。\n\n在使用旧版随机数生成器时生效（新版随机器为自动种子管理）。\n\nParameters\n---", "url": "./builtin.html#function-randomize"}, {"name": "init_rand", "desc": "重新初始化随机数生成器（INITRAND 指令的 Python 封装）。\n\n在使用旧版随机数生成器时，使用当前时间作为新种子重新初始化。\n\nReturns\n--", "url": "./builtin.html#function-init_rand"}, {"name": "dump_rand", "desc": "输出当前随机数生成器状态（DUMPRAND 指令的 Python 封装）。\n\n将当前随机序列的内部状态打印到控制台，便于调试。\n\nReturns\n-------", "url": "./builtin.html#function-dump_rand"}, {"name": "sqrt", "desc": "返回整数的平方根（SQRT 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python ``math.isqrt`` 实现。\n\nPara", "url": "./builtin.html#function-sqrt"}, {"name": "cbrt", "desc": "返回整数的立方根（CBRT 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python 实现。\n\nParameters\n--------", "url": "./builtin.html#function-cbrt"}, {"name": "log_", "desc": "返回整数的对数（LOG 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python ``math.log`` 实现。\n\nParamete", "url": "./builtin.html#function-log_"}, {"name": "exp_", "desc": "返回 e 的幂次方（EXP 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python ``math.exp`` 实现。\n\nParame", "url": "./builtin.html#function-exp_"}, {"name": "max_array", "desc": "返回整数数组中的最大值（MAXARRAY 指令的 Python 封装）。\n\n遍历指定变量数组，返回最大元素值。空数组返回 ``0``。\n\nParameters\n", "url": "./builtin.html#function-max_array"}, {"name": "min_array", "desc": "返回整数数组中的最小值（MINARRAY 指令的 Python 封装）。\n\n遍历指定变量数组，返回最小元素值。空数组返回 ``0``。\n\nParameters\n", "url": "./builtin.html#function-min_array"}, {"name": "get_num", "desc": "统计数组中非零元素的数量（GETNUM 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组变量", "url": "./builtin.html#function-get_num"}, {"name": "get_num_s", "desc": "统计字符串数组中非空元素的数量（GETNUMS 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标", "url": "./builtin.html#function-get_num_s"}, {"name": "exist_file", "desc": "检查文件是否存在（EXISTFILE 指令的 Python 封装）。\n\nParameters\n----------\npath : str\n    文件路径（相对", "url": "./builtin.html#function-exist_file"}, {"name": "exist_dir", "desc": "检查目录是否存在。\n\nParameters\n----------\npath : str\n    目录路径。\n\nReturns\n-------\nint\n    目", "url": "./builtin.html#function-exist_dir"}, {"name": "save_text", "desc": "将文本保存到文件（SAVETEXT 指令的 Python 封装）。\n\nParameters\n----------\npath : str\n    文件路径。\nte", "url": "./builtin.html#function-save_text"}, {"name": "load_text", "desc": "从文件加载文本（LOADTEXT 指令的 Python 封装）。\n\nParameters\n----------\npath : str\n    文件路径。\n\nRe", "url": "./builtin.html#function-load_text"}, {"name": "is_numeric", "desc": "检查字符串是否为数字（ISNUMERIC 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    要检查的字符串。", "url": "./builtin.html#function-is_numeric"}, {"name": "escape_str", "desc": "转义字符串中的特殊字符（ESCAPE 指令的 Python 封装）。\n\n    将 ``\\``、``\"``、``\n``、``\r``、``   `` 等字符转义为", "url": "./builtin.html#function-escape_str"}, {"name": "nosames", "desc": "检查所有值互不相同（NOSAMES 指令的 Python 封装）。\n\nParameters\n----------\n*values : int\n    要检查的整", "url": "./builtin.html#function-nosames"}, {"name": "allsames", "desc": "检查所有值完全相同（ALLSAMES 指令的 Python 封装）。\n\nParameters\n----------\n*values : int\n    要检查的", "url": "./builtin.html#function-allsames"}, {"name": "max_", "desc": "返回两个整数中的较大值（MAX 指令的 Python 封装）。\n\nParameters\n----------\na : int\n    第一个整数。\nb : in", "url": "./builtin.html#function-max_"}, {"name": "min_", "desc": "返回两个整数中的较小值（MIN 指令的 Python 封装）。\n\nParameters\n----------\na : int\n    第一个整数。\nb : in", "url": "./builtin.html#function-min_"}, {"name": "limit", "desc": "将整数限制在指定闭区间内（LIMIT 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要限制的原始", "url": "./builtin.html#function-limit"}, {"name": "abs_", "desc": "返回整数的绝对值（ABS 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    输入整数。\n\nRetur", "url": "./builtin.html#function-abs_"}, {"name": "power_", "desc": "计算整数的幂次方（POWER 指令的 Python 封装）。\n\nParameters\n----------\nbase : int\n    底数。\nexp : i", "url": "./builtin.html#function-power_"}, {"name": "match", "desc": "统计整数数组中指定值的出现次数（MATCH 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组", "url": "./builtin.html#function-match"}, {"name": "smatch", "desc": "统计字符串数组中指定值的出现次数（MATCH 指令的 Python 封装，字符串版）。\n\nParameters\n----------\nname : str\n  ", "url": "./builtin.html#function-smatch"}, {"name": "cmatch", "desc": "统计角色整数数组中指定值的出现次数（CMATCH 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目", "url": "./builtin.html#function-cmatch"}, {"name": "sum_array", "desc": "计算整数数组的元素总和（SUMARRAY 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组变", "url": "./builtin.html#function-sum_array"}, {"name": "find_array", "desc": "在整数数组中查找指定值（FINDARRAY 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组", "url": "./builtin.html#function-find_array"}, {"name": "sfind_array", "desc": "在字符串数组中查找指定值（FINDARRAY 指令的 Python 封装，字符串版）。\n\nParameters\n----------\nname : str\n  ", "url": "./builtin.html#function-sfind_array"}, {"name": "in_range", "desc": "判断整数是否在指定闭区间内（INRANGE 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要判断", "url": "./builtin.html#function-in_range"}, {"name": "str_len_sjis", "desc": "计算字符串在 Shift-JIS 编码下的字节长度（STRLENS 指令的 Python 封装）。\n\nParameters\n----------\ns : str", "url": "./builtin.html#function-str_len_sjis"}, {"name": "str_len_u", "desc": "计算字符串的 Unicode 字符数（STRLENSU 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    输", "url": "./builtin.html#function-str_len_u"}, {"name": "str_find", "desc": "在字符串中查找子串首次出现的位置（STRFIND 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    被搜索的", "url": "./builtin.html#function-str_find"}, {"name": "str_find_u", "desc": "在字符串中查找子串首次出现的位置（STRFINDU 指令的 Python 封装）。\n\n与 ``str_find`` 功能相同，区别在于按 Unicode 字符计", "url": "./builtin.html#function-str_find_u"}, {"name": "substring", "desc": "截取字符串的子串（SUBSTRING 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    源字符串。\nstar", "url": "./builtin.html#function-substring"}, {"name": "substring_u", "desc": "截取字符串的子串（SUBSTRINGU 指令的 Python 封装）。\n\n与 ``substring`` 功能相同，区别在于按 Unicode 字符计数位置和长", "url": "./builtin.html#function-substring_u"}, {"name": "str_count", "desc": "统计子串在字符串中的出现次数（STRCOUNT 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    被搜索的字", "url": "./builtin.html#function-str_count"}, {"name": "str_join", "desc": "用分隔符连接多个字符串（STRJOIN 指令的 Python 封装）。\n\nParameters\n----------\ndelimiter : str\n    分", "url": "./builtin.html#function-str_join"}, {"name": "replace", "desc": "替换字符串中的子串（REPLACE 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    源字符串。\nold :", "url": "./builtin.html#function-replace"}, {"name": "to_str", "desc": "将整数转换为字符串（TOSTR 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    要转换的整数。\n\n", "url": "./builtin.html#function-to_str"}, {"name": "to_int", "desc": "将字符串转换为整数（TOINT 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    要转换的字符串。\n\nRet", "url": "./builtin.html#function-to_int"}, {"name": "group_match", "desc": "判断目标值是否匹配给定的任意一个值（GROUPMATCH 指令的 Python 封装）。\n\nParameters\n----------\ntarget : int", "url": "./builtin.html#function-group_match"}, {"name": "sign", "desc": "返回整数的符号（SIGN 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    输入整数。\n\nRetur", "url": "./builtin.html#function-sign"}, {"name": "money_str", "desc": "格式化金额字符串（MONEYSTR 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    金额数值。\nu", "url": "./builtin.html#function-money_str"}, {"name": "get_palam_lv", "desc": "根据数值计算 PALAM 等级（GETPALAMLV 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n  ", "url": "./builtin.html#function-get_palam_lv"}, {"name": "get_exp_lv", "desc": "根据数值计算 EXP 等级（GETEXPLV 指令的 Python 封装）。\n\nParameters\n----------\nvalue : int\n    当前", "url": "./builtin.html#function-get_exp_lv"}, {"name": "save_nos", "desc": "获取配置的存档槽位总数（SAVENOS 指令的 Python 封装）。\n\nReturns\n-------\nint\n    引擎配置中允许的存档槽位数量。", "url": "./builtin.html#function-save_nos"}, {"name": "is_skip", "desc": "检查是否处于消息跳过状态（ISSKIP 指令的 Python 封装）。\n\nReturns\n-------\nint\n    若玩家当前按住跳过键或处于自动跳过模式", "url": "./builtin.html#function-is_skip"}, {"name": "get_config", "desc": "获取整数型配置项（GETCONFIG 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    配置项名称（例", "url": "./builtin.html#function-get_config"}, {"name": "get_configs", "desc": "获取字符串型配置项（GETCONFIGS 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    配置项名称", "url": "./builtin.html#function-get_configs"}, {"name": "rand", "desc": "生成随机整数（RAND 指令的 Python 封装）。\n\n返回范围 ``[0, max_val)`` 内的伪随机整数。\n\nParameters\n--------", "url": "./builtin.html#function-rand"}, {"name": "get_time", "desc": "获取当前时间戳（GETTIME 指令的 Python 封装）。\n\nReturns\n-------\nint\n    当前时间的打包整数值，格式为 ``yyyymm", "url": "./builtin.html#function-get_time"}, {"name": "get_time_str", "desc": "获取当前时间的格式化字符串。\n\nReturns\n-------\nstr\n    当前时间的字符串表示，格式为 ``\"yyyy/MM/dd HH:mm:ss\"``", "url": "./builtin.html#function-get_time_str"}, {"name": "get_millisecond", "desc": "获取当前时间的毫秒部分（GETMILLISECOND 指令的 Python 封装）。\n\nReturns\n-------\nint\n    自系统启动以来的毫秒数（", "url": "./builtin.html#function-get_millisecond"}, {"name": "get_second", "desc": "获取当前时间的秒部分（GETSECOND 指令的 Python 封装）。\n\nReturns\n-------\nint\n    自系统启动以来的秒数（与 ``Dat", "url": "./builtin.html#function-get_second"}, {"name": "randomize", "desc": "设置随机数种子（RANDOMIZE 指令的 Python 封装）。\n\n在使用旧版随机数生成器时生效（新版随机器为自动种子管理）。\n\nParameters\n---", "url": "./builtin.html#function-randomize"}, {"name": "init_rand", "desc": "重新初始化随机数生成器（INITRAND 指令的 Python 封装）。\n\n在使用旧版随机数生成器时，使用当前时间作为新种子重新初始化。\n\nReturns\n--", "url": "./builtin.html#function-init_rand"}, {"name": "dump_rand", "desc": "输出当前随机数生成器状态（DUMPRAND 指令的 Python 封装）。\n\n将当前随机序列的内部状态打印到控制台，便于调试。\n\nReturns\n-------", "url": "./builtin.html#function-dump_rand"}, {"name": "sqrt", "desc": "返回整数的平方根（SQRT 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python ``math.isqrt`` 实现。\n\nPara", "url": "./builtin.html#function-sqrt"}, {"name": "cbrt", "desc": "返回整数的立方根（CBRT 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python 实现。\n\nParameters\n--------", "url": "./builtin.html#function-cbrt"}, {"name": "log_", "desc": "返回整数的对数（LOG 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python ``math.log`` 实现。\n\nParamete", "url": "./builtin.html#function-log_"}, {"name": "exp_", "desc": "返回 e 的幂次方（EXP 指令的 Python 封装）。\n\n由于 C# 侧未暴露此方法，使用纯 Python ``math.exp`` 实现。\n\nParame", "url": "./builtin.html#function-exp_"}, {"name": "max_array", "desc": "返回整数数组中的最大值（MAXARRAY 指令的 Python 封装）。\n\n遍历指定变量数组，返回最大元素值。空数组返回 ``0``。\n\nParameters\n", "url": "./builtin.html#function-max_array"}, {"name": "min_array", "desc": "返回整数数组中的最小值（MINARRAY 指令的 Python 封装）。\n\n遍历指定变量数组，返回最小元素值。空数组返回 ``0``。\n\nParameters\n", "url": "./builtin.html#function-min_array"}, {"name": "get_num", "desc": "统计数组中非零元素的数量（GETNUM 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标数组变量", "url": "./builtin.html#function-get_num"}, {"name": "get_num_s", "desc": "统计字符串数组中非空元素的数量（GETNUMS 指令的 Python 封装）。\n\nParameters\n----------\nname : str\n    目标", "url": "./builtin.html#function-get_num_s"}, {"name": "exist_file", "desc": "检查文件是否存在（EXISTFILE 指令的 Python 封装）。\n\nParameters\n----------\npath : str\n    文件路径（相对", "url": "./builtin.html#function-exist_file"}, {"name": "exist_dir", "desc": "检查目录是否存在。\n\nParameters\n----------\npath : str\n    目录路径。\n\nReturns\n-------\nint\n    目", "url": "./builtin.html#function-exist_dir"}, {"name": "save_text", "desc": "将文本保存到文件（SAVETEXT 指令的 Python 封装）。\n\nParameters\n----------\npath : str\n    文件路径。\nte", "url": "./builtin.html#function-save_text"}, {"name": "load_text", "desc": "从文件加载文本（LOADTEXT 指令的 Python 封装）。\n\nParameters\n----------\npath : str\n    文件路径。\n\nRe", "url": "./builtin.html#function-load_text"}, {"name": "is_numeric", "desc": "检查字符串是否为数字（ISNUMERIC 指令的 Python 封装）。\n\nParameters\n----------\ns : str\n    要检查的字符串。", "url": "./builtin.html#function-is_numeric"}, {"name": "escape_str", "desc": "转义字符串中的特殊字符（ESCAPE 指令的 Python 封装）。\n\n    将 ``\\``、``\"``、``\n``、``\r``、``   `` 等字符转义为", "url": "./builtin.html#function-escape_str"}, {"name": "nosames", "desc": "检查所有值互不相同（NOSAMES 指令的 Python 封装）。\n\nParameters\n----------\n*values : int\n    要检查的整", "url": "./builtin.html#function-nosames"}, {"name": "allsames", "desc": "检查所有值完全相同（ALLSAMES 指令的 Python 封装）。\n\nParameters\n----------\n*values : int\n    要检查的", "url": "./builtin.html#function-allsames"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

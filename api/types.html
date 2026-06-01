@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 类型定义</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 类型定义</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>类型定义</h1>
+<div class="api-card" id="class-Alignment">
+<div class="api-header">
+<div><span class="api-name">Alignment</span>
+</div>
+<div class="api-sig">Alignment</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>行对齐方式枚举。</p>
+<p>控制文本在显示行中的水平对齐位置。</p>
+<p>Members
+-------
+LEFT = 0
+    左对齐（默认）。
+CENTER = 1
+    居中对齐，常用于标题或居中提示。
+RIGHT = 2
+    右对齐，常用于数值或状态显示。</p>
+<p>See Also
+--------
+pyera.alignment : 设置当前对齐方式。
+pyera.current_align : 获取当前对齐方式。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-FontStyleFlag">
+<div class="api-header">
+<div><span class="api-name">FontStyleFlag</span>
+</div>
+<div class="api-sig">FontStyleFlag</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>字体样式位标志枚举。</p>
+<p>通过按位或（``|``）组合多个标志，可同时应用多种样式。</p>
+<p>Members
+-------
+REGULAR = 0
+    常规样式（无特殊效果）。
+BOLD = 1
+    粗体。
+ITALIC = 2
+    斜体。
+STRIKEOUT = 4
+    删除线。
+UNDERLINE = 8
+    下划线。</p>
+<p>See Also
+--------
+pyera.font_style : 应用字体样式。
+pyera.get_style : 获取当前字体样式。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-RedrawMode">
+<div class="api-header">
+<div><span class="api-name">RedrawMode</span>
+</div>
+<div class="api-sig">RedrawMode</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>重绘模式枚举。</p>
+<p>控制引擎在何时自动刷新屏幕显示内容。</p>
+<p>Members
+-------
+NORMAL = 0
+    不自动重绘，需手动调用 ``refresh()``。
+PRINT_AND_FORCE = 1
+    每次打印后自动重绘（性能开销较大）。
+FORCE = 2
+    强制完整重绘模式。</p>
+<p>See Also
+--------
+pyera.redraw : 设置重绘模式。
+pyera.current_redraw : 获取当前重绘模式。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-SortOrder">
+<div class="api-header">
+<div><span class="api-name">SortOrder</span>
+</div>
+<div class="api-sig">SortOrder</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>数组排序方向枚举。</p>
+<p>Members
+-------
+ASCENDING = 0
+    升序排列（从小到大）。
+DESCENDING = 1
+    降序排列（从大到小）。
+UNDEF = 2
+    未定义/保持原始顺序。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-InputType">
+<div class="api-header">
+<div><span class="api-name">InputType</span>
+</div>
+<div class="api-sig">InputType</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输入请求类型枚举。</p>
+<p>标识引擎当前等待的输入类别，用于 ``InputRequest`` 的内部处理。</p>
+<p>Members
+-------
+ENTER_KEY = 1
+    等待按下回车键。
+ANY_KEY = 2
+    等待按下任意键。
+INT_VALUE = 3
+    等待输入一个整数值。
+STR_VALUE = 4
+    等待输入一个字符串值。
+VOID = 5
+    无特定输入要求（占位）。
+ANY_VALUE = 6
+    接受任意类型的输入值。
+INT_BUTTON = 7
+    等待点击一个整数按钮。
+STR_BUTTON = 8
+    等待点击一个字符串按钮。
+PRIMITIVE_MOUSE_KEY = 11
+    原始鼠标按键事件。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-parse_color">
+<div class="api-header">
+<div><span class="api-name">parse_color</span>
+</div>
+<div class="api-sig">parse_color(value: Union[str, ColorTuple]) -&gt; ColorTuple</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将颜色描述符转换为 ``(R, G, B)`` 元组。</p>
+<p>支持以下三种格式：</p>
+<p>- ``#RRGGBB`` 十六进制字符串（例如 ``&quot;#FF0000&quot;``）
+- 颜色名称（例如 ``&quot;red&quot;``、``&quot;blue&quot;``）
+- 已有的 ``(R, G, B)`` 元组</p>
+<p>Parameters
+----------
+value : str or tuple[int, int, int]
+    颜色描述符。</p>
+<p>Returns
+-------
+tuple[int, int, int]
+    解析后的 ``(R, G, B)`` 元组，每个分量范围 ``0`` ~ ``255``。</p>
+<p>Raises
+------
+ValueError
+    当 *value* 无法被解析为有效颜色时抛出。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">Union[str, ColorTuple]</span></div><p class="param-desc-text">颜色描述符。 解析后的 ``(R, G, B)`` 元组，每个分量范围 ``0`` ~ ``255``。 当 *value* 无法被解析为有效颜色时抛出。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Type Definitions</h1>
+<div class="api-card" id="class-Alignment">
+<div class="api-header">
+<div><span class="api-name">Alignment</span>
+</div>
+<div class="api-sig">Alignment</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>行对齐方式枚举。</p>
+<p>控制文本在显示行中的水平对齐位置。</p>
+<p>Members
+-------
+LEFT = 0
+    左对齐（默认）。
+CENTER = 1
+    居中对齐，常用于标题或居中提示。
+RIGHT = 2
+    右对齐，常用于数值或状态显示。</p>
+<p>See Also
+--------
+pyera.alignment : 设置当前对齐方式。
+pyera.current_align : 获取当前对齐方式。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-FontStyleFlag">
+<div class="api-header">
+<div><span class="api-name">FontStyleFlag</span>
+</div>
+<div class="api-sig">FontStyleFlag</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>字体样式位标志枚举。</p>
+<p>通过按位或（``|``）组合多个标志，可同时应用多种样式。</p>
+<p>Members
+-------
+REGULAR = 0
+    常规样式（无特殊效果）。
+BOLD = 1
+    粗体。
+ITALIC = 2
+    斜体。
+STRIKEOUT = 4
+    删除线。
+UNDERLINE = 8
+    下划线。</p>
+<p>See Also
+--------
+pyera.font_style : 应用字体样式。
+pyera.get_style : 获取当前字体样式。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-RedrawMode">
+<div class="api-header">
+<div><span class="api-name">RedrawMode</span>
+</div>
+<div class="api-sig">RedrawMode</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>重绘模式枚举。</p>
+<p>控制引擎在何时自动刷新屏幕显示内容。</p>
+<p>Members
+-------
+NORMAL = 0
+    不自动重绘，需手动调用 ``refresh()``。
+PRINT_AND_FORCE = 1
+    每次打印后自动重绘（性能开销较大）。
+FORCE = 2
+    强制完整重绘模式。</p>
+<p>See Also
+--------
+pyera.redraw : 设置重绘模式。
+pyera.current_redraw : 获取当前重绘模式。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-SortOrder">
+<div class="api-header">
+<div><span class="api-name">SortOrder</span>
+</div>
+<div class="api-sig">SortOrder</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>数组排序方向枚举。</p>
+<p>Members
+-------
+ASCENDING = 0
+    升序排列（从小到大）。
+DESCENDING = 1
+    降序排列（从大到小）。
+UNDEF = 2
+    未定义/保持原始顺序。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-InputType">
+<div class="api-header">
+<div><span class="api-name">InputType</span>
+</div>
+<div class="api-sig">InputType</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输入请求类型枚举。</p>
+<p>标识引擎当前等待的输入类别，用于 ``InputRequest`` 的内部处理。</p>
+<p>Members
+-------
+ENTER_KEY = 1
+    等待按下回车键。
+ANY_KEY = 2
+    等待按下任意键。
+INT_VALUE = 3
+    等待输入一个整数值。
+STR_VALUE = 4
+    等待输入一个字符串值。
+VOID = 5
+    无特定输入要求（占位）。
+ANY_VALUE = 6
+    接受任意类型的输入值。
+INT_BUTTON = 7
+    等待点击一个整数按钮。
+STR_BUTTON = 8
+    等待点击一个字符串按钮。
+PRIMITIVE_MOUSE_KEY = 11
+    原始鼠标按键事件。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-parse_color">
+<div class="api-header">
+<div><span class="api-name">parse_color</span>
+</div>
+<div class="api-sig">parse_color(value: Union[str, ColorTuple]) -&gt; ColorTuple</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将颜色描述符转换为 ``(R, G, B)`` 元组。</p>
+<p>支持以下三种格式：</p>
+<p>- ``#RRGGBB`` 十六进制字符串（例如 ``&quot;#FF0000&quot;``）
+- 颜色名称（例如 ``&quot;red&quot;``、``&quot;blue&quot;``）
+- 已有的 ``(R, G, B)`` 元组</p>
+<p>Parameters
+----------
+value : str or tuple[int, int, int]
+    颜色描述符。</p>
+<p>Returns
+-------
+tuple[int, int, int]
+    解析后的 ``(R, G, B)`` 元组，每个分量范围 ``0`` ~ ``255``。</p>
+<p>Raises
+------
+ValueError
+    当 *value* 无法被解析为有效颜色时抛出。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">Union[str, ColorTuple]</span></div><p class="param-desc-text">颜色描述符。 解析后的 ``(R, G, B)`` 元组，每个分量范围 ``0`` ~ ``255``。 当 *value* 无法被解析为有效颜色时抛出。</p></div>
+</div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>型定義</h1>
+<div class="api-card" id="class-Alignment">
+<div class="api-header">
+<div><span class="api-name">Alignment</span>
+</div>
+<div class="api-sig">Alignment</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>行对齐方式枚举。</p>
+<p>控制文本在显示行中的水平对齐位置。</p>
+<p>Members
+-------
+LEFT = 0
+    左对齐（默认）。
+CENTER = 1
+    居中对齐，常用于标题或居中提示。
+RIGHT = 2
+    右对齐，常用于数值或状态显示。</p>
+<p>See Also
+--------
+pyera.alignment : 设置当前对齐方式。
+pyera.current_align : 获取当前对齐方式。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-FontStyleFlag">
+<div class="api-header">
+<div><span class="api-name">FontStyleFlag</span>
+</div>
+<div class="api-sig">FontStyleFlag</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>字体样式位标志枚举。</p>
+<p>通过按位或（``|``）组合多个标志，可同时应用多种样式。</p>
+<p>Members
+-------
+REGULAR = 0
+    常规样式（无特殊效果）。
+BOLD = 1
+    粗体。
+ITALIC = 2
+    斜体。
+STRIKEOUT = 4
+    删除线。
+UNDERLINE = 8
+    下划线。</p>
+<p>See Also
+--------
+pyera.font_style : 应用字体样式。
+pyera.get_style : 获取当前字体样式。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-RedrawMode">
+<div class="api-header">
+<div><span class="api-name">RedrawMode</span>
+</div>
+<div class="api-sig">RedrawMode</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>重绘模式枚举。</p>
+<p>控制引擎在何时自动刷新屏幕显示内容。</p>
+<p>Members
+-------
+NORMAL = 0
+    不自动重绘，需手动调用 ``refresh()``。
+PRINT_AND_FORCE = 1
+    每次打印后自动重绘（性能开销较大）。
+FORCE = 2
+    强制完整重绘模式。</p>
+<p>See Also
+--------
+pyera.redraw : 设置重绘模式。
+pyera.current_redraw : 获取当前重绘模式。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-SortOrder">
+<div class="api-header">
+<div><span class="api-name">SortOrder</span>
+</div>
+<div class="api-sig">SortOrder</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>数组排序方向枚举。</p>
+<p>Members
+-------
+ASCENDING = 0
+    升序排列（从小到大）。
+DESCENDING = 1
+    降序排列（从大到小）。
+UNDEF = 2
+    未定义/保持原始顺序。</p></div>
+</div>
+</div>
+<div class="api-card" id="class-InputType">
+<div class="api-header">
+<div><span class="api-name">InputType</span>
+</div>
+<div class="api-sig">InputType</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>输入请求类型枚举。</p>
+<p>标识引擎当前等待的输入类别，用于 ``InputRequest`` 的内部处理。</p>
+<p>Members
+-------
+ENTER_KEY = 1
+    等待按下回车键。
+ANY_KEY = 2
+    等待按下任意键。
+INT_VALUE = 3
+    等待输入一个整数值。
+STR_VALUE = 4
+    等待输入一个字符串值。
+VOID = 5
+    无特定输入要求（占位）。
+ANY_VALUE = 6
+    接受任意类型的输入值。
+INT_BUTTON = 7
+    等待点击一个整数按钮。
+STR_BUTTON = 8
+    等待点击一个字符串按钮。
+PRIMITIVE_MOUSE_KEY = 11
+    原始鼠标按键事件。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-parse_color">
+<div class="api-header">
+<div><span class="api-name">parse_color</span>
+</div>
+<div class="api-sig">parse_color(value: Union[str, ColorTuple]) -&gt; ColorTuple</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>将颜色描述符转换为 ``(R, G, B)`` 元组。</p>
+<p>支持以下三种格式：</p>
+<p>- ``#RRGGBB`` 十六进制字符串（例如 ``&quot;#FF0000&quot;``）
+- 颜色名称（例如 ``&quot;red&quot;``、``&quot;blue&quot;``）
+- 已有的 ``(R, G, B)`` 元组</p>
+<p>Parameters
+----------
+value : str or tuple[int, int, int]
+    颜色描述符。</p>
+<p>Returns
+-------
+tuple[int, int, int]
+    解析后的 ``(R, G, B)`` 元组，每个分量范围 ``0`` ~ ``255``。</p>
+<p>Raises
+------
+ValueError
+    当 *value* 无法被解析为有效颜色时抛出。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">value</span><span class="param-required">必需</span><span class="param-type-tag">Union[str, ColorTuple]</span></div><p class="param-desc-text">颜色描述符。 解析后的 ``(R, G, B)`` 元组，每个分量范围 ``0`` ~ ``255``。 当 *value* 无法被解析为有效颜色时抛出。</p></div>
+</div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "Alignment", "desc": "行对齐方式枚举。\n\n控制文本在显示行中的水平对齐位置。\n\nMembers\n-------\nLEFT = 0\n    左对齐（默认）。\nCENTER = 1\n  ", "url": "./types.html#class-Alignment"}, {"name": "FontStyleFlag", "desc": "字体样式位标志枚举。\n\n通过按位或（``|``）组合多个标志，可同时应用多种样式。\n\nMembers\n-------\nREGULAR = 0\n    常规样式（", "url": "./types.html#class-FontStyleFlag"}, {"name": "RedrawMode", "desc": "重绘模式枚举。\n\n控制引擎在何时自动刷新屏幕显示内容。\n\nMembers\n-------\nNORMAL = 0\n    不自动重绘，需手动调用 ``refres", "url": "./types.html#class-RedrawMode"}, {"name": "SortOrder", "desc": "数组排序方向枚举。\n\nMembers\n-------\nASCENDING = 0\n    升序排列（从小到大）。\nDESCENDING = 1\n    降序排列", "url": "./types.html#class-SortOrder"}, {"name": "InputType", "desc": "输入请求类型枚举。\n\n标识引擎当前等待的输入类别，用于 ``InputRequest`` 的内部处理。\n\nMembers\n-------\nENTER_KEY =", "url": "./types.html#class-InputType"}, {"name": "parse_color", "desc": "将颜色描述符转换为 ``(R, G, B)`` 元组。\n\n支持以下三种格式：\n\n- ``#RRGGBB`` 十六进制字符串（例如 ``\"#FF0000\"``）\n", "url": "./types.html#function-parse_color"}, {"name": "Alignment", "desc": "行对齐方式枚举。\n\n控制文本在显示行中的水平对齐位置。\n\nMembers\n-------\nLEFT = 0\n    左对齐（默认）。\nCENTER = 1\n  ", "url": "./types.html#class-Alignment"}, {"name": "FontStyleFlag", "desc": "字体样式位标志枚举。\n\n通过按位或（``|``）组合多个标志，可同时应用多种样式。\n\nMembers\n-------\nREGULAR = 0\n    常规样式（", "url": "./types.html#class-FontStyleFlag"}, {"name": "RedrawMode", "desc": "重绘模式枚举。\n\n控制引擎在何时自动刷新屏幕显示内容。\n\nMembers\n-------\nNORMAL = 0\n    不自动重绘，需手动调用 ``refres", "url": "./types.html#class-RedrawMode"}, {"name": "SortOrder", "desc": "数组排序方向枚举。\n\nMembers\n-------\nASCENDING = 0\n    升序排列（从小到大）。\nDESCENDING = 1\n    降序排列", "url": "./types.html#class-SortOrder"}, {"name": "InputType", "desc": "输入请求类型枚举。\n\n标识引擎当前等待的输入类别，用于 ``InputRequest`` 的内部处理。\n\nMembers\n-------\nENTER_KEY =", "url": "./types.html#class-InputType"}, {"name": "parse_color", "desc": "将颜色描述符转换为 ``(R, G, B)`` 元组。\n\n支持以下三种格式：\n\n- ``#RRGGBB`` 十六进制字符串（例如 ``\"#FF0000\"``）\n", "url": "./types.html#function-parse_color"}, {"name": "Alignment", "desc": "行对齐方式枚举。\n\n控制文本在显示行中的水平对齐位置。\n\nMembers\n-------\nLEFT = 0\n    左对齐（默认）。\nCENTER = 1\n  ", "url": "./types.html#class-Alignment"}, {"name": "FontStyleFlag", "desc": "字体样式位标志枚举。\n\n通过按位或（``|``）组合多个标志，可同时应用多种样式。\n\nMembers\n-------\nREGULAR = 0\n    常规样式（", "url": "./types.html#class-FontStyleFlag"}, {"name": "RedrawMode", "desc": "重绘模式枚举。\n\n控制引擎在何时自动刷新屏幕显示内容。\n\nMembers\n-------\nNORMAL = 0\n    不自动重绘，需手动调用 ``refres", "url": "./types.html#class-RedrawMode"}, {"name": "SortOrder", "desc": "数组排序方向枚举。\n\nMembers\n-------\nASCENDING = 0\n    升序排列（从小到大）。\nDESCENDING = 1\n    降序排列", "url": "./types.html#class-SortOrder"}, {"name": "InputType", "desc": "输入请求类型枚举。\n\n标识引擎当前等待的输入类别，用于 ``InputRequest`` 的内部处理。\n\nMembers\n-------\nENTER_KEY =", "url": "./types.html#class-InputType"}, {"name": "parse_color", "desc": "将颜色描述符转换为 ``(R, G, B)`` 元组。\n\n支持以下三种格式：\n\n- ``#RRGGBB`` 十六进制字符串（例如 ``\"#FF0000\"``）\n", "url": "./types.html#function-parse_color"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>

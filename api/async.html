@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pyera — 异步工具</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="../index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="../index.html" data-key="index">首页</a>
+      <a class="nav-link" href="../getting-started.html" data-key="getting-started">快速开始</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="../api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="../api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="../api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="../api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="../api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="../api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="../api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="../api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="../api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="../api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="../api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="../api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="../api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="../api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="../api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="../api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="../api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="../api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="../examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="../examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="../index.html">Pyera</a> / API / 异步工具</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+  <div class="content">
+<div class="lang-content" data-lang="zh" id="content-zh">
+<h1>异步工具</h1>
+<div class="api-card" id="function-get_main_loop">
+<div class="api-header">
+<div><span class="api-name">get_main_loop</span>
+</div>
+<div class="api-sig">get_main_loop() -&gt; Optional[asyncio.AbstractEventLoop]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取主线程的事件循环（如果已创建）。</p>
+<p>Returns
+-------
+asyncio.AbstractEventLoop or None
+    主线程事件循环，未初始化时返回 ``None``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-ensure_main_loop">
+<div class="api-header">
+<div><span class="api-name">ensure_main_loop</span>
+</div>
+<div class="api-sig">ensure_main_loop(awaitable: Optional[Awaitable[Any]] = None) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>确保主线程有一个运行中的事件循环，并可选地提交一个协程。</p>
+<p>在 Emuera 的事件处理器（如 ``event_shop``）中调用此函数，
+可以启动一个后台事件循环来处理异步任务，同时不阻塞引擎的 UI 线程。</p>
+<p>Parameters
+----------
+awaitable : Awaitable, optional
+    要提交到事件循环的协程或 awaitable 对象。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; def event_shop():</p>
+<pre><code class="language-python">...     ensure_main_loop(fetch_data())</code><button class="copy-btn">📋</button></pre></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">awaitable</span><span class="param-type-tag">Optional[Awaitable[Any]]</span><span class="param-default-val">= None</span></div><p class="param-desc-text">要提交到事件循环的协程或 awaitable 对象。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-run_on_main">
+<div class="api-header">
+<div><span class="api-name">run_on_main</span>
+</div>
+<div class="api-sig">run_on_main(func: Callable[Ellipsis, T], *args, **kwargs) -&gt; T</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在主线程上执行一个同步函数（用于引擎 API 调用）。</p>
+<p>当异步代码需要调用 Emuera 引擎 API 时，必须将调用提交到主线程。
+本函数通过 ``loop.call_soon_threadsafe`` 配合 ``asyncio.wrap_future``
+实现安全的跨线程调用。</p>
+<p>Parameters
+----------
+func : callable
+    要在主线程执行的函数（通常是 ``pyera.xxx`` 引擎 API）。
+*args : Any
+    位置参数。
+**kwargs : Any
+    关键字参数。</p>
+<p>Returns
+-------
+Any
+    函数的返回值。</p>
+<p>Raises
+------
+RuntimeError
+    若主线程事件循环未初始化。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; async def show_result():</p>
+<p>...     await run_on_main(pyera.print_line, &quot;Done!&quot;)</p>
+<pre><code class="language-python">...     await run_on_main(pyera.refresh, True)</code><button class="copy-btn">📋</button></pre></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func</span><span class="param-required">必需</span><span class="param-type-tag">Callable[Ellipsis, T]</span></div><p class="param-desc-text">要在主线程执行的函数（通常是 ``pyera.xxx`` 引擎 API）。 位置参数。 关键字参数。 函数的返回值。 若主线程事件循环未初始化。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">**kwargs</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-run_on_main_sync">
+<div class="api-header">
+<div><span class="api-name">run_on_main_sync</span>
+</div>
+<div class="api-sig">run_on_main_sync(func: Callable[Ellipsis, T], timeout: float = 30.0, *args, **kwargs) -&gt; T</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在主线程上同步执行一个函数（阻塞当前线程直到完成）。</p>
+<p>适用于非异步代码中需要将引擎调用提交到主线程的场景。</p>
+<p>Parameters
+----------
+func : callable
+    要在主线程执行的函数。
+*args : Any
+    位置参数。
+timeout : float, optional
+    等待超时时间（秒），默认 30 秒。
+**kwargs : Any
+    关键字参数。</p>
+<p>Returns
+-------
+Any
+    函数的返回值。</p>
+<p>Raises
+------
+RuntimeError
+    若主线程事件循环未初始化。
+TimeoutError
+    若超过 *timeout* 仍未完成。</p></div>
+<h4>参数</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func</span><span class="param-required">必需</span><span class="param-type-tag">Callable[Ellipsis, T]</span></div><p class="param-desc-text">要在主线程执行的函数。 位置参数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-type-tag">float</span><span class="param-default-val">= 30.0</span></div><p class="param-desc-text">等待超时时间（秒），默认 30 秒。 关键字参数。 函数的返回值。 若主线程事件循环未初始化。 若超过 *timeout* 仍未完成。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">**kwargs</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-shutdown_main_loop">
+<div class="api-header">
+<div><span class="api-name">shutdown_main_loop</span>
+</div>
+<div class="api-sig">shutdown_main_loop() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>关闭主线程事件循环。</p>
+<p>在游戏退出时调用，清理异步资源。</p></div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="en" id="content-en">
+<h1>Async Utilities</h1>
+<div class="api-card" id="function-get_main_loop">
+<div class="api-header">
+<div><span class="api-name">get_main_loop</span>
+</div>
+<div class="api-sig">get_main_loop() -&gt; Optional[asyncio.AbstractEventLoop]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取主线程的事件循环（如果已创建）。</p>
+<p>Returns
+-------
+asyncio.AbstractEventLoop or None
+    主线程事件循环，未初始化时返回 ``None``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-ensure_main_loop">
+<div class="api-header">
+<div><span class="api-name">ensure_main_loop</span>
+</div>
+<div class="api-sig">ensure_main_loop(awaitable: Optional[Awaitable[Any]] = None) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>确保主线程有一个运行中的事件循环，并可选地提交一个协程。</p>
+<p>在 Emuera 的事件处理器（如 ``event_shop``）中调用此函数，
+可以启动一个后台事件循环来处理异步任务，同时不阻塞引擎的 UI 线程。</p>
+<p>Parameters
+----------
+awaitable : Awaitable, optional
+    要提交到事件循环的协程或 awaitable 对象。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; def event_shop():</p>
+<pre><code class="language-python">...     ensure_main_loop(fetch_data())</code><button class="copy-btn">📋</button></pre></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">awaitable</span><span class="param-type-tag">Optional[Awaitable[Any]]</span><span class="param-default-val">= None</span></div><p class="param-desc-text">要提交到事件循环的协程或 awaitable 对象。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-run_on_main">
+<div class="api-header">
+<div><span class="api-name">run_on_main</span>
+</div>
+<div class="api-sig">run_on_main(func: Callable[Ellipsis, T], *args, **kwargs) -&gt; T</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在主线程上执行一个同步函数（用于引擎 API 调用）。</p>
+<p>当异步代码需要调用 Emuera 引擎 API 时，必须将调用提交到主线程。
+本函数通过 ``loop.call_soon_threadsafe`` 配合 ``asyncio.wrap_future``
+实现安全的跨线程调用。</p>
+<p>Parameters
+----------
+func : callable
+    要在主线程执行的函数（通常是 ``pyera.xxx`` 引擎 API）。
+*args : Any
+    位置参数。
+**kwargs : Any
+    关键字参数。</p>
+<p>Returns
+-------
+Any
+    函数的返回值。</p>
+<p>Raises
+------
+RuntimeError
+    若主线程事件循环未初始化。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; async def show_result():</p>
+<p>...     await run_on_main(pyera.print_line, &quot;Done!&quot;)</p>
+<pre><code class="language-python">...     await run_on_main(pyera.refresh, True)</code><button class="copy-btn">📋</button></pre></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func</span><span class="param-required">必需</span><span class="param-type-tag">Callable[Ellipsis, T]</span></div><p class="param-desc-text">要在主线程执行的函数（通常是 ``pyera.xxx`` 引擎 API）。 位置参数。 关键字参数。 函数的返回值。 若主线程事件循环未初始化。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">**kwargs</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-run_on_main_sync">
+<div class="api-header">
+<div><span class="api-name">run_on_main_sync</span>
+</div>
+<div class="api-sig">run_on_main_sync(func: Callable[Ellipsis, T], timeout: float = 30.0, *args, **kwargs) -&gt; T</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在主线程上同步执行一个函数（阻塞当前线程直到完成）。</p>
+<p>适用于非异步代码中需要将引擎调用提交到主线程的场景。</p>
+<p>Parameters
+----------
+func : callable
+    要在主线程执行的函数。
+*args : Any
+    位置参数。
+timeout : float, optional
+    等待超时时间（秒），默认 30 秒。
+**kwargs : Any
+    关键字参数。</p>
+<p>Returns
+-------
+Any
+    函数的返回值。</p>
+<p>Raises
+------
+RuntimeError
+    若主线程事件循环未初始化。
+TimeoutError
+    若超过 *timeout* 仍未完成。</p></div>
+<h4>Parameters</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func</span><span class="param-required">必需</span><span class="param-type-tag">Callable[Ellipsis, T]</span></div><p class="param-desc-text">要在主线程执行的函数。 位置参数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-type-tag">float</span><span class="param-default-val">= 30.0</span></div><p class="param-desc-text">等待超时时间（秒），默认 30 秒。 关键字参数。 函数的返回值。 若主线程事件循环未初始化。 若超过 *timeout* 仍未完成。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">**kwargs</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-shutdown_main_loop">
+<div class="api-header">
+<div><span class="api-name">shutdown_main_loop</span>
+</div>
+<div class="api-sig">shutdown_main_loop() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>关闭主线程事件循环。</p>
+<p>在游戏退出时调用，清理异步资源。</p></div>
+</div>
+</div>
+</div>
+<div class="lang-content" data-lang="ja" id="content-ja">
+<h1>非同期ユーティリティ</h1>
+<div class="api-card" id="function-get_main_loop">
+<div class="api-header">
+<div><span class="api-name">get_main_loop</span>
+</div>
+<div class="api-sig">get_main_loop() -&gt; Optional[asyncio.AbstractEventLoop]</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>获取主线程的事件循环（如果已创建）。</p>
+<p>Returns
+-------
+asyncio.AbstractEventLoop or None
+    主线程事件循环，未初始化时返回 ``None``。</p></div>
+</div>
+</div>
+<div class="api-card" id="function-ensure_main_loop">
+<div class="api-header">
+<div><span class="api-name">ensure_main_loop</span>
+</div>
+<div class="api-sig">ensure_main_loop(awaitable: Optional[Awaitable[Any]] = None) -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>确保主线程有一个运行中的事件循环，并可选地提交一个协程。</p>
+<p>在 Emuera 的事件处理器（如 ``event_shop``）中调用此函数，
+可以启动一个后台事件循环来处理异步任务，同时不阻塞引擎的 UI 线程。</p>
+<p>Parameters
+----------
+awaitable : Awaitable, optional
+    要提交到事件循环的协程或 awaitable 对象。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; def event_shop():</p>
+<pre><code class="language-python">...     ensure_main_loop(fetch_data())</code><button class="copy-btn">📋</button></pre></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">awaitable</span><span class="param-type-tag">Optional[Awaitable[Any]]</span><span class="param-default-val">= None</span></div><p class="param-desc-text">要提交到事件循环的协程或 awaitable 对象。</p></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-run_on_main">
+<div class="api-header">
+<div><span class="api-name">run_on_main</span>
+</div>
+<div class="api-sig">run_on_main(func: Callable[Ellipsis, T], *args, **kwargs) -&gt; T</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在主线程上执行一个同步函数（用于引擎 API 调用）。</p>
+<p>当异步代码需要调用 Emuera 引擎 API 时，必须将调用提交到主线程。
+本函数通过 ``loop.call_soon_threadsafe`` 配合 ``asyncio.wrap_future``
+实现安全的跨线程调用。</p>
+<p>Parameters
+----------
+func : callable
+    要在主线程执行的函数（通常是 ``pyera.xxx`` 引擎 API）。
+*args : Any
+    位置参数。
+**kwargs : Any
+    关键字参数。</p>
+<p>Returns
+-------
+Any
+    函数的返回值。</p>
+<p>Raises
+------
+RuntimeError
+    若主线程事件循环未初始化。</p>
+<p>Example
+-------</p>
+<p>&gt;&gt;&gt; async def show_result():</p>
+<p>...     await run_on_main(pyera.print_line, &quot;Done!&quot;)</p>
+<pre><code class="language-python">...     await run_on_main(pyera.refresh, True)</code><button class="copy-btn">📋</button></pre></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func</span><span class="param-required">必需</span><span class="param-type-tag">Callable[Ellipsis, T]</span></div><p class="param-desc-text">要在主线程执行的函数（通常是 ``pyera.xxx`` 引擎 API）。 位置参数。 关键字参数。 函数的返回值。 若主线程事件循环未初始化。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">**kwargs</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-run_on_main_sync">
+<div class="api-header">
+<div><span class="api-name">run_on_main_sync</span>
+</div>
+<div class="api-sig">run_on_main_sync(func: Callable[Ellipsis, T], timeout: float = 30.0, *args, **kwargs) -&gt; T</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>在主线程上同步执行一个函数（阻塞当前线程直到完成）。</p>
+<p>适用于非异步代码中需要将引擎调用提交到主线程的场景。</p>
+<p>Parameters
+----------
+func : callable
+    要在主线程执行的函数。
+*args : Any
+    位置参数。
+timeout : float, optional
+    等待超时时间（秒），默认 30 秒。
+**kwargs : Any
+    关键字参数。</p>
+<p>Returns
+-------
+Any
+    函数的返回值。</p>
+<p>Raises
+------
+RuntimeError
+    若主线程事件循环未初始化。
+TimeoutError
+    若超过 *timeout* 仍未完成。</p></div>
+<h4>パラメータ</h4>
+<div class="param-list">
+<div class="param-item"><div class="param-row"><span class="param-name">func</span><span class="param-required">必需</span><span class="param-type-tag">Callable[Ellipsis, T]</span></div><p class="param-desc-text">要在主线程执行的函数。 位置参数。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">timeout</span><span class="param-type-tag">float</span><span class="param-default-val">= 30.0</span></div><p class="param-desc-text">等待超时时间（秒），默认 30 秒。 关键字参数。 函数的返回值。 若主线程事件循环未初始化。 若超过 *timeout* 仍未完成。</p></div>
+<div class="param-item"><div class="param-row"><span class="param-name">*args</span><span class="param-type-tag">any</span></div></div>
+<div class="param-item"><div class="param-row"><span class="param-name">**kwargs</span><span class="param-type-tag">any</span></div></div>
+</div>
+</div>
+</div>
+<div class="api-card" id="function-shutdown_main_loop">
+<div class="api-header">
+<div><span class="api-name">shutdown_main_loop</span>
+</div>
+<div class="api-sig">shutdown_main_loop() -&gt; None</div>
+</div>
+<div class="api-body">
+<div class="api-desc"><p>关闭主线程事件循环。</p>
+<p>在游戏退出时调用，清理异步资源。</p></div>
+</div>
+</div>
+</div>  </div>
+  <div class="footer">Pyera 文档 — 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[{"name": "get_main_loop", "desc": "获取主线程的事件循环（如果已创建）。\n\nReturns\n-------\nasyncio.AbstractEventLoop or None\n    主线程事件循", "url": "./async.html#function-get_main_loop"}, {"name": "ensure_main_loop", "desc": "确保主线程有一个运行中的事件循环，并可选地提交一个协程。\n\n在 Emuera 的事件处理器（如 ``event_shop``）中调用此函数，\n可以启动一个后台事", "url": "./async.html#function-ensure_main_loop"}, {"name": "run_on_main", "desc": "在主线程上执行一个同步函数（用于引擎 API 调用）。\n\n当异步代码需要调用 Emuera 引擎 API 时，必须将调用提交到主线程。\n本函数通过 ``loop", "url": "./async.html#function-run_on_main"}, {"name": "run_on_main_sync", "desc": "在主线程上同步执行一个函数（阻塞当前线程直到完成）。\n\n适用于非异步代码中需要将引擎调用提交到主线程的场景。\n\nParameters\n----------\nfu", "url": "./async.html#function-run_on_main_sync"}, {"name": "shutdown_main_loop", "desc": "关闭主线程事件循环。\n\n在游戏退出时调用，清理异步资源。", "url": "./async.html#function-shutdown_main_loop"}, {"name": "get_main_loop", "desc": "获取主线程的事件循环（如果已创建）。\n\nReturns\n-------\nasyncio.AbstractEventLoop or None\n    主线程事件循", "url": "./async.html#function-get_main_loop"}, {"name": "ensure_main_loop", "desc": "确保主线程有一个运行中的事件循环，并可选地提交一个协程。\n\n在 Emuera 的事件处理器（如 ``event_shop``）中调用此函数，\n可以启动一个后台事", "url": "./async.html#function-ensure_main_loop"}, {"name": "run_on_main", "desc": "在主线程上执行一个同步函数（用于引擎 API 调用）。\n\n当异步代码需要调用 Emuera 引擎 API 时，必须将调用提交到主线程。\n本函数通过 ``loop", "url": "./async.html#function-run_on_main"}, {"name": "run_on_main_sync", "desc": "在主线程上同步执行一个函数（阻塞当前线程直到完成）。\n\n适用于非异步代码中需要将引擎调用提交到主线程的场景。\n\nParameters\n----------\nfu", "url": "./async.html#function-run_on_main_sync"}, {"name": "shutdown_main_loop", "desc": "关闭主线程事件循环。\n\n在游戏退出时调用，清理异步资源。", "url": "./async.html#function-shutdown_main_loop"}, {"name": "get_main_loop", "desc": "获取主线程的事件循环（如果已创建）。\n\nReturns\n-------\nasyncio.AbstractEventLoop or None\n    主线程事件循", "url": "./async.html#function-get_main_loop"}, {"name": "ensure_main_loop", "desc": "确保主线程有一个运行中的事件循环，并可选地提交一个协程。\n\n在 Emuera 的事件处理器（如 ``event_shop``）中调用此函数，\n可以启动一个后台事", "url": "./async.html#function-ensure_main_loop"}, {"name": "run_on_main", "desc": "在主线程上执行一个同步函数（用于引擎 API 调用）。\n\n当异步代码需要调用 Emuera 引擎 API 时，必须将调用提交到主线程。\n本函数通过 ``loop", "url": "./async.html#function-run_on_main"}, {"name": "run_on_main_sync", "desc": "在主线程上同步执行一个函数（阻塞当前线程直到完成）。\n\n适用于非异步代码中需要将引擎调用提交到主线程的场景。\n\nParameters\n----------\nfu", "url": "./async.html#function-run_on_main_sync"}, {"name": "shutdown_main_loop", "desc": "关闭主线程事件循环。\n\n在游戏退出时调用，清理异步资源。", "url": "./async.html#function-shutdown_main_loop"}]</script>
+<script src="../js/lang.js"></script>
+</body>
+</html>
