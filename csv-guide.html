@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Era / Emuera CSV 技术专栏 - Pyera</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="index.html">Pyera</a>
+    <div class="version">v0.3.0</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-title">指南</div>
+      <a class="nav-link" href="index.html" data-key="index">首页</a>
+      <a class="nav-link" href="getting-started.html" data-key="getting-started">快速开始</a>
+      <a class="nav-link" href="csv-guide.html" data-key="csv-guide">CSV 技术专栏</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">API 文档</div>
+      <a class="nav-link" href="api/display.html" data-key="_display">显示 / 输出</a>
+      <a class="nav-link" href="api/input.html" data-key="_input">输入</a>
+      <a class="nav-link" href="api/flow.html" data-key="_flow">流程控制</a>
+      <a class="nav-link" href="api/chara-ops.html" data-key="_chara_ops">角色操作</a>
+      <a class="nav-link" href="api/array-ops.html" data-key="_array_ops">数组操作</a>
+      <a class="nav-link" href="api/csv.html" data-key="_csv_ops">CSV 数据</a>
+      <a class="nav-link" href="api/save-load.html" data-key="_save_load">存档 / 读档</a>
+      <a class="nav-link" href="api/builtin.html" data-key="_builtin">内置函数</a>
+      <a class="nav-link" href="api/sound.html" data-key="_sound">音效 / BGM</a>
+      <a class="nav-link" href="api/vars.html" data-key="vars">变量代理</a>
+      <a class="nav-link" href="api/chara-class.html" data-key="chara">角色类</a>
+      <a class="nav-link" href="api/async.html" data-key="_async_utils">异步工具</a>
+      <a class="nav-link" href="api/events.html" data-key="_events">事件注册</a>
+      <a class="nav-link" href="api/logging.html" data-key="_logging">日志系统</a>
+      <a class="nav-link" href="api/types.html" data-key="types">类型定义</a>
+      <a class="nav-link" href="api/utils.html" data-key="utils">工具函数</a>
+      <a class="nav-link" href="api/exceptions.html" data-key="exceptions">异常</a>
+      <a class="nav-link" href="api/core.html" data-key="core">核心桥接</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">示例</div>
+      <a class="nav-link" href="examples/basic-game.html" data-key="ex-basic">Basic Game</a>
+      <a class="nav-link" href="examples/async-integration.html" data-key="ex-async">Async</a>
+    </div>
+  </nav>
+</aside>
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="mobile-toggle">☰</button>
+      <div class="breadcrumb"><a href="index.html">Pyera</a> / CSV 技术专栏</div>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667zM14 14l-2.9-2.9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <input class="search-input" type="text" placeholder="Ctrl+K 搜索...">
+        <kbd class="search-kbd">Ctrl K</kbd>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn" data-lang="zh">中</button>
+        <button class="lang-btn" data-lang="en">En</button>
+        <button class="lang-btn" data-lang="ja">日</button>
+      </div>
+      <button class="theme-toggle">☀</button>
+    </div>
+  </div>
+
+  <article class="content csv-article">
+    <section class="csv-hero">
+      <div class="csv-kicker">Era / Emuera 数据层</div>
+      <h1>CSV 不是杂项配置，而是 era 游戏的数据骨架</h1>
+      <p>这篇专栏基于原版 Emuera 源码和 eratohoK 示例工程，解释每类 CSV 的作用、加载时机、写法、迁移方法，以及在 Pyera 项目里怎样把 CSV 与 Python 代码配合起来。</p>
+      <div class="csv-hero-grid">
+        <div>
+          <span>参考实现</span>
+          <strong>emuera.em-master</strong>
+          <small>Process.Initialize -> ConstantData.LoadData</small>
+        </div>
+        <div>
+          <span>参考数据</span>
+          <strong>eratohok-master/CSV</strong>
+          <small>包含大型实战 CSV 组织方式</small>
+        </div>
+        <div>
+          <span>面向项目</span>
+          <strong>Pyera / era</strong>
+          <small>Python 脚本层与 Emuera 变量系统互操作</small>
+        </div>
+      </div>
+    </section>
+
+    <nav class="csv-toc" aria-label="CSV 专栏目录">
+      <a href="#model">心智模型</a>
+      <a href="#pipeline">加载顺序</a>
+      <a href="#catalog">文件总览</a>
+      <a href="#chara">角色模板</a>
+      <a href="#pyera">Pyera 用法</a>
+      <a href="#best-practice">最佳实践</a>
+      <a href="#migration">迁移建议</a>
+    </nav>
+
+    <section id="model">
+      <h2>1. CSV 的心智模型</h2>
+      <p>在传统 ERB 项目里，CSV 经常被误解成“放名字的地方”。实际更准确的理解是：CSV 为 Emuera 的固定变量系统提供 <strong>名字表、数组尺寸、初始角色模板和少量系统元信息</strong>。ERB 或 Pyera 代码运行时使用的是变量，例如 <code>CFLAG</code>、<code>ABL</code>、<code>FLAG</code>、<code>ITEM</code>；CSV 决定这些变量的索引是什么意思。</p>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="concept-label">名字表</div>
+          <h3>把数字索引翻译成人能读懂的名字</h3>
+          <p><code>ABL.csv</code> 的 <code>10,侵攻</code> 让 <code>ABL:10</code> 有了含义。代码仍然访问索引，CSV 负责命名。</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-label">尺寸表</div>
+          <h3>决定变量数组可以开多大</h3>
+          <p><code>VariableSize.csv</code> 可以把 <code>CFLAG</code> 扩到 20000。大项目必须先规划尺寸，避免后期越界或存档迁移困难。</p>
+        </div>
+        <div class="concept-card">
+          <div class="concept-label">模板表</div>
+          <h3>定义角色创建时的初始状态</h3>
+          <p><code>Chara*.csv</code> 不是角色存档，而是角色模板。<code>ADDCHARA</code> 或初始角色加载会基于模板生成运行时角色。</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>给 Pyera 项目的结论：</strong>
+        Python 代码适合写流程、系统、算法和第三方库集成；CSV 适合保存稳定的编号体系和初始数据。不要把所有游戏设定硬编码进 Python，也不要把复杂逻辑塞回 CSV。
+      </div>
+    </section>
+
+    <section id="pipeline">
+      <h2>2. Emuera 的加载顺序</h2>
+      <p>根据 <code>Process.Initialize</code> 和 <code>ConstantData.LoadData</code>，启动阶段大致按下面顺序处理 CSV。理解这个顺序很重要，因为后面的 CSV 会依赖前面建立好的尺寸和名字表。</p>
+
+      <div class="pipeline">
+        <div class="pipe-step">
+          <span>01</span>
+          <strong>_Replace.csv</strong>
+          <p>如果配置启用，先覆盖部分 emuera.config 项，例如界面文字、分隔线、系统标签。</p>
+        </div>
+        <div class="pipe-step">
+          <span>02</span>
+          <strong>_Rename.csv</strong>
+          <p>如果配置启用，建立 <code>[[别名]] -> 实际标识符</code> 的替换字典，主要影响脚本读取。</p>
+        </div>
+        <div class="pipe-step">
+          <span>03</span>
+          <strong>GAMEBASE.CSV</strong>
+          <p>读取游戏代码、版本、标题、作者、最初角色、兼容版本等元信息。</p>
+        </div>
+        <div class="pipe-step">
+          <span>04</span>
+          <strong>VariableSize.CSV</strong>
+          <p>先调整变量数组大小，再为后续名字表和角色变量分配空间。</p>
+        </div>
+        <div class="pipe-step">
+          <span>05</span>
+          <strong>固定名字表</strong>
+          <p>读取 <code>ABL</code>、<code>BASE</code>、<code>CFLAG</code>、<code>ITEM</code>、<code>STR</code> 等 CSV。</p>
+        </div>
+        <div class="pipe-step">
+          <span>06</span>
+          <strong>Chara*.csv</strong>
+          <p>扫描角色模板文件。是否递归扫描子目录受 Emuera 的 <code>SearchSubdirectory</code> 配置影响。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog">
+      <h2>3. 固定 CSV 文件总览</h2>
+      <p>下面按职责分类说明常见 CSV。Emuera 文件名匹配通常不区分大小写，但项目里建议统一使用明确大小写，避免跨平台工具链和版本管理混乱。</p>
+
+      <h3>3.1 项目元信息与装载控制</h3>
+      <div class="file-matrix">
+        <div class="file-row">
+          <code>GameBase.csv</code>
+          <div>
+            <strong>游戏身份与版本信息。</strong>
+            <p>常见键包括 <code>コード</code>、<code>バージョン</code>、<code>タイトル</code>、<code>作者</code>、<code>製作年</code>、<code>追加情報</code>、<code>ウィンドウタイトル</code>、<code>最初からいるキャラ</code>。存档兼容、窗口标题和默认角色都来自这里。</p>
+          </div>
+        </div>
+        <div class="file-row">
+          <code>VariableSize.csv</code>
+          <div>
+            <strong>变量数组尺寸表。</strong>
+            <p>格式通常是 <code>变量名,长度</code>。例如 eratohoK 将 <code>CFLAG</code> 和 <code>CFLAGNAME</code> 扩到 <code>20000</code>。对应变量和对应名字表不一定自动同步，除 <code>ITEMNAME</code> 与 <code>ITEMPRICE</code> 有特殊联动外，建议成对写清。</p>
+          </div>
+        </div>
+        <div class="file-row">
+          <code>_Replace.csv</code>
+          <div>
+            <strong>覆盖配置项。</strong>
+            <p>在配置启用 <code>UseReplaceFile</code> 时读取。适合改显示标签、分隔线、加载文字等配置，不适合放游戏规则。</p>
+          </div>
+        </div>
+        <div class="file-row">
+          <code>_Rename.csv</code>
+          <div>
+            <strong>脚本别名替换。</strong>
+            <p>源码中右侧是脚本里的 <code>[[显示名]]</code>，左侧是替换成的实际标识符。它可以改善 ERB 可读性，但在 Pyera 项目里更推荐用 Python 常量、枚举或 dataclass 建立可读名称。</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>3.2 角色能力与训练参数</h3>
+      <div class="csv-card-grid">
+        <div class="csv-card"><code>Base.csv</code><strong>基础参数名</strong><p>定义 <code>BASE</code> / <code>MAXBASE</code> 的索引含义，例如体力、气力、精神力。</p></div>
+        <div class="csv-card"><code>Abl.csv</code><strong>能力名</strong><p>定义 <code>ABL</code> 索引，例如性知識、侵攻、武勇、速度。角色模板中的 <code>能力,名称,值</code> 会映射到这里。</p></div>
+        <div class="csv-card"><code>Talent.csv</code><strong>素质名</strong><p>定义 <code>TALENT</code> 索引。适合放稳定的角色特质、体质、出身、标签和开关型属性。</p></div>
+        <div class="csv-card"><code>Exp.csv</code><strong>经验名</strong><p>定义 <code>EXP</code> 索引。用于长期积累的经验、熟练度、经历计数。</p></div>
+        <div class="csv-card"><code>Mark.csv</code><strong>刻印名</strong><p>定义 <code>MARK</code> 索引。传统 era 项目常用来表达阶段性、不可逆或半永久状态。</p></div>
+        <div class="csv-card"><code>Palam.csv</code><strong>调教参数名</strong><p>定义 <code>PALAM</code>、<code>JUEL</code>、<code>UP</code>、<code>DOWN</code> 等相关索引。</p></div>
+        <div class="csv-card"><code>Source.csv</code><strong>参数来源名</strong><p>定义 <code>SOURCE</code>，表示当前命令产生的参数来源，用于结算。</p></div>
+        <div class="csv-card"><code>Ex.csv</code><strong>绝顶/事件计数名</strong><p>定义 <code>EX</code>、<code>NOWEX</code> 一类短期或阶段内计数。</p></div>
+        <div class="csv-card"><code>Train.csv</code><strong>命令名</strong><p>定义 <code>TRAINNAME</code>，通常与选择命令、训练命令、菜单显示相关。</p></div>
+      </div>
+
+      <h3>3.3 物品、装备与临时状态</h3>
+      <div class="csv-card-grid">
+        <div class="csv-card"><code>Item.csv</code><strong>物品名与价格</strong><p>通常格式是 <code>编号,名称,价格</code>。读取后对应 <code>ITEMNAME</code>、<code>ITEMPRICE</code> 和运行时 <code>ITEM</code>。</p></div>
+        <div class="csv-card"><code>Equip.csv</code><strong>装备名</strong><p>定义 <code>EQUIPNAME</code>。部分项目少用或不用，但保留给角色装备类状态。</p></div>
+        <div class="csv-card"><code>Tequip.csv</code><strong>训练中装备名</strong><p>定义 <code>TEQUIPNAME</code>，对应 <code>TEQUIP</code>。传统项目常用于命令执行期间的临时装备或状态。</p></div>
+        <div class="csv-card"><code>Stain.csv</code><strong>污渍/附着状态名</strong><p>定义 <code>STAINNAME</code>，对应角色变量 <code>STAIN</code>。</p></div>
+      </div>
+
+      <h3>3.4 全局与角色自定义变量名</h3>
+      <div class="csv-card-grid">
+        <div class="csv-card"><code>Flag.csv</code><strong>全局数值标志名</strong><p>定义 <code>FLAGNAME</code>，对应保存型全局数值数组 <code>FLAG</code>。适合剧情进度、系统开关、全局状态。</p></div>
+        <div class="csv-card"><code>Tflag.csv</code><strong>临时全局标志名</strong><p>定义 <code>TFLAGNAME</code>，对应 <code>TFLAG</code>。适合一轮事件、一段流程内的临时状态。</p></div>
+        <div class="csv-card"><code>CFLAG.csv</code><strong>角色数值标志名</strong><p>定义 <code>CFLAGNAME</code>，对应每个角色自己的 <code>CFLAG</code>。这是角色长期状态最常用的扩展区。</p></div>
+        <div class="csv-card"><code>Tcvar.csv</code><strong>角色临时数值名</strong><p>定义 <code>TCVARNAME</code>，对应角色变量 <code>TCVAR</code>。适合临时计算，不建议作为长期存档字段。</p></div>
+        <div class="csv-card"><code>CSTR.csv</code><strong>角色字符串名</strong><p>定义 <code>CSTRNAME</code>，对应角色字符串数组 <code>CSTR</code>。适合称呼、文本标签、动态描述。</p></div>
+        <div class="csv-card"><code>Str.csv</code><strong>全局字符串名</strong><p>定义 <code>STRNAME</code>，对应可写的 <code>STR</code>。适合运行中字符串缓存。</p></div>
+        <div class="csv-card"><code>Tstr.csv</code><strong>临时字符串名</strong><p>定义 <code>TSTRNAME</code>，对应 <code>TSTR</code>。适合短生命周期字符串。</p></div>
+        <div class="csv-card"><code>Savestr.csv</code><strong>保存字符串名</strong><p>定义 <code>SAVESTRNAME</code>，对应会进入存档的 <code>SAVESTR</code>。</p></div>
+        <div class="csv-card"><code>Global.csv</code><strong>跨存档数值名</strong><p>定义 <code>GLOBALNAME</code>，对应全局数值变量 <code>GLOBAL</code>。适合成就、周回、全局设置。</p></div>
+        <div class="csv-card"><code>Globals.csv</code><strong>跨存档字符串名</strong><p>定义 <code>GLOBALSNAME</code>，对应全局字符串变量 <code>GLOBALS</code>。</p></div>
+        <div class="csv-card"><code>Day.csv</code><strong>日期数组名</strong><p>EE 扩展读取，定义 <code>DAYNAME</code>，对应 <code>DAY</code>。</p></div>
+        <div class="csv-card"><code>Time.csv</code><strong>时间数组名</strong><p>EE 扩展读取，定义 <code>TIMENAME</code>，对应 <code>TIME</code>。</p></div>
+        <div class="csv-card"><code>Money.csv</code><strong>货币数组名</strong><p>EE 扩展读取，定义 <code>MONEYNAME</code>，对应 <code>MONEY</code>。适合多货币或资源。</p></div>
+        <div class="csv-card"><code>CDFLAG1.csv / CDFLAG2.csv</code><strong>二维角色标志轴名</strong><p>定义 <code>CDFLAGNAME1</code> 与 <code>CDFLAGNAME2</code>，用于二维角色变量 <code>CDFLAG</code>。适合“角色 x 对象”“角色 x 部位”等矩阵型数据。</p></div>
+      </div>
+
+      <h3>3.5 示例项目里出现但不是固定加载入口的文件</h3>
+      <p>eratohoK 的 <code>CSV</code> 目录还包含 <code>Juel.csv</code>、<code>train.txt</code>、<code>_default.config</code>、<code>_fixed.config</code>、<code>Chara.rar</code> 等。这些文件对该项目有意义，但不属于 <code>ConstantData.LoadData</code> 固定读取的标准名字表。迁移时要先搜索脚本里是否引用它们，再决定保留、改名或删除。</p>
+    </section>
+
+    <section id="chara">
+      <h2>4. Chara*.csv 角色模板</h2>
+      <p>角色模板文件通常命名为 <code>Chara0 xxx.csv</code>、<code>Chara1 xxx.csv</code>。Emuera 通过 <code>Config.GetFiles(csvDir, "CHARA*.CSV")</code> 扫描，是否读取子目录取决于 <code>SearchSubdirectory</code>。eratohoK 把角色放在 <code>CSV/Chara/</code>，这是一种适合大型项目的组织方式。</p>
+
+      <div class="code-caption">一个简化的角色模板示例</div>
+      <pre><code>番号,0
+名前,あなた
+呼び名,あなた
+CSTR,99,あなた
+
+基礎,体力,2000
+基礎,気力,1500
+基礎,精神力,2500
+
+素質,性别,0
+素質,成長型,0
+
+能力,性知識,0
+能力,侵攻,30
+能力,速度,30</code><button class="copy-btn">复制</button></pre>
+
+      <div class="file-matrix compact">
+        <div class="file-row"><code>番号</code><div><strong>角色模板编号。</strong><p>对应角色的 <code>NO</code>，也是添加角色、查找角色、关系数组常用的稳定 ID。</p></div></div>
+        <div class="file-row"><code>名前</code><div><strong>正式名称。</strong><p>对应 <code>NAME</code>，用于系统显示、角色识别和默认文本。</p></div></div>
+        <div class="file-row"><code>呼び名</code><div><strong>称呼名。</strong><p>对应 <code>CALLNAME</code>，常用于对话和菜单。</p></div></div>
+        <div class="file-row"><code>基礎</code><div><strong>基础参数初值。</strong><p>第二列通常写 <code>Base.csv</code> 里的名字，第三列写数值，映射到 <code>BASE</code> 和 <code>MAXBASE</code>。</p></div></div>
+        <div class="file-row"><code>能力</code><div><strong>能力初值。</strong><p>第二列对应 <code>Abl.csv</code>，第三列为 <code>ABL</code> 初值。</p></div></div>
+        <div class="file-row"><code>素質</code><div><strong>素质或标签。</strong><p>第二列对应 <code>Talent.csv</code>。第三列为空时通常表示布尔型素质存在，写数值时表示带等级或参数的素质。</p></div></div>
+        <div class="file-row"><code>CFLAG</code><div><strong>角色自定义数值。</strong><p>第二列可写编号或 <code>CFLAG.csv</code> 名称，第三列为初始值。适合项目自定义长期状态。</p></div></div>
+        <div class="file-row"><code>CSTR</code><div><strong>角色自定义字符串。</strong><p>第二列可写编号或 <code>CSTR.csv</code> 名称，第三列为字符串初值。</p></div></div>
+        <div class="file-row"><code>相性</code><div><strong>关系初值。</strong><p>常用于初始化角色对其他角色编号的关系值。大型项目要谨慎维护编号稳定性。</p></div></div>
+      </div>
+    </section>
+
+    <section id="pyera">
+      <h2>5. 在 Pyera 里怎么用 CSV</h2>
+      <p>Pyera 不应该复刻 ERB 的所有写法。更推荐做法是：CSV 继续承担稳定编号和初始数据，Python 侧建立轻量常量或缓存视图，把高频逻辑留在 Python 内部批量处理，最后再写回 Emuera 变量。</p>
+
+      <div class="code-caption">建议的 Python 访问风格</div>
+      <pre><code>import era
+
+# 常量可以由 CSV 生成，也可以手写在 py/game/ids.py
+CFLAG_AFFECTION = 2
+ABL_SPEED = 30
+
+def show_profile(chara_index: int) -> None:
+    c = era.chara(chara_index)
+    name = c.name
+    affection = c.cflag[CFLAG_AFFECTION]
+    speed = c.abl[ABL_SPEED]
+    era.print_line(f"{name} 好感度 {affection} / 速度 {speed}")
+
+def add_affection(chara_index: int, value: int) -> None:
+    c = era.chara(chara_index)
+    c.cflag[CFLAG_AFFECTION] = c.cflag[CFLAG_AFFECTION] + value</code><button class="copy-btn">复制</button></pre>
+
+      <div class="callout">
+        <strong>性能原则：</strong>
+        不要像传统 ERB 那样一行一行跨桥查询。Python 侧可以缓存 CSV 名字表、角色视图和配置；批量计算后再一次性提交给 Emuera。复杂项目的优势来自模块化、缓存、批处理和第三方库，不来自单次变量访问更快。
+      </div>
+    </section>
+
+    <section id="best-practice">
+      <h2>6. 最佳实践</h2>
+      <div class="practice-list">
+        <div>
+          <span>01</span>
+          <strong>编号一旦发布就不要随意重排</strong>
+          <p>CSV 索引会进入存档、角色模板和脚本逻辑。删除旧字段时优先标注废弃，保留编号空洞，而不是把后面的编号整体前移。</p>
+        </div>
+        <div>
+          <span>02</span>
+          <strong>给每个范围留注释和分段</strong>
+          <p>例如 <code>CFLAG 1-99</code> 放身份与关系，<code>100-199</code> 放剧情进度，<code>1000+</code> 放系统扩展。大型项目没有分段会很快失控。</p>
+        </div>
+        <div>
+          <span>03</span>
+          <strong>长期状态用保存变量，临时状态用临时变量</strong>
+          <p><code>FLAG</code>、<code>CFLAG</code>、<code>SAVESTR</code> 适合存档；<code>TFLAG</code>、<code>TCVAR</code>、<code>TSTR</code> 适合流程内临时值。</p>
+        </div>
+        <div>
+          <span>04</span>
+          <strong>角色独有状态优先放 CFLAG / CSTR</strong>
+          <p>不要把每个角色的长期差异塞进全局 <code>FLAG</code>。角色状态跟着角色走，Python 侧也更容易封装成 <code>Chara</code> 视图。</p>
+        </div>
+        <div>
+          <span>05</span>
+          <strong>不要盲目复制旧项目 CSV</strong>
+          <p>复制 eratohoK 这种大型项目的 CSV 会带来大量不适合当前主题的字段。更好的方式是先建最小集合，再按系统需要扩展。</p>
+        </div>
+        <div>
+          <span>06</span>
+          <strong>为 Pyera 生成常量层</strong>
+          <p>可以从 CSV 生成 <code>ids.py</code>，让 Python 代码写 <code>CFLAG.AFFECTION</code> 而不是到处写裸数字。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="migration">
+      <h2>7. 从现有 era CSV 迁移到新主题</h2>
+      <p>如果你从其他 era 游戏复制了一整套 CSV，第一步不是翻译文本，而是判断每个字段是否服务于你的新主题。对 Pyera 项目来说，建议按下面顺序迁移。</p>
+
+      <ol class="migration-steps">
+        <li><strong>保留最小引擎必需层：</strong><code>GameBase.csv</code>、<code>VariableSize.csv</code>、<code>Base.csv</code>、<code>Abl.csv</code>、<code>Talent.csv</code>、<code>CFLAG.csv</code>、<code>CSTR.csv</code>、<code>Flag.csv</code>。</li>
+        <li><strong>删除不服务主题的旧字段：</strong>先不要保留几千个看不懂的旧编号。保留会制造错误安全感，后面写代码时更难判断字段含义。</li>
+        <li><strong>为主题建立新的编号规划：</strong>例如角色生态、寄生状态、虫巢关系、身体部位、资源、事件进度分别使用独立编号段。</li>
+        <li><strong>把复杂规则放到 Python：</strong>CSV 记录“有哪些字段”和“初始值”，Python 负责计算变化、触发事件、批量同步。</li>
+        <li><strong>写迁移脚本而不是手工改存档：</strong>如果项目已经有玩家存档，新增字段可以默认 0；删除字段则保留废弃编号，避免破坏旧档。</li>
+      </ol>
+
+      <div class="code-caption">一个更适合新项目起步的 CFLAG 分段样例</div>
+      <pre><code>; 1-99 基础关系
+1,阵营,
+2,好感度,
+3,警戒度,
+4,依赖度,
+
+; 100-199 剧情与事件
+100,初次相遇完成,
+101,巢穴事件阶段,
+102,特殊对话解锁,
+
+; 1000-1099 生态/寄生系统
+1000,寄生阶段,
+1001,虫卵计数,
+1002,侵蚀值,
+1003,共生适应度,</code><button class="copy-btn">复制</button></pre>
+    </section>
+
+    <section id="sources">
+      <h2>8. 本文依据</h2>
+      <p>本文主要对照了本地两个参考项目，不依赖网络资料：</p>
+      <ul>
+        <li><code>E:\MyCode\Era\emuera.em-master\Emuera\Runtime\Script\Process.cs</code>：启动阶段加载 <code>_Replace.csv</code>、<code>_Rename.csv</code>、<code>GAMEBASE.CSV</code> 和主 CSV。</li>
+        <li><code>E:\MyCode\Era\emuera.em-master\Emuera\Runtime\Script\Data\ConstantData.cs</code>：固定 CSV 名字表、<code>VariableSize.CSV</code> 和 <code>Chara*.csv</code> 的加载入口。</li>
+        <li><code>E:\MyCode\Era\emuera.em-master\Emuera\Runtime\Script\Statements\Variable\VariableCode.cs</code>：各变量与 <code>*NAME</code> 常量的对应关系。</li>
+        <li><code>E:\Godot_v4.6.2-stable_mono_win64\eratohok-master\CSV</code>：大型 era 项目的实际 CSV 组织案例。</li>
+      </ul>
+    </section>
+  </article>
+
+  <div class="footer">Pyera 文档 - 基于 MIT 协议开源</div>
+</main>
+</div>
+<script id="search-data" type="application/json">[
+  {"name":"CSV 技术专栏","kind":"guide","module":"指南","moduleEn":"Guide","signature":"Era / Emuera CSV","desc":"解释 Emuera CSV 的作用、加载顺序、文件分类、角色模板和 Pyera 最佳实践。","url":"csv-guide.html"},
+  {"name":"CFLAG.csv","kind":"csv","module":"CSV 技术专栏","moduleEn":"CSV Guide","signature":"CFLAGNAME -> CFLAG","desc":"角色数值标志名表，每个角色拥有自己的 CFLAG 数组，适合长期角色状态。","url":"csv-guide.html#catalog"},
+  {"name":"VariableSize.csv","kind":"csv","module":"CSV 技术专栏","moduleEn":"CSV Guide","signature":"变量名,长度","desc":"调整 Emuera 变量数组尺寸，必须在名字表和角色模板前加载。","url":"csv-guide.html#pipeline"},
+  {"name":"Chara*.csv","kind":"csv","module":"CSV 技术专栏","moduleEn":"CSV Guide","signature":"角色模板","desc":"定义角色编号、名称、基础参数、能力、素质、CFLAG 和 CSTR 初值。","url":"csv-guide.html#chara"}
+]</script>
+<script src="js/lang.js"></script>
+</body>
+</html>
